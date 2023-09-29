@@ -211,6 +211,7 @@
   </div>
   <script src="js/calendar.js" type="text/javascript"></script>
   <script>
+    var thismonth = new Date();
     var calDates = new Calendar({
       // 设置显示位置
       parent: 'dates-view',
@@ -412,7 +413,6 @@
     })
   </script>
   <script>
-    var thismonth = new Date();
     let a = 'Copyright&nbsp;&copy;&nbsp;' + thismonth.getFullYear() + '&nbsp;<a href="">宋凯凯</a>&nbsp;All rights reserved.'
     $(".copyright p").html(a);
     function td2() {
