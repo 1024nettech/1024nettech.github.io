@@ -198,16 +198,14 @@
             <td id="td8">1</td>
           </tr>
         </table>
-        <script>
-          let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
-          $("#td2").text(a);
-        </script>
         <p style="margin-top: 20px;font-size: 16px;">提示 : <br>除日均工资和应发工资外，其余项可手动填写后点击计算</p>
         <div id="calcbtn" style="width: 100%;margin-top: 50px;text-align: center;">
           <button style="width: 200px; height: 50px;border: 0;border-radius: 5px;font-size: 16px;"
             class="cal-picked">点击计算</button>
         </div>
         <script>
+          let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
+          $("#td2").text(a);
           $("#calcbtn").click(function () {
             $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
             $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
