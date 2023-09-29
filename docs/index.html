@@ -204,8 +204,11 @@
             class="cal-picked">点击计算</button>
         </div>
         <script>
-          let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
-          $("#td2").text(a);
+          function td2() {
+            let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
+            $("#td2").text(a);
+          }
+          setTimeout(td2, 1000);
           $("#calcbtn").click(function () {
             $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
             $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
