@@ -195,7 +195,7 @@
             <td id="td5" contenteditable="">0</td>
             <td id="td6" contenteditable="">0</td>
             <td id="td7" contenteditable="">450.93</td>
-            <td id="td8">1</td>
+            <td id="td8">0</td>
           </tr>
         </table>
         <p style="margin-top: 20px;font-size: 16px;">提示 : <br>除日均工资和应发工资外，其余项可手动填写后点击计算</p>
@@ -212,8 +212,10 @@
           }
           setTimeout(td2, 1000);
           $("#calcbtn").click(function () {
-            $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
-            $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
+            if (!$(".ri").length) {
+              $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
+              $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
+            }
             let b = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
             $("#td2").text(b);
             $("#td3").text(($("#td1").text() / $("#td2").text()).toFixed(4));
