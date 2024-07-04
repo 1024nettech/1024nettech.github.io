@@ -415,32 +415,19 @@
     <script>
         let a = 'Copyright&nbsp;&copy;&nbsp;' + thismonth.getFullYear() + '&nbsp;<a href="">宋凯凯</a>&nbsp;All rights reserved.'
         $(".copyright p").html(a);
-        let date = "";
         function td2() {
             $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
             $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
-            let b = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
-            $("#td2").text(b);
-            date = $(".cal-title").text();
+            let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
+            $("#td2").text(a);
         }
-        setTimeout(td2, 200);
-
-        $(".cal-prev,.cal-next,.cal-title").click(function () {
-            let a = setInterval(function () {
-                let b = $(".cal-months.cal-hidden").length;
-                let c = $(".cal-title").text();
-                if (c != date && c.indexOf("月") != -1 && b == 0) {
-                    clearInterval(a);
-                    setTimeout(td2, 200);
-                }
-            }, 200);
+        setTimeout(td2, 100);
+        $(".cal-prev,.cal-next").click(function () {
+            setTimeout(td2, 100);
         });
         $("#calcbtn").click(function () {
             if (!$(".ri").length) {
-                $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
-                $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
-                let c = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
-                $("#td2").text(c);
+                td2();
             }
             $("#td3").text(($("#td1").text() / $("#td2").text()).toFixed(4));
             $("#td3").attr("title", function () { return $("#td1").text() / $("#td2").text(); });
