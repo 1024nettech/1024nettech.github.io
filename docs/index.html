@@ -421,16 +421,17 @@
             let b = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
             $("#td2").text(b);
         }
-        setTimeout(td2, 1000);
+        setTimeout(td2, 200);
         $(".cal-prev,.cal-next,.cal-title").mousedown(function () {
             let a = $(".cal-title").text();
             let b = setInterval(function () {
-                let c = $(".cal-title").text();
-                if (c != a && c.indexOf("月") != -1) {
+                let c = $(".cal-months.cal-hidden").length();
+                let d = $(".cal-title").text();
+                if (d != a && d.indexOf("月") != -1 && c == 0) {
                     clearInterval(b);
-                    setTimeout(td2, 1000);
+                    setTimeout(td2, 200);
                 }
-            }, 100);
+            }, 200);
         });
         $("#calcbtn").click(function () {
             if (!$(".ri").length) {
