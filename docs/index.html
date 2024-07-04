@@ -422,8 +422,15 @@
             $("#td2").text(b);
         }
         setTimeout(td2, 1000);
-        $(".cal-prev,.cal-next").click(function () {
-            setTimeout(td2, 1000);
+        $(".cal-prev,.cal-next,.cal-title").mousedown(function () {
+            let a = $(".cal-title").text();
+            let b = setInterval(function () {
+                let c = $(".cal-title").text();
+                if (c != a) {
+                    clearInterval(b);
+                    setTimeout(td2, 1000);
+                }
+            }, 100);
         });
         $("#calcbtn").click(function () {
             if (!$(".ri").length) {
