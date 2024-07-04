@@ -426,7 +426,7 @@
             let a = $(".cal-title").text();
             let b = setInterval(function () {
                 let c = $(".cal-title").text();
-                if (c != a) {
+                if (c != a && c.indexOf("月") != -1) {
                     clearInterval(b);
                     setTimeout(td2, 1000);
                 }
