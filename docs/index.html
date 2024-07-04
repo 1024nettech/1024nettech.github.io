@@ -423,10 +423,9 @@
         }
         setTimeout(td2, 200);
         $(".cal-prev,.cal-next,.cal-title").mousedown(function () {
-            alert();
             let a = $(".cal-title").text();
             let b = setInterval(function () {
-                let c = $(".cal-months.cal-hidden").length();
+                let c = $(".cal-months.cal-hidden").length;
                 let d = $(".cal-title").text();
                 if (d != a && d.indexOf("月") != -1 && c == 0) {
                     clearInterval(b);
