@@ -419,7 +419,10 @@
             $(".cal-weekend:even").attr("class", function (n, v) { return v + " ri" });
             $(".cal-day,.cal-date-prev,.cal-date-next").removeClass("ri");
             let a = $(".cal-date").length - $(".cal-date-prev").length - $(".cal-date-next").length - $(".ri").length;
+            let b = $(".cal-title").text().split("年")[1];
+            $("th:eq(1)").text(function (n, v) { return v + "(" + b + ")" });
             $("#td2").text(a);
+
         }
         setTimeout(td2, 100);
         $(".cal-prev,.cal-next").click(function () {
