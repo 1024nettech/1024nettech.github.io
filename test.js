@@ -1,3 +1,3 @@
 function aa() {
-    alert(0);
+    alert(1);
 }
