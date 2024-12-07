@@ -434,7 +434,7 @@
             }
             $("#td3").text(($("#td1").text() / $("#td2").text()).toFixed(4));
             $("#td3").attr("title", function () { return $("#td1").text() / $("#td2").text(); });
-            $("#td8").text(($("#td1").text() - ($("#td4").text() + $("#td5").text()) * $("#td3").text() - $("#td6").text() * 5 - $("#td7").text()).toFixed(4));
+            $("#td8").text(($("#td1").text() - (Number($("#td4").text()) + Number($("#td5").text())) * $("#td3").text() - $("#td6").text() * 5 - $("#td7").text()).toFixed(4));
         });
     </script>
 </body>
