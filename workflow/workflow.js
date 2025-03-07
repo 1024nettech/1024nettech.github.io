@@ -19,7 +19,7 @@ function loadScripts(urls, callback) {
             script.src = addTimestampToUrl(urls[index]);
             script.onload = handleLoad;
             script.onerror = handleError;  // 添加错误处理
-            document.head.prependChild(script);
+            document.head.prepend(script);
         } else {
             handleLoad();
         }
