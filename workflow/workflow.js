@@ -53,6 +53,10 @@ if (url.indexOf("https://detail.1688.com/offer/") != -1) {
         // 详情图修改：修改 .content-detail 内部图片的 alt 和 src 后缀
         document.querySelectorAll('.content-detail img').forEach((img, index) => {
             img.alt = `详情图-${index + 1}`;
+            // 如果 img 有 data-lazyload-src 属性，则将其值赋给 src
+            if (img.hasAttribute('data-lazyload-src')) {
+                img.src = img.getAttribute('data-lazyload-src');
+            }
             // 只在 src 中不包含 #1024down 时修改
             if (!img.src.includes('#1024down')) {
                 img.src = img.src + '#1024down-' + img.alt; // 追加到 src 的末尾，并把 alt 值加到 #1024down 后面
