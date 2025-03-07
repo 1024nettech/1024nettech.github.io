@@ -30,7 +30,7 @@ if (url.indexOf("https://detail.1688.com/offer/") != -1) {
     /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
     function img_rename() {
         // 主图修改：修改 .detail-gallery-img 的图片 alt 和 src 后缀
-        document.querySelectorAll('.detail-gallery-img').forEach((img, index) => {
+        document.querySelectorAll('.detail-gallery-img:not(.video-icon + .detail-gallery-img)').forEach((img, index) => {
             img.alt = `主图-${index + 1}`;
             // 只在 src 中不包含 #1024down 时修改
             if (!img.src.includes('#1024down')) {
