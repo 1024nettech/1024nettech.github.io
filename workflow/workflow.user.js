@@ -24,6 +24,6 @@
         console.log('脚本已加载并执行完毕！');
         // 在这里调用脚本中定义的函数或其他操作
     };
-    document.head.appendChild(script);
+    document.head.prepend(script);
 })();
 /*2025.03.07.080000 - Line : 29*/
