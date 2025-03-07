@@ -10,11 +10,15 @@ function loadScripts(urls, callback) {
             callback();
         }
     }
+    function handleError(error) {
+        console.error('脚本加载失败：', error);
+    }
     function loadNextScript(index) {
         if (index < urls.length) {
             const script = document.createElement('script');
             script.src = addTimestampToUrl(urls[index]);
             script.onload = handleLoad;
+            script.onerror = handleError;  // 添加错误处理
             document.head.appendChild(script);
         } else {
             handleLoad();
@@ -31,7 +35,6 @@ loadScripts(scriptUrls, function () {
     // 在这里可以安全地调用所有加载的脚本中定义的函数或其他操作
     const url = location.href;
     if (url.indexOf("https://detail.1688.com/offer/") != -1) {
-        alert();
+        alert('脚本已加载，当前是1688商品详情页');
     }
 });
-alert();
