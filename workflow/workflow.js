@@ -34,3 +34,4 @@ loadScripts(scriptUrls, function () {
         alert();
     }
 });
+alert();
