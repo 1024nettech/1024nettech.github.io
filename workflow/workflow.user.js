@@ -15,6 +15,7 @@
     'use strict';
 
     // Your code here...
+    const check_auth = 0;
     function addTimestampToUrl(url) {
         return url + '?v=' + new Date().getTime();
     }
@@ -26,4 +27,4 @@
     };
     document.head.prepend(script);
 })();
-/*2025.03.08.080000 - Line : 29*/
+/*2025.03.08.080000 - Line : 30*/
