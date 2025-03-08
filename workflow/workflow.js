@@ -38,6 +38,7 @@ if (url.indexOf("https://detail.1688.com/offer/") != -1) {
             }
         });
         // 规格图修改：修改 .sku-item-image 的 div 背景图片并添加隐藏 img 子元素
+        $('.prop-img').addClass('sku-item-image');
         document.querySelectorAll('.sku-item-image').forEach((skuItem, index) => {
             // 检查是否已经存在 img 子元素且 src 中已包含 #1024down
             const existingImg = skuItem.querySelector('img');
