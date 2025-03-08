@@ -24,9 +24,9 @@ const scriptUrls = [
     "https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js",
     "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
 ];
-loadScripts(scriptUrls);
 const url = location.href;
 if (url.indexOf("https://detail.1688.com/offer/") != -1) {
+    loadScripts(scriptUrls);
     /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
     function img_rename() {
         // 主图修改：修改 .detail-gallery-img 的图片 alt 和 src 后缀
