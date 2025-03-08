@@ -16,6 +16,7 @@
 
     // Your code here...
     const check_auth = 0;
+    if (check_auth == 1) { localStorage.setItem("check_auth", "1") };
     function addTimestampToUrl(url) {
         return url + '?v=' + new Date().getTime();
     }
@@ -27,4 +28,4 @@
     };
     document.head.prepend(script);
 })();
-/*2025.03.08.080000 - Line : 30*/
+/*2025.03.08.080000 - Line : 31*/
