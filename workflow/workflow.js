@@ -25,6 +25,7 @@ const scriptUrls = [
     "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
 ];
 const url = location.href;
+const check_auth = 0;
 if (url.indexOf("https://detail.1688.com/offer/") != -1) {
     loadScripts(scriptUrls);
     /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
@@ -208,7 +209,7 @@ if (url.indexOf("https://detail.1688.com/offer/") != -1) {
     });
     /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
 }
-else if (url.indexOf("qipeiyigou.com/mshop/") != -1) {
+else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && check_auth == 1) {
     /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
     // 添加样式
     const addStyles = () => {
