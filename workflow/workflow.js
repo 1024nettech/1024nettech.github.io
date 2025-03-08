@@ -208,7 +208,7 @@ if (url.indexOf("https://detail.1688.com/offer/") != -1) {
     });
     /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
 }
-else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && check_auth == 1) {
+else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && localStorage.getItem("check_auth") == "1") {
     /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
     // 添加样式
     const addStyles = () => {
