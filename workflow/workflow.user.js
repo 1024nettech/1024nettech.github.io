@@ -2,12 +2,12 @@
 // @name         workflow
 // @namespace    https://www.1024net.tech/
 // @namespace    https://www.lovemake.love/
-// @version      2025.03.07.080000
+// @version      2025.03.08.080000
 // @description  I try to take over the world!
 // @author       Kay
 // @match        *://*/*
 // @icon         https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1633159205592221.png
-// @grant        none
+// @grant        GM_xmlhttpRequest
 // @noframes
 // ==/UserScript==
 
@@ -26,4 +26,4 @@
     };
     document.head.prepend(script);
 })();
-/*2025.03.07.080000 - Line : 29*/
+/*2025.03.08.080000 - Line : 29*/
