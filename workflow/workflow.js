@@ -1,1 +1,465 @@
-const _0x4b924a = _0x46a2; (function (_0x39ec1a, _0x4b9ec3) { const _0x581ca5 = _0x46a2, _0x4618aa = _0x39ec1a(); while (!![]) { try { const _0x21fa04 = -parseInt(_0x581ca5(0xa9)) / 0x1 * (-parseInt(_0x581ca5(0xc3)) / 0x2) + parseInt(_0x581ca5(0xea)) / 0x3 * (-parseInt(_0x581ca5(0xd8)) / 0x4) + -parseInt(_0x581ca5(0xe8)) / 0x5 * (-parseInt(_0x581ca5(0xd5)) / 0x6) + -parseInt(_0x581ca5(0xe4)) / 0x7 * (parseInt(_0x581ca5(0x136)) / 0x8) + parseInt(_0x581ca5(0xd7)) / 0x9 * (-parseInt(_0x581ca5(0x99)) / 0xa) + -parseInt(_0x581ca5(0xec)) / 0xb + parseInt(_0x581ca5(0x11e)) / 0xc; if (_0x21fa04 === _0x4b9ec3) break; else _0x4618aa['push'](_0x4618aa['shift']()); } catch (_0x5b7f3c) { _0x4618aa['push'](_0x4618aa['shift']()); } } }(_0xfdd4, 0xe7dd4)); function _0xfdd4() { const _0x468ace = ['车辆饰品', '?undefined', '产品性质：', '查询完毕……', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js', 'background-color', 'http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=', '已下载！如需重新下载请刷新页面……', '>|-', '__NUXT__', '19366358', 'remove', '33020748PmljbG', ',\x22classname\x22:', '单图模式', 'drawImage', 'display', '#processing-message', 'getItem', 'mode', 'head', '液压系统', '系统分类：', 'log', '19365569', 'text', '19366355', 'mshop/?', 'key', 'css', '#keywordx', 'toDataURL', 'attr', '&id=', '19366357', '#divx', '120qEXFJg', 'padStart', 'getComputedStyle', '#shop-info', 'prepend', 'download', '开始加载脚本：', 'replace', '电子电器', 'match', '.main\x20.v-x-scroll\x20#tipx', '存在非超链接小手！', '#bodyx', 'mouseenter', 'src', '<br><p\x20id=\x22keywordx\x22></p>', '.title\x20h3', 'bodyx', 'alt', '.content-detail', 'shop_info', 'indexOf', '详情图-', 'floor', '.detail-gallery-img:not(.video-icon\x20+\x20.detail-gallery-img)', '4298820UZuBuE', '处理中……', 'data-lazyload-src', '关键词为空', 'top', '#shop-cat', 'meta[name=keywords]', '.content-wrap', 'forEach', 'getHours', 'image/png', '已完成！', 'sku-item-image', '规格图-', 'content', '底盘系统', '289fNTMFj', '&req_method=5&one_cid=', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.description\x20a,\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.main\x20.content\x20a,\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.description\x20*[style*=\x22pointer\x22],\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.main\x20.content\x20*[style*=\x22pointer\x22],\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.description\x20img:not([src*=\x22aimg8.dlssyht.cn\x22]),\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.main\x20.content\x20img:not([src*=\x22aimg8.dlssyht.cn\x22])\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding-left:\x205px\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20blue\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-left:\x205px\x20solid\x20red\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.online-kefu\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x20calc(50%\x20+\x20100px)\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#shop-info\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20inline-block;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x2042px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:\x2042px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x20100px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#shop-cat,\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#shop-cert\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x209px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#shop-cert\x20a\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#keywordx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20red;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20inline-block;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-top:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#divx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#tipx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x2051px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:\x2051px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20green;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20700px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x200\x204px\x200\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', 'http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=', '.main\x20img', '#1024down', 'https://detail.1688.com/offer/', '#shop-cert\x20a', '#divx,\x20#tipx', '19366356', '16435676', '<div\x20id=\x22shop-info\x22><span\x20id=\x22shop-cat\x22>商铺类别</span><span\x20id=\x22shop-cert\x22><a\x20target=\x22_blank\x22>认证资料</a></span></div>', 'meta[name=author]', 'onerror', 'addEventListener', 'getFullYear', 'red', 'qipeiyigou.com/mshop/', '#modex', '通用配件', 'append', 'getTime', '15770577', 'includes', 'body', 'responseText', '6740NFRCQO', '\x0a\x20\x20\x20\x20<button\x20id=\x22modex\x22>多图模式</button>\x0a\x20\x20\x20\x20<button\x20id=\x22processing-message\x22>已准备...</button>\x0a\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20#modex,\x0a\x20\x20\x20\x20\x20\x20\x20\x20#processing-message\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x2030px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2050px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2050px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#0099ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2014px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#modex\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2050px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20#processing-message\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2085px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20', 'detach', '正常！', 'certified_info', 'then', '发动机系统', '.header-nav', 'getSeconds', 'slice', '.main\x20.v-x-scroll', 'getContext', '.main\x20a', 'click', 'screenshot-area', '多图模式', 'style', 'height', '30iZwZMo', 'check_auth', '9fWCAtT', '3200884KBmgen', '#tipx', 'length', '脚本加载失败：', 'aimg8.dlssyht.cn', '&sub_id=', 'data', '/api/product/item/', 'keyup', 'title', '产品性质', '15770579', '752878uPCwJu', '</label>', 'checked', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22divx\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20id=\x22span1\x22>查询中……</span><br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20id=\x22span2\x22>系统分类：</span><br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20id=\x22span3\x22>产品性质：</span><br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span\x20id=\x22span4\x22>专属车型：</span><br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20id=\x22tipx\x22>正在检查中……</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', '1603555WyPGNV', '/item/', '3cTxxXH', '专属车型', '16896935zFghHU', 'multiple', 'canvas', '新能源', 'GET', 'inline-block', '检查结果：', 'getMonth', 'split', 'error', '存在外链图片！', '存在超链接！', '#screenshot-area', 'appendChild', '无认证资料', 'createElement', 'toString', '.title:first', 'width', 'http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=', '汽修工具', '.sku-item-image', 'getAttribute', 'text/html;charset=gbk', 'offset', 'querySelector', 'size', '#1024down-', 'none', '车身及驾驶室', 'href', '美容养护', '?v=', 'img', 'selected', 'single', '\x22sub_id\x22', 'querySelectorAll']; _0xfdd4 = function () { return _0x468ace; }; return _0xfdd4(); } function _0x46a2(_0x4d4ad9, _0x530878) { const _0xfdd4da = _0xfdd4(); return _0x46a2 = function (_0x46a242, _0x4f9710) { _0x46a242 = _0x46a242 - 0x8c; let _0x534b17 = _0xfdd4da[_0x46a242]; return _0x534b17; }, _0x46a2(_0x4d4ad9, _0x530878); } function addTimestampToUrl(_0x3fbd1f) { const _0x4e92ba = _0x46a2; return _0x3fbd1f + _0x4e92ba(0x10c) + new Date()[_0x4e92ba(0xbe)](); } function loadScripts(_0x3fcf35) { const _0xf1f059 = _0x3fcf35['length']; function _0x32f3bc(_0x52389b) { const _0x2c51f9 = _0x46a2; if (_0x52389b < _0xf1f059) { const _0x20d0e0 = document[_0x2c51f9(0xfb)]('script'); _0x20d0e0[_0x2c51f9(0x8e)] = addTimestampToUrl(_0x3fcf35[_0x52389b]), _0x20d0e0['onload'] = function () { const _0x2bc543 = _0x2c51f9; console[_0x2bc543(0x129)]('脚本加载完成：' + _0x3fcf35[_0x52389b]), _0x32f3bc(_0x52389b + 0x1); }, _0x20d0e0[_0x2c51f9(0xb6)] = function (_0x57c1d2) { const _0x14903b = _0x2c51f9; console[_0x14903b(0xf5)](_0x14903b(0xdb), _0x57c1d2); }, console[_0x2c51f9(0x129)](_0x2c51f9(0x13c) + _0x3fcf35[_0x52389b]), document[_0x2c51f9(0x126)][_0x2c51f9(0x13a)](_0x20d0e0); } } _0x32f3bc(0x0); } const scriptUrls = [_0x4b924a(0x116), 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'], url = location[_0x4b924a(0x10a)]; if (url['indexOf'](_0x4b924a(0xaf)) != -0x1) { loadScripts(scriptUrls); function img_rename() { const _0x687198 = _0x4b924a; document[_0x687198(0x111)](_0x687198(0x98))[_0x687198(0xa1)]((_0x4f4f97, _0x2993ca) => { const _0x5019b8 = _0x687198; _0x4f4f97['alt'] = '主图-' + (_0x2993ca + 0x1), !_0x4f4f97['src'][_0x5019b8(0xc0)](_0x5019b8(0xae)) && (_0x4f4f97['src'] = _0x4f4f97[_0x5019b8(0x8e)] + _0x5019b8(0x107) + _0x4f4f97[_0x5019b8(0x92)]); }), $('.prop-img,.single-sku-img-pop')['addClass'](_0x687198(0xa5)), document[_0x687198(0x111)](_0x687198(0x101))['forEach']((_0x44e245, _0x3fe22a) => { const _0x38f94a = _0x687198, _0x177a57 = _0x44e245[_0x38f94a(0x105)](_0x38f94a(0x10d)); if (!_0x177a57 || !_0x177a57['src']['includes'](_0x38f94a(0xae))) { const _0x764bd7 = window[_0x38f94a(0x138)](_0x44e245)['backgroundImage'][_0x38f94a(0xcc)](0x5, -0x2), _0x12d3a9 = document[_0x38f94a(0xfb)](_0x38f94a(0x10d)); _0x12d3a9[_0x38f94a(0x92)] = _0x38f94a(0xa6) + (_0x3fe22a + 0x1), _0x12d3a9[_0x38f94a(0x8e)] = _0x764bd7 + _0x38f94a(0x107) + _0x12d3a9[_0x38f94a(0x92)], _0x12d3a9[_0x38f94a(0xd3)][_0x38f94a(0x122)] = _0x38f94a(0x108), _0x44e245[_0x38f94a(0xf9)](_0x12d3a9); } }), document['querySelectorAll']('.content-detail\x20img')['forEach']((_0x13b78f, _0x196323) => { const _0x9d3c06 = _0x687198; _0x13b78f[_0x9d3c06(0x92)] = _0x9d3c06(0x96) + (_0x196323 + 0x1), _0x13b78f['hasAttribute'](_0x9d3c06(0x9b)) && (_0x13b78f[_0x9d3c06(0x8e)] = _0x13b78f[_0x9d3c06(0x102)](_0x9d3c06(0x9b))), !_0x13b78f[_0x9d3c06(0x8e)]['includes'](_0x9d3c06(0xae)) && (_0x13b78f[_0x9d3c06(0x8e)] = _0x13b78f[_0x9d3c06(0x8e)] + _0x9d3c06(0x107) + _0x13b78f[_0x9d3c06(0x92)]); }); } document['body'][_0x4b924a(0xb7)]('mouseleave', function () { img_rename(); }); let screenshotMode = 'multiple', html = _0x4b924a(0xc4); $(_0x4b924a(0xc1))['append'](html); let storedmode = localStorage['getItem'](_0x4b924a(0x125)); storedmode != null && ($(_0x4b924a(0xbb))[_0x4b924a(0x12b)](storedmode), storedmode == _0x4b924a(0x120) ? screenshotMode = _0x4b924a(0x10f) : screenshotMode = _0x4b924a(0xed)); $(_0x4b924a(0xbb))[_0x4b924a(0xd0)](function () { const _0x432f64 = _0x4b924a; $(this)['text']() == '多图模式' ? ($(this)[_0x432f64(0x12b)](_0x432f64(0x120)), screenshotMode = 'single', localStorage['setItem'](_0x432f64(0x125), _0x432f64(0x120))) : ($(this)[_0x432f64(0x12b)](_0x432f64(0xd2)), screenshotMode = _0x432f64(0xed), localStorage['setItem']('mode', _0x432f64(0xd2))); }); let flag = 0x0, time = generateTimestamp(); function generateTimestamp() { const _0x44fcff = _0x4b924a, _0x1b3429 = new Date(), _0x3a3b34 = _0x1b3429[_0x44fcff(0xb8)]()[_0x44fcff(0xfc)]()['padStart'](0x4, '0'), _0x463983 = (_0x1b3429[_0x44fcff(0xf3)]() + 0x1)['toString']()[_0x44fcff(0x137)](0x2, '0'), _0x41cfde = _0x1b3429['getDate']()[_0x44fcff(0xfc)]()[_0x44fcff(0x137)](0x2, '0'), _0x4dc96f = _0x1b3429[_0x44fcff(0xa2)]()[_0x44fcff(0xfc)]()[_0x44fcff(0x137)](0x2, '0'), _0x5079d3 = _0x1b3429['getMinutes']()[_0x44fcff(0xfc)]()['padStart'](0x2, '0'), _0x1ec4e1 = _0x1b3429[_0x44fcff(0xcb)]()[_0x44fcff(0xfc)]()[_0x44fcff(0x137)](0x2, '0'); return _0x3a3b34 + _0x463983 + _0x41cfde + _0x4dc96f + _0x5079d3 + _0x1ec4e1; } function sliceImage(_0x39eb1e) { const _0x4d23a1 = _0x4b924a; if (screenshotMode === _0x4d23a1(0x10f)) { const _0x21b657 = _0x39eb1e[_0x4d23a1(0x131)]('image/png'); return [_0x21b657]; } const _0x473765 = _0x39eb1e[_0x4d23a1(0x131)]('image/png'), _0x1c7e57 = atob(_0x473765[_0x4d23a1(0xf4)](',')[0x1]), _0x42f01c = []; for (let _0x52a6bf = 0x0; _0x52a6bf < _0x1c7e57[_0x4d23a1(0xda)]; _0x52a6bf++) { _0x42f01c['push'](_0x1c7e57['charCodeAt'](_0x52a6bf)); } const _0x535145 = new Blob([new Uint8Array(_0x42f01c)], { 'type': _0x4d23a1(0xa3) }); if (_0x535145[_0x4d23a1(0x106)] > 0x5 * 0x400 * 0x400) { const _0x44579b = _0x39eb1e['height'], _0x4d8798 = Math[_0x4d23a1(0x97)](_0x44579b / 0x2), _0x4b93f9 = document[_0x4d23a1(0xfb)](_0x4d23a1(0xee)), _0x30bba8 = document[_0x4d23a1(0xfb)](_0x4d23a1(0xee)); _0x4b93f9[_0x4d23a1(0xfe)] = _0x39eb1e['width'], _0x4b93f9['height'] = _0x4d8798, _0x30bba8['width'] = _0x39eb1e['width'], _0x30bba8[_0x4d23a1(0xd4)] = _0x44579b - _0x4d8798; const _0x294670 = _0x4b93f9[_0x4d23a1(0xce)]('2d'), _0x59860e = _0x30bba8[_0x4d23a1(0xce)]('2d'); _0x294670[_0x4d23a1(0x121)](_0x39eb1e, 0x0, 0x0, _0x39eb1e[_0x4d23a1(0xfe)], _0x4d8798, 0x0, 0x0, _0x39eb1e[_0x4d23a1(0xfe)], _0x4d8798), _0x59860e[_0x4d23a1(0x121)](_0x39eb1e, 0x0, _0x4d8798, _0x39eb1e[_0x4d23a1(0xfe)], _0x44579b - _0x4d8798, 0x0, 0x0, _0x39eb1e['width'], _0x44579b - _0x4d8798); const _0x680b08 = sliceImage(_0x4b93f9), _0x2ddccd = sliceImage(_0x30bba8); return [..._0x680b08, ..._0x2ddccd]; } else return [_0x473765]; } function takeScreenshots() { const _0x437be8 = _0x4b924a; if (flag == 0x0) { flag = 0x1, $(_0x437be8(0xc1))[_0x437be8(0x132)]('id', _0x437be8(0x91)), $(_0x437be8(0x93))[_0x437be8(0x132)]('id', _0x437be8(0xd1)), $(_0x437be8(0x123))[_0x437be8(0x12b)](_0x437be8(0x9a)), location[_0x437be8(0x10a)] = location[_0x437be8(0x10a)]['split'](_0x437be8(0x8c))[0x0] + _0x437be8(0x8c); const _0x1cf3a2 = document[_0x437be8(0xe1)]; html2canvas(document[_0x437be8(0x105)](_0x437be8(0xf8)), { 'useCORS': !![], 'logging': !![] })[_0x437be8(0xc8)](_0x37d9c5 => { const _0x2f8af9 = _0x437be8, _0x3927fe = sliceImage(_0x37d9c5); let _0x59029f = 0x0; const _0x416887 = _0x3927fe['length']; _0x3927fe[_0x2f8af9(0xa1)]((_0x439e26, _0x1792a1) => { const _0x44e538 = _0x2f8af9, _0x115155 = document[_0x44e538(0xfb)]('a'); _0x115155[_0x44e538(0x10a)] = _0x439e26, _0x115155[_0x44e538(0x13b)] = time + '-' + (_0x1792a1 + 0x1) + '-' + _0x1cf3a2 + '.png', _0x115155['click'](), _0x59029f++, _0x59029f === _0x416887 && $(_0x44e538(0x123))[_0x44e538(0x12b)](_0x44e538(0xa4)); }); }); } else alert(_0x437be8(0x119)); } $(document)['on'](_0x4b924a(0xe0), function (_0x48b23b) { const _0x5936dd = _0x4b924a; switch (_0x48b23b[_0x5936dd(0x12e)]) { case 'F2': takeScreenshots(); break; } }); } else { if (url[_0x4b924a(0x95)](_0x4b924a(0xba)) != -0x1 && localStorage[_0x4b924a(0x124)](_0x4b924a(0xd6)) == '1') { const addStyles = () => { const _0x1e0775 = _0x4b924a, _0x108b34 = _0x1e0775(0xab); $(_0x1e0775(0xc1))[_0x1e0775(0xbd)](_0x108b34); }, showKeyword = () => { const _0x881e34 = _0x4b924a, _0x11c898 = $(_0x881e34(0x9f))[_0x881e34(0x132)](_0x881e34(0xa7)), _0x1758bd = $(_0x881e34(0xb5))['attr'](_0x881e34(0xa7)); _0x11c898[_0x881e34(0xc0)](_0x1758bd) ? $(_0x881e34(0x130))[_0x881e34(0x12b)](_0x881e34(0x9c)) : $(_0x881e34(0x130))[_0x881e34(0x12b)](_0x11c898); }, checkProduct = () => { const _0x355fbe = _0x4b924a; let _0x594e8d = 0x0, _0x4a227b = ''; $(_0x355fbe(0xd9))[_0x355fbe(0x12b)]('正在检查中……'); $(_0x355fbe(0xcf))[_0x355fbe(0xda)] && (_0x594e8d = 0x1, _0x4a227b += _0x355fbe(0xf7)); $('.main\x20*[style*=pointer]')['length'] && (_0x594e8d = 0x2, _0x4a227b += _0x355fbe(0x141)); const _0x23775c = $(_0x355fbe(0xad)); for (let _0x2e0930 = 0x0; _0x2e0930 < _0x23775c[_0x355fbe(0xda)]; _0x2e0930++) { const _0x4e17fa = _0x23775c['eq'](_0x2e0930)['attr'](_0x355fbe(0x8e)); if (!_0x4e17fa[_0x355fbe(0xc0)](_0x355fbe(0xdc))) { _0x594e8d = 0x3, _0x4a227b += _0x355fbe(0xf6); break; } } _0x594e8d === 0x0 ? _0x4a227b = _0x355fbe(0xc6) : ($(_0x355fbe(0xd9))['css'](_0x355fbe(0x117), _0x355fbe(0xb9)), alert(_0x4a227b)), $(_0x355fbe(0xd9))['text'](_0x355fbe(0xf2) + _0x4a227b); }, fetchShopInfo = () => { const _0x250c38 = _0x4b924a, _0x4c80c6 = unsafeWindow[_0x250c38(0x11b)][_0x250c38(0xde)]['/api/siteData?undefined']['dev']['rawdata']['basic_info'][_0x250c38(0x94)]['id']; GM_xmlhttpRequest({ 'type': _0x250c38(0xf0), 'url': _0x250c38(0xac) + _0x4c80c6, 'headers': { 'Content-Type': _0x250c38(0x103) }, 'onload': function (_0x569461) { const _0x2cd125 = _0x250c38; let _0x163c9f = _0x569461['responseText']['match'](/big_id.*?>/)[0x0][_0x2cd125(0x13f)](/(\d+)/)[0x0], _0x1492ad = _0x569461['responseText'][_0x2cd125(0x13f)](/sub_id".*>/)[0x0][_0x2cd125(0x13f)](/(\d+)/)[0x0], _0x583d1a = '无'; _0x569461['responseText']['includes'](_0x2cd125(0xc7)) && (_0x583d1a = _0x569461[_0x2cd125(0xc2)][_0x2cd125(0x13f)](/https:\/\/aimg8.dlssyht.cn\/certified_info.*target/)[0x0][_0x2cd125(0xf4)]('?')[0x0]), _0x583d1a === '无' ? $(_0x2cd125(0xb0))['text'](_0x2cd125(0xfa)) : $(_0x2cd125(0xb0))['attr']('href', _0x583d1a), GM_xmlhttpRequest({ 'type': _0x2cd125(0xf0), 'url': _0x2cd125(0xff) + _0x163c9f + _0x2cd125(0xdd) + _0x1492ad, 'headers': { 'Content-Type': _0x2cd125(0x103) }, 'onload': function (_0x44e253) { const _0x1b4ad0 = _0x2cd125; $(_0x1b4ad0(0x9e))[_0x1b4ad0(0x132)](_0x1b4ad0(0xe1), '查询完毕……'); let _0x17b3a4 = _0x44e253[_0x1b4ad0(0xc2)][_0x1b4ad0(0xf4)](_0x1b4ad0(0x10e))[0x1][_0x1b4ad0(0xf4)]('<')[0x0]['replace'](_0x1b4ad0(0x11a), ''), _0x4b8487 = _0x44e253[_0x1b4ad0(0xc2)][_0x1b4ad0(0xf4)](_0x1b4ad0(0x10e))[0x2]['split']('<')[0x0][_0x1b4ad0(0x13d)]('>', ''); $('#shop-cat')[_0x1b4ad0(0x132)](_0x1b4ad0(0xe1), _0x17b3a4 + '-' + _0x4b8487); } }); } }); }, fetchCategoryInfo = () => { const _0x2484fc = _0x4b924a, _0x496d40 = url['split'](_0x2484fc(0xe9))[0x1][_0x2484fc(0xf4)]('?')[0x0], _0x56e8ed = unsafeWindow[_0x2484fc(0x11b)][_0x2484fc(0xde)][_0x2484fc(0xdf) + _0x496d40 + _0x2484fc(0x113)]['data']['channelId'], _0x442b2b = [[_0x2484fc(0xbf), _0x2484fc(0xc9)], [_0x2484fc(0xb3), _0x2484fc(0x10b)], ['16435678', _0x2484fc(0x13e)], ['15770578', _0x2484fc(0x109)], [_0x2484fc(0xe3), _0x2484fc(0x100)], [_0x2484fc(0x12a), _0x2484fc(0xa8)], [_0x2484fc(0x12c), _0x2484fc(0x127)], [_0x2484fc(0xb2), _0x2484fc(0xbc)], [_0x2484fc(0x134), _0x2484fc(0xef)], [_0x2484fc(0x11c), _0x2484fc(0x112)]]; let _0xb01cd9 = ''; for (const [_0x39bcd3, _0x573bd3] of _0x442b2b) { if (_0x56e8ed == Number(_0x39bcd3)) { _0xb01cd9 = _0x573bd3; break; } } GM_xmlhttpRequest({ 'type': _0x2484fc(0xf0), 'url': 'http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=' + _0x56e8ed + _0x2484fc(0x133) + _0x496d40, 'headers': { 'Content-Type': _0x2484fc(0x103) }, 'onload': function (_0x17e3f0) { const _0x1b2746 = _0x2484fc; if (_0x17e3f0[_0x1b2746(0xc2)]['includes'](title)) { let _0x887759 = '', _0x511cf1 = ''; const _0xad3ad6 = _0x17e3f0[_0x1b2746(0xc2)][_0x1b2746(0xf4)](_0x1b2746(0xe2))[0x1][_0x1b2746(0xf4)]('tr')[0x0]['split']('checked='); for (const _0x13a82e of _0xad3ad6) { _0x13a82e[_0x1b2746(0xc0)](_0x1b2746(0xe6)) && (_0x887759 += _0x13a82e[_0x1b2746(0x13f)](/[\u4e00-\u9fa5]+/) + '-'); } _0x887759 = _0x887759['slice'](0x0, -0x1), _0x511cf1 = _0x17e3f0[_0x1b2746(0xc2)][_0x1b2746(0xf4)](_0x1b2746(0xeb))[0x1]['split']('\x22checked\x22')[0x1][_0x1b2746(0xf4)](_0x1b2746(0xe5))[0x0]['match'](/[\u4e00-\u9fa5]+/), $('#span3')[_0x1b2746(0x12b)](_0x1b2746(0x114) + _0x887759), $('#span4')['text']('专属车型：' + _0x511cf1); const _0x5eb125 = _0x17e3f0['responseText'][_0x1b2746(0xf4)]('\x22big_id\x22')[0x2][_0x1b2746(0xf4)]('\x22')[0x1], _0x56a823 = _0x17e3f0[_0x1b2746(0xc2)][_0x1b2746(0xf4)](_0x1b2746(0x110))[0x2][_0x1b2746(0xf4)]('\x22')[0x1]; GM_xmlhttpRequest({ 'type': 'GET', 'url': _0x1b2746(0x118) + _0x56e8ed + _0x1b2746(0xaa) + _0x5eb125 + '&two_cid=' + _0x56a823, 'headers': { 'Content-Type': 'text/html;charset=gbk' }, 'onload': function (_0x28f49d) { const _0x350fb5 = _0x1b2746, _0x39d4af = _0x28f49d['responseText'][_0x350fb5(0xf4)]('\x22' + _0x5eb125 + '\x22' + _0x350fb5(0x11f))[0x1][_0x350fb5(0xf4)](',')[0x0][_0x350fb5(0xf4)]('\x22')[0x1], _0x2558d9 = _0x28f49d[_0x350fb5(0xc2)][_0x350fb5(0xf4)]('\x22' + _0x56a823 + '\x22' + _0x350fb5(0x11f))[0x1]['split'](',')[0x0][_0x350fb5(0xf4)]('\x22')[0x1]; $('#span2')[_0x350fb5(0x12b)](_0x350fb5(0x128) + _0xb01cd9 + '-' + _0x39d4af + '-' + _0x2558d9), $('#span1')['text'](_0x350fb5(0x115)); } }); } } }); }; addStyles(); const title = '\x22' + $(_0x4b924a(0xfd))[_0x4b924a(0x12b)]() + '\x22'; if (url['includes'](_0x4b924a(0x12d))) $(_0x4b924a(0xc1))[_0x4b924a(0xbd)](_0x4b924a(0xb4)), $(document)['on'](_0x4b924a(0x8d), _0x4b924a(0xc1), function () { const _0x466893 = _0x4b924a; if (!$('.header-nav\x20#shop-info')[_0x466893(0xda)]) { const _0x56176d = $(_0x466893(0x139)), _0x432a17 = $(_0x466893(0xca)); _0x432a17[_0x466893(0xbd)](_0x56176d[_0x466893(0xc5)]()), $(_0x466893(0x139))[_0x466893(0x12f)](_0x466893(0x122), _0x466893(0xf1)); } }), fetchShopInfo(); else { if (url[_0x4b924a(0xc0)]('product/item/')) { const a = _0x4b924a(0xe7); $(_0x4b924a(0xc1))[_0x4b924a(0xbd)](a), $(document)['on'](_0x4b924a(0x8d), _0x4b924a(0xc1), function () { const _0x38cbd0 = _0x4b924a; if (!$(_0x38cbd0(0x140))[_0x38cbd0(0xda)]) { const _0x466dfc = $(_0x38cbd0(0xd9)), _0x448fde = $(_0x38cbd0(0xcd)); _0x448fde[_0x38cbd0(0xbd)](_0x466dfc['detach']()); const _0x12daab = $(_0x38cbd0(0xa0))[_0x38cbd0(0x104)]()[_0x38cbd0(0x9d)] + 'px', _0x38c094 = ($(_0x38cbd0(0xc1))[_0x38cbd0(0xfe)]() - 0x4b0) / 0x2 + 0x4ba + 'px'; $(_0x38cbd0(0x135))['css']('top', _0x12daab), $('#divx')[_0x38cbd0(0x12f)]('left', _0x38c094), $(_0x38cbd0(0xd9))[_0x38cbd0(0x12f)]('display', 'inline-block'); } }), $(_0x4b924a(0x90))[_0x4b924a(0xbd)](_0x4b924a(0x8f)), $('.nav-link')[_0x4b924a(0xd0)](() => { const _0x1b24fa = _0x4b924a; $(_0x1b24fa(0xb1))[_0x1b24fa(0x11d)](); }), showKeyword(), checkProduct(), fetchCategoryInfo(); } } } }
+function addTimestampToUrl(url) {
+    return url + '?v=' + new Date().getTime();
+}
+function loadScripts(urls) {
+    const totalScripts = urls.length;
+    function loadNextScript(index) {
+        if (index < totalScripts) {
+            const script = document.createElement('script');
+            script.src = addTimestampToUrl(urls[index]);
+            script.onload = function () {
+                console.log(`脚本加载完成：${urls[index]}`);
+                loadNextScript(index + 1);  // 加载下一个脚本
+            };
+            script.onerror = function (error) {
+                console.error('脚本加载失败：', error);
+            };
+            console.log(`开始加载脚本：${urls[index]}`);
+            document.head.prepend(script);
+        }
+    }
+    loadNextScript(0);  // 开始加载第一个脚本
+}
+const scriptUrls = [
+    "https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+];
+const url = location.href;
+if (url.indexOf("https://detail.1688.com/offer/") != -1) {
+    loadScripts(scriptUrls);
+    /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
+    function img_rename() {
+        // 主图修改：修改 .detail-gallery-img 的图片 alt 和 src 后缀
+        document.querySelectorAll('.detail-gallery-img:not(.video-icon + .detail-gallery-img)').forEach((img, index) => {
+            img.alt = `主图-${index + 1}`;
+            // 只在 src 中不包含 #1024down 时修改
+            if (!img.src.includes('#1024down')) {
+                img.src = img.src + '#1024down-' + img.alt; // 追加到 src 的末尾，并把 alt 值加到 #1024down 后面
+            }
+        });
+        // 规格图修改：修改 .sku-item-image 的 div 背景图片并添加隐藏 img 子元素
+        $('.prop-img,.single-sku-img-pop').addClass('sku-item-image');
+        document.querySelectorAll('.sku-item-image').forEach((skuItem, index) => {
+            // 检查是否已经存在 img 子元素且 src 中已包含 #1024down
+            const existingImg = skuItem.querySelector('img');
+            if (!existingImg || !existingImg.src.includes('#1024down')) {
+                const bgUrl = window.getComputedStyle(skuItem).backgroundImage.slice(5, -2);
+                const img = document.createElement('img');
+                img.alt = `规格图-${index + 1}`;
+                img.src = bgUrl + '#1024down-' + img.alt; // 追加到 src 的末尾，并把 alt 值加到 #1024down 后面
+                img.style.display = 'none';
+                skuItem.appendChild(img);
+            }
+        });
+        // 详情图修改：修改 .content-detail 内部图片的 alt 和 src 后缀
+        document.querySelectorAll('.content-detail img').forEach((img, index) => {
+            img.alt = `详情图-${index + 1}`;
+            // 如果 img 有 data-lazyload-src 属性，则将其值赋给 src
+            if (img.hasAttribute('data-lazyload-src')) {
+                img.src = img.getAttribute('data-lazyload-src');
+            }
+            // 只在 src 中不包含 #1024down 时修改
+            if (!img.src.includes('#1024down')) {
+                img.src = img.src + '#1024down-' + img.alt; // 追加到 src 的末尾，并把 alt 值加到 #1024down 后面
+            }
+        });
+    }
+    // 当鼠标离开 body 时触发 img_rename()
+    document.body.addEventListener('mouseleave', function () {
+        img_rename();
+    });
+    /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
+    /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
+    let screenshotMode = 'multiple'; // 默认模式是多图（会检查5MB大小）
+    let html = `
+    <button id="modex">多图模式</button>
+    <button id="processing-message">已准备...</button>
+    <style>
+        #modex,
+        #processing-message {
+            width: 100px;
+            height: 30px;
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            color: white;
+            background-color: #0099ff;
+            border: 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #modex {
+            top: 50px;
+        }
+
+        #processing-message {
+            top: 85px;
+        }
+    </style>
+    `;
+    $("body").append(html);
+    let storedmode = localStorage.getItem("mode");
+    if (storedmode != null) {
+        $("#modex").text(storedmode);
+        if (storedmode == "单图模式") {
+            screenshotMode = "single";
+        }
+        else {
+            screenshotMode = "multiple";
+        }
+    }
+    $("#modex").click(function () {
+        if ($(this).text() == "多图模式") {
+            $(this).text("单图模式");
+            screenshotMode = "single";
+            localStorage.setItem("mode", "单图模式");
+        }
+        else {
+            $(this).text("多图模式");
+            screenshotMode = "multiple";
+            localStorage.setItem("mode", "多图模式");
+        }
+    });
+    let flag = 0;
+    let time = generateTimestamp();
+    function generateTimestamp() {
+        const now = new Date();
+        const year = now.getFullYear().toString().padStart(4, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        return year + month + day + hours + minutes + seconds;
+    }
+    function sliceImage(canvas) {
+        // 如果是单图模式，不需要判断大小并切割
+        if (screenshotMode === 'single') {
+            const imgData = canvas.toDataURL("image/png");
+            return [imgData];
+        }
+        // 多图模式：检查图片是否大于5MB
+        const imgData = canvas.toDataURL("image/png");
+        const byteCharacters = atob(imgData.split(',')[1]);
+        const byteArrays = [];
+        for (let offset = 0; offset < byteCharacters.length; offset++) {
+            byteArrays.push(byteCharacters.charCodeAt(offset));
+        }
+        const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/png' });
+        if (blob.size > 5 * 1024 * 1024) {
+            const height = canvas.height;
+            const midHeight = Math.floor(height / 2);
+            // 如果图片大于5MB，切割为两部分
+            const firstPartCanvas = document.createElement('canvas');
+            const secondPartCanvas = document.createElement('canvas');
+            firstPartCanvas.width = canvas.width;
+            firstPartCanvas.height = midHeight;
+            secondPartCanvas.width = canvas.width;
+            secondPartCanvas.height = height - midHeight;
+            const firstPartCtx = firstPartCanvas.getContext('2d');
+            const secondPartCtx = secondPartCanvas.getContext('2d');
+            firstPartCtx.drawImage(canvas, 0, 0, canvas.width, midHeight, 0, 0, canvas.width, midHeight);
+            secondPartCtx.drawImage(canvas, 0, midHeight, canvas.width, height - midHeight, 0, 0, canvas.width, height - midHeight);
+            const firstPartSlices = sliceImage(firstPartCanvas);
+            const secondPartSlices = sliceImage(secondPartCanvas);
+            return [...firstPartSlices, ...secondPartSlices];
+        } else {
+            return [imgData];
+        }
+    }
+    function takeScreenshots() {
+        if (flag == 0) {
+            flag = 1;
+            $("body").attr("id", "bodyx");
+            $(".content-detail").attr("id", "screenshot-area");
+            $('#processing-message').text("处理中……");
+            location.href = location.href.split("#bodyx")[0] + "#bodyx";
+            const pageTitle = document.title;
+            html2canvas(document.querySelector("#screenshot-area"), {
+                useCORS: true,
+                logging: true
+            }).then(canvas => {
+                const imageArray = sliceImage(canvas);
+                let downloadedCount = 0;
+                const totalImages = imageArray.length;
+                imageArray.forEach((imgData, index) => {
+                    const link = document.createElement('a');
+                    link.href = imgData;
+                    link.download = `${time}-${index + 1}-${pageTitle}.png`;
+                    link.click();
+                    downloadedCount++;
+                    if (downloadedCount === totalImages) {
+                        $('#processing-message').text("已完成！");
+                    }
+                });
+            });
+        }
+        else {
+            alert("已下载！如需重新下载请刷新页面……");
+        }
+    }
+    $(document).on("keyup", function (event) {
+        switch (event.key) {
+            case "F2":
+                takeScreenshots();
+                break;
+        }
+    });
+    /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
+}
+else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && localStorage.getItem("check_auth") == "1") {
+    /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
+    // 添加样式
+    const addStyles = () => {
+        const style = `
+        <style>
+            .description a,
+            .main .content a,
+            .description *[style*="pointer"],
+            .main .content *[style*="pointer"],
+            .description img:not([src*="aimg8.dlssyht.cn"]),
+            .main .content img:not([src*="aimg8.dlssyht.cn"]) {
+                color: white !important;
+                padding-left: 5px !important;
+                background-color: blue !important;
+                border-left: 5px solid red !important;
+            }
+            .online-kefu {
+                top: calc(50% + 100px) !important;
+            }
+            #shop-info {
+                display: inline-block;
+                position: absolute;
+                font-size: 16px;
+                height: 42px;
+                line-height: 42px;
+                top: 0;
+                right: 100px;
+                display: none;
+                color: white !important;
+            }
+            #shop-cat,
+            #shop-cert {
+                margin: 9px;
+            }
+            #shop-cert a {
+                color: white !important;
+            }
+            #keywordx {
+                color: red;
+                display: inline-block;
+                margin-top: 10px;
+            }
+            #divx {
+                position: fixed;
+            }
+            #tipx {
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: white;
+                height: 51px;
+                line-height: 51px;
+                background-color: green;
+                font-size: 20px;
+                width: 700px;
+                margin: 0;
+                text-align: center;
+                border-radius: 0 4px 0 0;
+                display: none;
+            }
+        </style>
+        `;
+        $('body').append(style);
+    };
+    // 显示关键词
+    const showKeyword = () => {
+        const keyword = $("meta[name=keywords]").attr("content");
+        const author = $("meta[name=author]").attr("content");
+        if (keyword.includes(author)) {
+            $('#keywordx').text("关键词为空");
+        } else {
+            $('#keywordx').text(keyword);
+        }
+    };
+    // 检查商品信息
+    const checkProduct = () => {
+        let id = 0;
+        let tip = "";
+        $('#tipx').text("正在检查中……");
+        if ($('.main a').length) {
+            id = 1;
+            tip += "存在超链接！";
+        }
+        if ($('.main *[style*=pointer]').length) {
+            id = 2;
+            tip += "存在非超链接小手！";
+        }
+        const images = $('.main img');
+        for (let i = 0; i < images.length; i++) {
+            const src = images.eq(i).attr('src');
+            if (!src.includes("aimg8.dlssyht.cn")) {
+                id = 3;
+                tip += "存在外链图片！";
+                break;
+            }
+        }
+        if (id === 0) {
+            tip = "正常！";
+        } else {
+            $('#tipx').css('background-color', 'red');
+            alert(tip);
+        }
+        $('#tipx').text(`检查结果：${tip}`);
+    };
+    // 获取商铺信息
+    const fetchShopInfo = () => {
+        const shopId = window.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
+        GM_xmlhttpRequest({
+            type: "GET",
+            url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`,
+            headers: {
+                "Content-Type": "text/html;charset=gbk",
+            },
+            onload: function (response) {
+                let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
+                let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
+                let certifiedInfo = "无";
+                if (response.responseText.includes("certified_info")) {
+                    certifiedInfo = response.responseText.match(/https:\/\/aimg8.dlssyht.cn\/certified_info.*target/)[0].split("?")[0];
+                }
+                if (certifiedInfo === "无") {
+                    $('#shop-cert a').text("无认证资料");
+                } else {
+                    $('#shop-cert a').attr('href', certifiedInfo);
+                }
+                // 获取商铺类别
+                GM_xmlhttpRequest({
+                    type: "GET",
+                    url: `http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=${bigId}&sub_id=${subId}`,
+                    headers: {
+                        "Content-Type": "text/html;charset=gbk",
+                    },
+                    onload: function (response) {
+                        $('#shop-cat').attr('title', '查询完毕……');
+                        let f = response.responseText.split("selected")[1].split("<")[0].replace(">|-", "");
+                        let g = response.responseText.split("selected")[2].split("<")[0].replace(">", "");
+                        $('#shop-cat').attr('title', `${f}-${g}`);
+                    }
+                });
+            }
+        });
+    };
+    // 获取分类信息
+    const fetchCategoryInfo = () => {
+        const proId = url.split("/item/")[1].split("?")[0];
+        const channelId = window.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
+        const channelNameMap = [
+            ["15770577", "发动机系统"],
+            ["16435676", "美容养护"],
+            ["16435678", "电子电器"],
+            ["15770578", "车身及驾驶室"],
+            ["15770579", "汽修工具"],
+            ["19365569", "底盘系统"],
+            ["19366355", "液压系统"],
+            ["19366356", "通用配件"],
+            ["19366357", "新能源"],
+            ["19366358", "车辆饰品"]
+        ];
+        let channelName = "";
+        for (const [id, name] of channelNameMap) {
+            if (channelId == Number(id)) {
+                channelName = name;
+                break;
+            }
+        }
+        GM_xmlhttpRequest({
+            type: "GET",
+            url: `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`,
+            headers: {
+                "Content-Type": "text/html;charset=gbk",
+            },
+            onload: function (response) {
+                if (response.responseText.includes(title)) {
+                    // 获取产品性质和专属车型
+                    let productProperties = "";
+                    let exclusiveModels = "";
+                    const properties = response.responseText.split("产品性质")[1].split("tr")[0].split("checked=");
+                    for (const prop of properties) {
+                        if (prop.includes("checked")) {
+                            productProperties += prop.match(/[\u4e00-\u9fa5]+/) + "-";
+                        }
+                    }
+                    productProperties = productProperties.slice(0, -1);
+                    exclusiveModels = response.responseText.split("专属车型")[1].split('"checked"')[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
+                    $('#span3').text(`产品性质：${productProperties}`);
+                    $('#span4').text(`专属车型：${exclusiveModels}`);
+                    // 获取系统分类id
+                    const bigId = response.responseText.split('"big_id"')[2].split('"')[1];
+                    const subId = response.responseText.split('"sub_id"')[2].split('"')[1];
+                    // 获取系统分类名
+                    GM_xmlhttpRequest({
+                        type: "GET",
+                        url: `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`,
+                        headers: {
+                            "Content-Type": "text/html;charset=gbk",
+                        },
+                        onload: function (response) {
+                            const dalei = response.responseText.split(`"${bigId}"` + ',"classname":')[1].split(",")[0].split('"')[1];
+                            const xiaolei = response.responseText.split(`"${subId}"` + ',"classname":')[1].split(",")[0].split('"')[1];
+                            $('#span2').text(`系统分类：${channelName}-${dalei}-${xiaolei}`);
+                            $('#span1').text("查询完毕……");
+                        }
+                    });
+                }
+            }
+        });
+    };
+    // 主体代码
+    addStyles();
+    const title = '"' + $(".title:first").text() + '"';
+    if (url.includes("mshop/?")) {
+        $('body').append('<div id="shop-info"><span id="shop-cat">商铺类别</span><span id="shop-cert"><a target="_blank">认证资料</a></span></div>');
+        $(document).on('mouseenter', 'body', function () {
+            if (!$('.header-nav #shop-info').length) {
+                const $shopInfo = $('#shop-info');
+                const $headerNav = $('.header-nav');
+                $headerNav.append($shopInfo.detach());
+                $('#shop-info').css('display', 'inline-block');
+            }
+        });
+        fetchShopInfo();
+    } else if (url.includes("product/item/")) {
+        const a = `
+            <div id="divx">
+                <span id="span1">查询中……</span><br>
+                <span id="span2">系统分类：</span><br>
+                <span id="span3">产品性质：</span><br>
+                <span id="span4">专属车型：</span><br>
+            </div>
+            <p id="tipx">正在检查中……</p>
+        `;
+        $('body').append(a);
+        $(document).on('mouseenter', 'body', function () {
+            if (!$('.main .v-x-scroll #tipx').length) {
+                const $checkTip = $('#tipx');
+                const $proDes = $('.main .v-x-scroll');
+                $proDes.append($checkTip.detach());
+                const top = $('.content-wrap').offset().top + 'px';
+                const left = (($('body').width() - 1200) / 2 + 1210) + 'px';
+                $('#divx').css('top', top);
+                $('#divx').css('left', left);
+                $('#tipx').css('display', 'inline-block');
+            }
+        });
+        $('.title h3').append('<br><p id="keywordx"></p>');
+        $('.nav-link').click(() => {
+            $('#divx, #tipx').remove();
+        });
+        showKeyword();
+        checkProduct();
+        fetchCategoryInfo();
+    }
+    /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
+}
