@@ -315,7 +315,7 @@ else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && localStorage.getItem("che
     };
     // 获取商铺信息
     const fetchShopInfo = () => {
-        const shopId = window.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
+        const shopId = unsafeWindow.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
         GM_xmlhttpRequest({
             type: "GET",
             url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`,
@@ -354,7 +354,7 @@ else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && localStorage.getItem("che
     // 获取分类信息
     const fetchCategoryInfo = () => {
         const proId = url.split("/item/")[1].split("?")[0];
-        const channelId = window.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
+        const channelId = unsafeWindow.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
         const channelNameMap = [
             ["15770577", "发动机系统"],
             ["16435676", "美容养护"],
