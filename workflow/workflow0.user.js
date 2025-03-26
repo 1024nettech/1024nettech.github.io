@@ -2,7 +2,7 @@
 // @name         workflow
 // @namespace    https://www.1024net.tech/
 // @namespace    https://www.lovemake.love/
-// @version      2025.03.08.080000
+// @version      2025.03.26.080000
 // @description  I try to take over the world!
 // @author       Kay
 // @match        *://*/*
@@ -18,6 +18,7 @@
 
     // Your code here...
     const check_auth = 0;
+    const capture = 0;
     function loadScripts(urls) {
         const totalScripts = urls.length;
         function loadNextScript(index) {
@@ -42,7 +43,7 @@
         "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
     ];
     const url = location.href;
-    if (url.indexOf("https://detail.1688.com/offer/") != -1) {
+    if (url.indexOf("https://detail.1688.com/offer/") != -1 && capture == 1) {
         loadScripts(scriptUrls);
         /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
         function img_rename() {
@@ -89,32 +90,32 @@
         /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
         let screenshotMode = 'multiple'; // 默认模式是多图（会检查5MB大小）
         let html = `
-    <button id="modex">多图模式</button>
-    <button id="processing-message">已准备...</button>
-    <style>
-        #modex,
-        #processing-message {
-            width: 100px;
-            height: 30px;
-            position: fixed;
-            top: 50px;
-            right: 50px;
-            color: white;
-            background-color: #0099ff;
-            border: 0;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+        <button id="modex">多图模式</button>
+        <button id="processing-message">已准备...</button>
+        <style>
+            #modex,
+            #processing-message {
+                width: 100px;
+                height: 30px;
+                position: fixed;
+                top: 50px;
+                right: 50px;
+                color: white;
+                background-color: #0099ff;
+                border: 0;
+                border-radius: 5px;
+                font-size: 14px;
+            }
 
-        #modex {
-            top: 50px;
-        }
+            #modex {
+                top: 50px;
+            }
 
-        #processing-message {
-            top: 85px;
-        }
-    </style>
-    `;
+            #processing-message {
+                top: 85px;
+            }
+        </style>
+        `;
         $("body").append(html);
         let storedmode = localStorage.getItem("mode");
         if (storedmode != null) {
@@ -481,4 +482,4 @@
         /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
     }
 })();
-/*2025.03.08.080000 - Line : 484*/
+/*2025.03.26.080000 - Line : 485*/
