@@ -29,14 +29,24 @@
         },
         onload: function (response) {
             if (response.responseText.indexOf(version) != -1) {
-                console.log("workflow 已是最新版本");
-                console.log(version_url);
+                console.log(`workflow 已是最新版本:${version_url}`);
             }
             else {
-                window.open("https://1024nettech.github.io/workflow/workflow.user.js");
+                $("body").html("<a href='https://1024nettech.github.io/workflow/workflow.user.js'>点击更新</a>");
             }
         }
     });
+    function open_products() {
+        if (location.href.indexOf("mshop/product/item") == -1) {
+            let a = $(".list .image").length;
+            for (let i = 0; i < a; i++) {
+                window.open($(".list .image:eq(" + i + ")").attr("href"));
+            }
+        }
+        else if (location.href.indexOf("mshop/product/item") != -1) {
+            window.close();
+        }
+    }
     function loadScripts(urls) {
         const totalScripts = urls.length;
         function loadNextScript(index) {
@@ -498,6 +508,13 @@
             fetchCategoryInfo();
         }
         /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
+        $(document).on("keyup", function (event) {
+            switch (event.key) {
+                case "F2":
+                    open_products();
+                    break;
+            }
+        });
     }
 })();
-/*2025.03.26.080000 - Line : 503*/
+/*2025.03.26.080000 - Line : 520*/
