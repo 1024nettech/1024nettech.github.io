@@ -19,6 +19,24 @@
     // Your code here...
     const check_auth = 0;
     const capture = 0;
+    const version = "2025.03.26.080000";
+    const version_url = `https://1024nettech.github.io/workflow/version.txt?${new Date().getTime()}`;
+    GM_xmlhttpRequest({
+        type: "GET",
+        url: version_url,
+        headers: {
+            "Content-Type": "text/plain;charset=gbk",
+        },
+        onload: function (response) {
+            if (response.responseText.indexOf(version) != -1) {
+                console.log("workflow 已是最新版本");
+                console.log(version_url);
+            }
+            else {
+                window.open("https://1024nettech.github.io/workflow/workflow.user.js");
+            }
+        }
+    });
     function loadScripts(urls) {
         const totalScripts = urls.length;
         function loadNextScript(index) {
@@ -482,4 +500,4 @@
         /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
     }
 })();
-/*2025.03.26.080000 - Line : 485*/
+/*2025.03.26.080000 - Line : 503*/
