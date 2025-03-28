@@ -2,7 +2,7 @@
 // @name         workflow
 // @namespace    https://www.1024net.tech/
 // @namespace    https://www.lovemake.love/
-// @version      2025.03.26.080000
+// @version      2025.03.28.080000
 // @description  I try to take over the world!
 // @author       Kay
 // @match        *://*/*
@@ -19,31 +19,28 @@
     // Your code here...
     const check_auth = 0;
     const capture = 0;
-    const version = "2025.03.26.080000";
+    const url = location.href;
     const version_url = `https://1024nettech.github.io/workflow/version.txt?${new Date().getTime()}`;
     GM_xmlhttpRequest({
         type: "GET",
         url: version_url,
-        headers: {
-            "Content-Type": "text/plain;charset=gbk",
-        },
         onload: function (response) {
-            if (response.responseText.indexOf(version) != -1) {
-                console.log(`workflow 已是最新版本:${version_url}`);
+            if (response.responseText.trim() == GM_info.script.version) {
+                console.log(`workflow已是最新版本:${GM_info.script.version}\n${version_url}`);
             }
             else {
-                $("body").html("<a href='https://1024nettech.github.io/workflow/workflow.user.js'>点击更新</a>");
+                if (url.includes("mshop/?") || url.includes("detail.1688.com/offer/")) {
+                    $("body").html(`<a href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
+                }
             }
         }
     });
     function open_products() {
-        if (location.href.indexOf("mshop/product/item") == -1) {
-            let a = $(".list .image").length;
-            for (let i = 0; i < a; i++) {
-                window.open($(".list .image:eq(" + i + ")").attr("href"));
-            }
-        }
-        else if (location.href.indexOf("mshop/product/item") != -1) {
+        if (!location.href.includes("mshop/product/item")) {
+            $(".list .image").each(function () {
+                window.open($(this).attr("href"));
+            });
+        } else if (location.href.includes("mshop/product/item")) {
             window.close();
         }
     }
@@ -61,7 +58,7 @@
                     console.error('脚本加载失败：', error);
                 };
                 console.log(`开始加载脚本：${urls[index]}`);
-                document.head.prepend(script);
+                document.head.append(script);
             }
         }
         loadNextScript(0);  // 开始加载第一个脚本
@@ -70,8 +67,7 @@
         "https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
     ];
-    const url = location.href;
-    if (url.indexOf("https://detail.1688.com/offer/") != -1 && capture == 1) {
+    if (url.includes("https://detail.1688.com/offer/") && capture == 1) {
         loadScripts(scriptUrls);
         /*——————————————————————————————————————————————————1688图片重命名——————————————————————————————————————————————————*/
         function img_rename() {
@@ -254,69 +250,69 @@
         });
         /*——————————————————————————————————————————————————1688详情截图——————————————————————————————————————————————————*/
     }
-    else if (url.indexOf("qipeiyigou.com/mshop/") != -1 && check_auth == 1) {
+    else if (url.includes("qipeiyigou.com/mshop/") && check_auth == 1) {
         /*——————————————————————————————————————————————————店铺检查专用——————————————————————————————————————————————————*/
         // 添加样式
         const addStyles = () => {
             const style = `
-        <style>
-            .description a,
-            .main .content a,
-            .description *[style*="pointer"],
-            .main .content *[style*="pointer"],
-            .description img:not([src*="aimg8.dlssyht.cn"]),
-            .main .content img:not([src*="aimg8.dlssyht.cn"]) {
-                color: white !important;
-                padding-left: 5px !important;
-                background-color: blue !important;
-                border-left: 5px solid red !important;
-            }
-            .online-kefu {
-                top: calc(50% + 100px) !important;
-            }
-            #shop-info {
-                display: inline-block;
-                position: absolute;
-                font-size: 16px;
-                height: 42px;
-                line-height: 42px;
-                top: 0;
-                right: 100px;
-                display: none;
-                color: white !important;
-            }
-            #shop-cat,
-            #shop-cert {
-                margin: 9px;
-            }
-            #shop-cert a {
-                color: white !important;
-            }
-            #keywordx {
-                color: red;
-                display: inline-block;
-                margin-top: 10px;
-            }
-            #divx {
-                position: fixed;
-            }
-            #tipx {
-                position: absolute;
-                top: 0;
-                right: 0;
-                color: white;
-                height: 51px;
-                line-height: 51px;
-                background-color: green;
-                font-size: 20px;
-                width: 700px;
-                margin: 0;
-                text-align: center;
-                border-radius: 0 4px 0 0;
-                display: none;
-            }
-        </style>
-        `;
+            <style>
+                .description a,
+                .main .content a,
+                .description *[style*="pointer"],
+                .main .content *[style*="pointer"],
+                .description img:not([src*="aimg8.dlssyht.cn"]),
+                .main .content img:not([src*="aimg8.dlssyht.cn"]) {
+                    color: white !important;
+                    padding-left: 5px !important;
+                    background-color: blue !important;
+                    border-left: 5px solid red !important;
+                }
+                .online-kefu {
+                    top: calc(50% + 100px) !important;
+                }
+                #shop-info {
+                    display: inline-block;
+                    position: absolute;
+                    font-size: 16px;
+                    height: 42px;
+                    line-height: 42px;
+                    top: 0;
+                    right: 100px;
+                    display: none;
+                    color: white !important;
+                }
+                #shop-cat,
+                #shop-cert {
+                    margin: 9px;
+                }
+                #shop-cert a {
+                    color: white !important;
+                }
+                #keywordx {
+                    color: red;
+                    display: inline-block;
+                    margin-top: 10px;
+                }
+                #divx {
+                    position: fixed;
+                }
+                #tipx {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    color: white;
+                    height: 51px;
+                    line-height: 51px;
+                    background-color: green;
+                    font-size: 20px;
+                    width: 700px;
+                    margin: 0;
+                    text-align: center;
+                    border-radius: 0 4px 0 0;
+                    display: none;
+                }
+            </style>
+            `;
             $('body').append(style);
         };
         // 显示关键词
@@ -365,9 +361,6 @@
             GM_xmlhttpRequest({
                 type: "GET",
                 url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`,
-                headers: {
-                    "Content-Type": "text/html;charset=gbk",
-                },
                 onload: function (response) {
                     let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
                     let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
@@ -384,9 +377,6 @@
                     GM_xmlhttpRequest({
                         type: "GET",
                         url: `http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=${bigId}&sub_id=${subId}`,
-                        headers: {
-                            "Content-Type": "text/html;charset=gbk",
-                        },
                         onload: function (response) {
                             $('#shop-cat').attr('title', '查询完毕……');
                             let f = response.responseText.split("selected")[1].split("<")[0].replace(">|-", "");
@@ -423,9 +413,6 @@
             GM_xmlhttpRequest({
                 type: "GET",
                 url: `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`,
-                headers: {
-                    "Content-Type": "text/html;charset=gbk",
-                },
                 onload: function (response) {
                     if (response.responseText.includes(title)) {
                         // 获取产品性质和专属车型
@@ -448,9 +435,6 @@
                         GM_xmlhttpRequest({
                             type: "GET",
                             url: `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`,
-                            headers: {
-                                "Content-Type": "text/html;charset=gbk",
-                            },
                             onload: function (response) {
                                 const dalei = response.responseText.split(`"${bigId}"` + ',"classname":')[1].split(",")[0].split('"')[1];
                                 const xiaolei = response.responseText.split(`"${subId}"` + ',"classname":')[1].split(",")[0].split('"')[1];
@@ -517,4 +501,4 @@
         });
     }
 })();
-/*2025.03.26.080000 - Line : 520*/
+/*2025.03.28.080000 - Line : 504*/
