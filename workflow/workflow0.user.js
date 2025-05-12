@@ -17,7 +17,7 @@
     'use strict';
 
     // Your code here...
-    const auth = "0015";//权限对应数字:组长检查店铺、1688截图、改库存件标签、改库存件标签请求频率、
+    const auth = "00";//权限对应数字:组长检查店铺、1688截图
     //——————————————————————————————————————————————————函数定义区 Start——————————————————————————————————————————————————
     function update() {
         let version_url = `https://1024nettech.github.io/workflow/version.json?${new Date().getTime()}`;
@@ -57,11 +57,11 @@
     function openProductsEdit() {
         //Esc打开产品栏目管理列表
         if (Number(auto_running)) {
-            if (url.includes("sc_product_list.php") && url.includes("&ls_cur=112")) {
+            if (url.includes("sc_product_list.php") && !url.includes("&t=")) {
                 $('a').filter(function () {
                     return $(this).text().trim() == '编辑';
                 }).each(function (index) {
-                    let newHref = $(this).attr('href') + '#' + (index + 1);
+                    let newHref = $(this).attr('href');
                     window.open(newHref, '_blank');
                 });
                 if ($(".page-next").length) {
@@ -69,9 +69,6 @@
                 } else {
                     window.close();
                 }
-            }
-            else if (url.includes("sc_product.php") && url.includes("#")) {
-                location.href = location.href.split("#")[0];
             }
         }
     };
@@ -742,23 +739,9 @@
                 });
             }
             //————————————————————————————————————————————————————————————————————————————————产品编辑页取消勾选并提交
-            else if (url.includes("sc_product.php") && url.includes("#")) {
+            else if (url.includes("sc_product.php")) {
                 if (Number(auto_running)) {
                     $(document).ready(function () {
-                        let time = Number(url.split("#")[1]) * Number(getAuth(4));
-                        let a = time;
-                        let countdownFinished = false;
-                        function updateTitle() {
-                            if (a > 0) {
-                                $("title").text(a);
-                                a--;
-                            } else {
-                                $("title").text(0);
-                                countdownFinished = true;
-                                clearInterval(interval_0);
-                            }
-                        }
-                        let interval_0 = setInterval(updateTitle, 1000);
                         $("#submit_msg").css("display", "none");
                         let proname = $("#proname").val();
                         let checked_box_num = $("input[type=checkbox]:checked").length;
@@ -770,17 +753,17 @@
                         else {
                             if (checked_box_num == 1) {
                                 if ($("input[type=checkbox]:checked").val() == "4") {
-                                    let interval_1 = setInterval(function () {
-                                        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length && countdownFinished) {
-                                            clearInterval(interval_1);
-                                            $("title").text("完成");
+                                    let interval = setInterval(function () {
+                                        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+                                            clearInterval(interval);
                                             generateOriginRecord();
                                             $("input[type=checkbox][value=4]").prop("checked", false);
                                             $("input[type=checkbox][value=2]").prop("checked", true);
                                             generateNewRecord("已处理");
+                                            $("title").text("完成");
                                             $("#submit_msg a").click();
                                         }
-                                    }, 500);
+                                    }, 1000);
                                 }
                                 else {
                                     generateOriginRecord();
@@ -790,16 +773,16 @@
                             }
                             else {
                                 if ($("input[type=checkbox][value=4]:checked").length) {
-                                    let interval_2 = setInterval(function () {
-                                        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length && countdownFinished) {
-                                            clearInterval(interval_2);
-                                            $("title").text("完成");
+                                    let interval = setInterval(function () {
+                                        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+                                            clearInterval(interval);
                                             generateOriginRecord();
                                             $("input[type=checkbox][value=4]").prop("checked", false);
                                             generateNewRecord("已处理");
+                                            $("title").text("完成");
                                             $("#submit_msg a").click();
                                         }
-                                    }, 500);
+                                    }, 1000);
                                 }
                                 else {
                                     generateOriginRecord();
@@ -812,7 +795,7 @@
                 }
             }
             //————————————————————————————————————————————————————————————————————————————————自动关闭提交后的产品列表页
-            else if (url.includes("sc_product_list.php") && !url.includes("&ls_cur=112") && url.includes("&t=")) {
+            else if (url.includes("sc_product_list.php") && url.includes("&t=")) {
                 if (Number(auto_running)) {
                     window.close();
                 }
@@ -828,4 +811,4 @@
     }
     //——————————————————————————————————————————————————主体代码区 End——————————————————————————————————————————————————
 })();
-/*2025.05.12.080000 - Line : 831*/
+/*2025.05.12.080000 - Line : 814*/
