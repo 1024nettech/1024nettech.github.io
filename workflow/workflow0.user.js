@@ -742,7 +742,7 @@
             else if (url.includes("sc_product.php")) {
                 if (Number(auto_running)) {
                     $(document).ready(function () {
-                        let time = Number(url.split("#")[1]) * c;
+                        let time = Number(url.split("#")[1]) * Number(getAuth(4));
                         let a = time;
                         let countdownFinished = false;
                         function updateTitle() {
