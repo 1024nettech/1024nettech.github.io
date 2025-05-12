@@ -57,7 +57,7 @@
     function openProductsEdit() {
         //Esc打开产品栏目管理列表
         if (Number(auto_running)) {
-            if (url.includes("sc_product_list.php") != -1 && url.includes("&ls_cur=112") != -1) {
+            if (url.includes("sc_product_list.php") && url.includes("&ls_cur=112")) {
                 $('a').filter(function () {
                     return $(this).text().trim() == '编辑';
                 }).each(function (index) {
@@ -69,6 +69,9 @@
                 } else {
                     window.close();
                 }
+            }
+            else if (url.includes("sc_product.php") && url.includes("#")) {
+                location.href = location.href.split("#")[0];
             }
         }
     };
@@ -323,7 +326,7 @@
         /*——————————————————————————————————————————————————1688详情截图 End——————————————————————————————————————————————————*/
     }
     else if (url.includes("http://testpage.qipeiyigou.com/")) {
-        let auto_running = localStorage.getItem("auto_running");
+        var auto_running = localStorage.getItem("auto_running");
         let today = getCurrentDate();
         let stored_date = localStorage.getItem("date");
         if (today != stored_date) {
@@ -739,7 +742,7 @@
                 });
             }
             //————————————————————————————————————————————————————————————————————————————————产品编辑页取消勾选并提交
-            else if (url.includes("sc_product.php")) {
+            else if (url.includes("sc_product.php") && url.includes("#")) {
                 if (Number(auto_running)) {
                     $(document).ready(function () {
                         let time = Number(url.split("#")[1]) * Number(getAuth(4));
@@ -756,6 +759,7 @@
                             }
                         }
                         let interval_0 = setInterval(updateTitle, 1000);
+                        $("#submit_msg").css("display", "none");
                         let proname = $("#proname").val();
                         let checked_box_num = $("input[type=checkbox]:checked").length;
                         if (proname.includes("库存件")) {
@@ -824,4 +828,4 @@
     }
     //——————————————————————————————————————————————————主体代码区 End——————————————————————————————————————————————————
 })();
-/*2025.05.12.080000 - Line : 827*/
+/*2025.05.12.080000 - Line : 831*/
