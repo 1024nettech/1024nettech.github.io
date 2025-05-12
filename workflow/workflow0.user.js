@@ -93,14 +93,15 @@
         let ch_name = $(".myColumnTit").text();
         let origin_labels = getCheckedLabels();
         let product_link = "http://testpage.qipeiyigou.com/qipeiyigouwang/products/" + id + ".html";
-        record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
+        let origin_record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
+        let stored_record = localStorage.getItem("record");
+        localStorage.setItem("record", stored_record + origin_record);
     }
     function generateNewRecord(status) {
         //获取修改产品性质后的最新记录:产品发布页
-        let now_labels = getCheckedLabels() + "\t" + status + "|@@|";
-        record += now_labels;
+        let new_labels = getCheckedLabels() + "\t" + status + "|@@|";
         let stored_record = localStorage.getItem("record");
-        localStorage.setItem("record", stored_record + record)
+        localStorage.setItem("record", stored_record + new_labels);
     }
     function open_products() {
         //店铺内打开或关闭产品
@@ -136,7 +137,6 @@
     //——————————————————————————————————————————————————主体代码区 Start——————————————————————————————————————————————————
     update();
     const url = location.href;
-    let record = "";
     if (url.includes("https://detail.1688.com/offer/") && getAuth(2) == "1") {
         let scriptUrls = [
             "https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js",
@@ -759,7 +759,7 @@
                         let proname = $("#proname").val();
                         let checked_box_num = $("input[type=checkbox]:checked").length;
                         if (proname.includes("库存件")) {
-                            generateOriginRecord;
+                            generateOriginRecord();
                             generateNewRecord("未处理");
                             window.close();
                         }
@@ -770,7 +770,7 @@
                                         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length && countdownFinished) {
                                             clearInterval(interval_1);
                                             $("title").text("完成");
-                                            generateOriginRecord;
+                                            generateOriginRecord();
                                             $("input[type=checkbox][value=4]").prop("checked", false);
                                             $("input[type=checkbox][value=2]").prop("checked", true);
                                             generateNewRecord("已处理");
@@ -779,7 +779,7 @@
                                     }, 500);
                                 }
                                 else {
-                                    generateOriginRecord;
+                                    generateOriginRecord();
                                     generateNewRecord("未处理");
                                     window.close();
                                 }
@@ -790,7 +790,7 @@
                                         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length && countdownFinished) {
                                             clearInterval(interval_2);
                                             $("title").text("完成");
-                                            generateOriginRecord;
+                                            generateOriginRecord();
                                             $("input[type=checkbox][value=4]").prop("checked", false);
                                             generateNewRecord("已处理");
                                             $("#submit_msg a").click();
@@ -798,7 +798,7 @@
                                     }, 500);
                                 }
                                 else {
-                                    generateOriginRecord;
+                                    generateOriginRecord();
                                     generateNewRecord("未处理");
                                     window.close();
                                 }
