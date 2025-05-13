@@ -1,6 +1,7 @@
 function a(b) {
     alert(b+10);
 }
+console.log(url);
 let urls = ["https://1024nettech.github.io/workflow/test-func.js", "https://1024nettech.github.io/workflow/test-main.js"];
 loadScripts(urls, 1);
 function update() {
