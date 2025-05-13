@@ -1,3 +1,4 @@
+alert(url);
 function a(b) {
     alert(b+10);
 }
