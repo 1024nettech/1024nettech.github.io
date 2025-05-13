@@ -1,5 +1,5 @@
 function a(b) {
-    alert(b+1);
+    alert(b+10);
 }
 function update() {
     alert();
@@ -22,4 +22,33 @@ function update() {
             }
         }
     });
+}
+function loadScripts(urls, status) {
+    //动态加载外部脚本
+    if (status === 1) {
+        urls = urls.map(url => url + '?t=' + Date.now());
+    }
+
+    let totalScripts = urls.length;
+
+    function loadNextScript(index) {
+        if (index < totalScripts) {
+            let script = document.createElement('script');
+            script.src = urls[index];
+
+            script.onload = function () {
+                console.log(`脚本加载完成：${urls[index]}`);
+                loadNextScript(index + 1);
+            };
+
+            script.onerror = function (error) {
+                console.error('脚本加载失败：', error);
+            };
+
+            console.log(`开始加载脚本：${urls[index]}`);
+            document.head.append(script);
+        }
+    }
+
+    loadNextScript(0);
 }
