@@ -1,4 +1,4 @@
-alert(6);
+
 alert(window.url);
 function update() {
     //脚本更新
