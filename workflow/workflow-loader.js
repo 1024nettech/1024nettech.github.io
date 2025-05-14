@@ -17,10 +17,10 @@ function update() {
                     ];
                     loadFiles(urls, 1);
                 } else {
-                    $("body").html('<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>');
+                    $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
                 }
             } catch (error) {
-                console.error('解析版本信息时出错:', error);
+                console.error("解析版本信息时出错:", error);
             }
         }
     });
@@ -28,16 +28,16 @@ function update() {
 function loadFiles(urls, status) {
     // 动态加载外部文件(JS/CSS)
     if (status == 1) {
-        urls = urls.map(url => url + '?t=' + Date.now());
+        urls = urls.map(url => url + "?t=" + Date.now());
     }
     let totalFiles = urls.length;
     let loadedFiles = 0;
     function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
-            let fileExtension = url.split('.').pop().split('?')[0].toLowerCase();
-            if (fileExtension === 'js') {
-                let script = document.createElement('script');
+            let fileExtension = url.split(".").pop().split("?")[0].toLowerCase();
+            if (fileExtension === "js") {
+                let script = document.createElement("script");
                 script.src = url;
                 script.onload = function () {
                     console.log(`脚本加载完成：${url}`);
@@ -53,9 +53,9 @@ function loadFiles(urls, status) {
                 };
                 console.log(`开始加载脚本：${url}`);
                 document.head.append(script);
-            } else if (fileExtension === 'css') {
-                let link = document.createElement('link');
-                link.rel = 'stylesheet';
+            } else if (fileExtension === "css") {
+                let link = document.createElement("link");
+                link.rel = "stylesheet";
                 link.href = url;
                 link.onload = function () {
                     console.log(`CSS 加载完成：${url}`);
@@ -83,4 +83,3 @@ function loadFiles(urls, status) {
     loadNextFile(0);
 }
 update();
-const url = location.href;
