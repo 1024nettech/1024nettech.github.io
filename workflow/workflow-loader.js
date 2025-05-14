@@ -1,4 +1,6 @@
-console.log("loader: " + window.url);
+window.addEventListener('urlSet', () => {
+    console.log(window.url);  // 读取并使用主脚本中的 url 变量
+});
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
