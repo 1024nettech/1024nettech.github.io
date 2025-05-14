@@ -1,3 +1,4 @@
+alert(6);
 alert(url);
 function update() {
     //脚本更新
