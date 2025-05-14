@@ -79,8 +79,10 @@ function loadFiles(urls, status) {
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
+        localStorage.setItem("src_all_loaded", "1");
     }
     loadNextFile(0);
 }
+localStorage.setItem("src_all_loaded", "0");
 update();
-// End-86-2025.05.14.135223
+// End-88-2025.05.14.143509
