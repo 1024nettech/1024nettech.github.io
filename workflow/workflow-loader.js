@@ -1,6 +1,8 @@
 
- window.addEventListener('urlSet', function() {
-        alert(window.url);  // 当事件触发时，可以安全地访问 window.url
+    window.addEventListener('urlSet', function () {
+        console.log("url"+window.url);  // 当事件触发时，可以安全地访问 window.url
+        console.log("a"+window.a);
+        console.log("b"+window.b);
     });
 function update() {
     //脚本更新
