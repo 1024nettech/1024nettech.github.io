@@ -1,44 +1,4 @@
-function fetchShopInfo() {
-    // 获取商铺信息
-    let shopId = window.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
-    GM_xmlhttpRequest({
-        type: "GET",
-        url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`,
-        onload: function (response) {
-            console.log(response.responseText);
-            let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
-            let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
-            let certifiedInfo = "无";
-            if (response.responseText.includes("certified_info")) {
-                certifiedInfo = response.responseText.match(/https:\/\/aimg8.dlssyht.cn\/certified_info.*target/)[0].split("?")[0];
-            }
-            if (certifiedInfo === "无") {
-                $('#shop-cert a').text("无认证资料");
-            } else {
-                $('#shop-cert a').attr('href', certifiedInfo);
-            }
-            // 获取商铺类别
-            $.ajax({
-                type: "GET",
-                url: `http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=${bigId}&sub_id=${subId}`,
-                success: function (response) {
-                    $('#shop-cat').attr('title', '查询完毕……');
 
-                    // 解析 response 获取相应数据
-                    let f = response.split("selected")[1].split("<")[0].replace(">|-", "");
-                    let g = response.split("selected")[2].split("<")[0].replace(">", "");
-
-                    // 更新标题
-                    $('#shop-cat').attr('title', `${f}-${g}`);
-                },
-                error: function (xhr, status, error) {
-                    console.error("请求失败: ", status, error);
-                }
-            });
-        }
-    });
-};
-fetchShopInfo();
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
@@ -132,43 +92,3 @@ function loadFiles(urls, status) {
 }
 update();
 // End-92-2025.05.14.125730
-function fetchShopInfo() {
-    // 获取商铺信息
-    let shopId = unsafeWindow.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
-    GM_xmlhttpRequest({
-        type: "GET",
-        url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`,
-        onload: function (response) {
-            console.log(response.responseText);
-            let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
-            let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
-            let certifiedInfo = "无";
-            if (response.responseText.includes("certified_info")) {
-                certifiedInfo = response.responseText.match(/https:\/\/aimg8.dlssyht.cn\/certified_info.*target/)[0].split("?")[0];
-            }
-            if (certifiedInfo === "无") {
-                $('#shop-cert a').text("无认证资料");
-            } else {
-                $('#shop-cert a').attr('href', certifiedInfo);
-            }
-            // 获取商铺类别
-            $.ajax({
-                type: "GET",
-                url: `http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=${bigId}&sub_id=${subId}`,
-                success: function (response) {
-                    $('#shop-cat').attr('title', '查询完毕……');
-
-                    // 解析 response 获取相应数据
-                    let f = response.split("selected")[1].split("<")[0].replace(">|-", "");
-                    let g = response.split("selected")[2].split("<")[0].replace(">", "");
-
-                    // 更新标题
-                    $('#shop-cat').attr('title', `${f}-${g}`);
-                },
-                error: function (xhr, status, error) {
-                    console.error("请求失败: ", status, error);
-                }
-            });
-        }
-    });
-};
