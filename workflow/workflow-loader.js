@@ -12,8 +12,7 @@ function update() {
                     console.log(`workflow.user.js已是最新版本: ${GM_info.script.version}\n${version_url}`);
                     let urls = [
                         "https://1024nettech.github.io/workflow/workflow-func.js",
-                        "https://1024nettech.github.io/workflow/workflow-main.js",
-                        "https://1024nettech.github.io/workflow/workflow-css.css"
+                        "https://1024nettech.github.io/workflow/workflow-css.css",
                     ];
                     loadFiles(urls, 1);
                 } else {
@@ -85,4 +84,4 @@ function loadFiles(urls, status) {
 }
 localStorage.setItem("src_all_loaded", "0");
 update();
-// End-88-2025.05.14.143509
+// End-87-2025.05.14.153434
