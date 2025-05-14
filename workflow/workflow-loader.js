@@ -1,4 +1,5 @@
-alert(auth);
+alert(996);
+alert(unsafeWindow.auth);
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
