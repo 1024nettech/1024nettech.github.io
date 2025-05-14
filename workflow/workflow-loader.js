@@ -36,7 +36,7 @@ function loadFiles(urls, status) {
     function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
-            let fileExtension = url.split('?')[0].split('.').pop().toLowerCase();
+            let fileExtension = url.split('.').pop().split('?')[0].toLowerCase();
             if (fileExtension === 'js') {
                 let script = document.createElement('script');
                 script.src = url;
