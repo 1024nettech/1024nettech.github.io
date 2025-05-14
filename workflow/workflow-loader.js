@@ -27,9 +27,6 @@ function update() {
 }
 function loadFiles(urls, status) {
     // 动态加载外部文件(JS/CSS)
-    localStorage.setItem("allsrcloaded", "");
-    let allsrcloaded = "allsrcloaded已清空:" + localStorage.getItem("allsrcloaded", "");
-    console.log(allsrcloaded);
     if (status == 1) {
         urls = urls.map(url => url + '?t=' + Date.now());
     }
@@ -82,10 +79,8 @@ function loadFiles(urls, status) {
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
-        localStorage.setItem("allsrcloaded", "1");
-        let allsrcloaded = "allsrcloaded:" + localStorage.getItem("allsrcloaded", "");
-        console.log(allsrcloaded);
     }
     loadNextFile(0);
 }
 update();
+const url = location.href;
