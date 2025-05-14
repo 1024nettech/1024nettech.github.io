@@ -27,10 +27,12 @@ function update() {
 }
 function loadFiles(urls, status) {
     // 动态加载外部文件(JS/CSS)
+    localStorage.setItem("allsrcloaded", "");
     if (status == 1) {
         urls = urls.map(url => url + '?t=' + Date.now());
     }
     let totalFiles = urls.length;
+    let loadedFiles = 0;
     function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
@@ -40,6 +42,10 @@ function loadFiles(urls, status) {
                 script.src = url;
                 script.onload = function () {
                     console.log(`脚本加载完成：${url}`);
+                    loadedFiles++;
+                    if (loadedFiles === totalFiles) {
+                        onFilesLoaded();
+                    }
                     loadNextFile(index + 1);
                 };
                 script.onerror = function (error) {
@@ -54,6 +60,10 @@ function loadFiles(urls, status) {
                 link.href = url;
                 link.onload = function () {
                     console.log(`CSS 加载完成：${url}`);
+                    loadedFiles++;
+                    if (loadedFiles === totalFiles) {
+                        onFilesLoaded();
+                    }
                     loadNextFile(index + 1);
                 };
                 link.onerror = function (error) {
@@ -67,6 +77,10 @@ function loadFiles(urls, status) {
                 loadNextFile(index + 1);
             }
         }
+    }
+    function onFilesLoaded() {
+        console.log("所有文件加载完成！");
+        localStorage.setItem("allsrcloaded", "1");
     }
     loadNextFile(0);
 }
