@@ -1,12 +1,3 @@
-    // 轮询直到 localStorage 中的 auth 不为 null
-    let checkAuthInterval = setInterval(function () {
-        let auth = localStorage.getItem("auth");
-        if (auth !== null) {
-            console.log("auth 已经设置为:", auth);
-            clearInterval(checkAuthInterval); // 停止轮询
-            // 执行后续操作
-        }
-    }, 100);
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
@@ -88,8 +79,15 @@ function loadFiles(urls, status) {
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
+        let checkAuthInterval = setInterval(function () {
+            let auth = localStorage.getItem("auth");
+            if (auth !== null) {
+                clearInterval(checkAuthInterval);
+                fetchShopInfo();
+            }
+        }, 100);
     }
     loadNextFile(0);
 }
 update();
-// End-86-2025.05.14.114653
+// End-92-2025.05.14.125730
