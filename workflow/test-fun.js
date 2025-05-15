@@ -1,3 +1,3 @@
 function a(c,d){
-  alert(c+d);
+  alert(c + d);
 }
