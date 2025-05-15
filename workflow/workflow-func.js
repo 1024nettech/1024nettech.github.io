@@ -1,20 +1,14 @@
 /*——————————————————————————————Public Start——————————————————————————————*/
+window.gg=function(){
 GM_xmlhttpRequest({
     type: "GET",
     url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
     onload: function (response) {
-        console.log("来自func"+response.responseText);
+        console.log("来自func12点"+response.responseText);
     }
 });
-function cc() {
-    GM_xmlhttpRequest({
-        type: "GET",
-        url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
-        onload: function (response) {
-            console.log("来自0f0unc" + response.responseText);
-        }
-    });
-}
+    }
+
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
