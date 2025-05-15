@@ -5,3 +5,4 @@ export const greet = () => {
 
 export const value = 42;
 
+export const value0 = 42;
