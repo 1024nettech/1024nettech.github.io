@@ -6,4 +6,4 @@ export const greet = () => {
 export let value = {a:42};
 
 
-setTimeout(() => { alert(value["a"]) }, 10000);
+setTimeout(() => { alert(value["a"]) }, 10003);
