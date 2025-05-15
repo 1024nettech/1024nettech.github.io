@@ -1,6 +1,7 @@
 window.addEventListener('urlSet', () => {
     console.log(window.url);  // 读取并使用主脚本中的 url 变量
 });
+import { cc } from './workflow-func.js';
 cc();
 GM_xmlhttpRequest({
     type: "GET",
@@ -51,6 +52,7 @@ function loadFiles(urls, status) {
             if (fileExtension === "js") {
                 let script = document.createElement("script");
                 script.src = url;
+                script.type = "module";
                 script.onload = function () {
                     console.log(`脚本加载完成：${url}`);
                     loadedFiles++;
