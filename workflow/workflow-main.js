@@ -1,2 +1,2 @@
-import { cc } from './workflow-func.js';
+import { cc } from './workflow-loader.js';
 cc();
