@@ -1,1 +1,2 @@
-a(1,2)
+import { greet} from './test-func.js';
+greet();
