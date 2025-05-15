@@ -28,6 +28,8 @@ function update() {
                         "https://1024nettech.github.io/workflow/workflow-func.js",
                         "https://1024nettech.github.io/workflow/workflow-main.js",
                         "https://1024nettech.github.io/workflow/workflow-css.css",
+                        "https://1024nettech.github.io/workflow/test-fun.js",
+                        "https://1024nettech.github.io/workflow/test-main.js",
                     ];
                     loadFiles(urls, 1);
                 } else {
