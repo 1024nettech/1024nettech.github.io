@@ -1,7 +1,7 @@
 window.addEventListener('urlSet', () => {
     console.log(window.url);  // 读取并使用主脚本中的 url 变量
 });
-
+cc();
 GM_xmlhttpRequest({
     type: "GET",
     url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
