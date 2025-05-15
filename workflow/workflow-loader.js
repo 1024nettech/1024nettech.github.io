@@ -10,10 +10,12 @@ function update() {
                 let userJsVersion = versionData["workflow.user.js"];
                 if (userJsVersion == GM_info.script.version) {
                     console.log(`workflow.user.js已是最新版本: ${GM_info.script.version}\n${version_url}`);
-                    let urls = [
-                        "https://1024nettech.github.io/workflow/workflow-css.css",
-                    ];
+                    let urls = ["https://1024nettech.github.io/workflow/workflow-css.css"];
                     loadFiles(urls, 1);
+                    if (location.href.includes("1688.com")) {
+                        urls = ["https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"];
+                        loadFiles(urls, 0);
+                    }
                 } else {
                     $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
                 }
@@ -102,4 +104,4 @@ GM_xmlhttpRequest({
         console.error("加载 workflow-main.js 文件失败");
     }
 });
-// End-105-2025.05.15.144356
+// End-107-2025.05.15.150308
