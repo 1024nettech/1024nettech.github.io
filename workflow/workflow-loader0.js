@@ -39,6 +39,7 @@ function loadFiles(urls, status) {
             if (fileExtension == "js") {
                 let script = document.createElement("script");
                 script.src = url;
+                script.type = 'module';
                 script.onload = function () {
                     console.log(`脚本加载完成: ${url}`);
                     loadedFiles++;
