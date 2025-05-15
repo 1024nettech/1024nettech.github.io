@@ -6,7 +6,7 @@ GM_xmlhttpRequest({
     url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
     onload: function (response) {
         alert(1);
-        console.log("来自func"+response.responseText);
+        console.log("来自loader"+response.responseText);
     }
 });
 function update() {
