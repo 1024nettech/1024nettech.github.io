@@ -1,17 +1,3 @@
-window.addEventListener('urlSet', () => {
-    console.log(window.url);  // 读取并使用主脚本中的 url 变量
-});
-
-function dd() {
-GM_xmlhttpRequest({
-    type: "GET",
-    url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
-    onload: function (response) {
-     
-        console.log("来自0l0oader+m0ain"+response.responseText);
-    }
-});
-    }
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
@@ -28,10 +14,8 @@ function update() {
                         "https://1024nettech.github.io/workflow/workflow-func.js",
                         "https://1024nettech.github.io/workflow/workflow-main.js",
                         "https://1024nettech.github.io/workflow/workflow-css.css",
-                        "https://1024nettech.github.io/workflow/test-fun.js",
-                        "https://1024nettech.github.io/workflow/test-main.js",
                     ];
-                    loadFiles(urls, 1);
+                    // loadFiles(urls, 1);
                 } else {
                     $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
                 }
@@ -55,7 +39,6 @@ function loadFiles(urls, status) {
             if (fileExtension === "js") {
                 let script = document.createElement("script");
                 script.src = url;
-                script.type = "module";
                 script.onload = function () {
                     console.log(`脚本加载完成：${url}`);
                     loadedFiles++;
@@ -96,13 +79,62 @@ function loadFiles(urls, status) {
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
-        localStorage.setItem("src_all_loaded", "1");
-      const event = new Event('urlSet');
-    console.log("main: " + url);
-    window.dispatchEvent(event);
     }
     loadNextFile(0);
 }
-localStorage.setItem("src_all_loaded", "0");
 update();
+const funcUrl = 'https://1024nettech.github.io/workflow/workflow-func.js'; // func 文件 URL
+const mainUrl = 'https://1024nettech.github.io/workflow/workflow-main.js'; // main 文件 URL
+
+// 加载并执行 func 文件
+GM_xmlhttpRequest({
+    method: 'GET',
+    url: funcUrl,
+    onload: function (response) {
+        if (response.status === 200) {
+            const funcCode = response.responseText;
+
+            try {
+                eval(funcCode); // 执行 func 文件中的代码
+                console.log('workflow-func.js 已成功加载并执行');
+
+                // 在 func 文件加载并执行完毕后，再加载并执行 main 文件
+                loadAndExecuteMain();
+            } catch (e) {
+                console.error('执行 workflow-func.js 文件时出错', e);
+            }
+        } else {
+            console.error('无法加载 workflow-func.js 文件');
+        }
+    },
+    onerror: function () {
+        console.error('加载 workflow-func.js 文件失败');
+    }
+});
+
+// 加载并执行 main 文件
+function loadAndExecuteMain() {
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: mainUrl,
+        onload: function (response) {
+            if (response.status === 200) {
+                const mainCode = response.responseText;
+
+                try {
+                    eval(mainCode); // 执行 main 文件中的代码
+                    console.log('workflow-main.js 已成功加载并执行');
+                } catch (e) {
+                    console.error('执行 workflow-main.js 文件时出错', e);
+                }
+            } else {
+                console.error('无法加载 workflow-main.js 文件');
+            }
+        },
+        onerror: function () {
+            console.error('加载 workflow-main.js 文件失败');
+        }
+    });
+}
+
 // End-87-2025.05.14.153434
