@@ -3,7 +3,7 @@ export const greet = () => {
     console.log("Hello from test-func.js!");
 };
 
-export let value = 42;
+export let value = {a:42};
 
 
-setTimeout(() => { alert(value) }, 10000)
+setTimeout(() => { alert(value[a]) }, 10000);
