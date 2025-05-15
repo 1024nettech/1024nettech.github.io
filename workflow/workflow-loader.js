@@ -95,7 +95,9 @@ function loadFiles(urls, status) {
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
         localStorage.setItem("src_all_loaded", "1");
-        cc();
+      const event = new Event('urlSet');
+    console.log("main: " + url);
+    window.dispatchEvent(event);
     }
     loadNextFile(0);
 }
