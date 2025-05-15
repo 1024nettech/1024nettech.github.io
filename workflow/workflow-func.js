@@ -1,4 +1,7 @@
 /*——————————————————————————————Public Start——————————————————————————————*/
+let a=3;
+var b=9;
+
 window.gg = function() {
 GM_xmlhttpRequest({
     type: "GET",
