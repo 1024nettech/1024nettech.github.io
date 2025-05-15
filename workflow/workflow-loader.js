@@ -15,6 +15,7 @@ function update() {
                     console.log(`workflow.user.js已是最新版本: ${GM_info.script.version}\n${version_url}`);
                     let urls = [
                         "https://1024nettech.github.io/workflow/workflow-func.js",
+                        "https://1024nettech.github.io/workflow/workflow-main.js",
                         "https://1024nettech.github.io/workflow/workflow-css.css",
                     ];
                     loadFiles(urls, 1);
