@@ -2,13 +2,13 @@ window.addEventListener('urlSet', () => {
     console.log(window.url);  // 读取并使用主脚本中的 url 变量
 });
 
-function dd(){
+function dd() {
 GM_xmlhttpRequest({
     type: "GET",
     url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
     onload: function (response) {
      
-        console.log("来自0l0oader+main"+response.responseText);
+        console.log("来自0l0oader+m0ain"+response.responseText);
     }
 });
     }
