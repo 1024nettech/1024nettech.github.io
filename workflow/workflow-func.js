@@ -1,4 +1,12 @@
 /*——————————————————————————————Public Start——————————————————————————————*/
+GM_xmlhttpRequest({
+    type: "GET",
+    url: `http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=24455853`,
+    onload: function (response) {
+        console.log(response.responseText);
+    }
+});
+
 function update() {
     //脚本更新
     let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
