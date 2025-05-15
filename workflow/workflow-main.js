@@ -1,3 +1,3 @@
 gg();
-alert("func-a"+a);
-alert("func-a"+b);
+alert(a);
+alert(b);
