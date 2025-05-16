@@ -1,6 +1,8 @@
 // test-main.js
-import { greet, value } from './test-func.js';  // 使用相对路径导入
+import { greet, value, GM_xmlhttp } from './test-func.js';  // 使用相对路径导入
 
-greet();  // 调用 test-func.js 中的 greet 函数
-alert(value["a"]);
-value["a"]=50;
+
+
+GM_xmlhttp("https://qq.com", "", function(response) {
+    console.log("请求成功，响应内容:", response.responseText);
+});
