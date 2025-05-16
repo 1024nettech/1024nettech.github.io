@@ -1,3 +1,23 @@
+GM_xmlhttpRequest({
+    method: "GET",
+    url: "https://qq.com",
+    onload: function (response) {
+        console.log("好了");
+        console.log("请求成功，响应内容:", response.responseText);
+    },
+    onerror: function (error) {
+        console.error("请求失败:", error);
+        
+    }
+});
+
+
+
+
+
+
+
+
 export function GM_xmlhttp(url, cookie, doCallback) {
     GM_xmlhttpRequest({
         method: "GET", // 你可以根据需要修改请求类型
