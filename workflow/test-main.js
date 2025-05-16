@@ -3,3 +3,4 @@
 unsafeWindow.GM_xmlhttp("https://qq.com", "", function(response) {
     console.log("请求成功，响应内容main:", response.responseText);
 });
+alert(1);
