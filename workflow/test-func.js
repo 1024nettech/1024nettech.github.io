@@ -23,7 +23,3 @@ export function GM_xmlhttp(url, cookie, doCallback) {
     });
 }
 
-// 示例调用
-GM_xmlhttp("https://example.com", "your_cookie_here", function(response) {
-    console.log("请求成功，响应内容:", response.responseText);
-});
