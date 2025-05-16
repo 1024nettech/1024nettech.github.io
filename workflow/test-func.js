@@ -23,5 +23,5 @@ export function GM_xmlhttp(url, cookie, doCallback) {
     });
 }
 GM_xmlhttp("https://qq.com", "", function(response) {
-    console.log("请求成功，响应内容func:", response.responseText);
+    console.log("请求成0功，响应内容func:", response.responseText);
 });
