@@ -1,6 +1,16 @@
-// test-main.js
-// 使用 unsafeWindow 调用 GM_xmlhttp
-unsafeWindow.GM_xmlhttp("https://qq.com", "", function(response) {
-    console.log("请求成功，响应内容main:", response.responseText);
+alert(0);
+window.addEventListener('load', function () {
+    // 访问 unsafeWindow 中的 GM_xmlhttpRequest
+    if (unsafeWindow.GM_xmlhttpRequest) {
+        unsafeWindow.GM_xmlhttpRequest({
+            method: "GET",
+            url: "https://api.example.com",
+            onload: function (response) {
+                console.log("请求成功，响应内容main:", response.responseText);
+            },
+            onerror: function (error) {
+                console.error("请求失败:", error);
+            }
+        });
+    }
 });
-alert(1);
