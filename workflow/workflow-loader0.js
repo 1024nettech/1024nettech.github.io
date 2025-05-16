@@ -1,32 +1,13 @@
-GM_xmlhttpRequest({
-    method: "GET",
-    url: "https://qq.com",
-    onload: function (response) {
-        console.log("好了");
-        console.log("请求成功，响应内容:", response.responseText);
-    },
-    onerror: function (error) {
-        console.error("请求失败:", error);
-        
-    }
-});
-
-
-
-
-
-
-
-
-export function GM_xmlhttp(url, cookie, doCallback) {
+// 暴露 GM_xmlhttp 函数给全局 unsafeWindow
+unsafeWindow.GM_xmlhttp = function(url, cookie, doCallback) {
     GM_xmlhttpRequest({
-        method: "GET", // 你可以根据需要修改请求类型
+        method: "GET", // 根据需要修改请求类型
         url: url,
         headers: {
             "Cookie": cookie
         },
         onload: function(response) {
-            // 请求成功时调用do()回调函数，传递响应数据
+            // 请求成功时调用 doCallback 回调函数，传递响应数据
             doCallback(response);
         },
         onerror: function(error) {
@@ -34,10 +15,12 @@ export function GM_xmlhttp(url, cookie, doCallback) {
             console.error("请求失败:", error);
         }
     });
-}
-GM_xmlhttp("https://qq.com", "", function(response) {
-    console.log("请求成0功，响应内容workflow0:", response.responseText);
-});
+};
+
+
+
+
+
 
 
 
