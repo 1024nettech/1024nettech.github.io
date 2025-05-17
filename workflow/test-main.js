@@ -1,2 +1,2 @@
-import{vars} from './test-func.js'
-vars(3,5)
+import{set,get,del} from 'https://cdnjs.cloudflare.com/ajax/libs/idb-keyval/6.2.1/index.min.js'
+
