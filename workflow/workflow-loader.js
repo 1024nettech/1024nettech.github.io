@@ -93,7 +93,6 @@ function loadFiles(urls, status, isModule = false) {
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
-        localStorage.setItem("src_all_loaded", "1");
     }
     loadNextFile(0);
 }
@@ -103,4 +102,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-106-2025.05.17.165245
+// End-105-2025.05.17.191049
