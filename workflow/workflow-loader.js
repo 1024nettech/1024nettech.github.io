@@ -18,7 +18,7 @@ function sendRequest(url, cookie, method, doSuccess) {
         }
     });
 }
-function loadSucess(response) {
+function loadSucess(response, version_url) {
     //加载成功后do
     try {
         let versionData = JSON.parse(response.responseText.trim());
@@ -103,4 +103,4 @@ function update() {
     sendRequest(version_url, "", "GET", loadSucess);
 }
 update();
-// End-106-2025.05.17.162347
+// End-106-2025.05.17.164511
