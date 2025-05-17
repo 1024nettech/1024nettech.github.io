@@ -1,4 +1,4 @@
-import{set,get,del} from './idb-keyval.js'
+import{set,get,del} from './idb-keyval-6.2.1-min.js'
 
 // 检查 idb-keyval 是否加载成功
     if (typeof set === 'function' && typeof get === 'function' && typeof del === 'function') {
