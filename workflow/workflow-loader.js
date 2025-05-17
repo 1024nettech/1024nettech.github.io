@@ -18,7 +18,7 @@ function sendRequest(url, cookie, method, doSuccess) {
         }
     });
 }
-function loadSucess(response, version_url) {
+function loadSucess(response) {
     //加载成功后do
     try {
         let versionData = JSON.parse(response.responseText.trim());
@@ -99,8 +99,8 @@ function loadFiles(urls, status, isModule = false) {
 }
 function update() {
     //脚本更新
-    let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
     sendRequest(version_url, "", "GET", loadSucess);
 }
+let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-106-2025.05.17.164511
+// End-106-2025.05.17.165245
