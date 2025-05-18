@@ -13,7 +13,7 @@ export function openProductsEdit() {
         window.close();
     }
 };
-export function getCheckedLabels() {
+export async function getCheckedLabels() {
     // 获取所有选中产品性质的父元素文本:产品发布页
     let labelsText = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
         .map(checkbox => checkbox.closest("label").textContent.trim())
@@ -40,23 +40,23 @@ export async function generateNewRecord(status) {
     let new_labels = getCheckedLabels() + "\t" + status;
     await publics.appendToRecord(new_labels, 0);
 }
-export  async function nodo() {
+export async function nodo() {
     // 无需处理勾选
     await generateOriginRecord();
     await generateNewRecord("未处理");
     window.close();
 }
-export function yesdo(checked_car) {
+export async function yesdo(checked_car) {
     // 需要处理勾选
-    let interval = setInterval(function () {
+    let interval = setInterval(async function () {
         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
             clearInterval(interval);
-            generateOriginRecord();
+            await generateOriginRecord();
             $("input[type=checkbox][value=4]").prop("checked", false);
             if (checked_car) {
                 $("input[type=checkbox][value=2]").prop("checked", true);
             }
-            generateNewRecord("已处理");
+            await generateNewRecord("已处理");
             $("title").text("完成");
             $("#submit_msg a").click();
         }
@@ -200,4 +200,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-203-2025.05.18.201645
+// End-203-2025.05.18.203758
