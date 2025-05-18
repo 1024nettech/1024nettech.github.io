@@ -21,7 +21,7 @@ export function getCheckedLabels() {
     console.log(labelsText);
     return labelsText;
 }
-export function generateOriginRecord() {
+export  async function generateOriginRecord() {
     // 获取修改产品性质前的原始记录:产品发布页
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
@@ -33,12 +33,12 @@ export function generateOriginRecord() {
     let origin_labels = getCheckedLabels();
     let product_link = "http://testpage.qipeiyigou.com/qipeiyigouwang/products/" + id + ".html";
     let origin_record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
-    publics.appendToRecord(origin_record, 1);
+    await publics.appendToRecord(origin_record, 1);
 }
-export function generateNewRecord(status) {
+export  async function generateNewRecord(status) {
     // 获取修改产品性质后的最新记录:产品发布页
     let new_labels = getCheckedLabels() + "\t" + status;
-    publics.appendToRecord(new_labels, 0);
+    await publics.appendToRecord(new_labels, 0);
 }
 export function nodo() {
     // 无需处理勾选
