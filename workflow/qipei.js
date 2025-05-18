@@ -72,7 +72,81 @@ export function open_close_shop_products() {
         window.close();
     }
 }
+
 export function open_channel_product_list() {
+    // 打开所有包含产品的栏目管理列表页
+    console.log("函数 open_channel_product_list 被调用");
+
+    // 输出当前 URL 和 chIds
+    console.log("当前 URL:", url);
+    console.log("频道 ID 列表:", chIds);
+
+    if (url == "http://testpage.qipeiyigou.com/" || url == "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
+        console.log("URL 匹配，开始处理频道 ID 列表");
+
+        if (chIds.length === 0) {
+            console.log("chIds 数组为空，跳过处理");
+            return;
+        }
+
+        let promises = chIds.map(function (id) {
+            console.log(`正在处理频道 ID: ${id}`);
+
+            return new Promise(function (resolve, reject) {
+                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
+                console.log(`发送请求到: ${productUrl}`);  // 打印每个请求的 URL
+
+                $.ajax({
+                    url: productUrl,
+                    method: "GET",
+                    success: function (response) {
+                        console.log(`成功响应: ${productUrl}`);
+
+                        if (!response.includes("暂无数据")) {
+                            console.log(`该频道包含产品，打开新窗口: ${productUrl}`);
+                            window.open(productUrl, "_blank");
+                        } else {
+                            console.log(`该频道没有产品: ${productUrl}`);
+                        }
+
+                        resolve();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(`Ajax 请求失败，URL: ${productUrl}, 错误: ${error}`);
+                        resolve();  // 即使请求失败也继续执行
+                    }
+                });
+            });
+        });
+
+        Promise.all(promises).then(function () {
+            console.log("所有请求已完成，窗口已打开");
+        }).catch(function (error) {
+            console.error("请求过程中发生错误:", error);
+        });
+    } else {
+        console.log("URL 不匹配，跳过处理");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function open_channel_product_lis000t() {
     console.log(url);
     // 打开所有包含产品的栏目管理列表页
     if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
