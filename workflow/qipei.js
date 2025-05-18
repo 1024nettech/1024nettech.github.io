@@ -73,7 +73,7 @@ export function open_close_shop_products() {
     }
 }
 
-export function open_channel_product_list(chId) {
+export function open_channel_product_list(chIds) {
     // 打开所有包含产品的栏目管理列表页
     console.log("函数 open_channel_product_list 被调用");
 
@@ -144,36 +144,6 @@ export function open_channel_product_list(chId) {
 
 
 
-
-
-export function open_channel_product_lis000t() {
-    console.log(url);
-    // 打开所有包含产品的栏目管理列表页
-    if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
-        let promises = chIds.map(function (id) {
-            return new Promise(function (resolve, reject) {
-                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
-                $.ajax({
-                    url: productUrl,
-                    method: "GET",
-                    success: function (response) {
-                        if (!response.includes("暂无数据")) {
-                            window.open(productUrl, "_blank");
-                        }
-                        resolve();
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Ajax request failed:", error);
-                        resolve();
-                    }
-                });
-            });
-        });
-        Promise.all(promises).then(function () {
-            console.log("所有请求已完成，窗口已打开");
-        });
-    }
-}
 export function export_tsc() {
     // 首页导出数据组件
     let html = `
