@@ -204,7 +204,7 @@ export async function appendToRecord(newValue, appendMode) {
     await set("record", records);
     console.log("记录已更新: ", records);
 }
-export async function downloadRecordAsTSV(fileName) {
+export async function downloadRecordAsTSV(personName, fileName) {
     // 从 idb-keyval 获取 record[],下载为tsv格式
     let records = await get("record");
     if (!records || records.length === 0) {
@@ -214,6 +214,8 @@ export async function downloadRecordAsTSV(fileName) {
     let tsvContent = "";
     records.forEach(record => {
         tsvContent += `${record}\n`;
+        let updatedRecord = record.replace(/xxpersonname/g, personName);
+        tsvContent += `${updatedRecord}\n`;
     });
     let blob = new Blob([tsvContent], { type: "text/tab-separated-values" });
     let link = document.createElement("a");
@@ -222,4 +224,4 @@ export async function downloadRecordAsTSV(fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-225-2025.05.18.162950
+// End-227-2025.05.18.170438
