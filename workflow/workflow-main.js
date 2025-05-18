@@ -71,7 +71,7 @@ async function main() {
             $(document).on("keyup", function (event) {
                 switch (event.key) {
                     case "F2":
-                        open_close_shop_products();
+                        qipei.open_close_shop_products();
                         break;
                 }
             });
@@ -122,23 +122,23 @@ async function main() {
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
-                    nodo();
+                    qipei.nodo();
                 }
                 else {
                     if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            yesdo(1);
+                            qipei.yesdo(1);
                         }
                         else {
-                            nodo();
+                            qipei.nodo();
                         }
                     }
                     else {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            yesdo(0);
+                            qipei.yesdo(0);
                         }
                         else {
-                            nodo();
+                            qipei.nodo();
                         }
                     }
                 }
@@ -193,4 +193,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-196-2025.05.18.184430
+// End-196-2025.05.18.194225
