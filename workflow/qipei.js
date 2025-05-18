@@ -23,7 +23,7 @@ export function getCheckedLabels() {
 }
 export async function generateOriginRecord() {
     // 获取修改产品性质前的原始记录:产品发布页
-    let today = generateTimestamp(0);
+    let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
     let username = $(".welcome").text().trim().replace("欢迎您：", "");
     let urlParams = new URLSearchParams(new URL(url).search);
@@ -200,4 +200,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-203-2025.05.18.200314
+// End-203-2025.05.18.201645
