@@ -40,10 +40,10 @@ export async function generateNewRecord(status) {
     let new_labels = getCheckedLabels() + "\t" + status;
     await publics.appendToRecord(new_labels, 0);
 }
-export function nodo() {
+export  async function nodo() {
     // 无需处理勾选
-    generateOriginRecord();
-    generateNewRecord("未处理");
+    await generateOriginRecord();
+    await generateNewRecord("未处理");
     window.close();
 }
 export function yesdo(checked_car) {
