@@ -1,3 +1,4 @@
+//idb-keyval-6.2.1-min.js
 function promisifyRequest(request) {
     return new Promise((resolve, reject) => {
         // @ts-ignore - file size hacks
