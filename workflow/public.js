@@ -213,7 +213,6 @@ export async function downloadRecordAsTSV(personName, fileName) {
     }
     let tsvContent = "";
     records.forEach(record => {
-        tsvContent += `${record}\n`;
         let updatedRecord = record.replace(/xxpersonname/g, personName);
         tsvContent += `${updatedRecord}\n`;
     });
@@ -224,4 +223,4 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-227-2025.05.18.182506
+// End-226-2025.05.18.202536
