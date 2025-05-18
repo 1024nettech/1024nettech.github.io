@@ -1,4 +1,4 @@
-import { set, get, delete as deleteKey, keys } from "idb-keyval";
+import { set, get, delete as deleteKey, keys } from "./idb-keyval.js";
 export function loadFiles(urls, status, isModule = false) {
     // 动态加载外部文件(JS/CSS)
     if (status === 1) {
@@ -224,4 +224,4 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-227-2025.05.18.170438
+// End-227-2025.05.18.180754
