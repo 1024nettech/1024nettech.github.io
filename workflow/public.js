@@ -190,39 +190,82 @@ export async function setAndLog(key, value) {
     await set(key, value);
     console.log(`${key} 已设置为: `, value);
 }
-export async function appendToRecord(newValue, appendMode) {
-    // 获取当前记录对象
-    let records = await get("record");
-    if (!records) {
-        //records = {};  // 如果没有记录对象，则初始化为空对象
+
+export async function appendToRecord(newValue, appendMode, maxRetries = 5, retryInterval = 1000) {
+    // 获取锁的键
+    const lockKey = "recordLock";
+    let retries = 0;
+
+    while (retries < maxRetries) {
+        const isLocked = localStorage.getItem(lockKey);
+        
+        if (isLocked !== "true") {
+            try {
+                // 锁定记录
+                localStorage.setItem(lockKey, "true");
+
+                // 获取当前记录对象
+                let records = await get("record");
+                if (!records) {
+                    records = {};  // 如果没有记录对象，则初始化为空对象
+                }
+
+                // 从当前URL中提取 ch_id 和 id
+                const urlParams = new URLSearchParams(window.location.search);
+                const ch_id = urlParams.get('ch_id');
+                const _id = urlParams.get('id');
+
+                if (!ch_id || !_id) {
+                    console.error("URL 中缺少 ch_id 或 id 参数");
+                    return;
+                }
+
+                const recordKey = `${ch_id}_${_id}`;  // 将 ch_id 和 id 拼接为键名
+
+                // 根据 appendMode 来决定如何处理记录
+                if (appendMode === 0 && records[recordKey]) {
+                    // 如果是附加模式并且已有该键的记录，则追加数据到该键
+                    records[recordKey] += newValue;
+                } else if (appendMode === 1) {
+                    // 如果是推送模式，则将新的数据作为该键的值
+                    records[recordKey] = newValue;
+                }
+
+                // 更新 idb-keyval 中的记录
+                await set("record", records);
+
+                console.log("记录已更新: ", records);
+                return;  // 操作成功，退出
+            } finally {
+                // 操作完成后解除锁
+                localStorage.removeItem(lockKey);
+            }
+        } else {
+            // 锁定状态，等待并重试
+            console.log(`记录已被锁定，等待重试 (重试 ${retries + 1} / ${maxRetries})...`);
+            retries++;
+            await new Promise(resolve => setTimeout(resolve, retryInterval));
+        }
     }
 
-    // 从当前URL中提取 ch_id 和 id
-    const urlParams = new URLSearchParams(window.location.search);
-    const ch_id = urlParams.get('ch_id');
-    const _id = urlParams.get('id');
-
-    if (!ch_id || !_id) {
-        console.error("URL 中缺少 ch_id 或 id 参数");
-        return;
-    }
-
-    const recordKey = `${ch_id}_${_id}`;  // 将 ch_id 和 id 拼接为键名
-
-    // 根据 appendMode 来决定如何处理记录
-    if (appendMode === 0 && records[recordKey]) {
-        // 如果是附加模式并且已有该键的记录，则追加数据到该键
-        records[recordKey] += newValue;
-    } else if (appendMode === 1) {
-        // 如果是推送模式，则将新的数据作为该键的值
-        records[recordKey] = newValue;
-    }
-
-    // 更新 idb-keyval 中的记录
-    await set("record", records);
-
-    console.log("记录已更新: ", records);
+    // 达到最大重试次数，给出提示
+    console.error("无法获取锁，已达到最大重试次数。请稍后再试。");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export async function downloadRecordAsTSV(personName, fileName) {
     // 从 idb-keyval 获取 record 对象
     let records = await get("record");
