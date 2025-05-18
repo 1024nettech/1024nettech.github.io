@@ -219,7 +219,7 @@ export async function appendToRecord(newValue, appendMode, maxRetries = 1000, re
                 }
                 await set("record", records);
                 console.log("来自workflow-main.js的输出: appendToRecord记录已更新: ", records);
-                window.close();
+                // window.close();
                 return;
             } finally {
                 localStorage.removeItem(lockKey);
@@ -252,4 +252,4 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-255-2025.05.19.045702
+// End-255-2025.05.19.054817
