@@ -30,14 +30,14 @@ export async function generateOriginRecord() {
     let ch_id = urlParams.get("ch_id");
     let id = urlParams.get("id");
     let ch_name = $(".myColumnTit").text();
-    let origin_labels = getCheckedLabels();
+    let origin_labels = await getCheckedLabels();
     let product_link = "http://testpage.qipeiyigou.com/qipeiyigouwang/products/" + id + ".html";
     let origin_record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
     await publics.appendToRecord(origin_record, 1);
 }
 export async function generateNewRecord(status) {
     // 获取修改产品性质后的最新记录:产品发布页
-    let new_labels = getCheckedLabels() + "\t" + status;
+    let new_labels = await getCheckedLabels() + "\t" + status;
     await publics.appendToRecord(new_labels, 0);
 }
 export async function nodo() {
