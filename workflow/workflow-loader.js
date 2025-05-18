@@ -135,7 +135,6 @@ const url = location.href;
 let cookie = "";
 $(function () {
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
-    alert(auth);
     if (url.includes("qipeiyigou.com")) {
         if (auth[1] === "1") {
             if (url.includes("mshop/?")) {
@@ -291,4 +290,4 @@ $(function () {
         }
     }
 });
-// End-293-2025.05.18.130321
+// End-293-2025.05.18.132208
