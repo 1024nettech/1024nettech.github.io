@@ -191,36 +191,68 @@ export async function setAndLog(key, value) {
     console.log(`${key} 已设置为: `, value);
 }
 export async function appendToRecord(newValue, appendMode) {
-    // 获取记录并根据条件追加数据到idb-keyval的record[]: 0为更新附加到最后一条; 1为push一条新数据
+    // 获取当前记录对象
     let records = await get("record");
     if (!records) {
-        records = [];
+        records = {};  // 如果没有记录对象，则初始化为空对象
     }
-    if (appendMode === 0 && records.length > 0) {
-        records[records.length - 1] += newValue;
+
+    // 从当前URL中提取 ch_id 和 id
+    const urlParams = new URLSearchParams(window.location.search);
+    const ch_id = urlParams.get('ch_id');
+    const _id = urlParams.get('id');
+
+    if (!ch_id || !_id) {
+        console.error("URL 中缺少 ch_id 或 id 参数");
+        return;
+    }
+
+    const recordKey = `${ch_id}_${_id}`;  // 将 ch_id 和 id 拼接为键名
+
+    // 根据 appendMode 来决定如何处理记录
+    if (appendMode === 0 && records[recordKey]) {
+        // 如果是附加模式并且已有该键的记录，则追加数据到该键
+        records[recordKey] += newValue;
     } else if (appendMode === 1) {
-        records.push(newValue);
+        // 如果是推送模式，则将新的数据作为该键的值
+        records[recordKey] = newValue;
     }
+
+    // 更新 idb-keyval 中的记录
     await set("record", records);
+
     console.log("记录已更新: ", records);
 }
 export async function downloadRecordAsTSV(personName, fileName) {
-    // 从 idb-keyval 获取 record[],下载为tsv格式
+    // 从 idb-keyval 获取 record 对象
     let records = await get("record");
-    if (!records || records.length === 0) {
+    if (!records || Object.keys(records).length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
-    let tsvContent = "";
-    records.forEach(record => {
-        let updatedRecord = record.replace(/xxpersonname/g, personName);
-        tsvContent += `${updatedRecord}\n`;
+
+    // 创建 TSV 文件的内容
+    let tsvContent = "日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态\t记录内容\n";  // 第一行是表头，ch_id_id 和 记录内容
+
+    // 遍历 record 对象，构建 TSV 内容
+    Object.keys(records).forEach(key => {
+        let recordValue = records[key];
+        // 替换 xxpersonname 为 personName
+        let updatedRecord = recordValue.replace(/xxpersonname/g, personName);
+        // 将 ch_id_id 和记录内容写入 TSV 内容
+        tsvContent += `${key}\t${updatedRecord}\n`;
     });
+
+    // 创建 Blob 对象并启动下载
     let blob = new Blob([tsvContent], { type: "text/tab-separated-values" });
     let link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `${fileName}.tsv`;
     link.click();
+
     console.log("TSV 文件已生成并开始下载");
 }
+
+
+
 // End-226-2025.05.18.202536
