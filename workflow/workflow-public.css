@@ -1,1 +1,55 @@
+/*——————————————————————————————————————————————————汽配易购网 Start——————————————————————————————————————————————————*/
+/*首页导出*/
+#toggleImg,
+#nameInput,
+#exportx {
+    position: fixed;
+    z-index: 10000;
+    font-size: 16px;
+}
 
+#toggleImg {
+    top: 59px;
+    right: 280px;
+    height: 43px;
+}
+
+#nameInput {
+    top: 59px;
+    right: 155px;
+    width: 100px;
+    height: 37px;
+}
+
+#exportx {
+    top: 59px;
+    right: 20px;
+    height: 43px;
+    padding: 10px 20px;
+}
+
+/*——————————————————————————————————————————————————汽配易购网 End——————————————————————————————————————————————————*/
+/*——————————————————————————————————————————————————1688 Start——————————————————————————————————————————————————*/
+#modex,
+#processing-message {
+    width: 100px;
+    height: 30px;
+    position: fixed;
+    right: 50px;
+    color: white;
+    background-color: #0099ff;
+    border: 0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#modex {
+    top: 50px;
+}
+
+#processing-message {
+    top: 85px;
+}
+
+/*——————————————————————————————————————————————————1688 End——————————————————————————————————————————————————*/
+/* End-55-2025.05.18.174916 */
