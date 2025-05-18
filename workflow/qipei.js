@@ -21,7 +21,7 @@ export function getCheckedLabels() {
     console.log(labelsText);
     return labelsText;
 }
-export  async function generateOriginRecord() {
+export function generateOriginRecord() {
     // 获取修改产品性质前的原始记录:产品发布页
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
@@ -33,30 +33,29 @@ export  async function generateOriginRecord() {
     let origin_labels = getCheckedLabels();
     let product_link = "http://testpage.qipeiyigou.com/qipeiyigouwang/products/" + id + ".html";
     let origin_record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
-    await publics.appendToRecord(origin_record, 1);
+    publics.appendToRecord(origin_record, 1);
 }
-export  async function generateNewRecord(status) {
+export function generateNewRecord(status) {
     // 获取修改产品性质后的最新记录:产品发布页
     let new_labels = getCheckedLabels() + "\t" + status;
-    await publics.appendToRecord(new_labels, 0);
+    publics.appendToRecord(new_labels, 0);
 }
 export function nodo() {
     // 无需处理勾选
     generateOriginRecord();
     generateNewRecord("未处理");
-    //window.close();
 }
-export async function yesdo(checked_car) {
+export function yesdo(checked_car) {
     // 需要处理勾选
-    let interval = setInterval(async function () {
+    let interval = setInterval(function () {
         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
             clearInterval(interval);
-            await generateOriginRecord();
+            generateOriginRecord();
             $("input[type=checkbox][value=4]").prop("checked", false);
             if (checked_car) {
                 $("input[type=checkbox][value=2]").prop("checked", true);
             }
-            await generateNewRecord("已处理");
+            generateNewRecord("已处理");
             $("title").text("完成");
             $("#submit_msg a").click();
         }
@@ -81,7 +80,6 @@ export function open_channel_product_list(chIds) {
     console.log("函数 open_channel_product_list 被调用\n频道 ID 列表:\n", chIds);
     if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
         console.log("URL 匹配，开始处理频道 ID 列表");
-        // 定义一个存储请求结果的数组
         let promises = chIds.map((id, index) => {
             return new Promise((resolve, reject) => {
                 let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
@@ -200,4 +198,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-203-2025.05.18.203758
+// End-201-2025.05.19.051044
