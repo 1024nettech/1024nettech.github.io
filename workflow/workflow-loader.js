@@ -29,7 +29,7 @@ function loadSucess(response) {
     let versionData = JSON.parse(response.responseText.trim());
     let userJsVersion = versionData["workflow.user.js"];
     cookie = versionData["cookie"];
-    if (userJsVersion == GM_info.script.version) {
+    if (userJsVersion === GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
         loadFiles(urls, 1, 1);
@@ -43,7 +43,7 @@ function loadSucess(response) {
 }
 function loadFiles(urls, status, isModule = false) {
     // 动态加载外部文件(JS/CSS)
-    if (status == 1) {
+    if (status === 1) {
         urls = urls.map(url => url + "?t=" + Date.now());
     }
     let totalFiles = urls.length;
@@ -134,11 +134,11 @@ update();
 const url = location.href;
 let cookie = "";
 document.addEventListener("DOMContentLoaded", function () {
-    main_code();
+    main();
 });
-function main_code() {
+function main() {
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
-    console.log(`workflow-loader.js输出的auth: ${auth}`);
+    console.log(`workflow-loader.js 输出的auth: ${auth}`);
     if (url.includes("qipeiyigou.com")) {
         if (auth[1] === "1") {
             let urls = ["https://1024nettech.github.io/workflow/workflow-admin.css"];
@@ -296,4 +296,4 @@ function main_code() {
         }
     }
 }
-// End-299-2025.05.18.165834
+// End-299-2025.05.19.052344
