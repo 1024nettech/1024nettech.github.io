@@ -73,7 +73,7 @@ export function open_close_shop_products() {
     }
 }
 
-export function open_channel_product_list(chIds) {
+export function open_channel_product_list(chId) {
     // 打开所有包含产品的栏目管理列表页
     console.log("函数 open_channel_product_list 被调用");
 
