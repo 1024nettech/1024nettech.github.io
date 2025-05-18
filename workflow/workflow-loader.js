@@ -31,7 +31,7 @@ function loadSucess(response) {
     cookie = versionData["cookie"];
     if (userJsVersion == GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
-        let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-css.css"];
+        let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
         loadFiles(urls, 1, 1);
         if (location.href.includes("1688.com")) {
             urls = ["https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"];
@@ -141,6 +141,8 @@ function main_code() {
     console.log(`workflow-loader.js输出的auth: ${auth}`);
     if (url.includes("qipeiyigou.com")) {
         if (auth[1] === "1") {
+            let urls = ["https://1024nettech.github.io/workflow/workflow-admin.css"];
+            loadFiles(urls, 1, 0);
             if (url.includes("mshop/?")) {
                 // 店铺首页
                 let fetchShopInfo = () => {
@@ -294,4 +296,4 @@ function main_code() {
         }
     }
 }
-// End-297-2025.05.18.135718
+// End-299-2025.05.18.165834
