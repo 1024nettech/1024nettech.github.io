@@ -122,23 +122,23 @@ async function main() {
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
-                    await qipei.nodo();
+                    qipei.nodo();
                 }
                 else {
                     if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            await qipei.yesdo(1);
+                            qipei.yesdo(1);
                         }
                         else {
-                            await qipei.nodo();
+                            qipei.nodo();
                         }
                     }
                     else {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            await qipei.yesdo(0);
+                            qipei.yesdo(0);
                         }
                         else {
-                            await qipei.nodo();
+                            qipei.nodo();
                         }
                     }
                 }
