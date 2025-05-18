@@ -90,7 +90,7 @@ async function main() {
                         chIds.push(match[1]);
                     }
                     console.log("提取到的 ch_id 数组为：", chIds);
-                    qipei.open_channel_product_list();
+                    qipei.open_channel_product_list(chIds);
                 },
                 error: function (xhr, status, error) {
                     console.error("请求失败: " + error);
