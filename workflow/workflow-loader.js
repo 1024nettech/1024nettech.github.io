@@ -133,7 +133,23 @@ let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.
 update();
 const url = location.href;
 let cookie = "";
-$(function () {
+
+// let interval = setInterval(() => {
+//     let a = localStorage.getItem("auth");
+//     if (a) {
+//         clearInterval(interval);
+//         $(function () {
+//             main_code();
+//         });
+
+//     }
+// }, 100);
+document.addEventListener('DOMContentLoaded', function () {
+    main_code();
+});
+
+function main_code() {
+
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
     console.log(`workflow-loader.js输出的auth: ${auth}`);
     if (url.includes("qipeiyigou.com")) {
@@ -290,5 +306,5 @@ $(function () {
             });
         }
     }
-});
+}
 // End-294-2025.05.18.132614
