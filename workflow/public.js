@@ -194,7 +194,7 @@ export async function appendToRecord(newValue, appendMode) {
     // 获取当前记录对象
     let records = await get("record");
     if (!records) {
-        records = {};  // 如果没有记录对象，则初始化为空对象
+        //records = {};  // 如果没有记录对象，则初始化为空对象
     }
 
     // 从当前URL中提取 ch_id 和 id
