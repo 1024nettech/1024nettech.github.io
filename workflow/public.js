@@ -191,7 +191,7 @@ export async function setAndLog(key, value) {
     console.log(`${key} 已设置为: `, value);
 }
 
-export async function appendToRecord(newValue, appendMode, maxRetries = 5, retryInterval = 1000) {
+export async function appendToRecord(newValue, appendMode, maxRetries = 100, retryInterval = 1000) {
     // 获取锁的键
     const lockKey = "recordLock";
     let retries = 0;
