@@ -8,7 +8,7 @@ async function main() {
     console.log(`workflow-main.js输出的auth: ${auth}`);
     let autorun = Number(localStorage.getItem("autorun"));
     let stored_day = localStorage.getItem("date");
-    const record = ["日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态"];
+    // const record = ["日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态"];
     const today = publics.generateTimestamp(0);
     if (stored_day == today) {
         localStorage.setItem("date", today);
@@ -16,7 +16,6 @@ async function main() {
         publics.clearExceptAuth();
         await publics.clearAll();
         console.log("所有数据已清除……");
-        await publics.setAndLog("record", record);
     }
     if (url.includes("qipeiyigou.com")) {
         // admin权限
