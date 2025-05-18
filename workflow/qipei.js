@@ -99,6 +99,7 @@ export function open_channel_product_list() {
     }
 }
 export function export_tsc() {
+    // 首页导出数据组件
     let html = `
         <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1746954291684901.png" id="toggleImg" />
         <input type="text" id="nameInput" placeholder="请输入姓名" />
@@ -174,4 +175,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-177-2025.05.18.165202
+// End-178-2025.05.18.171103
