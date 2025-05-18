@@ -44,7 +44,7 @@ export async function nodo() {
     // 无需处理勾选
     await generateOriginRecord();
     await generateNewRecord("未处理");
-    window.close();
+    //window.close();
 }
 export async function yesdo(checked_car) {
     // 需要处理勾选
