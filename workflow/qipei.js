@@ -72,37 +72,27 @@ export function open_close_shop_products() {
         window.close();
     }
 }
-
-
 export function open_channel_product_list(chIds) {
-    // 确保 chIds 是有效的数组
+    // 打开所有包含产品的栏目管理列表页
     if (!Array.isArray(chIds) || chIds.length === 0) {
         console.log("chIds 不是有效的数组或为空");
-        return;  // 如果 chIds 无效，终止函数执行
+        return;
     }
-
-    console.log("函数 open_channel_product_list 被调用");
-    console.log("频道 ID 列表:", chIds);
-
-    // 确保 URL 匹配
-    if (url == "http://testpage.qipeiyigou.com/" || url == "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
+    console.log("函数 open_channel_product_list 被调用\n频道 ID 列表:\n", chIds);
+    if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
         console.log("URL 匹配，开始处理频道 ID 列表");
-
         // 定义一个存储请求结果的数组
         let promises = chIds.map((id, index) => {
             return new Promise((resolve, reject) => {
-                const productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
+                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
                 console.log(`请求频道 ID: ${id}`);
-
                 $.ajax({
                     url: productUrl,
                     method: "GET",
                     success: function (response) {
                         console.log(`响应频道 ID: ${id}`);
-
-                        // 如果有产品，记录该请求的信息
                         resolve({
-                            index: index, // 保持原始顺序
+                            index: index,
                             id: id,
                             hasProducts: !response.includes("暂无数据"),
                             url: productUrl
@@ -110,18 +100,13 @@ export function open_channel_product_list(chIds) {
                     },
                     error: function (xhr, status, error) {
                         console.error(`请求失败，URL: ${productUrl}, 错误: ${error}`);
-                        resolve({ index: index, id: id, hasProducts: false, url: productUrl });  // 即使请求失败也要解决该 Promise
+                        resolve({ index: index, id: id, hasProducts: false, url: productUrl });
                     }
                 });
             });
         });
-
-        // 并行请求，所有请求完成后按顺序处理
         Promise.all(promises).then(results => {
-            // 根据原始顺序排序
             results.sort((a, b) => a.index - b.index);
-
-            // 按照顺序打开有产品的页面
             results.forEach(result => {
                 if (result.hasProducts) {
                     console.log(`打开有产品的页面: ${result.url}`);
@@ -130,7 +115,6 @@ export function open_channel_product_list(chIds) {
                     console.log(`该频道没有产品，跳过: ${result.url}`);
                 }
             });
-
             console.log("所有请求已完成，窗口按顺序打开");
         }).catch(error => {
             console.error("处理请求时发生错误:", error);
@@ -139,104 +123,6 @@ export function open_channel_product_list(chIds) {
         console.log("URL 不匹配，跳过处理");
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export function open_channel_product_list111(chIds) {
-    // 打开所有包含产品的栏目管理列表页
-    console.log("函数 open_channel_product_list 被调用");
-
-    // 输出当前 URL 和 chIds
-    console.log("当前 URL:", url);
-    console.log("频道 ID 列表:", chIds);
-
-    if (url == "http://testpage.qipeiyigou.com/" || url == "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
-        console.log("URL 匹配，开始处理频道 ID 列表");
-
-        if (chIds.length === 0) {
-            console.log("chIds 数组为空，跳过处理");
-            return;
-        }
-
-        let promises = chIds.map(function (id) {
-            console.log(`正在处理频道 ID: ${id}`);
-
-            return new Promise(function (resolve, reject) {
-                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
-                console.log(`发送请求到: ${productUrl}`);  // 打印每个请求的 URL
-
-                $.ajax({
-                    url: productUrl,
-                    method: "GET",
-                    success: function (response) {
-                        console.log(`成功响应: ${productUrl}`);
-
-                        if (!response.includes("暂无数据")) {
-                            console.log(`该频道包含产品，打开新窗口: ${productUrl}`);
-                            window.open(productUrl, "_blank");
-                        } else {
-                            console.log(`该频道没有产品: ${productUrl}`);
-                        }
-
-                        resolve();
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(`Ajax 请求失败，URL: ${productUrl}, 错误: ${error}`);
-                        resolve();  // 即使请求失败也继续执行
-                    }
-                });
-            });
-        });
-
-        Promise.all(promises).then(function () {
-            console.log("所有请求已完成，窗口已打开");
-        }).catch(function (error) {
-            console.error("请求过程中发生错误:", error);
-        });
-    } else {
-        console.log("URL 不匹配，跳过处理");
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function export_tsc() {
     // 首页导出数据组件
     let html = `
@@ -314,4 +200,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-179-2025.05.18.190557
+// End-203-2025.05.18.200314
