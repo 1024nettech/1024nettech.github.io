@@ -1,4 +1,4 @@
-import { set, get, delete as deleteKey, keys } from "./idb-keyval.js";
+import { set, get, del, keys } from "./idb-keyval.js";
 export function loadFiles(urls, status, isModule = false) {
     // 动态加载外部文件(JS/CSS)
     if (status === 1) {
@@ -181,7 +181,7 @@ export async function clearAll() {
     // 清除所有idb-keyval数据
     let allKeys = await keys();
     for (let key of allKeys) {
-        await deleteKey(key);
+        await del(key);
     }
     console.log("所有数据已清除");
 }
@@ -224,4 +224,4 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-227-2025.05.18.180754
+// End-227-2025.05.18.182506
