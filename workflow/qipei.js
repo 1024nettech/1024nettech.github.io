@@ -73,6 +73,7 @@ export function open_close_shop_products() {
     }
 }
 export function open_channel_product_list() {
+    console.log(url);
     // 打开所有包含产品的栏目管理列表页
     if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
         let promises = chIds.map(function (id) {
