@@ -5,17 +5,17 @@ import * as ali from "./ali.js"
 async function main() {
     const url = location.href;
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
-    console.log(`workflow-main.js输出的auth: ${auth}`);
+    console.log(`workflow-main.js 输出的auth: ${auth}`);
     let autorun = Number(localStorage.getItem("autorun"));
     let stored_day = localStorage.getItem("date");
-    // const record = ["日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态"];
     const today = publics.generateTimestamp(0);
     if (stored_day !== today) {
         localStorage.setItem("date", today);
-        console.log("开始清除所有数据……");
+        console.log(`${today}新的一天开始了: 开始清除所有数据……`);
         publics.clearExceptAuth();
         await publics.clearAll();
-        console.log("所有数据已清除……");
+        console.log(`${today}新的一天开始了: 所有数据已清除……\n清除后的数据为……`);
+        console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
         // admin权限
@@ -157,7 +157,6 @@ async function main() {
         `;
         $("body").append(html);
         let storedmode = localStorage.getItem("screenshotMode");
-        // 设置初始模式
         if (storedmode) {
             $("#modex").text(storedmode);
         }
@@ -192,4 +191,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-196-2025.05.18.204156
+// End-194-2025.05.19.054636
