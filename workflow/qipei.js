@@ -39,6 +39,7 @@ export function generateNewRecord(status) {
     // 获取修改产品性质后的最新记录:产品发布页
     let new_labels = getCheckedLabels() + "\t" + status;
     publics.appendToRecord(new_labels, 0);
+    if (status === "未处理") { window.close(); }
 }
 export function nodo() {
     // 无需处理勾选
@@ -198,4 +199,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-201-2025.05.19.051044
+// End-202-2025.05.19.055321
