@@ -275,7 +275,7 @@ export async function downloadRecordAsTSV(personName, fileName) {
     }
 
     // 创建 TSV 文件的内容
-    let tsvContent = "日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态\t记录内容\n";  // 第一行是表头，ch_id_id 和 记录内容
+    let tsvContent = "日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态\n";  // 第一行是表头，ch_id_id 和 记录内容
 
     // 遍历 record 对象，构建 TSV 内容
     Object.keys(records).forEach(key => {
@@ -283,7 +283,7 @@ export async function downloadRecordAsTSV(personName, fileName) {
         // 替换 xxpersonname 为 personName
         let updatedRecord = recordValue.replace(/xxpersonname/g, personName);
         // 将 ch_id_id 和记录内容写入 TSV 内容
-        tsvContent += `${key}\t${updatedRecord}\n`;
+        tsvContent += `${updatedRecord}\n`;
     });
 
     // 创建 Blob 对象并启动下载
