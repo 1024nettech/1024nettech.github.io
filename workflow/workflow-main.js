@@ -98,11 +98,11 @@ async function main() {
             });
         }
         // 首页添加导出组件
-        if (url == "http://testpage.qipeiyigou.com/") {
+        if (url === "http://testpage.qipeiyigou.com/") {
             qipei.export_tsc();
         }
         // 退出后自动跳转登录页
-        else if (url == "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
+        else if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
             location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
         }
         // 栏目产品管理列表页Esc打开编辑产品
@@ -125,7 +125,7 @@ async function main() {
                     nodo();
                 }
                 else {
-                    if (checked_box_num == 1) {
+                    if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
                             yesdo(1);
                         }
@@ -151,7 +151,7 @@ async function main() {
             }
         }
     }
-    else if (url.includes("https://detail.1688.com/offer/") && auth[2] == "1") {
+    else if (url.includes("https://detail.1688.com/offer/") && auth[2] === "1") {
         let html = `
         <button id="modex">多图模式</button>
         <button id="processing-message">已准备...</button>
@@ -184,7 +184,13 @@ async function main() {
         });
     }
 }
-document.addEventListener("DOMContentLoaded", function () {
-    main();
-});
-// End-190-2025.05.18.173734
+let interval = setInterval(function () {
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        clearInterval(interval);
+        main();
+        console.log("来自workflow-main.js输出: DOM 已加载完成, main()函数已执行");
+    } else {
+        console.log("来自workflow-main.js输出: DOM 还未加载");
+    }
+}, 100);
+// End-196-2025.05.18.184430
