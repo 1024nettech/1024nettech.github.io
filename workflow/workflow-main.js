@@ -10,7 +10,7 @@ async function main() {
     let stored_day = localStorage.getItem("date");
     const record = ["日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态"];
     const today = publics.generateTimestamp(0);
-    if (stored_day !== today) {
+    if (stored_day == today) {
         localStorage.setItem("date", today);
         console.log("开始清除所有数据……");
         publics.clearExceptAuth();
