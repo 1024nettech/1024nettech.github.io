@@ -32,25 +32,24 @@ export async function handleProductAction(checked_car, status = "") {
         await publics.appendToRecord(record);
         window.close();
     } else {
-let interval = setTimeout(async function checkAndExecute() {
-    if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-        clearTimeout(interval);  // 停止定时器
-        $("input[type=checkbox][value=4]").prop("checked", false);
-        if (checked_car) {
-            $("input[type=checkbox][value=2]").prop("checked", true);
-        }
-        let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-            .map(checkbox => checkbox.closest("label").textContent.trim())
-            .join(", ");
-        record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-        await publics.appendToRecord(record);  // 等待记录完成
-        $("title").text("完成");
-        $("#submit_msg a").click();  // 点击提交按钮
-    } else {
-        // 重新调用 checkAndExecute 函数，延迟 100ms
-        setTimeout(checkAndExecute, 100);
-    }
-}, 100);
+        let interval = setTimeout(async function checkAndExecute() {
+            if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+                clearTimeout(interval);
+                $("input[type=checkbox][value=4]").prop("checked", false);
+                if (checked_car) {
+                    $("input[type=checkbox][value=2]").prop("checked", true);
+                }
+                let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                    .map(checkbox => checkbox.closest("label").textContent.trim())
+                    .join(", ");
+                record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+                await publics.appendToRecord(record);
+                $("title").text("完成");
+                $("#submit_msg a").click();
+            } else {
+                setTimeout(checkAndExecute, 1000);
+            }
+        }, 1000);
     }
 }
 export function open_close_shop_products() {
@@ -190,4 +189,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-192-2025.05.19.100247
+// End-192-2025.05.19.110104
