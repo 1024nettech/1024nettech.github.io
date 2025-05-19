@@ -233,6 +233,7 @@ function main() {
                     waitForElementOrCookie("cookie", function () {
                         sendRequest(`http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`, cookie, "GET", function (response) {
                             let dalei = extractCategoryName(response.responseText, bigId);
+                            console.log(response.responseText);
                             let xiaolei = extractCategoryName(response.responseText, subId);
                             waitForElementOrCookie("#divx", function () {
                                 $("#span2").text(`系统分类：${channelNameMap[channelId]}-${dalei}-${xiaolei}`);
