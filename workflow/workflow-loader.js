@@ -175,6 +175,7 @@ function main() {
             else if (url.includes("product/item/")) {
                 // 获取分类信息
                 waitForElementOrCookie("#shop-info", function () {
+                    let title = '"' + $(".title:first").text() + '"';
                     let proId = url.split("/item/")[1].split("?")[0];
                     let channelId = unsafeWindow.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
                     let channelNameMap = {
@@ -281,4 +282,4 @@ function main() {
         }
     }
 }
-// End-284-2025.05.19.162143
+// End-285-2025.05.19.163210
