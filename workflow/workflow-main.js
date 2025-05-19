@@ -121,23 +121,23 @@ async function main() {
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
-                    qipei.nodo();
+                    await qipei.handleProductAction(0, "未处理");
                 }
                 else {
                     if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            qipei.yesdo(1);
+                            await qipei.handleProductAction(1, "已处理");
                         }
                         else {
-                            qipei.nodo();
+                            await qipei.handleProductAction(0, "未处理");
                         }
                     }
                     else {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            qipei.yesdo(0);
+                            await qipei.handleProductAction(0, "已处理");
                         }
                         else {
-                            qipei.nodo();
+                            await qipei.handleProductAction(0, "未处理");
                         }
                     }
                 }
@@ -191,4 +191,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-194-2025.05.19.054636
+// End-194-2025.05.19.102513
