@@ -191,8 +191,8 @@ export async function setAndLog(key, value) {
     await set(key, value);
     console.log(`${key} 已设置为: `, value);
 }
-export async function appendToRecord(newValue, appendMode, maxRetries = 1000, retryInterval = 1000) {
-    // 获取记录并根据条件追加数据到idb-keyval的record[]: 0为更新附加到最后一条; 1为push一条新数据
+export async function appendToRecord(newValue, maxRetries = 1000, retryInterval = 1000) {
+    // 获取记录并根据条件追加数据到idb-keyval的record{}
     let lockKey = "recordLock";
     let retries = 0;
     while (retries < maxRetries) {
@@ -212,14 +212,9 @@ export async function appendToRecord(newValue, appendMode, maxRetries = 1000, re
                     return;
                 }
                 let recordKey = `${ch_id}_${_id}`;
-                if (appendMode === 0 && records[recordKey]) {
-                    records[recordKey] += newValue;
-                } else if (appendMode === 1) {
-                    records[recordKey] = newValue;
-                }
+                records[recordKey] = newValue;
                 await set("record", records);
-                console.log("来自workflow-main.js的输出: appendToRecord记录已更新: ", records);
-                // window.close();
+                console.log("来自workflow-main.js 的输出: appendToRecord记录已更新: ", records);
                 return;
             } finally {
                 localStorage.removeItem(lockKey);
@@ -252,4 +247,4 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-255-2025.05.19.054817
+// End-250-2025.05.19.101025
