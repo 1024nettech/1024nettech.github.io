@@ -232,6 +232,8 @@ function main() {
                 function fetchSystemCategoryInfo(channelId, bigId, subId, title) {
                     waitForElementOrCookie("cookie", function () {
                         sendRequest(`http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`, cookie, "GET", function (response) {
+                            console.log(bigId);
+                            console.log(subId);
                              console.log(response.responseText);
                             let dalei = extractCategoryName(response.responseText, bigId);
                            
