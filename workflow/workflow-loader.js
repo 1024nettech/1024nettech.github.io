@@ -133,12 +133,9 @@ let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.
 update();
 const url = location.href;
 let cookie = "";
-window.alert = function () { };
-const autorun = localStorage.getItem("autorun");
-if (url.includes("sc_product_list.php") && url.includes("&t=")) {
-    if (autorun) {
-        window.close();
-    }
+const autorun = Number(localStorage.getItem("autorun"));
+if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" && autorun) {
+    window.close();
 }
 document.addEventListener("DOMContentLoaded", function () {
     main();
@@ -152,7 +149,7 @@ function main() {
             loadFiles(urls, 1, 0);
             if (url.includes("mshop/?")) {
                 // 店铺首页
-                let fetchShopInfo = () => {
+                waitForElementOrCookie("#shop-info", function () {
                     let shopId = unsafeWindow.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
                     sendRequest(`http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`, cookie, "GET", function (response) {
                         let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
@@ -161,140 +158,75 @@ function main() {
                         if (response.responseText.includes("certified_info")) {
                             certifiedInfo = response.responseText.match(/https:\/\/aimg8.dlssyht.cn\/certified_info.*target/)[0].split("?")[0];
                         }
-                        waitForElementOrCookie("#shop-info", function () {
-                            if (certifiedInfo === "无") {
-                                $("#shop-cert a").text("无认证资料");
-                            } else {
-                                $("#shop-cert a").attr("href", certifiedInfo);
-                            }
-                        });
+                        if (certifiedInfo === "无") {
+                            $("#shop-cert a").text("无认证资料");
+                        } else {
+                            $("#shop-cert a").attr("href", certifiedInfo);
+                        }
                         sendRequest(`http://testpage.qipeiyigou.com/dom/shops/ajax_get_class.php?big_id=${bigId}&sub_id=${subId}`, document.cookie, "GET", function (response) {
-                            waitForElementOrCookie("#shop-info", function () {
-                                $("#shop-cat").attr("title", "查询完毕……");
-                                let big_shop_class = response.responseText.split("selected")[1].split("<")[0].replace(">|-", "");
-                                let sub_shop_class = response.responseText.split("selected")[2].split("<")[0].replace(">", "");
-                                $("#shop-cat").attr("title", `${big_shop_class}-${sub_shop_class}`);
-                            });
+                            $("#shop-cat").attr("title", "查询完毕……");
+                            let big_shop_class = response.responseText.split("selected")[1].split("<")[0].replace(">|-", "");
+                            let sub_shop_class = response.responseText.split("selected")[2].split("<")[0].replace(">", "");
+                            $("#shop-cat").attr("title", `${big_shop_class}-${sub_shop_class}`);
                         });
                     });
-                };
-                fetchShopInfo();
-            }
-else if (url.includes("mshop/product/item")) {
-    // 产品详情页
-    let channelNameMap = {};
-    
-    function fetchChannelNameMap() {
-        sendRequest("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php?username=qipeiyigouwang&ls_cur=112", document.cookie, "GET", function (response) {
-            let match = response.responseText.match(/ch_id=(\d+)[^>]*><span class="p-tit">([^<]+)<\/span>/g);
-            if (match) {
-                match.forEach(item => {
-                    let id = item.match(/ch_id=(\d+)/)[1];
-                    let name = item.match(/<span class="p-tit">([^<]+)<\/span>/)[1];
-                    channelNameMap[id] = name;
                 });
             }
-            console.log("channelNameMap: ", channelNameMap);
-            fetchProductInfo(proId, channelId, title);
-        });
-    }
-
-    function fetchProductInfo(proId, channelId, title) {
-        sendRequest(`http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`, document.cookie, "GET", function (response) {
-            if (response.responseText.includes(title)) {
-                let productProperties = extractProductProperties(response.responseText);
-                let exclusiveModels = extractExclusiveModels(response.responseText);
-                waitForElementOrCookie("#divx", function () {
-                    $("#span3").text(`产品性质：${productProperties}`);
-                    $("#span4").text(`专属车型：${exclusiveModels}`);
+            else if (url.includes("product/item/")) {
+                // 获取分类信息
+                waitForElementOrCookie("#shop-info", function () {
+                    let proId = url.split("/item/")[1].split("?")[0];
+                    let channelId = unsafeWindow.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
+                    let channelNameMap = {
+                        "15770577": "发动机系统",
+                        "15770578": "车身及驾驶室",
+                        "15770579": "汽修工具",
+                        "16435676": "美容养护",
+                        "16435678": "电子电器",
+                        "19365569": "底盘系统",
+                        "19366355": "液压系统",
+                        "19366356": "通用配件",
+                        "19366357": "新能源",
+                        "19366358": "车辆饰品"
+                    };
+                    let channelName = channelNameMap[channelId];
+                    GM_xmlhttpRequest({
+                        type: "GET",
+                        url: `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`,
+                        onload: function (response) {
+                            if (response.responseText.includes(title)) {
+                                // 获取产品性质和专属车型
+                                let productProperties = "";
+                                let exclusiveModels = "";
+                                let properties = response.responseText.split("产品性质")[1].split("tr")[0].split("checked=");
+                                for (let prop of properties) {
+                                    if (prop.includes("checked")) {
+                                        productProperties += prop.match(/[\u4e00-\u9fa5]+/) + "-";
+                                    }
+                                }
+                                productProperties = productProperties.slice(0, -1);
+                                exclusiveModels = response.responseText.split("专属车型")[1].split(`"checked"`)[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
+                                $("#span3").text(`产品性质：${productProperties}`);
+                                $("#span4").text(`专属车型：${exclusiveModels}`);
+                                // 获取系统分类id
+                                let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
+                                let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
+                                // 获取系统分类名
+                                GM_xmlhttpRequest({
+                                    type: "GET",
+                                    url: `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`,
+                                    onload: function (response) {
+                                        let dalei = response.responseText.split(`"${bigId}"` + `,"classname":`)[1].split(",")[0].split(`"`)[1];
+                                        let xiaolei = response.responseText.split(`"${subId}"` + `,"classname":`)[1].split(",")[0].split(`"`)[1];
+                                        $("#span2").text(`系统分类：${channelName}-${dalei}-${xiaolei}`);
+                                        $("#span1").text("查询完毕……");
+                                    }
+                                });
+                            }
+                        }
+                    });
                 });
-                console.log(response.responseText);
-                let { bigId, subId } = extractSystemCategories(response.responseText);
-                
-                if (bigId && subId) {
-                    console.log(bigId);
-                    console.log(subId);
-                    fetchSystemCategoryInfo(channelId, bigId, subId, title);
-                } else {
-                    console.error("bigId 或 subId 无法从响应中提取！");
-                }
             }
-        });
-    }
-
-    function extractProductProperties(responseText) {
-        let productProperties = "";
-        let properties = responseText.split("产品性质")[1].split("tr")[0].split("checked=");
-        for (let prop of properties) {
-            if (prop.includes("checked")) {
-                productProperties += prop.match(/[\u4e00-\u9fa5]+/) + "-";
-            }
-        }
-        return productProperties.slice(0, -1);
-    }
-
-    function extractExclusiveModels(responseText) {
-        return responseText.split("专属车型")[1].split(`"checked"`)[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
-    }
-
-    function extractSystemCategories(responseText) {
-        // 使用正则表达式提取 bigId 和 subId，避免直接使用 split，防止结构不一致
-        let bigIdMatch = responseText.match(/"big_id"\s*:\s*"(\d+)"/);
-        let subIdMatch = responseText.match(/"sub_id"\s*:\s*"(\d+)"/);
-
-        if (bigIdMatch && subIdMatch) {
-            return { bigId: bigIdMatch[1], subId: subIdMatch[1] };
-        } else {
-            console.error("未能从响应中提取 bigId 或 subId");
-            return {};
-        }
-    }
-
-    function fetchSystemCategoryInfo(channelId, bigId, subId, title) {
-        console.log(bigId);
-        console.log(subId);
-        waitForElementOrCookie("cookie", function () {
-            sendRequest(`http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`, cookie, "GET", function (response) {
-                let dalei = extractCategoryName(response.responseText, bigId);
-                let xiaolei = extractCategoryName(response.responseText, subId);
-                waitForElementOrCookie("#divx", function () {
-                    $("#span2").text(`系统分类：${channelNameMap[channelId]}-${dalei}-${xiaolei}`);
-                    $("#span1").text("查询完毕……");
-                });
-            });
-        });
-    }
-
-    function extractCategoryName(responseText, id) {
-        // 使用正则表达式提取分类名
-        let match = responseText.match(`"${id}", "classname":\\s*"([^"]+)"`);
-        if (match) {
-            return match[1];
-        } else {
-            console.error(`未能从响应中提取分类名 for id: ${id}`);
-            return "未知分类";
-        }
-    }
-
-    let title = `"` + $(".title:first").text() + `"`;
-    let proId = url.split("/item/")[1].split("?")[0];
-    let channelId = unsafeWindow.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
-    fetchChannelNameMap();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
         }
         if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
@@ -349,4 +281,4 @@ else if (url.includes("mshop/product/item")) {
         }
     }
 }
-// End-306-2025.05.19.114500
+// End-284-2025.05.19.162143
