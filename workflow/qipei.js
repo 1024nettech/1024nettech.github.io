@@ -189,4 +189,17 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-192-2025.05.19.110104
+function extractDataAsObject() {
+    // 手动提取商家中心的栏目{id:名称}
+    let items = document.querySelectorAll(".item-list li");
+    let dataObj = {};
+    items.forEach(item => {
+        let link = item.querySelector("a");
+        let chId = new URLSearchParams(link.search).get("ch_id");
+        let title = item.querySelector(".p-tit").textContent.trim();
+        dataObj[chId] = title;
+    });
+    console.log(dataObj);
+    return dataObj;
+}
+// End-205-2025.05.19.155451
