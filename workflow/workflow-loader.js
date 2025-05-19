@@ -1,8 +1,11 @@
 function sendRequest(url, cookie, method, doSuccess, formData = null) {
+    // 发送请求, formData为{k:v}键值对
     let options = {
         method: method,
         url: url,
-        headers: {},
+        headers: {
+            "Cookie": cookie
+        },
         onload: function (response) {
             if (response.status === 200) {
                 doSuccess(response);
@@ -14,25 +17,13 @@ function sendRequest(url, cookie, method, doSuccess, formData = null) {
             console.error("请求发生错误: ", error);
         }
     };
-
-    // 如果 cookie 非空，才添加到请求头中
-    if (cookie) {
-        options.headers["Cookie"] = cookie;
-    }
-
     if (method.toUpperCase() === "POST" && formData) {
         options.headers["Content-Type"] = "application/x-www-form-urlencoded";
         let urlEncodedData = new URLSearchParams(formData).toString();
         options.data = urlEncodedData;
     }
-
     GM_xmlhttpRequest(options);
 }
-
-
-
-
-
 function loadSucess(response) {
     // 加载成功后do
     let versionData = JSON.parse(response.responseText.trim());
@@ -143,8 +134,10 @@ update();
 const url = location.href;
 let cookie = "";
 const autorun = Number(localStorage.getItem("autorun"));
-if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" && autorun) {
-    window.close();
+if (autorun) {
+    if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
+        window.close();
+    }
 }
 document.addEventListener("DOMContentLoaded", function () {
     main();
@@ -184,7 +177,8 @@ function main() {
             else if (url.includes("product/item/")) {
                 // 获取分类信息
                 waitForElementOrCookie("#divx", function () {
-                    let title = `"${$(".title:first").text()}"`;
+                    let author = "-" + $(`meta[name="author"]`).attr("content");
+                    let proname = $("title").text().split(author)[0];
                     let proId = url.split("/item/")[1].split("?")[0];
                     let channelId = unsafeWindow.__NUXT__.data[`/api/product/item/${proId}?undefined`]["data"]["channelId"];
                     let channelNameMap = {
@@ -201,8 +195,16 @@ function main() {
                     };
                     let channelName = channelNameMap[channelId];
                     let req_url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
-                    sendRequest(req_url, "", "GET", function (response) {
-                        if (response.responseText.includes(title)) {
+                    sendRequest(req_url, document.cookie, "GET", function (response) {
+                        let regex = /<input[^>]+name="proname"[^>]+value="([^"]+)"/;
+                        let match = response.responseText.match(regex);
+                        if (match && match[1]) {
+                            let productName = match[1];
+                            console.log("提取的产品名称: " + productName);
+                        } else {
+                            console.log("未找到产品名称");
+                        }
+                        if (proname === productName) {
                             // 获取产品性质和专属车型
                             let productProperties = "";
                             let exclusiveModels = "";
@@ -221,7 +223,7 @@ function main() {
                             let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
                             // 获取系统分类名
                             req_url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
-                            sendRequest(req_url, "", "GET", function (response) {
+                            sendRequest(req_url, document.cookie, "GET", function (response) {
                                 let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 $("#span2").text(`系统分类：${channelName}-${one_class}-${two_class}`);
@@ -285,4 +287,4 @@ function main() {
         }
     }
 }
-// End-279-2025.05.19.210425
+// End-290-2025.05.19.221730
