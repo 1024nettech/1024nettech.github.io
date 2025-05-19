@@ -13,16 +13,8 @@ export function openProductsEdit() {
         window.close();
     }
 };
-export function getCheckedLabels() {
-    // 获取所有选中产品性质的父元素文本:产品发布页
-    let labelsText = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-        .map(checkbox => checkbox.closest("label").textContent.trim())
-        .join(", ");
-    console.log(labelsText);
-    return labelsText;
-}
-export function generateOriginRecord() {
-    // 获取修改产品性质前的原始记录:产品发布页
+export async function handleProductAction(checked_car, status = "") {
+    // 获取产品页面的相关数据，并进行记录操作
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
     let username = $(".welcome").text().trim().replace("欢迎您：", "");
@@ -30,37 +22,35 @@ export function generateOriginRecord() {
     let ch_id = urlParams.get("ch_id");
     let id = urlParams.get("id");
     let ch_name = $(".myColumnTit").text();
-    let origin_labels = getCheckedLabels();
-    let product_link = "http://testpage.qipeiyigou.com/qipeiyigouwang/products/" + id + ".html";
-    let origin_record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${origin_labels}\t`;
-    publics.appendToRecord(origin_record, 1);
-}
-export function generateNewRecord(status) {
-    // 获取修改产品性质后的最新记录:产品发布页
-    let new_labels = getCheckedLabels() + "\t" + status;
-    publics.appendToRecord(new_labels, 0);
-    if (status === "未处理") { window.close(); }
-}
-export function nodo() {
-    // 无需处理勾选
-    generateOriginRecord();
-    generateNewRecord("未处理");
-}
-export function yesdo(checked_car) {
-    // 需要处理勾选
-    let interval = setInterval(function () {
-        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-            clearInterval(interval);
-            generateOriginRecord();
-            $("input[type=checkbox][value=4]").prop("checked", false);
-            if (checked_car) {
-                $("input[type=checkbox][value=2]").prop("checked", true);
+    let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html`;
+    let record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t`;
+    let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+        .map(checkbox => checkbox.closest("label").textContent.trim())
+        .join(", ");
+    if (status === "未处理") {
+        record += `${labelsBefore}\t${labelsBefore}\t${status}`;
+        await publics.appendToRecord(record);
+        window.close();
+    } else {
+        let interval = setTimeout(async () => {
+            if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+                clearTimeout(interval);
+                $("input[type=checkbox][value=4]").prop("checked", false);
+                if (checked_car) {
+                    $("input[type=checkbox][value=2]").prop("checked", true);
+                }
+                let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                    .map(checkbox => checkbox.closest("label").textContent.trim())
+                    .join(", ");
+                record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+                await publics.appendToRecord(record);
+                $("title").text("完成");
+                $("#submit_msg a").click();
+            } else {
+                setTimeout(arguments.callee, 100);
             }
-            generateNewRecord("已处理");
-            $("title").text("完成");
-            $("#submit_msg a").click();
-        }
-    }, 1000);
+        }, 100);
+    }
 }
 export function open_close_shop_products() {
     // 店铺内打开或关闭产品
@@ -199,4 +189,4 @@ export function checkProduct() {
     }
     $("#tipx").text(`检查结果：${tip}`);
 };
-// End-202-2025.05.19.055321
+// End-192-2025.05.19.100247
