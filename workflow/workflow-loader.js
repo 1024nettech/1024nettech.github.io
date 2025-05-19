@@ -1,5 +1,7 @@
 function sendRequest(url, cookie, method, doSuccess, formData = null) {
-    // 发送请求, formData为{k:v}键值对
+    // 添加调试日志，输出请求的信息
+    console.log(`发送请求：${url}, 请求方法：${method}, cookie：${cookie}`);
+    
     let options = {
         method: method,
         url: url,
@@ -7,14 +9,15 @@ function sendRequest(url, cookie, method, doSuccess, formData = null) {
             "Cookie": cookie
         },
         onload: function (response) {
+            console.log(`响应状态码：${response.status}`);
             if (response.status === 200) {
                 doSuccess(response);
             } else {
-                console.error("请求失败, 状态码: " + response.status);
+                console.error("请求失败，状态码：" + response.status);
             }
         },
         onerror: function (error) {
-            console.error("请求发生错误: ", error);
+            console.error("请求发生错误：", error);
         }
     };
     if (method.toUpperCase() === "POST" && formData) {
@@ -24,6 +27,12 @@ function sendRequest(url, cookie, method, doSuccess, formData = null) {
     }
     GM_xmlhttpRequest(options);
 }
+
+
+
+
+
+
 function loadSucess(response) {
     // 加载成功后do
     let versionData = JSON.parse(response.responseText.trim());
