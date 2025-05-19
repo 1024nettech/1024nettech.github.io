@@ -201,7 +201,7 @@ function main() {
                     };
                     let channelName = channelNameMap[channelId];
                     let req_url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
-                    sendRequest(req_url, document.cookie, "GET", function (response) {
+                    sendRequest(req_url, "", "GET", function (response) {
                         if (response.responseText.includes(title)) {
                             // 获取产品性质和专属车型
                             let productProperties = "";
@@ -221,7 +221,7 @@ function main() {
                             let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
                             // 获取系统分类名
                             req_url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
-                            sendRequest(req_url, document.cookie, "GET", function (response) {
+                            sendRequest(req_url, "", "GET", function (response) {
                                 let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 $("#span2").text(`系统分类：${channelName}-${one_class}-${two_class}`);
