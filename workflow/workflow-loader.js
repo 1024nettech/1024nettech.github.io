@@ -133,6 +133,13 @@ let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.
 update();
 const url = location.href;
 let cookie = "";
+window.alert = function () { };
+const autorun = localStorage.getItem("autorun");
+if (url.includes("sc_product_list.php") && url.includes("&t=")) {
+    if (autorun) {
+        window.close();
+    }
+}
 document.addEventListener("DOMContentLoaded", function () {
     main();
 });
@@ -296,4 +303,4 @@ function main() {
         }
     }
 }
-// End-299-2025.05.19.052344
+// End-306-2025.05.19.114500
