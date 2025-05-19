@@ -99,7 +99,7 @@ function loadFiles(urls, status, isModule = false) {
     }
     loadNextFile(0);
 }
-function waitForElementOrCookie(selector, callback, interval = 100, maxAttempts = 100) {
+function waitForElementOrCookie(selector, callback, interval = 100, maxAttempts = 1000) {
     // 等待元素或cookie存在后执行
     let attempts = 0;
     let intervalId = setInterval(function () {
@@ -282,4 +282,4 @@ function main() {
         }
     }
 }
-// End-285-2025.05.19.163210
+// End-285-2025.05.19.163739
