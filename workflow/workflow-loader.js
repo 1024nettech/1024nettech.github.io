@@ -208,9 +208,12 @@ else if (url.includes("mshop/product/item")) {
                     $("#span3").text(`产品性质：${productProperties}`);
                     $("#span4").text(`专属车型：${exclusiveModels}`);
                 });
-                
+                console.log(response.responseText);
                 let { bigId, subId } = extractSystemCategories(response.responseText);
+                
                 if (bigId && subId) {
+                    console.log(bigId);
+                    console.log(subId);
                     fetchSystemCategoryInfo(channelId, bigId, subId, title);
                 } else {
                     console.error("bigId 或 subId 无法从响应中提取！");
@@ -248,6 +251,8 @@ else if (url.includes("mshop/product/item")) {
     }
 
     function fetchSystemCategoryInfo(channelId, bigId, subId, title) {
+        console.log(bigId);
+        console.log(subId);
         waitForElementOrCookie("cookie", function () {
             sendRequest(`http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`, cookie, "GET", function (response) {
                 let dalei = extractCategoryName(response.responseText, bigId);
