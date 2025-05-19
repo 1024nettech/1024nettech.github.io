@@ -191,8 +191,8 @@ function main() {
                         "19366358": "车辆饰品"
                     };
                     let channelName = channelNameMap[channelId];
-                    let url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
-                    sendRequest(url, document.cookie, "GET", function (response) {
+                    let req_url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
+                    sendRequest(req_url, document.cookie, "GET", function (response) {
                         if (response.responseText.includes(title)) {
                             // 获取产品性质和专属车型
                             let productProperties = "";
@@ -211,8 +211,8 @@ function main() {
                             let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
                             let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
                             // 获取系统分类名
-                            url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
-                            sendRequest(url, document.cookie, "GET", function (response) {
+                            req_url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
+                            sendRequest(req_url, document.cookie, "GET", function (response) {
                                 let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
                                 $("#span2").text(`系统分类：${channelName}-${one_class}-${two_class}`);
@@ -276,4 +276,4 @@ function main() {
         }
     }
 }
-// End-279-2025.05.19.200930
+// End-279-2025.05.19.210425
