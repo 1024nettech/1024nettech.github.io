@@ -57,6 +57,8 @@ async function main() {
                 $(".nav-link").click(() => {
                     $("#divx, #tipx").remove();
                 });
+                qipei.showKeyword();
+                qipei.checkProduct();
                 $(document).on("mouseenter", "body", function () {
                     if (!$(".main .v-x-scroll #tipx").length) {
                         publics.moveElement("#tipx", ".main .v-x-scroll");
@@ -185,4 +187,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-188-2025.05.19.203650
+// End-190-2025.05.19.204043
