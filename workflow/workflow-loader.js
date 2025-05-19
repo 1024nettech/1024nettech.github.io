@@ -1,5 +1,5 @@
 function sendRequest(url, cookie, method, doSuccess, formData = null) {
-    // 发送请求
+    // 发送请求, formData为{k:v}键值对
     let options = {
         method: method,
         url: url,
@@ -10,11 +10,11 @@ function sendRequest(url, cookie, method, doSuccess, formData = null) {
             if (response.status === 200) {
                 doSuccess(response);
             } else {
-                console.error("Request failed with status: " + response.status);
+                console.error("请求失败, 状态码: " + response.status);
             }
         },
         onerror: function (error) {
-            console.error("Request failed:", error);
+            console.error("请求发生错误: ", error);
         }
     };
     if (method.toUpperCase() === "POST" && formData) {
@@ -83,7 +83,7 @@ function loadFiles(urls, status, isModule = false) {
                     loadNextFile(index + 1);
                 };
                 link.onerror = function (error) {
-                    console.error(`CSS 加载失败: ${url}，错误信息: `, error);
+                    console.error(`CSS 加载失败: ${url}, 错误信息: `, error);
                     loadNextFile(index + 1);
                 };
                 console.log(`开始加载 CSS: ${url}`);
@@ -95,7 +95,7 @@ function loadFiles(urls, status, isModule = false) {
         }
     }
     function onFilesLoaded() {
-        console.log("所有文件加载完成！");
+        console.log("所有文件加载完成!");
     }
     loadNextFile(0);
 }
@@ -175,9 +175,9 @@ function main() {
             else if (url.includes("product/item/")) {
                 // 获取分类信息
                 waitForElementOrCookie("#divx", function () {
-                    let title = '"' + $(".title:first").text() + '"';
+                    let title = `"${$(".title:first").text()}"`;
                     let proId = url.split("/item/")[1].split("?")[0];
-                    let channelId = unsafeWindow.__NUXT__.data["/api/product/item/" + proId + "?undefined"]["data"]["channelId"];
+                    let channelId = unsafeWindow.__NUXT__.data[`/api/product/item/${proId}?undefined`]["data"]["channelId"];
                     let channelNameMap = {
                         "15770577": "发动机系统",
                         "15770578": "车身及驾驶室",
@@ -191,39 +191,33 @@ function main() {
                         "19366358": "车辆饰品"
                     };
                     let channelName = channelNameMap[channelId];
-                    GM_xmlhttpRequest({
-                        type: "GET",
-                        url: `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`,
-                        onload: function (response) {
-                            if (response.responseText.includes(title)) {
-                                // 获取产品性质和专属车型
-                                let productProperties = "";
-                                let exclusiveModels = "";
-                                let properties = response.responseText.split("产品性质")[1].split("tr")[0].split("checked=");
-                                for (let prop of properties) {
-                                    if (prop.includes("checked")) {
-                                        productProperties += prop.match(/[\u4e00-\u9fa5]+/) + "-";
-                                    }
+                    let url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
+                    sendRequest(url, document.cookie, "GET", function (response) {
+                        if (response.responseText.includes(title)) {
+                            // 获取产品性质和专属车型
+                            let productProperties = "";
+                            let exclusiveModels = "";
+                            let properties = response.responseText.split("产品性质")[1].split("tr")[0].split("checked=");
+                            for (let prop of properties) {
+                                if (prop.includes("checked")) {
+                                    productProperties += prop.match(/[\u4e00-\u9fa5]+/) + "-";
                                 }
-                                productProperties = productProperties.slice(0, -1);
-                                exclusiveModels = response.responseText.split("专属车型")[1].split(`"checked"`)[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
-                                $("#span3").text(`产品性质：${productProperties}`);
-                                $("#span4").text(`专属车型：${exclusiveModels}`);
-                                // 获取系统分类id
-                                let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
-                                let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
-                                // 获取系统分类名
-                                GM_xmlhttpRequest({
-                                    type: "GET",
-                                    url: `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`,
-                                    onload: function (response) {
-                                        let dalei = response.responseText.split(`"${bigId}"` + `,"classname":`)[1].split(",")[0].split(`"`)[1];
-                                        let xiaolei = response.responseText.split(`"${subId}"` + `,"classname":`)[1].split(",")[0].split(`"`)[1];
-                                        $("#span2").text(`系统分类：${channelName}-${dalei}-${xiaolei}`);
-                                        $("#span1").text("查询完毕……");
-                                    }
-                                });
                             }
+                            productProperties = productProperties.slice(0, -1);
+                            exclusiveModels = response.responseText.split("专属车型")[1].split(`"checked"`)[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
+                            $("#span3").text(`产品性质：${productProperties}`);
+                            $("#span4").text(`专属车型：${exclusiveModels}`);
+                            // 获取系统分类id
+                            let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
+                            let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
+                            // 获取系统分类名
+                            url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
+                            sendRequest(url, document.cookie, "GET", function (response) {
+                                let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
+                                let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
+                                $("#span2").text(`系统分类：${channelName}-${one_class}-${two_class}`);
+                                $("#span1").text("查询完毕……");
+                            });
                         }
                     });
                 });
@@ -231,7 +225,7 @@ function main() {
         }
         if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
-                let url = "http://admin.qipeiyigou.com/member_list.php?channel_id=0&is_frame=2";
+                let url = "http://admin.qipeiyigou.com/member_list.php";
                 let formData = {
                     "search_identity_id": 0,
                     "search_type": 0,
@@ -253,11 +247,11 @@ function main() {
                 }, formData);
             }
             function queryPassword(userId, cookie, doSuccess) {
-                let url = `http://admin.qipeiyigou.com/member_manage_detail.php?id=${userId}&is_frame=2&dom_id=18`;
+                let url = `http://admin.qipeiyigou.com/member_manage_detail.php?id=${userId}`;
                 sendRequest(url, cookie, "GET", function (response) {
                     let passwordMatch = response.responseText.match(/value="([^"]+)"/);
                     let password = passwordMatch ? passwordMatch[1] : null;
-                    console.log("成功获取到密码:", password);
+                    console.log("成功获取到密码: ", password);
                     if (password) {
                         doSuccess(password);
                     } else {
@@ -282,4 +276,4 @@ function main() {
         }
     }
 }
-// End-285-2025.05.19.164056
+// End-279-2025.05.19.200930
