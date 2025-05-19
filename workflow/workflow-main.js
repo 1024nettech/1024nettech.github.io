@@ -80,7 +80,7 @@ async function main() {
         if (autorun) {
             let chIds = [];
             $.ajax({
-                url: "http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php?username=qipeiyigouwang&ls_cur=112",
+                url: "http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php",
                 method: "GET",
                 success: function (response) {
                     let regex = /ch_id=(\d+)/g;
@@ -143,12 +143,6 @@ async function main() {
                 }
             }
         }
-        // 自动关闭提交后的栏目产品列表页
-        else if (url.includes("sc_product_list.php") && url.includes("&t=")) {
-            if (autorun) {
-                window.close();
-            }
-        }
     }
     else if (url.includes("https://detail.1688.com/offer/") && auth[2] === "1") {
         let html = `
@@ -191,4 +185,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-194-2025.05.19.102513
+// End-188-2025.05.19.203650
