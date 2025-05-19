@@ -196,10 +196,11 @@ function main() {
                     let channelName = channelNameMap[channelId];
                     let req_url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
                     sendRequest(req_url, document.cookie, "GET", function (response) {
+                        let productName = "";
                         let regex = /<input[^>]+name="proname"[^>]+value="([^"]+)"/;
                         let match = response.responseText.match(regex);
                         if (match && match[1]) {
-                            let productName = match[1];
+                            productName = match[1];
                             console.log("提取的产品名称: " + productName);
                         } else {
                             console.log("未找到产品名称");
@@ -287,4 +288,4 @@ function main() {
         }
     }
 }
-// End-290-2025.05.19.221730
+// End-291-2025.05.19.222327
