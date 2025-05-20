@@ -208,9 +208,19 @@ export async function fetchChIdsAndTitles(url) {
         if (!response.ok) {
             throw new Error(`请求失败, 状态码: ${response.status}`);
         }
+
+             
+
+
+
+        
         const responseText = await response.text();
+   const decoder = new TextDecoder('gbk');  // 这里使用 GBK 编码
+                const decodedText = decoder.decode(new TextEncoder().encode(responseText));
+
+        
         const parser = new DOMParser();
-        const doc = parser.parseFromString(responseText, "text/html");
+        const doc = parser.parseFromString(decodedText, "text/html");
         const listItems = doc.querySelectorAll(".item-list li");
         let chIdDict = {};
         listItems.forEach(item => {
