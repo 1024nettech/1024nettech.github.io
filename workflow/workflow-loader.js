@@ -1,6 +1,6 @@
 import * as publics from "./public.js"
-let autorun = Number(localStorage.getItem("autorun"));
-const url=location.href;
+const url = location.href;
+const autorun = Number(localStorage.getItem("autorun"));
 if (autorun) {
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
@@ -24,10 +24,10 @@ function loadSucess(response) {
         $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
     }
 }
-function update(version_url) {
+function update() {
     // 脚本更新
     publics.sendRequest(version_url, "", "GET", loadSucess);
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
-update(version_url);
-// End-32-2025.05.20.113537
+update();
+// End-33-2025.05.20.151039
