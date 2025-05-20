@@ -215,12 +215,11 @@ export async function fetchChIdsAndTitles(url) {
 
         
         const responseText = await response.text();
-   const decoder = new TextDecoder('gbk');  // 这里使用 GBK 编码
-                const decodedText = decoder.decode(new TextEncoder().encode(responseText));
+console.log(responseText);
 
         
         const parser = new DOMParser();
-        const doc = parser.parseFromString(decodedText, "text/html");
+        const doc = parser.parseFromString(responseText, "text/html");
         const listItems = doc.querySelectorAll(".item-list li");
         let chIdDict = {};
         listItems.forEach(item => {
