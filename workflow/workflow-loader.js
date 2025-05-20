@@ -1,4 +1,10 @@
 import * as publics from "./public.js"
+let autorun = Number(localStorage.getItem("autorun"));
+if (autorun) {
+    if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
+        window.close();
+    }
+}
 function loadSucess(response) {
     // 加载成功后do
     let versionData = publics.parseJson(response.responseText);
@@ -23,4 +29,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-26-2025.05.20.100042
+// End-32-2025.05.20.111818
