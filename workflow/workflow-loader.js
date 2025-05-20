@@ -1,5 +1,6 @@
 import * as publics from "./public.js"
 let autorun = Number(localStorage.getItem("autorun"));
+const url=location.href;
 if (autorun) {
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
