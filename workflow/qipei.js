@@ -209,30 +209,14 @@ export async function fetchChIdsAndTitles(url) {
             throw new Error(`请求失败, 状态码: ${response.status}`);
         }
 
-        // 获取响应头中的字符编码（默认是 UTF-8，但我们需要判断是否是 GB2312）
-        const contentType = response.headers.get("Content-Type");
-        let charset = "utf-8"; // 默认编码为 UTF-8
-
-        const charsetMatch = contentType?.match(/charset=([a-zA-Z0-9\-]+)/);
-        if (charsetMatch) {
-            charset = charsetMatch[1].toLowerCase();
-        }
-
         // 获取响应的字节流
         const arrayBuffer = await response.arrayBuffer();
 
-        // 如果编码是 GB2312，则手动解码
-        let decodedText = "";
-        if (charset === "gb2312") {
-            const decoder = new TextDecoder("gb2312");
-            decodedText = decoder.decode(arrayBuffer);
-        } else {
-            // 默认的解码方法，假设是 UTF-8
-            const decoder = new TextDecoder("utf-8");
-            decodedText = decoder.decode(arrayBuffer);
-        }
+        // 使用 TextDecoder 解码响应体，如果编码是 GBK
+        const decoder = new TextDecoder('gbk');
+        const decodedText = decoder.decode(arrayBuffer);
 
-        console.log(decodedText);  // 输出解码后的文本
+        console.log("xx"+decodedText);  // 输出解码后的文本
 
         // 正则表达式提取 ch_id 和标题
         const chIdDict = {};
