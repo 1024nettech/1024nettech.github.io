@@ -273,6 +273,28 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
+export async function downloadRecordAsXLSX(personName, fileName) {
+    // 使用 idb-keyval 获取记录对象, 下载为 xlsx 文件
+    let records = await get("record");
+    if (!records || Object.keys(records).length === 0) {
+        alert("没有找到可导出的数据！");
+        return;
+    }
+    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+    let data = [];
+    Object.keys(records).forEach(key => {
+        let recordValue = records[key];
+        let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
+        let recordFields = updatedRecord.split("\t");
+        data.push(recordFields);
+    });
+    data.unshift(headers);
+    let ws = XLSX.utils.aoa_to_sheet(data);
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
+    console.log("XLSX 文件已生成并开始下载");
+}
 export function parseJson(jsonString) {
     try {
         return JSON.parse(jsonString.trim());
@@ -281,4 +303,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-284-2025.05.20.155837
+// End-306-2025.05.20.210219
