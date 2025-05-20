@@ -87,8 +87,8 @@ async function main() {
                 let proId = url.split("/item/")[1].split("?")[0];
                 let channelId = window.__NUXT__.data[`/api/product/item/${proId}?undefined`]["data"]["channelId"];
                 let channelName = channelNameMap[channelId];
-                let url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
-                publics.sendRequest(url, document.cookie, "GET", function (response) {
+                let req_url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
+                publics.sendRequest(req_url, document.cookie, "GET", function (response) {
                     let productName = "";
                     let regex = /<input[^>]+name="proname"[^>]+value="([^"]+)"/;
                     let match = response.responseText.match(regex);
@@ -116,7 +116,7 @@ async function main() {
                         let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
                         let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
                         // 获取系统分类名
-                        url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
+                        req_url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
                         publics.sendRequest(req_url, cookie, "GET", function (response) {
                             let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                             let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
@@ -286,4 +286,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-289-2025.05.20.114911
+// End-289-2025.05.20.115255
