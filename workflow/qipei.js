@@ -209,27 +209,42 @@ export async function fetchChIdsAndTitles(url) {
             throw new Error(`请求失败, 状态码: ${response.status}`);
         }
 
-             
+        // 获取响应头中的字符编码（默认是 UTF-8，但我们需要判断是否是 GB2312）
+        const contentType = response.headers.get("Content-Type");
+        let charset = "utf-8"; // 默认编码为 UTF-8
 
+        const charsetMatch = contentType?.match(/charset=([a-zA-Z0-9\-]+)/);
+        if (charsetMatch) {
+            charset = charsetMatch[1].toLowerCase();
+        }
 
+        // 获取响应的字节流
+        const arrayBuffer = await response.arrayBuffer();
 
-        
-        const responseText = await response.text();
-console.log(responseText);
+        // 如果编码是 GB2312，则手动解码
+        let decodedText = "";
+        if (charset === "gb2312") {
+            const decoder = new TextDecoder("gb2312");
+            decodedText = decoder.decode(arrayBuffer);
+        } else {
+            // 默认的解码方法，假设是 UTF-8
+            const decoder = new TextDecoder("utf-8");
+            decodedText = decoder.decode(arrayBuffer);
+        }
 
-        
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(responseText, "text/html");
-        const listItems = doc.querySelectorAll(".item-list li");
-        let chIdDict = {};
-        listItems.forEach(item => {
-            const chIdMatch = item.querySelector("a")?.href.match(/ch_id=(\d+)/);
-            const title = item.querySelector(".p-tit")?.textContent.trim();
-            if (chIdMatch && title) {
-                const chId = chIdMatch[1];
-                chIdDict[chId] = title;
-            }
-        });
+        console.log(decodedText);  // 输出解码后的文本
+
+        // 正则表达式提取 ch_id 和标题
+        const chIdDict = {};
+        const regex = /<li>.*?<a href=".*?ch_id=(\d+).*?".*?>.*?<span class="p-tit">(.*?)<\/span>/g;
+
+        let match;
+        while ((match = regex.exec(decodedText)) !== null) {
+            const chId = match[1]; // 提取 ch_id
+            const title = match[2].trim(); // 提取标题并去除空格
+            chIdDict[chId] = title; // 将 ch_id 和标题存入字典
+        }
+
         console.log("提取到的 ch_id 和标题字典: ", chIdDict);
         return chIdDict;
     } catch (error) {
