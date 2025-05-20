@@ -47,9 +47,9 @@ export async function handleProductAction(checked_car, status = "") {
                 $("title").text("完成");
                 $("#submit_msg a").click();
             } else {
-                setTimeout(checkAndExecute, 100);
+                setTimeout(checkAndExecute, 1000);
             }
-        }, 100);
+        }, 1000);
     }
 }
 export function open_close_shop_products() {
