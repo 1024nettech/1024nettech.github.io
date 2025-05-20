@@ -243,6 +243,7 @@ async function main() {
         // 产品编辑页自动取消勾选并提交
         else if (url.includes("sc_product.php")) {
             if (autorun) {
+                window.alert = function () { };
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
@@ -310,4 +311,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-313-2025.05.20.174802
+// End-314-2025.05.21.045222
