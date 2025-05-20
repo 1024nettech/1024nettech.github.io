@@ -2,6 +2,44 @@ import * as admin from "./admin.js"
 import * as publics from "./public.js"
 import * as qipei from "./qipei.js"
 import * as ali from "./ali.js"
+
+
+
+
+// 外部文件中的 JavaScript
+window.GM_xmlhttpRequest({
+    method: "GET",
+    url: "https://qq.com", // 你可以更改为任何有效的 URL
+    onload: function(response) {
+        console.log("Response:0", response.responseText);
+    },
+    onerror: function(error) {
+        console.log("Error:0", error);
+    }
+});
+unsafeWindow.GM_xmlhttpRequest({
+    method: "GET",
+    url: "https://qq.com", // 你可以更改为任何有效的 URL
+    onload: function(response) {
+        console.log("Response:1", response.responseText);
+    },
+    onerror: function(error) {
+        console.log("Error:1", error);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function main() {
     const url = location.href;
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
