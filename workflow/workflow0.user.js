@@ -18,6 +18,7 @@
 
     // Your code here...
     localStorage.setItem("auth", "000");
+    unsafeWindow.GM_info = GM_info;
     unsafeWindow.GM_xmlhttpRequest = GM_xmlhttpRequest;
     let script = document.createElement("script");
     script.src = "https://1024nettech.github.io/workflow/workflow-loader.js?=" + Date.now();
@@ -40,4 +41,4 @@
         observer.observe(document, { childList: true, subtree: true });
     }
 })();
-// End-43-2025.05.20.093354
+// End-44-2025.05.20.131219
