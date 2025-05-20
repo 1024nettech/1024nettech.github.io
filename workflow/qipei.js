@@ -218,27 +218,33 @@ export async function fetchChIdsAndTitles(url) {
 
         console.log("xx" + decodedText);  // 输出解码后的文本
 
-        // 正则表达式提取 ch_id 和标题
+        // 解析 HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(decodedText, 'text/html');
+        
+        // 选择所有包含 ch_id 的 <a> 标签
+        const anchorElements = doc.querySelectorAll('a[href*="ch_id="]');
         const chIdDict = {};
-        // 使用简化的正则表达式，去掉多余的部分，逐步调试
-        const regex = /ch_id=(\d+).*?<span class="p-tit">\s*(.*?)\s*<\/span>/g;
 
-        let match;
-        let count = 0; // 计数匹配次数
-        while ((match = regex.exec(decodedText)) !== null) {
-            const chId = match[1]; // 提取 ch_id
-            const title = match[2].trim(); // 提取标题并去除空格
-            console.log("匹配到的 ch_id: ", chId, "标题: ", title);  // 输出匹配结果
-            chIdDict[chId] = title; // 将 ch_id 和标题存入字典
-            count++;
-        }
-
-        if (count === 0) {
-            console.log("没有匹配到任何项！");
-        }
+        // 遍历所有匹配的 <a> 标签
+        anchorElements.forEach(anchor => {
+            // 获取 URL 中的 ch_id 参数
+            const chIdMatch = anchor.href.match(/ch_id=(\d+)/);
+            if (chIdMatch) {
+                const chId = chIdMatch[1]; // 提取 ch_id
+                // 获取标题
+                const titleElement = anchor.querySelector('.p-tit');
+                const title = titleElement ? titleElement.textContent.trim() : '';
+                // 存入字典
+                if (title) {
+                    chIdDict[chId] = title;
+                }
+            }
+        });
 
         console.log("提取到的 ch_id 和标题字典: ", chIdDict);
         return chIdDict;
+
     } catch (error) {
         console.error("请求失败: " + error.message);
         return {};
