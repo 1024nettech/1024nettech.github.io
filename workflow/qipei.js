@@ -138,15 +138,20 @@ export function export_tsc() {
         }
         localStorage.setItem("autorun", autorun);
     });
+    let stored_name = localStorage.getItem("name");
+    if (stored_name) {
+        $("#nameInput").val(stored_name);
+    }
     $("#exportx").click(function () {
         let personName = $("#nameInput").val().trim();
         if (!personName) {
             alert("姓名不能为空！");
             return;
         }
+        localStorage.setItem("name", personName);
         let time = publics.generateTimestamp(1);
         let fileName = `${personName}-${time}`;
-        publics.downloadRecordAsTSV(personName, fileName);
+        publics.downloadRecordAsXLSX(personName, fileName);
     });
 }
 export function showKeyword() {
@@ -233,4 +238,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-236-2025.05.20.154738
+// End-241-2025.05.20.210512
