@@ -18,11 +18,11 @@ async function main() {
         console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
-        //let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
+        let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
 
 
 
-let channelNameMap = {
+let channelNameMap0 = {
     "15770577": "发动机系统",
     "15770578": "车身及驾驶室",
     "15770579": "汽修工具",
