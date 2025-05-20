@@ -263,7 +263,7 @@ export async function downloadRecordAsTSV(personName, fileName) {
     let tsvContent = "日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态\n";
     Object.keys(records).forEach(key => {
         let recordValue = records[key];
-        let updatedRecord = recordValue.replace(/xxpersonname/g, personName);
+        let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
         tsvContent += `${updatedRecord}\n`;
     });
     let blob = new Blob([tsvContent], { type: "text/tab-separated-values" });
@@ -281,4 +281,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-284-2025.05.20.095830
+// End-284-2025.05.20.155837
