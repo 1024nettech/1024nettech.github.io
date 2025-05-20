@@ -62,7 +62,7 @@ export function open_close_shop_products() {
         window.close();
     }
 }
-export function open_channel_product_list(chIds) {
+export async function open_channel_product_list(chIds) {
     // 打开所有包含产品的栏目管理列表页
     if (!Array.isArray(chIds) || chIds.length === 0) {
         console.log("chIds 不是有效的数组或为空");
@@ -228,4 +228,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-231-2025.05.20.101933
+// End-231-2025.05.20.102958
