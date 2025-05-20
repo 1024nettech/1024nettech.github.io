@@ -38,7 +38,7 @@ async function main() {
                     </div>
                     `;
                 $("body").append(html);
-                let shopId = unsafeWindow.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
+                let shopId = window.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
                 qipei.sendRequest(`http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`, cookie, "GET", function (response) {
                     let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
                     let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
@@ -85,7 +85,7 @@ async function main() {
                 let author = "-" + $(`meta[name="author"]`).attr("content");
                 let proname = $("title").text().split(author)[0];
                 let proId = url.split("/item/")[1].split("?")[0];
-                let channelId = unsafeWindow.__NUXT__.data[`/api/product/item/${proId}?undefined`]["data"]["channelId"];
+                let channelId = window.__NUXT__.data[`/api/product/item/${proId}?undefined`]["data"]["channelId"];
                 let channelName = channelNameMap[channelId];
                 let url = `http://testpage.qipeiyigou.com/dom/sc_product.php?ch_id=${channelId}&id=${proId}`;
                 qipei.sendRequest(url, document.cookie, "GET", function (response) {
@@ -286,4 +286,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-289-2025.05.20.114259
+// End-289-2025.05.20.114622
