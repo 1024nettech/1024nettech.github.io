@@ -2,6 +2,7 @@ import * as publics from "./public.js"
 const url = location.href;
 const autorun = Number(localStorage.getItem("autorun"));
 if (autorun) {
+    window.alert = function () { };
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
     }
@@ -32,4 +33,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-35-2025.05.20.211723
+// End-36-2025.05.21.050008
