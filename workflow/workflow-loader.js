@@ -23,10 +23,10 @@ function loadSucess(response) {
         $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
     }
 }
-function update() {
+function update(version_url) {
     // 脚本更新
     publics.sendRequest(version_url, "", "GET", loadSucess);
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
-update();
+update(version_url);
 // End-32-2025.05.20.113537
