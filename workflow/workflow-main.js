@@ -285,5 +285,5 @@ let interval = setInterval(function () {
     } else {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
-}, 100);
-// End-289-2025.05.20.152518
+}, 10);
+// End-289-2025.05.20.153810
