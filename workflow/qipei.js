@@ -220,14 +220,21 @@ export async function fetchChIdsAndTitles(url) {
 
         // 正则表达式提取 ch_id 和标题
         const chIdDict = {};
-        // 修改正则表达式，以匹配 <a> 标签中的 ch_id 和 <span class="p-tit"> 标签中的标题
-        const regex = /<a href=".*?ch_id=(\d+).*?">.*?<span class="p-tit">\s*(.*?)\s*<\/span>/g;
+        // 使用简化的正则表达式，去掉多余的部分，逐步调试
+        const regex = /ch_id=(\d+).*?<span class="p-tit">\s*(.*?)\s*<\/span>/g;
 
         let match;
+        let count = 0; // 计数匹配次数
         while ((match = regex.exec(decodedText)) !== null) {
             const chId = match[1]; // 提取 ch_id
             const title = match[2].trim(); // 提取标题并去除空格
+            console.log("匹配到的 ch_id: ", chId, "标题: ", title);  // 输出匹配结果
             chIdDict[chId] = title; // 将 ch_id 和标题存入字典
+            count++;
+        }
+
+        if (count === 0) {
+            console.log("没有匹配到任何项！");
         }
 
         console.log("提取到的 ch_id 和标题字典: ", chIdDict);
