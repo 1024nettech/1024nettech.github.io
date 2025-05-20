@@ -21,7 +21,30 @@ async function main() {
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
-            if (url.includes("admin.qipeiyigou.com")) { }
+            if (url.includes("admin.qipeiyigou.com")) {
+                // 管理后台功能
+                $(document).on("mouseenter", "div[id^='evMo_']", function () {
+                    let $this = $(this);
+                    $this.attr("title", `宽度: ${$this.css("width")}\n高度: ${$this.css("height")}\n左: ${$this.css("left")}\n上: ${$this.css("top")}`);
+                });
+                $(document).on("keyup", function (event) {
+                    switch (event.key) {
+                        case "F2":
+                            admin.setPosition();
+                            break;
+                    }
+                });
+            }
+            else if (url.includes("design-mode")) {
+                // 商铺设计图片模块获取src, 复制到剪贴板
+                $(document).on("keyup", function (event) {
+                    switch (event.key) {
+                        case "F2":
+                            admin.get_img_src();
+                            break;
+                    }
+                });
+            }
         }
         // 组长查店铺权限
         if (auth[1] === "1") {
@@ -69,9 +92,9 @@ async function main() {
                 let html = `
                     <div id="divx">
                         <span id="span1">查询中……</span><br>
-                        <span id="span2">系统分类：</span><br>
-                        <span id="span3">产品性质：</span><br>
-                        <span id="span4">专属车型：</span><br>
+                        <span id="span2">系统分类: </span><br>
+                        <span id="span3">产品性质: </span><br>
+                        <span id="span4">专属车型: </span><br>
                     </div>
                     <p id="tipx" style="display: none;">正在检查中……</p>
                     `;
@@ -110,8 +133,8 @@ async function main() {
                         }
                         productProperties = productProperties.slice(0, -1);
                         exclusiveModels = response.responseText.split("专属车型")[1].split(`"checked"`)[1].split("</label>")[0].match(/[\u4e00-\u9fa5]+/);
-                        $("#span3").text(`产品性质：${productProperties}`);
-                        $("#span4").text(`专属车型：${exclusiveModels}`);
+                        $("#span3").text(`产品性质: ${productProperties}`);
+                        $("#span4").text(`专属车型: ${exclusiveModels}`);
                         // 获取系统分类id
                         let bigId = response.responseText.split(`"big_id"`)[2].split(`"`)[1];
                         let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
@@ -120,7 +143,7 @@ async function main() {
                         publics.sendRequest(req_url, cookie, "GET", function (response) {
                             let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                             let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
-                            $("#span2").text(`系统分类：${channelName}-${one_class}-${two_class}`);
+                            $("#span2").text(`系统分类: ${channelName}-${one_class}-${two_class}`);
                             $("#span1").text("查询完毕……");
                         });
                     }
@@ -286,4 +309,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-289-2025.05.20.153810
+// End-312-2025.05.20.170648
