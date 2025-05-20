@@ -11,7 +11,7 @@ function loadSucess(response) {
     let userJsVersion = versionData["workflow.user.js"];
     let cookie = versionData["cookie"];
     localStorage.setItem("cookie", cookie);
-    if (userJsVersion === GM_info.script.version) {
+    if (userJsVersion === window.GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
         publics.loadFiles(urls, 1, 1);
@@ -29,4 +29,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-32-2025.05.20.111818
+// End-32-2025.05.20.113537
