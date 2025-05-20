@@ -117,7 +117,7 @@ export function export_tsc() {
     let html = `
         <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1746954291684901.png" id="toggleImg" />
         <input type="text" id="nameInput" placeholder="请输入姓名" />
-        <button id="exportx">导出数据为 TSV</button>
+        <button id="exportx">导出数据为 xlsx</button>
         `;
     $("body").append(html);
     let autorun = Number(localStorage.getItem("autorun"));
@@ -238,4 +238,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-241-2025.05.20.210512
+// End-241-2025.05.20.213020
