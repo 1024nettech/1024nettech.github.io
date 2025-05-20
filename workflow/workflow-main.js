@@ -26,7 +26,7 @@ async function main() {
         // 组长查店铺权限
         if (auth[1] === "1") {
             let urls = ["https://1024nettech.github.io/workflow/workflow-admin.css"];
-            qipei.loadFiles(urls, 1, 0);
+            publics.loadFiles(urls, 1, 0);
             if (url.includes("mshop/?")) {
                 // 店铺首页
                 let html = `
@@ -286,4 +286,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 100);
-// End-289-2025.05.20.111358
+// End-289-2025.05.20.114259
