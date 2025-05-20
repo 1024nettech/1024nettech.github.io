@@ -208,46 +208,29 @@ export async function fetchChIdsAndTitles(url) {
         if (!response.ok) {
             throw new Error(`请求失败, 状态码: ${response.status}`);
         }
-
-        // 获取响应的字节流
         const arrayBuffer = await response.arrayBuffer();
-
-        // 使用 TextDecoder 解码响应体，如果编码是 GBK
-        const decoder = new TextDecoder('gbk');
+        const decoder = new TextDecoder("gbk");
         const decodedText = decoder.decode(arrayBuffer);
-
-        console.log("xx" + decodedText);  // 输出解码后的文本
-
-        // 解析 HTML
         const parser = new DOMParser();
-        const doc = parser.parseFromString(decodedText, 'text/html');
-        
-        // 选择所有包含 ch_id 的 <a> 标签
-        const anchorElements = doc.querySelectorAll('a[href*="ch_id="]');
+        const doc = parser.parseFromString(decodedText, "text/html");
+        const anchorElements = doc.querySelectorAll(`a[href*="ch_id="]`);
         const chIdDict = {};
-
-        // 遍历所有匹配的 <a> 标签
         anchorElements.forEach(anchor => {
-            // 获取 URL 中的 ch_id 参数
             const chIdMatch = anchor.href.match(/ch_id=(\d+)/);
             if (chIdMatch) {
-                const chId = chIdMatch[1]; // 提取 ch_id
-                // 获取标题
-                const titleElement = anchor.querySelector('.p-tit');
-                const title = titleElement ? titleElement.textContent.trim() : '';
-                // 存入字典
+                const chId = chIdMatch[1];
+                const titleElement = anchor.querySelector(".p-tit");
+                const title = titleElement ? titleElement.textContent.trim() : "";
                 if (title) {
                     chIdDict[chId] = title;
                 }
             }
         });
-
         console.log("提取到的 ch_id 和标题字典: ", chIdDict);
         return chIdDict;
-
     } catch (error) {
         console.error("请求失败: " + error.message);
         return {};
     }
 }
-// End-231-2025.05.20.102958
+// End-236-2025.05.20.134808
