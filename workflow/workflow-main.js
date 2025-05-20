@@ -18,7 +18,27 @@ async function main() {
         console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
-        let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
+        //let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
+
+
+
+let channelNameMap = {
+    "15770577": "发动机系统",
+    "15770578": "车身及驾驶室",
+    "15770579": "汽修工具",
+    "16435676": "美容养护",
+    "16435678": "电子电器",
+    "19365569": "底盘系统",
+    "19366355": "液压系统",
+    "19366356": "通用配件",
+    "19366357": "新能源",
+    "19366358": "车辆饰品"
+}
+
+
+
+
+        
                 console.log(autorun);
         console.log(Object.keys(channelNameMap));
         // admin权限
@@ -199,7 +219,7 @@ async function main() {
         // 获取所有产品栏目id后打开有产品的产品管理页
 
         if (autorun) {
-            await qipei.open_channel_product_list(Object.keys(channelNameMap));
+            qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
         // 首页添加导出组件
         if (url === "http://testpage.qipeiyigou.com/") {
