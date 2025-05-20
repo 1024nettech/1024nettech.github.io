@@ -290,7 +290,7 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     });
     data.unshift(headers);
     let ws = XLSX.utils.aoa_to_sheet(data);
-    let colWidths = [100, 70, 150, 80, 80, 120, 580, 200, 200, 90];
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
