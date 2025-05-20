@@ -15,7 +15,7 @@ function loadSucess(response) {
     if (userJsVersion === window.GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
-        publics.loadFiles(urls, 1, 1);
+        publics.loadFiles(urls, 0, 1);
         if (location.href.includes("1688.com")) {
             urls = ["https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"];
             publics.loadFiles(urls, 0, 0);
@@ -30,4 +30,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-33-2025.05.20.151039
+// End-33-2025.05.20.153428
