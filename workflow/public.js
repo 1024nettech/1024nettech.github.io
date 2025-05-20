@@ -24,7 +24,7 @@ export function loadFiles(urls, status, isModule = false) {
                     loadNextFile(index + 1);
                 };
                 script.onerror = function (error) {
-                    console.error(`脚本加载失败: ${url}，错误信息: `, error);
+                    console.error(`脚本加载失败: ${url}, 错误信息: `, error);
                     loadNextFile(index + 1);
                 };
                 console.log(`开始加载脚本: ${url}`);
@@ -42,7 +42,7 @@ export function loadFiles(urls, status, isModule = false) {
                     loadNextFile(index + 1);
                 };
                 link.onerror = function (error) {
-                    console.error(`CSS 加载失败: ${url}，错误信息: `, error);
+                    console.error(`CSS 加载失败: ${url}, 错误信息: `, error);
                     loadNextFile(index + 1);
                 };
                 console.log(`开始加载 CSS: ${url}`);
@@ -76,13 +76,13 @@ export function generateTimestamp(format) {
 }
 export function sliceImage(canvas) {
     // html2canvas截图
-    // 如果是单图模式，不需要判断大小并切割
+    // 如果是单图模式, 不需要判断大小并切割
     let screenshotMode = localStorage.getItem("screenshotMode");
     if (screenshotMode === "单图模式") {
         let imgData = canvas.toDataURL("image/png");
         return [imgData];
     }
-    // 多图模式：检查图片是否大于5MB
+    // 多图模式: 检查图片是否大于5MB
     let imgData = canvas.toDataURL("image/png");
     let byteCharacters = atob(imgData.split(",")[1]);
     let byteArrays = [];
@@ -93,7 +93,7 @@ export function sliceImage(canvas) {
     if (blob.size > 5 * 1024 * 1024) {
         let height = canvas.height;
         let midHeight = Math.floor(height / 2);
-        // 如果图片大于5MB，切割为两部分
+        // 如果图片大于5MB, 切割为两部分
         let firstPartCanvas = document.createElement("canvas");
         let secondPartCanvas = document.createElement("canvas");
         firstPartCanvas.width = canvas.width;
@@ -225,7 +225,7 @@ export async function appendToRecord(newValue, maxRetries = 1000, retryInterval 
             await new Promise(resolve => setTimeout(resolve, retryInterval));
         }
     }
-    console.error("无法获取锁，已达到最大重试次数。请稍后再试……");
+    console.error("无法获取锁, 已达到最大重试次数, 请稍后再试……");
 }
 export async function downloadRecordAsTSV(personName, fileName) {
     // idb-keyval获取record 对象,下载为tsv文件
@@ -247,4 +247,12 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
-// End-250-2025.05.19.101025
+export function parseJson(jsonString) {
+    try {
+        return JSON.parse(jsonString.trim());
+    } catch (error) {
+        console.error("Failed to parse JSON: ", error);
+        return null;
+    }
+}
+// End-258-2025.05.20.093952
