@@ -290,6 +290,16 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     });
     data.unshift(headers);
     let ws = XLSX.utils.aoa_to_sheet(data);
+    let colWidths = headers.map((_, colIndex) => {
+        let maxLength = headers[colIndex].length;
+        data.forEach(row => {
+            if (row[colIndex] && row[colIndex].toString().length > maxLength) {
+                maxLength = row[colIndex].toString().length;
+            }
+        });
+        return { wpx: (maxLength + 2) * 10 };
+    });
+    ws['!cols'] = colWidths;
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
     XLSX.writeFile(wb, `${fileName}.xlsx`);
@@ -303,4 +313,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-306-2025.05.20.210219
+// End-316-2025.05.20.212735
