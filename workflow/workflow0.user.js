@@ -19,19 +19,19 @@
     // Your code here...
     localStorage.setItem("auth", "000");
     unsafeWindow.GM_xmlhttpRequest = GM_xmlhttpRequest;
-    let script = document.createElement('script');
+    let script = document.createElement("script");
     script.src = "https://1024nettech.github.io/workflow/workflow-loader.js?=" + Date.now();
-    script.type = "text/javascript";
+    script.type = "module";
     script.async = true;
     if (document.head) {
         document.head.appendChild(script);
-        console.log('来自主脚本输出: head 已经存在, 脚本已添加……');
+        console.log("来自主脚本输出: head 已经存在, 脚本已添加……");
     } else {
         let observer = new MutationObserver(function (mutationsList, observer) {
             for (let mutation of mutationsList) {
                 if (document.head) {
                     document.head.appendChild(script);
-                    console.log('来自observer输出: head 已经存在, 脚本已添加……');
+                    console.log("来自observer输出: head 已经存在, 脚本已添加……");
                     observer.disconnect();
                     break;
                 }
@@ -40,4 +40,4 @@
         observer.observe(document, { childList: true, subtree: true });
     }
 })();
-// End-43-2025.05.20.090558
+// End-43-2025.05.20.093354
