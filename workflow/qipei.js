@@ -17,7 +17,7 @@ export async function handleProductAction(checked_car, status = "") {
     // 获取产品页面的相关数据, 并进行记录操作
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
-    let username = $(".welcome").text().trim().replace("欢迎您：", "");
+    let username = await $(".welcome").text().trim().replace("欢迎您：", "");
     let urlParams = new URLSearchParams(new URL(url).search);
     let ch_id = urlParams.get("ch_id");
     let id = urlParams.get("id");
