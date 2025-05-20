@@ -216,11 +216,12 @@ export async function fetchChIdsAndTitles(url) {
         const decoder = new TextDecoder('gbk');
         const decodedText = decoder.decode(arrayBuffer);
 
-        console.log("xx"+decodedText);  // 输出解码后的文本
+        console.log("xx" + decodedText);  // 输出解码后的文本
 
         // 正则表达式提取 ch_id 和标题
         const chIdDict = {};
-        const regex = /<li>.*?<a href=".*?ch_id=(\d+).*?".*?>.*?<span class="p-tit">(.*?)<\/span>/g;
+        // 修改正则表达式，以匹配 <a> 标签中的 ch_id 和 <span class="p-tit"> 标签中的标题
+        const regex = /<a href=".*?ch_id=(\d+).*?">.*?<span class="p-tit">\s*(.*?)\s*<\/span>/g;
 
         let match;
         while ((match = regex.exec(decodedText)) !== null) {
