@@ -21,7 +21,17 @@ async function main() {
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
-            if (url.includes("admin.qipeiyigou.com")) {
+            if (url.includes("design-mode")) {
+                // 商铺设计图片模块获取src, 复制到剪贴板
+                $(document).on("keyup", function (event) {
+                    switch (event.key) {
+                        case "F2":
+                            admin.get_img_src();
+                            break;
+                    }
+                });
+            }
+            else {
                 // 管理后台功能
                 $(document).on("mouseenter", "div[id^='evMo_']", function () {
                     let $this = $(this);
@@ -31,16 +41,6 @@ async function main() {
                     switch (event.key) {
                         case "F2":
                             admin.setPosition();
-                            break;
-                    }
-                });
-            }
-            else if (url.includes("design-mode")) {
-                // 商铺设计图片模块获取src, 复制到剪贴板
-                $(document).on("keyup", function (event) {
-                    switch (event.key) {
-                        case "F2":
-                            admin.get_img_src();
                             break;
                     }
                 });
@@ -309,4 +309,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-312-2025.05.20.170648
+// End-312-2025.05.20.171756
