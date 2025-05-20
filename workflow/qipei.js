@@ -14,10 +14,10 @@ export function openProductsEdit() {
     }
 };
 export async function handleProductAction(checked_car, status = "") {
-    // 获取产品页面的相关数据，并进行记录操作
+    // 获取产品页面的相关数据, 并进行记录操作
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
-    let username = $(".welcome").text().trim().replace("欢迎您：", "");
+    let username = $(".welcome").text().trim().replace("欢迎您: ", "");
     let urlParams = new URLSearchParams(new URL(url).search);
     let ch_id = urlParams.get("ch_id");
     let id = urlParams.get("id");
@@ -70,7 +70,7 @@ export function open_channel_product_list(chIds) {
     }
     console.log("函数 open_channel_product_list 被调用\n频道 ID 列表:\n", chIds);
     if (url === "http://testpage.qipeiyigou.com/" || url === "http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang") {
-        console.log("URL 匹配，开始处理频道 ID 列表");
+        console.log("URL 匹配, 开始处理频道 ID 列表");
         let promises = chIds.map((id, index) => {
             return new Promise((resolve, reject) => {
                 let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
@@ -88,7 +88,7 @@ export function open_channel_product_list(chIds) {
                         });
                     },
                     error: function (xhr, status, error) {
-                        console.error(`请求失败，URL: ${productUrl}, 错误: ${error}`);
+                        console.error(`请求失败, URL: ${productUrl}, 错误: ${error}`);
                         resolve({ index: index, id: id, hasProducts: false, url: productUrl });
                     }
                 });
@@ -101,15 +101,15 @@ export function open_channel_product_list(chIds) {
                     console.log(`打开有产品的页面: ${result.url}`);
                     window.open(result.url, "_blank");
                 } else {
-                    console.log(`该频道没有产品，跳过: ${result.url}`);
+                    console.log(`该频道没有产品, 跳过: ${result.url}`);
                 }
             });
-            console.log("所有请求已完成，窗口按顺序打开");
+            console.log("所有请求已完成, 窗口按顺序打开");
         }).catch(error => {
             console.error("处理请求时发生错误:", error);
         });
     } else {
-        console.log("URL 不匹配，跳过处理");
+        console.log("URL 不匹配, 跳过处理");
     }
 }
 export function export_tsc() {
@@ -187,7 +187,7 @@ export function checkProduct() {
         $("#tipx").css("background-color", "red");
         alert(tip);
     }
-    $("#tipx").text(`检查结果：${tip}`);
+    $("#tipx").text(`检查结果: ${tip}`);
 };
 function extractDataAsObject() {
     // 手动提取商家中心的栏目{id:名称}
@@ -202,4 +202,30 @@ function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-205-2025.05.19.155451
+export async function fetchChIdsAndTitles(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`请求失败, 状态码: ${response.status}`);
+        }
+        const responseText = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(responseText, "text/html");
+        const listItems = doc.querySelectorAll(".item-list li");
+        let chIdDict = {};
+        listItems.forEach(item => {
+            const chIdMatch = item.querySelector("a")?.href.match(/ch_id=(\d+)/);
+            const title = item.querySelector(".p-tit")?.textContent.trim();
+            if (chIdMatch && title) {
+                const chId = chIdMatch[1];
+                chIdDict[chId] = title;
+            }
+        });
+        console.log("提取到的 ch_id 和标题字典: ", chIdDict);
+        return chIdDict;
+    } catch (error) {
+        console.error("请求失败: " + error.message);
+        return {};
+    }
+}
+// End-231-2025.05.20.101933
