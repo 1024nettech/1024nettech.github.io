@@ -1,5 +1,31 @@
 import { set, get, del, keys } from "./idb-keyval.js";
 const url = location.href;
+export function sendRequest(url, cookie, method, doSuccess, formData = null) {
+    // 发送请求, formData为{k:v}键值对
+    let options = {
+        method: method,
+        url: url,
+        headers: {
+            "Cookie": cookie
+        },
+        onload: function (response) {
+            if (response.status === 200) {
+                doSuccess(response);
+            } else {
+                console.error("请求失败, 状态码: " + response.status);
+            }
+        },
+        onerror: function (error) {
+            console.error("请求发生错误: ", error);
+        }
+    };
+    if (method.toUpperCase() === "POST" && formData) {
+        options.headers["Content-Type"] = "application/x-www-form-urlencoded";
+        let urlEncodedData = new URLSearchParams(formData).toString();
+        options.data = urlEncodedData;
+    }
+    window.GM_xmlhttpRequest(options);
+}
 export function loadFiles(urls, status, isModule = false) {
     // 动态加载外部文件(JS/CSS)
     if (status === 1) {
@@ -255,4 +281,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-258-2025.05.20.093952
+// End-284-2025.05.20.095830
