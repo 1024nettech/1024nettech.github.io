@@ -121,6 +121,7 @@ export function export_tsc() {
         <button id="exportx">导出数据为 xlsx</button>
         `;
     $("body").append(html);
+    if (url.includes("denglu.php")) { $("#toggleImg").css("display", "none"); }
     let autorun = Number(localStorage.getItem("autorun"));
     if (autorun) {
         $("#toggleImg").attr("src", "https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1746954291684901.png");
@@ -252,4 +253,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-255-2025.05.21.092157
+// End-256-2025.05.21.093159
