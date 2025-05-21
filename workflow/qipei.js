@@ -149,6 +149,7 @@ export function export_tsc() {
         let first_stored_username = stored_usernames.split(" ")[0];
         $("#commonName").val(first_stored_username);
         $("#commonName").focus();
+        $("#commonYzm").focus();
         $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
     }
     $("#exportx").click(function () {
@@ -168,6 +169,7 @@ export function export_tsc() {
         localStorage.setItem("usernames", usernames);
         $("#commonName").val(first_username);
         $("#commonName").focus();
+        $("#commonYzm").focus();
         $("#usernameInput").val(`当前用户名: ${first_username}`);
     });
 }
@@ -255,4 +257,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-258-2025.05.21.094002
+// End-260-2025.05.21.101252
