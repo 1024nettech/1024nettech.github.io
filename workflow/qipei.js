@@ -117,7 +117,7 @@ export function export_tsc() {
     let html = `
         <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1746954291684901.png" id="toggleImg" />
         <input type="text" id="nameInput" placeholder="请输入姓名" />
-        <input type="text" id="usernameInput" placeholder="当前用户名: ">
+        <input type="text" id="usernameInput" value="当前用户名: ">
         <button id="exportx">导出数据为 xlsx</button>
         `;
     $("body").append(html);
@@ -239,4 +239,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-242-2025.05.21.083006
+// End-242-2025.05.21.083450
