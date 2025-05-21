@@ -222,8 +222,8 @@ async function main() {
         if (autorun) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
-        // 首页添加导出组件
-        if (url === "http://testpage.qipeiyigou.com/") {
+        // 首页和登录页面添加导出组件
+        if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
             qipei.export_tsc();
         }
         // 退出后自动跳转登录页
@@ -311,4 +311,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-314-2025.05.21.045222
+// End-314-2025.05.21.085829
