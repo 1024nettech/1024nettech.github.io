@@ -112,6 +112,14 @@ export async function open_channel_product_list(chIds) {
         console.log("URL 不匹配, 跳过处理");
     }
 }
+export function checkFocusAndRedirect() {
+    // 焦点到验证码输入框
+    if (!$("#commonName").is(":focus")) {
+        setTimeout(function () {
+            $("#commonYzm").focus();
+        }, 200);
+    }
+}
 export function export_tsc() {
     // 首页导出数据组件
     let html = `
@@ -149,8 +157,8 @@ export function export_tsc() {
         let first_stored_username = stored_usernames.split(" ")[0];
         $("#commonName").val(first_stored_username);
         $("#commonName").focus();
-        $("#commonName").prop('disabled', true);
-        setTimeout(() => { $("#commonYzm").focus(); }, 200);
+        $("#commonName").prop("disabled", true);
+        checkFocusAndRedirect();
         $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
     }
     $("#exportx").click(function () {
@@ -164,8 +172,8 @@ export function export_tsc() {
         let fileName = `${personName}-${time}`;
         publics.downloadRecordAsXLSX(personName, fileName);
     });
-    $('#usernameInput').blur(function () {
-        let usernames = $('#usernameInput').val().trim();
+    $("#usernameInput").blur(function () {
+        let usernames = $("#usernameInput").val().trim();
         if (usernames.includes("当前用户名:")) {
             usernames = usernames.split("当前用户名:")[1].trim();
         }
@@ -173,8 +181,8 @@ export function export_tsc() {
         localStorage.setItem("usernames", usernames);
         $("#commonName").val(first_username);
         $("#commonName").focus();
-        $("#commonName").prop('disabled', true);
-        setTimeout(() => { $("#commonYzm").focus(); }, 200);
+        $("#commonName").prop("disabled", true);
+        checkFocusAndRedirect();
         $("#usernameInput").val(`当前用户名: ${first_username}`);
     });
 }
@@ -262,4 +270,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-265-2025.05.21.124747
+// End-273-2025.05.21.132635
