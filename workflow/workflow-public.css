@@ -73,7 +73,7 @@
     color-scheme: light;
     cursor: pointer;
     overflow: hidden;
-    margin-top: 26px;
+    margin-top: 25px !important;
     top: 0;
     right: 0;
     bottom: 0;
@@ -81,4 +81,4 @@
 }
 
 /*——————————————————————————————————————————————————draw.io绘图 End——————————————————————————————————————————————————*/
-/* End-84-2025.05.22.040108 */
+/* End-84-2025.05.22.041054 */
