@@ -215,7 +215,7 @@ async function main() {
             let rightpassword = localStorage.getItem("rightpassword");
             if (!rightpassword) { $("#commonPassword").val("111111"); }
             else { $("#commonPassword").val(rightpassword); }
-            $("#commonPassword").focus();
+            setTimeout(() => { $("#commonPassword").focus(); }, 100);
             setTimeout(() => { $("#commonYzm").focus(); }, 200);
             $(".web-user-pass i").click(() => {
                 let username = $("#commonName").val().trim();
@@ -331,4 +331,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-334-2025.05.21.125700
+// End-334-2025.05.21.130518
