@@ -228,9 +228,10 @@ async function main() {
                 }
                 else {
                     queryUserId(username, cookie, function (password) {
-                        console.log("最终获取到的密码:", password);
+                        console.log("最终获取到的密码: ", password);
                         $("#commonName").val(username);
                         $("#commonPassword").val(password);
+                        localStorage.setItem("rightpassword", password);
                         setTimeout(() => { $("#commonYzm").focus(); }, 200);
                         $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                     });
@@ -330,4 +331,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-333-2025.05.21.124509
+// End-334-2025.05.21.125700
