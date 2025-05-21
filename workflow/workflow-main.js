@@ -216,14 +216,14 @@ async function main() {
             if (!rightpassword) { $("#commonPassword").val("111111"); }
             else { $("#commonPassword").val(rightpassword); }
             $("#commonPassword").focus();
-            checkFocusAndRedirect();
+            qipei.checkFocusAndRedirect();
             $(".web-user-pass i").click(() => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
                 if (rightpassword) {
                     $("#commonPassword").val(rightpassword);
-                    checkFocusAndRedirect();
+                    qipei.checkFocusAndRedirect();
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                 }
                 else {
@@ -232,7 +232,7 @@ async function main() {
                         $("#commonName").val(username);
                         $("#commonPassword").val(password);
                         localStorage.setItem("rightpassword", password);
-                        checkFocusAndRedirect();
+                        qipei.checkFocusAndRedirect();
                         $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                     });
                 }
@@ -331,4 +331,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-334-2025.05.21.133022
+// End-334-2025.05.21.133639
