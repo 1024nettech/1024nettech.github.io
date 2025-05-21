@@ -167,6 +167,13 @@ async function main() {
             });
         }
         // 公共权限
+        $("a:contains(退出)").mousedown(() => {
+            if (autorun) {
+                let usernames = localStorage.getItem("usernames").split(" ");
+                usernames.shift();
+                localStorage.setItem("usernames", usernames.join(" "));
+            }
+        });
         //登录页自动填充密码
         if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
@@ -311,4 +318,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-314-2025.05.21.085829
+// End-321-2025.05.21.095019
