@@ -170,7 +170,7 @@ export function moveElement(selector1, selector2) {
 }
 export function clearExceptAuth() {
     // 清除localStorage,保留列表里的键值
-    let keepKeys = ["auth", "autorun", "date", "screenshotMode"];
+    let keepKeys = ["auth", "autorun", "date", "screenshotMode", "name", "usernames"];
     for (let key in localStorage) {
         if (!keepKeys.includes(key)) {
             localStorage.removeItem(key);
@@ -305,4 +305,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-308-2025.05.20.214807
+// End-308-2025.05.21.091624
