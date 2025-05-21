@@ -213,6 +213,7 @@ async function main() {
             }
             $("#commonPassword").val("111111");
             $("#commonPassword").focus();
+            setTimeout(() => { $("#commonYzm").focus(); }, 200);
             $("#commonYzm").focus();
             $(".web-user-pass i").click(() => {
                 let username = $("#commonName").val().trim();
@@ -222,6 +223,7 @@ async function main() {
                     console.log("最终获取到的密码:", password);
                     $("#commonName").val(username);
                     $("#commonPassword").val(password);
+                    setTimeout(() => { $("#commonYzm").focus(); }, 200);
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                 });
             });
@@ -319,4 +321,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-322-2025.05.21.100711
+// End-324-2025.05.21.102302
