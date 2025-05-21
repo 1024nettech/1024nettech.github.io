@@ -161,7 +161,7 @@ export function export_tsc() {
         let first_username = usernames.split(" ")[0];
         localStorage.setItem("usernames", usernames);
         $("#commonName").val(first_username);
-        $("#usernameInput").val(first_username);
+        $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
     });
 }
 export function showKeyword() {
@@ -248,4 +248,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-251-2025.05.21.085249
+// End-251-2025.05.21.090035
