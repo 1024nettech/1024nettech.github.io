@@ -139,6 +139,10 @@ export function export_tsc() {
         }
         localStorage.setItem("autorun", autorun);
     });
+    let stored_personname = localStorage.getItem("name");
+    if (stored_personname) {
+        $("#nameInput").val(stored_personname);
+    }
     let stored_usernames = localStorage.getItem("usernames");
     if (stored_usernames) {
         let first_stored_username = stored_usernames.split(" ")[0];
@@ -147,11 +151,11 @@ export function export_tsc() {
     }
     $("#exportx").click(function () {
         let personName = $("#nameInput").val().trim();
+        localStorage.setItem("name", personName);
         if (!personName) {
             alert("姓名不能为空！");
             return;
         }
-        localStorage.setItem("name", personName);
         let time = publics.generateTimestamp(1);
         let fileName = `${personName}-${time}`;
         publics.downloadRecordAsXLSX(personName, fileName);
@@ -248,4 +252,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-251-2025.05.21.090322
+// End-255-2025.05.21.092157
