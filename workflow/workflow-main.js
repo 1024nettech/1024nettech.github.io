@@ -172,6 +172,7 @@ async function main() {
                 let usernames = localStorage.getItem("usernames").split(" ");
                 usernames.shift();
                 localStorage.setItem("usernames", usernames.join(" "));
+                localStorage.setItem("rightpassword", "");
             }
         });
         //登录页自动填充密码
@@ -211,21 +212,29 @@ async function main() {
                     }
                 });
             }
-            $("#commonPassword").val("111111");
+            let rightpassword = localStorage.getItem("rightpassword");
+            if (!rightpassword) { $("#commonPassword").val("111111"); }
+            else { $("#commonPassword").val(rightpassword); }
             $("#commonPassword").focus();
             setTimeout(() => { $("#commonYzm").focus(); }, 200);
-            $("#commonYzm").focus();
             $(".web-user-pass i").click(() => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
-                queryUserId(username, cookie, function (password) {
-                    console.log("最终获取到的密码:", password);
-                    $("#commonName").val(username);
-                    $("#commonPassword").val(password);
+                if (rightpassword) {
+                    $("#commonPassword").val(rightpassword);
                     setTimeout(() => { $("#commonYzm").focus(); }, 200);
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
-                });
+                }
+                else {
+                    queryUserId(username, cookie, function (password) {
+                        console.log("最终获取到的密码:", password);
+                        $("#commonName").val(username);
+                        $("#commonPassword").val(password);
+                        setTimeout(() => { $("#commonYzm").focus(); }, 200);
+                        $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
+                    });
+                }
             });
         }
         // 获取所有产品栏目id后打开有产品的产品管理页
@@ -321,4 +330,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-324-2025.05.21.102302
+// End-333-2025.05.21.124509
