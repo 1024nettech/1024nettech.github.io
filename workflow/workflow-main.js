@@ -213,6 +213,7 @@ async function main() {
             }
             $("#commonPassword").val("111111");
             $("#commonPassword").focus();
+            $("#commonYzm").focus();
             $(".web-user-pass i").click(() => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
@@ -318,4 +319,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-321-2025.05.21.095019
+// End-322-2025.05.21.100711
