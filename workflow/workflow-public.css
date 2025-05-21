@@ -65,10 +65,10 @@
 /*——————————————————————————————————————————————————1688 End——————————————————————————————————————————————————*/
 /*——————————————————————————————————————————————————draw.io绘图 Start——————————————————————————————————————————————————*/
 .mxgraph {
-    width: calc(100vw - 2px);
-    height: calc(100vh - 28px);
+    width: calc(100vw - 2px) !important;
+    height: calc(100vh - 28px) !important;
     border: 1px solid transparent;
-    position: fixed;
+    position: fixed !important;
     touch-action: none;
     color-scheme: light;
     cursor: pointer;
