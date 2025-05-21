@@ -2,6 +2,7 @@
 /*首页导出*/
 #toggleImg,
 #nameInput,
+#usernameInput,
 #exportx {
     position: fixed;
     z-index: 10000;
@@ -19,6 +20,13 @@
     top: 59px;
     right: 155px;
     width: 100px;
+    height: 37px;
+}
+
+#usernameInput {
+    right: 20px;
+    top: 110px;
+    width: 235px;
     height: 37px;
 }
 
@@ -53,4 +61,4 @@
 }
 
 /*——————————————————————————————————————————————————1688 End——————————————————————————————————————————————————*/
-/* End-56-2025.05.21.080624 */
+/* End-64-2025.05.21.082643 */
