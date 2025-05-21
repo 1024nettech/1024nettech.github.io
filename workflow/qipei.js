@@ -165,6 +165,9 @@ export function export_tsc() {
     });
     $('#usernameInput').blur(function () {
         let usernames = $('#usernameInput').val().trim();
+        if (usernames.includes("当前用户名:")) {
+            usernames = usernames.split("当前用户名:")[1].trim();
+        }
         let first_username = usernames.split(" ")[0];
         localStorage.setItem("usernames", usernames);
         $("#commonName").val(first_username);
@@ -257,4 +260,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-260-2025.05.21.101851
+// End-263-2025.05.21.112021
