@@ -139,9 +139,11 @@ export function export_tsc() {
         }
         localStorage.setItem("autorun", autorun);
     });
-    let stored_name = localStorage.getItem("name");
-    if (stored_name) {
-        $("#nameInput").val(stored_name);
+    let stored_usernames = localStorage.getItem("usernames");
+    if (stored_usernames) {
+        let first_stored_username = stored_usernames.split(" ")[0];
+        $("#commonName").val(first_stored_username);
+        $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
     }
     $("#exportx").click(function () {
         let personName = $("#nameInput").val().trim();
@@ -153,6 +155,13 @@ export function export_tsc() {
         let time = publics.generateTimestamp(1);
         let fileName = `${personName}-${time}`;
         publics.downloadRecordAsXLSX(personName, fileName);
+    });
+    $('#usernameInput').blur(function () {
+        let usernames = $('#usernameInput').val().trim();
+        let first_username = usernames.split(" ")[0];
+        localStorage.setItem("usernames", usernames);
+        $("#commonName").val(first_username);
+        $("#usernameInput").val(first_username);
     });
 }
 export function showKeyword() {
@@ -239,4 +248,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-242-2025.05.21.083450
+// End-251-2025.05.21.085249
