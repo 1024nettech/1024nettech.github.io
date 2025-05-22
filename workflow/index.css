@@ -1,0 +1,12 @@
+.download,
+#salary_calc a,
+div[id^="xlsx"] a {
+    display: inline-block;
+    background-color: #325cea;
+    font-size: 16px;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
