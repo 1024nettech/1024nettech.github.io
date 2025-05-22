@@ -172,7 +172,7 @@ export function export_tsc() {
         let fileName = `${personName}-${time}`;
         publics.downloadRecordAsXLSX(personName, fileName);
     });
-    $("#usernameInput").blur(function () {
+    $("#usernameInput").on("input", function () {
         let usernames = $("#usernameInput").val().trim();
         if (usernames.includes("当前用户名:")) {
             usernames = usernames.split("当前用户名:")[1].trim();
@@ -270,4 +270,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-273-2025.05.21.132635
+// End-273-2025.05.22.114256
