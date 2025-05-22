@@ -16,7 +16,7 @@ div[id^="xlsx"] {
 }
 
 div[id^="xlsx"] input {
-    height: 40px;
+    height: 46px;
 }
 
 #xlsx_template_1 input {
