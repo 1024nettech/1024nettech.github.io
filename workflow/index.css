@@ -8,5 +8,19 @@ div[id^="xlsx"] a {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 5px;
-    margin: 10px 0;
+    margin: 10px 10px;
 }
+
+div[id^="xlsx"] {
+    display: inline-block;
+}
+
+div[id^="xlsx"] input {
+    height: 40px;
+}
+
+#xlsx_template_1 input {
+    width: 500px;
+}
+
+/* End-25-2025.05.22.152442 */
