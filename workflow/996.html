@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Excel Template</title>
+</head>
+<body>
+
+  <!-- 按钮触发生成 Excel 文件 -->
+  <button onclick="generateExcel()">点击生成并下载 Excel 模板</button>
+
+  <script>
+    function generateExcel() {
+      // 可以通过某种方式（如调用后端 API）触发 GitHub Actions 生成 Excel 文件
+      alert("正在生成 Excel 文件，请稍候...");
+      
+      // 这里是示例，实际的生成触发可能需要通过后端 API 或 GitHub Actions 来实现
+      window.location.href = "https://your-username.github.io/your-repository-name/generated_template.xlsx";
+    }
+  </script>
+
+</body>
+</html>
