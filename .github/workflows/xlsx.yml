@@ -26,7 +26,7 @@ jobs:
 
     - name: Generate Excel file
       run: |
-        python generate_xlsx.py
+        python generate_xlsx.py   # 运行生成 Excel 文件的脚本
 
     - name: Commit and push generated file
       run: |
