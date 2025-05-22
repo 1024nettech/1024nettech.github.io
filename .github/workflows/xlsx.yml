@@ -1,10 +1,12 @@
 name: Generate Excel File
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_dispatch:  # 允许手动触发
+    inputs:
+      file_name:
+        description: 'Name of the Excel file'
+        required: true
+        default: 'generated_template.xlsx'
 
 jobs:
   generate_xlsx:
@@ -26,7 +28,7 @@ jobs:
 
     - name: Generate Excel file
       run: |
-        python generate_xlsx.py   # 运行生成 Excel 文件的脚本
+        python generate_xlsx.py --file-name ${{ github.event.inputs.file_name }}
 
     - name: Commit and push generated file
       run: |
