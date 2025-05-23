@@ -13,8 +13,10 @@ async function loadSucess(response) {
     let userJsVersion = versionData["workflow.user.js"];
     if (userJsVersion === window.GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
-        let urls1 = ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js", "https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
+        let urls1 = ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"];
         await publics.loadFiles(urls1, 0, 0);
+        let urls0 = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
+        setTimeout(() => { publics.loadFiles(urls0, 1, 1); }, 1000);
         // let urls0 = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
         // await publics.loadFiles(urls0, 0, 1);
         if (location.href.includes("1688.com")) {
