@@ -12,13 +12,17 @@ export async function openProductsEdit() {
     let page = location.href.split("&page=")[1];
 
     // 查找所有文本为 "编辑" 的 a 标签
-    $("a").filter(function () {
+    let editLinks = $("a").filter(function () {
         return $(this).text().trim() === "编辑";
-    }).each(async function (index) {
-        let href = $(this).attr("href");
+    });
+
+    // 使用 for...of 循环确保每个异步操作完成后再执行下一个
+    for (let index = 0; index < editLinks.length; index++) {
+        let link = editLinks[index];
+        let href = $(link).attr("href");
 
         // 使用正则从 URL 中提取产品 ID
-        let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id= 后面的数字
+        let proidMatch = href.match(/&id=(\d+)/);  // 正则匹配 &id= 后面的数字
         let proid = proidMatch ? proidMatch[1] : null;  // 提取 id 值
 
         if (proid) {
@@ -38,7 +42,7 @@ export async function openProductsEdit() {
             // 打开每个编辑链接并加上分页信息
             window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
         }
-    });
+    }
 
     // 如果存在下一页，跳转到下一页；否则关闭当前窗口
     if ($(".page-next").length) {
