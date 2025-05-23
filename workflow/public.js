@@ -300,11 +300,71 @@ export async function downloadRecordAsTSV(personName, fileName) {
 //     console.log("XLSX 文件已生成并开始下载");
 // }
 
+// export async function downloadRecordAsXLSX(personName, fileName) {
+//     // 直接遍历所有 keys
+//     const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
+
+//     // 如果没有记录，提示并返回
+//     if (stored_keys.length === 0) {
+//         alert("没有找到可导出的数据！");
+//         return;
+//     }
+
+//     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+//     let data = [];
+
+//     // 遍历所有的 keys
+//     for (let key of stored_keys) {
+//         let record = await get(key);  // 获取每个 key 对应的记录
+//         console.log(record);
+
+//         // 检查 record 是否存在且包含有效的数据
+//         if (record && Object.keys(record).length > 0) {
+//             // 假设 record 是一个对象，检查是否有我们需要的字段
+//             for (let subKey in record) {
+//                 let recordContent = record[subKey]; // 获取该 subKey 对应的值
+
+//                 if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+//                     // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
+//                     let updatedRecord = recordContent
+//                         .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
+//                         .replace("欢迎您：", "")  // 去掉 "欢迎您："
+//                         .trim();
+
+//                     let recordFields = updatedRecord.split("\t");  // 分割字段
+
+//                     // 构建一行数据
+//                     data.push(recordFields);
+//                 }
+//             }
+//         }
+//     }
+
+//     // 如果没有数据需要导出，提示并返回
+//     if (data.length === 0) {
+//         alert("没有有效的数据可以导出！");
+//         return;
+//     }
+
+//     // 将表头添加到数据的开头
+//     data.unshift(headers);
+
+//     // 使用 XLSX.js 库生成工作表和工作簿
+//     let ws = XLSX.utils.aoa_to_sheet(data);
+//     let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];  // 设置列宽
+//     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+
+//     // 创建工作簿并添加工作表
+//     let wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+
+//     // 下载生成的 XLSX 文件
+//     XLSX.writeFile(wb, `${fileName}.xlsx`);
+//     console.log("XLSX 文件已生成并开始下载");
+// }
 export async function downloadRecordAsXLSX(personName, fileName) {
-    // 直接遍历所有 keys
     const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
 
-    // 如果没有记录，提示并返回
     if (stored_keys.length === 0) {
         alert("没有找到可导出的数据！");
         return;
@@ -313,53 +373,51 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
     let data = [];
 
-    // 遍历所有的 keys
     for (let key of stored_keys) {
         let record = await get(key);  // 获取每个 key 对应的记录
         console.log(record);
 
-        // 检查 record 是否存在且包含有效的数据
         if (record && Object.keys(record).length > 0) {
-            // 假设 record 是一个对象，检查是否有我们需要的字段
             for (let subKey in record) {
-                let recordContent = record[subKey]; // 获取该 subKey 对应的值
+                let recordContent = record[subKey];
 
                 if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
-                    // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
                     let updatedRecord = recordContent
-                        .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
-                        .replace("欢迎您：", "")  // 去掉 "欢迎您："
+                        .replace(/xxpersonname/g, personName)
+                        .replace("欢迎您：", "")
                         .trim();
 
-                    let recordFields = updatedRecord.split("\t");  // 分割字段
-
-                    // 构建一行数据
+                    let recordFields = updatedRecord.split("\t");
                     data.push(recordFields);
                 }
             }
         }
     }
 
-    // 如果没有数据需要导出，提示并返回
     if (data.length === 0) {
         alert("没有有效的数据可以导出！");
         return;
     }
 
-    // 将表头添加到数据的开头
     data.unshift(headers);
 
-    // 使用 XLSX.js 库生成工作表和工作簿
     let ws = XLSX.utils.aoa_to_sheet(data);
-    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];  // 设置列宽
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
 
-    // 创建工作簿并添加工作表
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
 
-    // 下载生成的 XLSX 文件
-    XLSX.writeFile(wb, `${fileName}.xlsx`);
+    // 创建下载链接
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(XLSX.write(wb, { bookType: 'xlsx', type: 'binary' }));
+    link.download = `${fileName}.xlsx`;
+
+    // 触发点击
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
     console.log("XLSX 文件已生成并开始下载");
 }
 
