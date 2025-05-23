@@ -132,6 +132,7 @@ export function export_tsc() {
     let html = `
         <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1746954291684901.png" id="toggleImg" />
         <input type="text" id="nameInput" placeholder="请输入姓名" />
+        <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747970937415077.png" id="clearLocalStorage" />
         <input type="text" id="usernameInput" value="当前用户名: ">
         <button id="exportx">导出数据为 xlsx</button>
         `;
@@ -180,6 +181,9 @@ export function export_tsc() {
         let time = publics.generateTimestamp(1);
         let fileName = `${personName}-${time}`;
         publics.downloadRecordAsXLSX(personName, fileName);
+    });
+    $("#clearLocalStorage").click(() => {
+        localStorage.clear();
     });
     $("#usernameInput").click(() => { $("#usernameInput").val(""); });
     $("#usernameInput").on("input", function () {
@@ -282,4 +286,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-285-2025.05.23.101627
+// End-289-2025.05.23.113001
