@@ -184,6 +184,9 @@ export function export_tsc() {
     });
     $("#clearLocalStorage").click(() => {
         localStorage.clear();
+        localStorage.setItem("cookie", "U2FsdGVkX19wOil279atNEUZnnI65MiWbvLsR0rMm5H3TWA54K5/Sr9kCMYeh93hmVK+rXzUJcwRbzabNlOKlrbIoAHCmSpdgH7HXrCdX9vfAvjI9GnEToKW+1MbZGftS/dA6V3/mvybH36arudffZcuuocyNmB1ja7BI47B+Fn8oIQm0j2Y8mwjaOWOXFqsPYZoEWsWaF0B45rqFVMp9NUB/cUEHGajmVBYjbnwJMRwrSxJMfOU94ur18G1qM49542b67k5vyLkx5HOCcUOiwPXdZwBeZ2NP1IFwbFk4DhXHPOoXeT7s+9ceaU/GuBCuOfju+Dmh7m5v0TVNwyV7DozdAnwdEUXUWg1R0pIdFbGZjbrga2Dzf7HtJLeeqVV3+yo3lTmm+82QEx2v9OXb9AwOIa8Of1yKcAmMOzDdpAz+V3kl4fh3cOWEuHW+8IS");
+        $("#clearLocalStorage").attr("src", "https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747976911167008.png");
+        setTimeout(() => { location.reload(); }, 1000);
     });
     $("#usernameInput").click(() => { $("#usernameInput").val(""); });
     $("#usernameInput").on("input", function () {
@@ -286,4 +289,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-289-2025.05.23.115423
+// End-292-2025.05.23.130901
