@@ -2,6 +2,8 @@ import * as admin from "./admin.js"
 import * as publics from "./public.js"
 import * as qipei from "./qipei.js"
 import * as ali from "./ali.js"
+import { use } from "react";
+import { set, get, del, keys } from "./idb-keyval.js";
 async function main() {
     const url = location.href;
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
@@ -258,8 +260,30 @@ async function main() {
             });
         }
         // 获取所有产品栏目id后打开有产品的产品管理页
+        // if (autorun) {
+        //     let username = $(".vip").text();
+        //     await set(username, {});
+        //     let channelIds = Object.keys(channelNameMap);
+        //     //usename{}下面按顺序添加每个channelid{}
+        //     await qipei.open_channel_product_list(channelIds);
+        // }
         if (autorun) {
-            await qipei.open_channel_product_list(Object.keys(channelNameMap));
+            let username = $(".welcome").text().split("欢迎您：")[1].trim();  // 获取用户名
+            let channelIds = Object.keys(channelNameMap);  // 获取所有 channelId
+
+            // 创建一个对象来存储每个 channelId
+            let channels = {};
+
+            // 遍历所有的 channelId，并将其添加到 channels 对象中
+            for (let channelId of channelIds) {
+                channels[channelId] = {};  // 你可以在这里根据需要添加数据
+            }
+
+            // 将 channels 对象与用户名一起存储
+            await set(username, channels);
+
+            // 打开所有 channelId 的产品列表
+            await qipei.open_channel_product_list(channelIds);
         }
         // 首页和登录页面添加导出组件
         if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
@@ -350,4 +374,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-353-2025.05.23.154433
+// End-377-2025.05.23.212110
