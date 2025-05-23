@@ -91,7 +91,6 @@ export async function openProductsEdit() {
 // } else {
 //     window.close();
 // }
-
 export async function handleProductAction(checked_car, status = "") {
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
@@ -102,30 +101,35 @@ export async function handleProductAction(checked_car, status = "") {
     let ch_name = $(".myColumnTit").text();
     let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html${location.hash}`;
     let record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t`;
+
+    // 获取选中的标签
     let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
         .map(checkbox => checkbox.closest("label").textContent.trim())
         .join(", ");
+
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
-        // await waitForHashToMatch();
-        //await publics.appendToRecord(record);
-        // let stored_hash = localStorage.getItem("hash");
-        // if (stored_hash) {
-        //     localStorage.setItem("hash", parseInt(stored_hash) + 1);
-        // } else {
-        //     console.error("存储的哈希值无效或缺失");
-        // }
 
-        await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
+        // 获取现有的用户数据（如果有的话）
+        let userData = await get(username) || {};  // 如果没有数据则返回空对象
+        let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
 
+        // 将记录存储在嵌套路径中
+        chData[id] = record;  // 使用 id 作为键，存储记录
 
+        // 更新整个数据结构
+        userData[ch_id] = chData;  // 更新 ch_id 对应的数据
 
+        // 将数据保存到 IndexedDB
+        await set(username, userData);
 
+        // 关闭窗口
         window.close();
     } else {
         await processOtherStatus(checked_car, labelsBefore, record, status);
     }
 }
+
 async function waitForHashToMatch() {
     return new Promise(resolve => {
         function checkHash() {
@@ -141,45 +145,86 @@ async function waitForHashToMatch() {
     });
 }
 async function processOtherStatus(checked_car, labelsBefore, record, status) {
-
     const observer = new MutationObserver(async (mutationsList, observer) => {
         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
             let username = $(".welcome").text().trim().replace("欢迎您：", "");
             let urlParams = new URLSearchParams(new URL(url).search);
             let ch_id = urlParams.get("ch_id");
             let id = urlParams.get("id");
-            observer.disconnect();
+
+            observer.disconnect();  // 停止观察
+
+            // 更新复选框状态
             $("input[type=checkbox][value=4]").prop("checked", false);
             if (checked_car) {
                 $("input[type=checkbox][value=2]").prop("checked", true);
             }
+
+            // 获取选择的标签
             let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
                 .map(checkbox => checkbox.closest("label").textContent.trim())
                 .join(", ");
+
+            // 更新记录
             record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-            // await publics.appendToRecord(record);
-            await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
+
+            // 获取现有的用户数据（如果有的话）
+            let userData = await get(username) || {};  // 如果没有数据则返回空对象
+            let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
+
+            // 将记录存储在 id 下
+            chData[id] = record;  // 使用 id 作为键，存储记录
+
+            // 更新整个数据结构
+            userData[ch_id] = chData;  // 更新 ch_id 对应的数据
+
+            // 将数据保存到 IndexedDB
+            await set(username, userData);
+
+            // 更新页面显示
             $("title").text("完成");
             $("#submit_msg a").click();
         }
     });
+
     const parentNode = document.body;
     observer.observe(parentNode, {
         childList: true,
         subtree: true,
     });
+
+    // 如果满足条件，直接执行以下逻辑
     if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-        observer.disconnect();
+        observer.disconnect();  // 停止观察
+
+        // 更新复选框状态
         $("input[type=checkbox][value=4]").prop("checked", false);
         if (checked_car) {
             $("input[type=checkbox][value=2]").prop("checked", true);
         }
+
+        // 获取选择的标签
         let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
             .map(checkbox => checkbox.closest("label").textContent.trim())
             .join(", ");
+
+        // 更新记录
         record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-        // await publics.appendToRecord(record);
-        await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
+
+        // 获取现有的用户数据（如果有的话）
+        let userData = await get(username) || {};  // 如果没有数据则返回空对象
+        let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
+
+        // 将记录存储在 id 下
+        chData[id] = record;  // 使用 id 作为键，存储记录
+
+        // 更新整个数据结构
+        userData[ch_id] = chData;  // 更新 ch_id 对应的数据
+
+        // 将数据保存到 IndexedDB
+        await set(username, userData);
+
+        // 更新页面显示
         $("title").text("完成");
         $("#submit_msg a").click();
     }
