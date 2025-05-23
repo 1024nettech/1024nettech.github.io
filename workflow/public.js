@@ -524,13 +524,6 @@ export async function downloadRecordAsXLSX(personName, fileName) {
             console.log(`跳过空 key: ${key}`, record);  // 输出跳过的空记录
         }
     }
-
-    // 进一步检查 data 是否为空
-    if (data.length === 0) {
-        alert("没有有效的数据可以导出！");
-        return;
-    }
-
     data.unshift(headers);
 
     let ws = XLSX.utils.aoa_to_sheet(data);
