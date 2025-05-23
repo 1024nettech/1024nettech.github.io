@@ -9,6 +9,13 @@ if (autorun) {
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
     }
+    if (url.includes("qipeiyigou.com")) {
+        let cookie = localStorage.getItem("cookie");
+        if (!cookie || cookie.length < 10) {
+            let encodedCookie = prompt("请输入Key: ");
+            localStorage.setItem("cookie", encodedCookie);
+        }
+    }
 }
 async function loadSucess(response) {
     // 加载成功后do
@@ -29,13 +36,6 @@ async function loadSucess(response) {
                 "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js?time=0&module=0"
             ];
             await publics.loadFiles(urls);
-        }
-        if (url.includes("qipeiyigou.com")) {
-            let cookie = localStorage.getItem("cookie");
-            if (!cookie || cookie.length < 10) {
-                let encodedCookie = prompt("请输入Key: ");
-                localStorage.setItem("cookie", encodedCookie);
-            }
         }
     } else {
         $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
