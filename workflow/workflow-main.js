@@ -3,8 +3,6 @@ import * as publics from "./public.js"
 import * as qipei from "./qipei.js"
 import * as ali from "./ali.js"
 async function main() {
-    let url0 = ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"];
-    publics.loadFiles(url0, 0, 0);
     const url = location.href;
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
     let autorun = Number(localStorage.getItem("autorun"));
@@ -346,12 +344,28 @@ async function main() {
 let interval = setInterval(function () {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         clearInterval(interval);
-        setTimeout(() => {
+
+        const script = document.createElement('script');
+
+        // 设置 script 标签的 src 属性为外部 JavaScript 文件的 URL
+        script.src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js";
+
+
+        // 监听脚本加载完成事件
+        script.onload = () => {
+            console.log(`脚本加载完成: crypto`);
             main();
-        }, 2000);
+
+        };
+
+
+
+
+
+
         console.log("来自workflow-main.js输出: DOM 已加载完成, main()函数已执行");
     } else {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-355-2025.05.23.143057
+// End-355-2025.05.23.145857
