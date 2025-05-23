@@ -315,16 +315,28 @@ export async function downloadRecordAsXLSX(personName, fileName) {
 
     // 遍历所有的 keys
     for (let key of stored_keys) {
-        console.log(key);
         let record = await get(key);  // 获取每个 key 对应的记录
         console.log(record);
-        if (record && record.trim() !== "") {
-            // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
-            let updatedRecord = record.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-            let recordFields = updatedRecord.split("\t");
 
-            // 构建一行数据
-            data.push(recordFields);
+        // 检查 record 是否存在且包含有效的数据
+        if (record && Object.keys(record).length > 0) {
+            // 假设 record 是一个对象，检查是否有我们需要的字段
+            for (let subKey in record) {
+                let recordContent = record[subKey]; // 获取该 subKey 对应的值
+
+                if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+                    // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
+                    let updatedRecord = recordContent
+                        .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
+                        .replace("欢迎您：", "")  // 去掉 "欢迎您："
+                        .trim();
+
+                    let recordFields = updatedRecord.split("\t");  // 分割字段
+
+                    // 构建一行数据
+                    data.push(recordFields);
+                }
+            }
         }
     }
 
