@@ -29,7 +29,7 @@ async function loadSucess(response) {
         }
         if (url.includes("qipeiyigou.com")) {
             let cookie = localStorage.getItem("cookie");
-            if (!cookie) {
+            if (cookie.length < 10) {
                 let encodedCookie = prompt("请输入Key: ");
                 localStorage.setItem("cookie", encodedCookie);
             }
@@ -44,4 +44,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-47-2025.05.23.171338
+// End-47-2025.05.23.173913
