@@ -2,11 +2,12 @@ import * as publics from "./public.js"
 const url = location.href;
 export function openProductsEdit() {
     // Esc打开产品栏目管理列表
-    localStorage.setItem("hash", "1");
+    // localStorage.setItem("hash", "1");
+    let page = location.href.split("&page=")[1];
     $("a").filter(function () {
         return $(this).text().trim() === "编辑";
     }).each(function (index) {
-        window.open($(this).attr("href") + "#" + (index + 1), "_blank");
+        window.open($(this).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
     });
     if ($(".page-next").length) {
         location.href = $(".page-next").attr("href");
@@ -105,7 +106,7 @@ export async function open_channel_product_list(chIds) {
         console.log("URL 匹配, 开始处理频道 ID 列表");
         let promises = chIds.map((id, index) => {
             return new Promise((resolve, reject) => {
-                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112`;
+                let productUrl = `http://testpage.qipeiyigou.com/dom/sc_product_list.php?username=qipeiyigouwang&ch_id=${id}&ls_cur=112&page=1`;
                 console.log(`请求频道 ID: ${id}`);
                 $.ajax({
                     url: productUrl,
@@ -306,4 +307,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-309-2025.05.23.170620
+// End-310-2025.05.23.172207
