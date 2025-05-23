@@ -275,6 +275,30 @@ export async function downloadRecordAsTSV(personName, fileName) {
     link.click();
     console.log("TSV 文件已生成并开始下载");
 }
+// export async function downloadRecordAsXLSX(personName, fileName) {
+//     // 使用 idb-keyval 获取记录对象, 下载为 xlsx 文件
+//     let records = await get("record");
+//     if (!records || Object.keys(records).length === 0) {
+//         alert("没有找到可导出的数据！");
+//         return;
+//     }
+//     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+//     let data = [];
+//     Object.keys(records).forEach(key => {
+//         let recordValue = records[key];
+//         let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
+//         let recordFields = updatedRecord.split("\t");
+//         data.push(recordFields);
+//     });
+//     data.unshift(headers);
+//     let ws = XLSX.utils.aoa_to_sheet(data);
+//     let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
+//     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+//     let wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+//     XLSX.writeFile(wb, `${fileName}.xlsx`);
+//     console.log("XLSX 文件已生成并开始下载");
+// }
 export async function downloadRecordAsXLSX(personName, fileName) {
     // 使用 idb-keyval 获取记录对象, 下载为 xlsx 文件
     let records = await get("record");
@@ -282,20 +306,53 @@ export async function downloadRecordAsXLSX(personName, fileName) {
         alert("没有找到可导出的数据！");
         return;
     }
+
     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
     let data = [];
-    Object.keys(records).forEach(key => {
-        let recordValue = records[key];
-        let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-        let recordFields = updatedRecord.split("\t");
-        data.push(recordFields);
+
+    // 遍历 records 中的嵌套结构
+    Object.keys(records).forEach(username => {
+        let userRecords = records[username];
+
+        // 遍历每个 ch_id 下的数据
+        Object.keys(userRecords).forEach(ch_id => {
+            let chRecords = userRecords[ch_id];
+
+            // 遍历每个 id 对应的记录
+            Object.keys(chRecords).forEach(id => {
+                let record = chRecords[id];
+
+                // 如果记录有值，则添加到数据中
+                if (record && record.trim() !== "") {
+                    let updatedRecord = record.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
+                    let recordFields = updatedRecord.split("\t");
+
+                    // 构建一行数据
+                    data.push(recordFields);
+                }
+            });
+        });
     });
+
+    // 如果没有数据需要导出，提示并返回
+    if (data.length === 0) {
+        alert("没有有效的数据可以导出！");
+        return;
+    }
+
+    // 将表头添加到数据的开头
     data.unshift(headers);
+
+    // 使用 XLSX.js 库生成工作表和工作簿
     let ws = XLSX.utils.aoa_to_sheet(data);
-    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];  // 设置列宽
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+
+    // 创建工作簿并添加工作表
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+
+    // 下载生成的 XLSX 文件
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
