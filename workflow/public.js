@@ -315,8 +315,9 @@ export async function downloadRecordAsXLSX(personName, fileName) {
 
     // 遍历所有的 keys
     for (let key of stored_keys) {
+        console(key);
         let record = await get(key);  // 获取每个 key 对应的记录
-
+        console.log(record);
         if (record && record.trim() !== "") {
             // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
             let updatedRecord = record.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
