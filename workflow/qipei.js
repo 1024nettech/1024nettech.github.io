@@ -29,14 +29,14 @@ export async function handleProductAction(checked_car, status = "") {
         .join(", ");
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
-        await waitForHashToMatch();
+        // await waitForHashToMatch();
         await publics.appendToRecord(record);
-        let stored_hash = localStorage.getItem("hash");
-        if (stored_hash) {
-            localStorage.setItem("hash", parseInt(stored_hash) + 1);
-        } else {
-            console.error("存储的哈希值无效或缺失");
-        }
+        // let stored_hash = localStorage.getItem("hash");
+        // if (stored_hash) {
+        //     localStorage.setItem("hash", parseInt(stored_hash) + 1);
+        // } else {
+        //     console.error("存储的哈希值无效或缺失");
+        // }
         window.close();
     } else {
         await processOtherStatus(checked_car, labelsBefore, record, status);
@@ -60,24 +60,24 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
     await new Promise(resolve => {
         let interval = setTimeout(async function checkAndExecute() {
             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-                let currentHash = location.hash.split("#")[1];
-                let stored_hash = localStorage.getItem("hash");
-                if (currentHash === stored_hash) {
-                    localStorage.setItem("hash", parseInt(stored_hash) + 1);
-                    clearTimeout(interval);
-                    $("input[type=checkbox][value=4]").prop("checked", false);
-                    if (checked_car) {
-                        $("input[type=checkbox][value=2]").prop("checked", true);
-                    }
-                    let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-                        .map(checkbox => checkbox.closest("label").textContent.trim())
-                        .join(", ");
-                    record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-                    await publics.appendToRecord(record);
-                    $("title").text("完成");
-                    $("#submit_msg a").click();
-                    resolve();
+                // let currentHash = location.hash.split("#")[1];
+                // let stored_hash = localStorage.getItem("hash");
+                // if (currentHash === stored_hash) {
+                // localStorage.setItem("hash", parseInt(stored_hash) + 1);
+                clearTimeout(interval);
+                $("input[type=checkbox][value=4]").prop("checked", false);
+                if (checked_car) {
+                    $("input[type=checkbox][value=2]").prop("checked", true);
                 }
+                let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                    .map(checkbox => checkbox.closest("label").textContent.trim())
+                    .join(", ");
+                record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+                await publics.appendToRecord(record);
+                $("title").text("完成");
+                $("#submit_msg a").click();
+                resolve();
+                // }
             } else {
                 setTimeout(checkAndExecute, 100);
             }
@@ -306,4 +306,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-309-2025.05.23.165056
+// End-309-2025.05.23.170620
