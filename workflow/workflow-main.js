@@ -167,12 +167,23 @@ async function main() {
             });
         }
         // 公共权限
-        $("a:contains(退出)").mousedown(() => {
-            if (autorun) {
-                let usernames = localStorage.getItem("usernames").split(" ");
-                usernames.shift();
+        $(document).on("mousedown", "a:contains(退出)", function () {
+            let usernames = localStorage.getItem("usernames");
+            if (!usernames) {
+                console.log("No usernames found in localStorage.");
+                return;
+            }
+            usernames = usernames.split(" ");
+            let currentUsername = $(".welcome").text().trim().replace("欢迎您：", "");
+            console.log("Current Username: ", currentUsername);
+            console.log("Usernames from localStorage: ", usernames);
+            if (currentUsername && usernames.includes(currentUsername)) {
+                usernames = usernames.filter(username => username !== currentUsername);
                 localStorage.setItem("usernames", usernames.join(" "));
                 localStorage.setItem("rightpassword", "");
+                console.log("Updated localStorage: ", localStorage);
+            } else {
+                console.log("Current username not found or not valid.");
             }
         });
         //登录页自动填充密码
@@ -331,4 +342,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-334-2025.05.21.133639
+// End-345-2025.05.23.084856
