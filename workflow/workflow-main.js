@@ -346,7 +346,9 @@ async function main() {
 let interval = setInterval(function () {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         clearInterval(interval);
-        main();
+        setTimeout(() => {
+            main();
+        }, 2000);
         console.log("来自workflow-main.js输出: DOM 已加载完成, main()函数已执行");
     } else {
         console.log("来自workflow-main.js输出: DOM 还未加载");
