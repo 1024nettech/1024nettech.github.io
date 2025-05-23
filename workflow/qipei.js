@@ -1,29 +1,39 @@
 import * as publics from "./public.js"
 import { set, get, del, keys } from "./idb-keyval.js";
 const url = location.href;
-export function openProductsEdit() {
-    // Esc打开产品栏目管理列表
+
+export async function openProductsEdit() {
     // 获取用户名
     let username = $(".welcome").text().split("欢迎您：")[1].trim();
-    // 获取ch_id参数
-    let ch_id = location.href.split("&ch_id=")[1];
+    // 获取 ch_id 参数
+    let ch_id = parseInt(location.href.split("&ch_id=")[1]);
 
     // 获取当前页码
     let page = location.href.split("&page=")[1];
 
-    // 查找所有文本为 "编辑" 的a标签
+    // 查找所有文本为 "编辑" 的 a 标签
     $("a").filter(function () {
         return $(this).text().trim() === "编辑";
     }).each(async function (index) {
         let href = $(this).attr("href");
 
-        // 使用正则从URL中提取产品ID
-        let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id=后面的数字
-        let proid = proidMatch ? proidMatch[1] : null;  // 提取id值
+        // 使用正则从 URL 中提取产品 ID
+        let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id= 后面的数字
+        let proid = proidMatch ? proidMatch[1] : null;  // 提取 id 值
 
         if (proid) {
-            // 存储数据到 idb-keyval（IndexedDB）
-            await set(`${username}[${ch_id}][${proid}]`, '');  // 存储到 IndexedDB 中，可以存储其他相关信息
+            // 获取现有的用户数据（如果有的话）
+            let userData = await get(username) || {};  // 如果没有数据则返回空对象
+            let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
+
+            // 将 proid 作为 key 存储在 chData 下
+            chData[proid] = '';  // 你可以在这里存储其他值，当前存储空字符串
+
+            // 更新整个数据结构
+            userData[ch_id] = chData;  // 更新 ch_id 对应的数据
+
+            // 将数据保存到 IndexedDB
+            await set(username, userData);
 
             // 打开每个编辑链接并加上分页信息
             window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
@@ -37,6 +47,47 @@ export function openProductsEdit() {
         window.close();
     }
 };
+
+
+
+
+
+// export function openProductsEdit() {
+//     // Esc打开产品栏目管理列表
+//     // 获取用户名
+//     let username = $(".welcome").text().split("欢迎您：")[1].trim();
+//     // 获取ch_id参数
+//     let ch_id = location.href.split("&ch_id=")[1];
+
+//     // 获取当前页码
+//     let page = location.href.split("&page=")[1];
+
+//     // 查找所有文本为 "编辑" 的a标签
+//     $("a").filter(function () {
+//         return $(this).text().trim() === "编辑";
+//     }).each(async function (index) {
+//         let href = $(this).attr("href");
+
+//         // 使用正则从URL中提取产品ID
+//         let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id=后面的数字
+//         let proid = proidMatch ? proidMatch[1] : null;  // 提取id值
+
+
+//         // 存储数据到 idb-keyval（IndexedDB）
+//         await set(`${username}[${ch_id}][${proid}]`, '');  // 存储到 IndexedDB 中，可以存储其他相关信息
+
+//         // 打开每个编辑链接并加上分页信息
+//         window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
+
+//     });
+
+// // 如果存在下一页，跳转到下一页；否则关闭当前窗口
+// if ($(".page-next").length) {
+//     location.href = $(".page-next").attr("href");
+// } else {
+//     window.close();
+// }
+
 export async function handleProductAction(checked_car, status = "") {
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
