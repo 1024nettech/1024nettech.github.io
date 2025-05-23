@@ -267,6 +267,17 @@ async function main() {
         //     await qipei.open_channel_product_list(channelIds);
         // }
         if (autorun) {
+            async function waitForElement(selector) {
+                return new Promise((resolve) => {
+                    const interval = setInterval(() => {
+                        if ($(selector).length > 0) {
+                            clearInterval(interval);
+                            resolve();
+                        }
+                    }, 100); // 每 100ms 检查一次
+                });
+            }
+            await waitForElement(".welcome");
             let username = $(".welcome").text().split("欢迎您：")[1].trim();  // 获取用户名
             let channelIds = Object.keys(channelNameMap);  // 获取所有 channelId
 
