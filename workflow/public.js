@@ -301,20 +301,11 @@ export async function downloadRecordAsTSV(personName, fileName) {
 // }
 
 export async function downloadRecordAsXLSX(personName, fileName) {
-    keys().then((allKeys) => {
-        console.log('所有键:', allKeys);
-
-        // 遍历每个键
-        allKeys.forEach(async (key) => {
-            const value = await keyval.get(key); // 获取对应的值
-            console.log(`键: ${key}, 值: ${value}`);
-        });
-    });
     // 直接遍历所有 keys
-    const keys = await keys();  // 假设keys()是返回所有存储键的函数
+    const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
 
     // 如果没有记录，提示并返回
-    if (keys.length === 0) {
+    if (stored_keys.length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
@@ -323,7 +314,7 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     let data = [];
 
     // 遍历所有的 keys
-    for (let key of keys) {
+    for (let key of stored_keys) {
         let record = await get(key);  // 获取每个 key 对应的记录
 
         if (record && record.trim() !== "") {
