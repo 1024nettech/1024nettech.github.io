@@ -299,10 +299,13 @@ export async function downloadRecordAsTSV(personName, fileName) {
 //     XLSX.writeFile(wb, `${fileName}.xlsx`);
 //     console.log("XLSX 文件已生成并开始下载");
 // }
+
 export async function downloadRecordAsXLSX(personName, fileName) {
-    // 使用 idb-keyval 获取记录对象, 下载为 xlsx 文件
-    let records = await get("record");
-    if (!records || Object.keys(records).length === 0) {
+    // 直接遍历所有 keys
+    const keys = await keys();  // 假设keys()是返回所有存储键的函数
+
+    // 如果没有记录，提示并返回
+    if (keys.length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
@@ -310,29 +313,19 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
     let data = [];
 
-    // 遍历 records 中的嵌套结构
-    Object.keys(records).forEach(username => {
-        let userRecords = records[username];
+    // 遍历所有的 keys
+    for (let key of keys) {
+        let record = await get(key);  // 获取每个 key 对应的记录
 
-        // 遍历每个 ch_id 下的数据
-        Object.keys(userRecords).forEach(ch_id => {
-            let chRecords = userRecords[ch_id];
+        if (record && record.trim() !== "") {
+            // 假设记录结构为 "username[ch_id][id]"，提取并处理记录
+            let updatedRecord = record.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
+            let recordFields = updatedRecord.split("\t");
 
-            // 遍历每个 id 对应的记录
-            Object.keys(chRecords).forEach(id => {
-                let record = chRecords[id];
-
-                // 如果记录有值，则添加到数据中
-                if (record && record.trim() !== "") {
-                    let updatedRecord = record.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-                    let recordFields = updatedRecord.split("\t");
-
-                    // 构建一行数据
-                    data.push(recordFields);
-                }
-            });
-        });
-    });
+            // 构建一行数据
+            data.push(recordFields);
+        }
+    }
 
     // 如果没有数据需要导出，提示并返回
     if (data.length === 0) {
@@ -356,6 +349,8 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
+
+
 export function parseJson(jsonString) {
     try {
         return JSON.parse(jsonString.trim());
