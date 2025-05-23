@@ -227,23 +227,35 @@ async function main() {
             if (!rightpassword) { $("#commonPassword").val("111111"); }
             else { $("#commonPassword").val(rightpassword); }
             $("#commonPassword").focus();
-            qipei.checkFocusAndRedirect();
+            if ($("#commonName").val()) {
+                $("#commonYzm").focus();
+            }
+            else {
+                $("#commonName").focus();
+            }
             $(".web-user-pass i").click(() => {
+                let cookie = localStorage.getItem("cookie");
+                if (!cookie) {
+                    cookie = prompt("请输入Cookie: ");
+                    localStorage.setItem("cookie", cookie);
+                }
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
                 if (rightpassword) {
                     $("#commonPassword").val(rightpassword);
-                    qipei.checkFocusAndRedirect();
+                    $("#commonYzm").focus();
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                 }
                 else {
-                    queryUserId(username, cookie, function (password) {
+                    let cookie = localStorage.getItem("cookie");
+                    let decodedCookie = atob(cookie);
+                    queryUserId(username, decodedCookie, function (password) {
                         console.log("最终获取到的密码: ", password);
                         $("#commonName").val(username);
                         $("#commonPassword").val(password);
                         localStorage.setItem("rightpassword", password);
-                        qipei.checkFocusAndRedirect();
+                        $("#commonYzm").focus();
                         $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                     });
                 }
@@ -342,4 +354,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-345-2025.05.23.084856
+// End-357-2025.05.23.094546
