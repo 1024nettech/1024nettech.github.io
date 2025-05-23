@@ -487,6 +487,7 @@ export async function downloadRecordAsTSV(personName, fileName) {
 export async function downloadRecordAsXLSX(personName, fileName) {
     try {
         const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
+        console.log(keys);
 
         if (stored_keys.length === 0) {
             alert("没有找到可导出的数据！");
