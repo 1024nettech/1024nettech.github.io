@@ -2,10 +2,11 @@ import * as publics from "./public.js"
 const url = location.href;
 export function openProductsEdit() {
     // Esc打开产品栏目管理列表
+    localStorage.setItem("hash", "1");
     $("a").filter(function () {
         return $(this).text().trim() === "编辑";
-    }).each(function () {
-        window.open($(this).attr("href"), "_blank");
+    }).each(function (index) {
+        window.open($(this).attr("href") + "#" + (index + 1), "_blank");
     });
     if ($(".page-next").length) {
         location.href = $(".page-next").attr("href");
@@ -27,10 +28,18 @@ export async function handleProductAction(checked_car, status = "") {
     let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
         .map(checkbox => checkbox.closest("label").textContent.trim())
         .join(", ");
+    let currentHash = location.hash.split("#")[1];
+    let stored_hash = localStorage.getItem("hash");
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
         await publics.appendToRecord(record);
-        window.close();
+        let interval = setInterval(() => {
+            if (currentHash === stored_hash) {
+                clearInterval(interval);
+                localStorage.setItem("hash", parseInt(stored_hash) + 1);
+                window.close();
+            }
+        }, 100);
     } else {
         let interval = setTimeout(async function checkAndExecute() {
             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
@@ -45,7 +54,13 @@ export async function handleProductAction(checked_car, status = "") {
                 record += `${labelsBefore}\t${labelsAfter}\t${status}`;
                 await publics.appendToRecord(record);
                 $("title").text("完成");
-                $("#submit_msg a").click();
+                let interval = setInterval(() => {
+                    if (currentHash === stored_hash) {
+                        clearInterval(interval);
+                        localStorage.setItem("hash", parseInt(stored_hash) + 1);
+                        $("#submit_msg a").click();
+                    }
+                }, 100);
             } else {
                 setTimeout(checkAndExecute, 1000);
             }
@@ -112,14 +127,6 @@ export async function open_channel_product_list(chIds) {
         console.log("URL 不匹配, 跳过处理");
     }
 }
-export function checkFocusAndRedirect() {
-    // 焦点到验证码输入框
-    if (!$("#commonName").is(":focus")) {
-        setTimeout(function () {
-            $("#commonYzm").focus();
-        }, 200);
-    }
-}
 export function export_tsc() {
     // 首页导出数据组件
     let html = `
@@ -158,7 +165,9 @@ export function export_tsc() {
         $("#commonName").val(first_stored_username);
         $("#commonName").focus();
         $("#commonName").prop("disabled", true);
-        checkFocusAndRedirect();
+        $("#commonPassword").val("111111");
+        $("#commonPassword").focus();
+        $("#commonYzm").focus();
         $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
     }
     $("#exportx").click(function () {
@@ -183,7 +192,9 @@ export function export_tsc() {
         $("#commonName").val(first_username);
         $("#commonName").focus();
         $("#commonName").prop("disabled", true);
-        checkFocusAndRedirect();
+        $("#commonPassword").val("111111");
+        $("#commonPassword").focus();
+        $("#commonYzm").focus();
         $("#usernameInput").val(`当前用户名: ${first_username}`);
     });
 }
@@ -271,4 +282,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-274-2025.05.22.144828
+// End-285-2025.05.23.092659
