@@ -35,7 +35,8 @@ export async function loadFiles(urls) {
             let url = urls[index];
             let fileExtension = url.split(".").pop().split("?")[0].toLowerCase();
             if (url.includes("?time=1")) {
-                url = url.split("?")[0] + "?time=" + Date.now();
+                let a = "?time=" + Date.now();
+                url = url.replace("?time=1", a);
             }
             let isModule = url.includes("&module=1");
             if (fileExtension === "js") {
@@ -306,4 +307,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-309-2025.05.23.161528
+// End-310-2025.05.23.163035
