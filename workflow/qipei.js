@@ -1,96 +1,21 @@
+@ -1,208 +1,207 @@
 import * as publics from "./public.js"
-import { set, get, del, keys } from "./idb-keyval.js";
 const url = location.href;
-
-export async function openProductsEdit() {
-    // 获取用户名
-    let username = $(".welcome").text().split("欢迎您：")[1].trim();
-    // 获取 ch_id 参数
-    let ch_id = parseInt(location.href.split("&ch_id=")[1]);
-
-    // 获取当前页码
+export function openProductsEdit() {
+    // Esc打开产品栏目管理列表
+    // localStorage.setItem("hash", "1");
     let page = location.href.split("&page=")[1];
-
-    // 查找所有文本为 "编辑" 的 a 标签
-    let editLinks = $("a").filter(function () {
+    $("a").filter(function () {
         return $(this).text().trim() === "编辑";
+    }).each(function (index) {
+        window.open($(this).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
     });
-
-    // 使用 for...of 循环确保每个异步操作完成后再执行下一个
-    for (let index = 0; index < editLinks.length; index++) {
-        let link = editLinks[index];
-        let href = $(link).attr("href");
-
-        // 使用正则从 URL 中提取产品 ID
-        let proidMatch = href.match(/&id=(\d+)/);  // 正则匹配 &id= 后面的数字
-        let proid = proidMatch ? proidMatch[1] : null;  // 提取 id 值
-
-        if (proid) {
-            // 获取现有的用户数据（如果有的话）
-            let userData = await get(username) || {};  // 如果没有数据则返回空对象
-            let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
-
-            // 将 proid 作为 key 存储在 chData 下
-            chData[proid] = '';  // 你可以在这里存储其他值，当前存储空字符串
-
-            // 更新整个数据结构
-            userData[ch_id] = chData;  // 更新 ch_id 对应的数据
-
-            // 将数据保存到 IndexedDB
-            await set(username, userData);
-
-            // 打开每个编辑链接并加上分页信息
-            window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
-        }
-    }
-
-    // 如果存在下一页，跳转到下一页；否则关闭当前窗口
     if ($(".page-next").length) {
         location.href = $(".page-next").attr("href");
     } else {
         window.close();
     }
 };
-
-
-
-
-
-// export function openProductsEdit() {
-//     // Esc打开产品栏目管理列表
-//     // 获取用户名
-//     let username = $(".welcome").text().split("欢迎您：")[1].trim();
-//     // 获取ch_id参数
-//     let ch_id = location.href.split("&ch_id=")[1];
-
-//     // 获取当前页码
-//     let page = location.href.split("&page=")[1];
-
-//     // 查找所有文本为 "编辑" 的a标签
-//     $("a").filter(function () {
-//         return $(this).text().trim() === "编辑";
-//     }).each(async function (index) {
-//         let href = $(this).attr("href");
-
-//         // 使用正则从URL中提取产品ID
-//         let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id=后面的数字
-//         let proid = proidMatch ? proidMatch[1] : null;  // 提取id值
-
-
-//         // 存储数据到 idb-keyval（IndexedDB）
-//         await set(`${username}[${ch_id}][${proid}]`, '');  // 存储到 IndexedDB 中，可以存储其他相关信息
-
-//         // 打开每个编辑链接并加上分页信息
-//         window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
-
-//     });
-
-// // 如果存在下一页，跳转到下一页；否则关闭当前窗口
-// if ($(".page-next").length) {
-//     location.href = $(".page-next").attr("href");
-// } else {
-//     window.close();
-// }
 export async function handleProductAction(checked_car, status = "") {
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
@@ -101,29 +26,19 @@ export async function handleProductAction(checked_car, status = "") {
     let ch_name = $(".myColumnTit").text();
     let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html${location.hash}`;
     let record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t`;
-
-    // 获取选中的标签
     let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
         .map(checkbox => checkbox.closest("label").textContent.trim())
         .join(", ");
-
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
-
-        // 获取现有的用户数据（如果有的话）
-        let userData = await get(username) || {};  // 如果没有数据则返回空对象
-        let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
-
-        // 更新记录，如果该 proid 下已经有记录，则更新，否则新增
-        chData[id] = record;  // 将新的记录直接赋值给该 proid
-
-        // 更新整个数据结构
-        userData[ch_id] = chData;  // 更新 ch_id 对应的数据
-
-        // 将数据保存到 IndexedDB
-        await set(username, userData);
-
-        // 关闭窗口
+        // await waitForHashToMatch();
+        await publics.appendToRecord(record);
+        // let stored_hash = localStorage.getItem("hash");
+        // if (stored_hash) {
+        //     localStorage.setItem("hash", parseInt(stored_hash) + 1);
+        // } else {
+        //     console.error("存储的哈希值无效或缺失");
+        // }
         window.close();
     } else {
         await processOtherStatus(checked_car, labelsBefore, record, status);
@@ -144,124 +59,33 @@ async function waitForHashToMatch() {
     });
 }
 async function processOtherStatus(checked_car, labelsBefore, record, status) {
-    const observer = new MutationObserver(async (mutationsList, observer) => {
-        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-            let username = $(".welcome").text().trim().replace("欢迎您：", "");
-            let urlParams = new URLSearchParams(new URL(url).search);
-            let ch_id = urlParams.get("ch_id");
-            let id = urlParams.get("id");
-
-            observer.disconnect();  // 停止观察
-
-            // 更新复选框状态
-            $("input[type=checkbox][value=4]").prop("checked", false);
-            if (checked_car) {
-                $("input[type=checkbox][value=2]").prop("checked", true);
+    await new Promise(resolve => {
+        let interval = setTimeout(async function checkAndExecute() {
+            if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+                // let currentHash = location.hash.split("#")[1];
+                // let stored_hash = localStorage.getItem("hash");
+                // if (currentHash === stored_hash) {
+                // localStorage.setItem("hash", parseInt(stored_hash) + 1);
+                clearTimeout(interval);
+                $("input[type=checkbox][value=4]").prop("checked", false);
+                if (checked_car) {
+                    $("input[type=checkbox][value=2]").prop("checked", true);
+                }
+                let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                    .map(checkbox => checkbox.closest("label").textContent.trim())
+                    .join(", ");
+                record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+                await publics.appendToRecord(record);
+                $("title").text("完成");
+                $("#submit_msg a").click();
+                resolve();
+                // }
+            } else {
+                setTimeout(checkAndExecute, 100);
             }
-
-            // 获取选择的标签
-            let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-                .map(checkbox => checkbox.closest("label").textContent.trim())
-                .join(", ");
-
-            // 更新记录
-            record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-
-            // 获取现有的用户数据（如果有的话）
-            let userData = await get(username) || {};  // 如果没有数据则返回空对象
-            let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
-
-            // 将记录存储在 id 下，直接覆盖原记录
-            chData[id] = record;  // 使用 id 作为键，存储记录
-
-            // 更新整个数据结构
-            userData[ch_id] = chData;  // 更新 ch_id 对应的数据
-
-            // 将数据保存到 IndexedDB
-            await set(username, userData);
-
-            // 更新页面显示
-            $("title").text("完成");
-            $("#submit_msg a").click();
-        }
+        }, 100);
     });
-
-    const parentNode = document.body;
-    observer.observe(parentNode, {
-        childList: true,
-        subtree: true,
-    });
-
-    // 如果满足条件，直接执行以下逻辑
-    if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-        observer.disconnect();  // 停止观察
-
-        // 更新复选框状态
-        $("input[type=checkbox][value=4]").prop("checked", false);
-        if (checked_car) {
-            $("input[type=checkbox][value=2]").prop("checked", true);
-        }
-
-        // 获取选择的标签
-        let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-            .map(checkbox => checkbox.closest("label").textContent.trim())
-            .join(", ");
-
-        // 更新记录
-        record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-
-        // 获取现有的用户数据（如果有的话）
-        let userData = await get(username) || {};  // 如果没有数据则返回空对象
-        let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
-
-        // 将记录存储在 id 下，直接覆盖原记录
-        chData[id] = record;  // 使用 id 作为键，存储记录
-
-        // 更新整个数据结构
-        userData[ch_id] = chData;  // 更新 ch_id 对应的数据
-
-        // 将数据保存到 IndexedDB
-        await set(username, userData);
-
-        // 更新页面显示
-        $("title").text("完成");
-        $("#submit_msg a").click();
-    }
 }
-
-
-
-
-
-
-// async function processOtherStatus(checked_car, labelsBefore, record, status) {
-//     await new Promise(resolve => {
-//         let interval = setTimeout(async function checkAndExecute() {
-//             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-//                 // let currentHash = location.hash.split("#")[1];
-//                 // let stored_hash = localStorage.getItem("hash");
-//                 // if (currentHash === stored_hash) {
-//                 // localStorage.setItem("hash", parseInt(stored_hash) + 1);
-//                 clearTimeout(interval);
-//                 $("input[type=checkbox][value=4]").prop("checked", false);
-//                 if (checked_car) {
-//                     $("input[type=checkbox][value=2]").prop("checked", true);
-//                 }
-//                 let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-//                     .map(checkbox => checkbox.closest("label").textContent.trim())
-//                     .join(", ");
-//                 record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-//                 await publics.appendToRecord(record);
-//                 $("title").text("完成");
-//                 $("#submit_msg a").click();
-//                 resolve();
-//                 // }
-//             } else {
-//                 setTimeout(checkAndExecute, 100);
-//             }
-//         }, 100);
-//     });
-// }
 export function open_close_shop_products() {
     // 店铺内打开或关闭产品
     if (!location.href.includes("mshop/product/item")) {
@@ -378,109 +202,15 @@ export function export_tsc() {
         publics.downloadRecordAsXLSX(personName, fileName);
     });
     $("#clearLocalStorage").click(() => {
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.setItem("cookie", "U2FsdGVkX19wOil279atNEUZnnI65MiWbvLsR0rMm5H3TWA54K5/Sr9kCMYeh93hmVK+rXzUJcwRbzabNlOKlrbIoAHCmSpdgH7HXrCdX9vfAvjI9GnEToKW+1MbZGftS/dA6V3/mvybH36arudffZcuuocyNmB1ja7BI47B+Fn8oIQm0j2Y8mwjaOWOXFqsPYZoEWsWaF0B45rqFVMp9NUB/cUEHGajmVBYjbnwJMRwrSxJMfOU94ur18G1qM49542b67k5vyLkx5HOCcUOiwPXdZwBeZ2NP1IFwbFk4DhXHPOoXeT7s+9ceaU/GuBCuOfju+Dmh7m5v0TVNwyV7DozdAnwdEUXUWg1R0pIdFbGZjbrga2Dzf7HtJLeeqVV3+yo3lTmm+82QEx2v9OXb9AwOIa8Of1yKcAmMOzDdpAz+V3kl4fh3cOWEuHW+8IS");
+        //localStorage.clear();
         $("#clearLocalStorage").attr("src", "https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747976911167008.png");
         setTimeout(() => { location.reload(); }, 1000);
     });
-    $("#usernameInput").click(() => { $("#usernameInput").val(""); });
-    $("#usernameInput").on("input", function () {
-        let usernames = $("#usernameInput").val().trim();
-        if (usernames.includes("当前用户名:")) {
-            usernames = usernames.split("当前用户名:")[1].trim();
-        }
-        let first_username = usernames.split(" ")[0];
-        localStorage.setItem("usernames", usernames);
-        $("#commonName").val(first_username);
-        $("#commonName").focus();
-        $("#commonName").prop("disabled", true);
-        $("#commonPassword").val("111111");
-        $("#commonPassword").focus();
-        $("#commonYzm").focus();
-        $("#usernameInput").val(`当前用户名: ${first_username}`);
-    });
-}
-export function showKeyword() {
-    // 显示关键词
-    let keyword = $("meta[name=keywords]").attr("content");
-    let author = $("meta[name=author]").attr("content");
-    if (keyword.includes(author)) {
-        $("#keywordx").text("关键词为空");
-    } else {
-        $("#keywordx").text(keyword);
-    }
-};
-export function checkProduct() {
-    // 检查产品详情
-    let id = 0;
-    let tip = "";
-    $("#tipx").text("正在检查中……");
-    if ($(".main a").length) {
-        id = 1;
-        tip += "存在超链接！";
-    }
-    if ($(".main *[style*=pointer]").length) {
-        id = 2;
-        tip += "存在非超链接小手！";
-    }
-    let images = $(".main img");
-    for (let i = 0; i < images.length; i++) {
-        let src = images.eq(i).attr("src");
-        if (!src.includes("aimg8.dlssyht.cn")) {
-            id = 3;
-            tip += "存在外链图片！";
-            break;
-        }
-    }
-    if (id === 0) {
-        tip = "正常！";
-    } else {
-        $("#tipx").css("background-color", "red");
-        alert(tip);
-    }
-    $("#tipx").text(`检查结果: ${tip}`);
-};
-function extractDataAsObject() {
-    // 手动提取商家中心的栏目{id:名称}
-    let items = document.querySelectorAll(".item-list li");
-    let dataObj = {};
-    items.forEach(item => {
-        let link = item.querySelector("a");
-        let chId = new URLSearchParams(link.search).get("ch_id");
-        let title = item.querySelector(".p-tit").textContent.trim();
-        dataObj[chId] = title;
-    });
-    console.log(dataObj);
-    return dataObj;
-}
-export async function fetchChIdsAndTitles(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`请求失败, 状态码: ${response.status}`);
-        }
-        const arrayBuffer = await response.arrayBuffer();
-        const decoder = new TextDecoder("gbk");
-        const decodedText = decoder.decode(arrayBuffer);
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(decodedText, "text/html");
-        const anchorElements = doc.querySelectorAll(`a[href*="ch_id="]`);
-        const chIdDict = {};
-        anchorElements.forEach(anchor => {
-            const chIdMatch = anchor.href.match(/ch_id=(\d+)/);
-            if (chIdMatch) {
-                const chId = chIdMatch[1];
-                const titleElement = anchor.querySelector(".p-tit");
-                const title = titleElement ? titleElement.textContent.trim() : "";
-                if (title) {
-                    chIdDict[chId] = title;
-                }
-            }
-        });
-        console.log("提取到的 ch_id 和标题字典: ", chIdDict);
-        return chIdDict;
-    } catch (error) {
-        console.error("请求失败: " + error.message);
+@ -307,4 +306,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-381-2025.05.23.220108
+// End-310-2025.05.23.172736
+// End-309-2025.05.23.175600
