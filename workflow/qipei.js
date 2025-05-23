@@ -1,4 +1,3 @@
-@ -1,208 +1,207 @@
 import * as publics from "./public.js"
 const url = location.href;
 export function openProductsEdit() {
@@ -202,15 +201,109 @@ export function export_tsc() {
         publics.downloadRecordAsXLSX(personName, fileName);
     });
     $("#clearLocalStorage").click(() => {
-        // localStorage.clear();
-        localStorage.setItem("cookie", "U2FsdGVkX19wOil279atNEUZnnI65MiWbvLsR0rMm5H3TWA54K5/Sr9kCMYeh93hmVK+rXzUJcwRbzabNlOKlrbIoAHCmSpdgH7HXrCdX9vfAvjI9GnEToKW+1MbZGftS/dA6V3/mvybH36arudffZcuuocyNmB1ja7BI47B+Fn8oIQm0j2Y8mwjaOWOXFqsPYZoEWsWaF0B45rqFVMp9NUB/cUEHGajmVBYjbnwJMRwrSxJMfOU94ur18G1qM49542b67k5vyLkx5HOCcUOiwPXdZwBeZ2NP1IFwbFk4DhXHPOoXeT7s+9ceaU/GuBCuOfju+Dmh7m5v0TVNwyV7DozdAnwdEUXUWg1R0pIdFbGZjbrga2Dzf7HtJLeeqVV3+yo3lTmm+82QEx2v9OXb9AwOIa8Of1yKcAmMOzDdpAz+V3kl4fh3cOWEuHW+8IS");
-        //localStorage.clear();
+        localStorage.clear();
         $("#clearLocalStorage").attr("src", "https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747976911167008.png");
         setTimeout(() => { location.reload(); }, 1000);
     });
-@ -307,4 +306,4 @@ export async function fetchChIdsAndTitles(url) {
+    $("#usernameInput").click(() => { $("#usernameInput").val(""); });
+    $("#usernameInput").on("input", function () {
+        let usernames = $("#usernameInput").val().trim();
+        if (usernames.includes("当前用户名:")) {
+            usernames = usernames.split("当前用户名:")[1].trim();
+        }
+        let first_username = usernames.split(" ")[0];
+        localStorage.setItem("usernames", usernames);
+        $("#commonName").val(first_username);
+        $("#commonName").focus();
+        $("#commonName").prop("disabled", true);
+        $("#commonPassword").val("111111");
+        $("#commonPassword").focus();
+        $("#commonYzm").focus();
+        $("#usernameInput").val(`当前用户名: ${first_username}`);
+    });
+}
+export function showKeyword() {
+    // 显示关键词
+    let keyword = $("meta[name=keywords]").attr("content");
+    let author = $("meta[name=author]").attr("content");
+    if (keyword.includes(author)) {
+        $("#keywordx").text("关键词为空");
+    } else {
+        $("#keywordx").text(keyword);
+    }
+};
+export function checkProduct() {
+    // 检查产品详情
+    let id = 0;
+    let tip = "";
+    $("#tipx").text("正在检查中……");
+    if ($(".main a").length) {
+        id = 1;
+        tip += "存在超链接！";
+    }
+    if ($(".main *[style*=pointer]").length) {
+        id = 2;
+        tip += "存在非超链接小手！";
+    }
+    let images = $(".main img");
+    for (let i = 0; i < images.length; i++) {
+        let src = images.eq(i).attr("src");
+        if (!src.includes("aimg8.dlssyht.cn")) {
+            id = 3;
+            tip += "存在外链图片！";
+            break;
+        }
+    }
+    if (id === 0) {
+        tip = "正常！";
+    } else {
+        $("#tipx").css("background-color", "red");
+        alert(tip);
+    }
+    $("#tipx").text(`检查结果: ${tip}`);
+};
+function extractDataAsObject() {
+    // 手动提取商家中心的栏目{id:名称}
+    let items = document.querySelectorAll(".item-list li");
+    let dataObj = {};
+    items.forEach(item => {
+        let link = item.querySelector("a");
+        let chId = new URLSearchParams(link.search).get("ch_id");
+        let title = item.querySelector(".p-tit").textContent.trim();
+        dataObj[chId] = title;
+    });
+    console.log(dataObj);
+    return dataObj;
+}
+export async function fetchChIdsAndTitles(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`请求失败, 状态码: ${response.status}`);
+        }
+        const arrayBuffer = await response.arrayBuffer();
+        const decoder = new TextDecoder("gbk");
+        const decodedText = decoder.decode(arrayBuffer);
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(decodedText, "text/html");
+        const anchorElements = doc.querySelectorAll(`a[href*="ch_id="]`);
+        const chIdDict = {};
+        anchorElements.forEach(anchor => {
+            const chIdMatch = anchor.href.match(/ch_id=(\d+)/);
+            if (chIdMatch) {
+                const chId = chIdMatch[1];
+                const titleElement = anchor.querySelector(".p-tit");
+                const title = titleElement ? titleElement.textContent.trim() : "";
+                if (title) {
+                    chIdDict[chId] = title;
+                }
+            }
+        });
+        console.log("提取到的 ch_id 和标题字典: ", chIdDict);
+        return chIdDict;
+    } catch (error) {
+        console.error("请求失败: " + error.message);
         return {};
     }
 }
-// End-310-2025.05.23.172736
 // End-309-2025.05.23.175600
