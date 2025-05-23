@@ -11,8 +11,6 @@ function loadSucess(response) {
     // 加载成功后do
     let versionData = publics.parseJson(response.responseText);
     let userJsVersion = versionData["workflow.user.js"];
-    let cookie = versionData["cookie"];
-    localStorage.setItem("cookie", cookie);
     if (userJsVersion === window.GM_info.script.version) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
@@ -22,6 +20,11 @@ function loadSucess(response) {
         if (location.href.includes("1688.com")) {
             urls = ["https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"];
             publics.loadFiles(urls, 0, 0);
+        }
+        let cookie = localStorage.getItem("cookie");
+        if (!cookie) {
+            let encodedCookie = prompt("请输入Cookie: ");
+            localStorage.setItem("cookie", encodedCookie);
         }
     } else {
         $("body").html(`<a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点击更新</a>`);
@@ -33,4 +36,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-36-2025.05.21.050008
+// End-39-2025.05.23.102318
