@@ -362,6 +362,64 @@ export async function downloadRecordAsTSV(personName, fileName) {
 //     XLSX.writeFile(wb, `${fileName}.xlsx`);
 //     console.log("XLSX 文件已生成并开始下载");
 // }
+// export async function downloadRecordAsXLSX(personName, fileName) {
+//     const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
+
+//     if (stored_keys.length === 0) {
+//         alert("没有找到可导出的数据！");
+//         return;
+//     }
+
+//     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+//     let data = [];
+
+//     for (let key of stored_keys) {
+//         let record = await get(key);  // 获取每个 key 对应的记录
+//         console.log(record);
+
+//         if (record && Object.keys(record).length > 0) {
+//             for (let subKey in record) {
+//                 let recordContent = record[subKey];
+
+//                 if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+//                     let updatedRecord = recordContent
+//                         .replace(/xxpersonname/g, personName)
+//                         .replace("欢迎您：", "")
+//                         .trim();
+
+//                     let recordFields = updatedRecord.split("\t");
+//                     data.push(recordFields);
+//                 }
+//             }
+//         }
+//     }
+
+//     if (data.length === 0) {
+//         alert("没有有效的数据可以导出！");
+//         return;
+//     }
+
+//     data.unshift(headers);
+
+//     let ws = XLSX.utils.aoa_to_sheet(data);
+//     let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
+//     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+
+//     let wb = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+
+//     // 创建下载链接
+//     const link = document.createElement('a');
+//     link.href = URL.createObjectURL(XLSX.write(wb, { bookType: 'xlsx', type: 'binary' }));
+//     link.download = `${fileName}.xlsx`;
+
+//     // 触发点击
+//     document.body.appendChild(link);
+//     link.click();
+//     document.body.removeChild(link);
+
+//     console.log("XLSX 文件已生成并开始下载");
+// }
 export async function downloadRecordAsXLSX(personName, fileName) {
     const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
 
@@ -408,9 +466,15 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
 
+    // 生成 XLSX 文件的 Blob 对象
+    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+
+    // 创建一个 Blob 对象用于下载
+    const blob = new Blob([wbout], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+
     // 创建下载链接
     const link = document.createElement('a');
-    link.href = URL.createObjectURL(XLSX.write(wb, { bookType: 'xlsx', type: 'binary' }));
+    link.href = URL.createObjectURL(blob);
     link.download = `${fileName}.xlsx`;
 
     // 触发点击
@@ -420,7 +484,6 @@ export async function downloadRecordAsXLSX(personName, fileName) {
 
     console.log("XLSX 文件已生成并开始下载");
 }
-
 
 export function parseJson(jsonString) {
     try {
