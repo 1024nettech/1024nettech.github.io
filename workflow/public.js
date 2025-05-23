@@ -26,7 +26,7 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
     }
     window.GM_xmlhttpRequest(options);
 }
-export function loadFiles(urls, status, isModule = false) {
+export async function loadFiles(urls, status, isModule = false) {
     // 动态加载外部文件(JS/CSS)
     if (status === 1) {
         urls = urls.map(url => url + "?t=" + Date.now());
@@ -305,4 +305,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-308-2025.05.23.100142
+// End-308-2025.05.23.145007
