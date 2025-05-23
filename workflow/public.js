@@ -494,7 +494,7 @@ export async function downloadRecordAsXLSX(personName, fileName) {
         return;
     }
 
-    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+    let headers = `日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态`;
     let data = [];
 
     for (let key of stored_keys) {
@@ -507,8 +507,27 @@ export async function downloadRecordAsXLSX(personName, fileName) {
             for (let subKey in record) {
                 let recordContent = record[subKey];
 
-                // 如果 recordContent 是字符串且不为空，进行处理
-                if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+                // 检查子项是否是对象
+                if (recordContent && typeof recordContent === 'object' && !Array.isArray(recordContent)) {
+                    // 如果是对象，遍历对象的键值对
+                    for (let innerKey in recordContent) {
+                        let innerValue = recordContent[innerKey];
+
+                        // 如果 innerValue 是字符串且不为空，进行处理
+                        if (innerValue && typeof innerValue === 'string' && innerValue.trim() !== "") {
+                            let updatedRecord = innerValue
+                                .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
+                                .replace("欢迎您：", "")  // 去掉 "欢迎您："
+                                .trim();
+
+                            let recordFields = updatedRecord.split("\t");  // 按制表符分割数据
+                            data.push(recordFields);  // 将数据添加到 data 数组
+                        } else {
+                            console.log(`跳过空记录: ${innerKey}`, innerValue);  // 输出跳过的记录
+                        }
+                    }
+                } else if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+                    // 如果 recordContent 是字符串且不为空，进行处理
                     let updatedRecord = recordContent
                         .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
                         .replace("欢迎您：", "")  // 去掉 "欢迎您："
@@ -539,9 +558,7 @@ export async function downloadRecordAsXLSX(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
 
     console.log("XLSX 文件已生成并开始下载");
-
 }
-
 export function parseJson(jsonString) {
     try {
         return JSON.parse(jsonString.trim());
