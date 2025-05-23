@@ -1,14 +1,36 @@
 import * as publics from "./public.js"
+import { set, get, del, keys } from "./idb-keyval.js";
 const url = location.href;
 export function openProductsEdit() {
     // Esc打开产品栏目管理列表
-    // localStorage.setItem("hash", "1");
+    // 获取用户名
+    let username = $(".welcome").text().split("欢迎您：")[1].trim();
+    // 获取ch_id参数
+    let ch_id = location.href.split("&ch_id=")[1];
+
+    // 获取当前页码
     let page = location.href.split("&page=")[1];
+
+    // 查找所有文本为 "编辑" 的a标签
     $("a").filter(function () {
         return $(this).text().trim() === "编辑";
-    }).each(function (index) {
-        window.open($(this).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
+    }).each(async function (index) {
+        let href = $(this).attr("href");
+
+        // 使用正则从URL中提取产品ID
+        let proidMatch = href.match(/id=(\d+)/);  // 正则匹配 id=后面的数字
+        let proid = proidMatch ? proidMatch[1] : null;  // 提取id值
+
+        if (proid) {
+            // 存储数据到 idb-keyval（IndexedDB）
+            await set(`${username}[${ch_id}][${proid}]`, '');  // 存储到 IndexedDB 中，可以存储其他相关信息
+
+            // 打开每个编辑链接并加上分页信息
+            window.open(href + "#page=" + page + "-" + (index + 1), "_blank");
+        }
     });
+
+    // 如果存在下一页，跳转到下一页；否则关闭当前窗口
     if ($(".page-next").length) {
         location.href = $(".page-next").attr("href");
     } else {
@@ -31,13 +53,19 @@ export async function handleProductAction(checked_car, status = "") {
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
         // await waitForHashToMatch();
-        await publics.appendToRecord(record);
+        //await publics.appendToRecord(record);
         // let stored_hash = localStorage.getItem("hash");
         // if (stored_hash) {
         //     localStorage.setItem("hash", parseInt(stored_hash) + 1);
         // } else {
         //     console.error("存储的哈希值无效或缺失");
         // }
+
+        await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
+
+
+
+
         window.close();
     } else {
         await processOtherStatus(checked_car, labelsBefore, record, status);
@@ -58,8 +86,13 @@ async function waitForHashToMatch() {
     });
 }
 async function processOtherStatus(checked_car, labelsBefore, record, status) {
+
     const observer = new MutationObserver(async (mutationsList, observer) => {
         if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+            let username = $(".welcome").text().trim().replace("欢迎您：", "");
+            let urlParams = new URLSearchParams(new URL(url).search);
+            let ch_id = urlParams.get("ch_id");
+            let id = urlParams.get("id");
             observer.disconnect();
             $("input[type=checkbox][value=4]").prop("checked", false);
             if (checked_car) {
@@ -69,7 +102,8 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
                 .map(checkbox => checkbox.closest("label").textContent.trim())
                 .join(", ");
             record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-            await publics.appendToRecord(record);
+            // await publics.appendToRecord(record);
+            await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
             $("title").text("完成");
             $("#submit_msg a").click();
         }
@@ -89,7 +123,8 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
             .map(checkbox => checkbox.closest("label").textContent.trim())
             .join(", ");
         record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-        await publics.appendToRecord(record);
+        // await publics.appendToRecord(record);
+        await set(`${username}[${ch_id}][${id}]`, record);  // 存储到 IndexedDB 中，可以存储其他相关信息
         $("title").text("完成");
         $("#submit_msg a").click();
     }
@@ -343,4 +378,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-346-2025.05.23.195729
+// End-381-2025.05.23.220108
