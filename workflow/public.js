@@ -500,20 +500,20 @@ export async function downloadRecordAsXLSX(personName, fileName) {
             let record = await get(key);  // 获取每个 key 对应的记录
             console.log(`处理记录: ${key}`, record);
 
-            if (record && Object.keys(record).length > 0) {
-                for (let subKey in record) {
-                    let recordContent = record[subKey];
+            // if (record && Object.keys(record).length > 0) {
+            for (let subKey in record) {
+                let recordContent = record[subKey];
 
-                    if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
-                        let updatedRecord = recordContent
-                            .replace(/xxpersonname/g, personName)
-                            .replace("欢迎您：", "")
-                            .trim();
+                if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+                    let updatedRecord = recordContent
+                        .replace(/xxpersonname/g, personName)
+                        .replace("欢迎您：", "")
+                        .trim();
 
-                        let recordFields = updatedRecord.split("\t");
-                        data.push(recordFields);
-                    }
+                    let recordFields = updatedRecord.split("\t");
+                    data.push(recordFields);
                 }
+                // }
             }
         }
 
