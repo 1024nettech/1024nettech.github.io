@@ -114,8 +114,8 @@ export async function handleProductAction(checked_car, status = "") {
         let userData = await get(username) || {};  // 如果没有数据则返回空对象
         let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
 
-        // 将记录存储在嵌套路径中
-        chData[id] = record;  // 使用 id 作为键，存储记录
+        // 更新记录，如果该 proid 下已经有记录，则更新，否则新增
+        chData[id] = record;  // 将新的记录直接赋值给该 proid
 
         // 更新整个数据结构
         userData[ch_id] = chData;  // 更新 ch_id 对应的数据
@@ -129,7 +129,6 @@ export async function handleProductAction(checked_car, status = "") {
         await processOtherStatus(checked_car, labelsBefore, record, status);
     }
 }
-
 async function waitForHashToMatch() {
     return new Promise(resolve => {
         function checkHash() {
@@ -172,7 +171,7 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
             let userData = await get(username) || {};  // 如果没有数据则返回空对象
             let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
 
-            // 将记录存储在 id 下
+            // 将记录存储在 id 下，直接覆盖原记录
             chData[id] = record;  // 使用 id 作为键，存储记录
 
             // 更新整个数据结构
@@ -215,7 +214,7 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
         let userData = await get(username) || {};  // 如果没有数据则返回空对象
         let chData = userData[ch_id] || {};  // 获取 ch_id 对应的数据，如果没有则初始化为空对象
 
-        // 将记录存储在 id 下
+        // 将记录存储在 id 下，直接覆盖原记录
         chData[id] = record;  // 使用 id 作为键，存储记录
 
         // 更新整个数据结构
@@ -229,6 +228,12 @@ async function processOtherStatus(checked_car, labelsBefore, record, status) {
         $("#submit_msg a").click();
     }
 }
+
+
+
+
+
+
 // async function processOtherStatus(checked_car, labelsBefore, record, status) {
 //     await new Promise(resolve => {
 //         let interval = setTimeout(async function checkAndExecute() {
