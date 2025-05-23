@@ -17,8 +17,10 @@ async function main() {
         console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
+        const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
         const encodedCookie = localStorage.getItem("cookie");
-        const decodedCookie = atob(encodedCookie);
+        const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
+        const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
@@ -348,4 +350,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-351-2025.05.23.103240
+// End-353-2025.05.23.130341
