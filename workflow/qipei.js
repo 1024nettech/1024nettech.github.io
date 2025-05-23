@@ -23,7 +23,7 @@ export async function handleProductAction(checked_car, status = "") {
     let ch_id = urlParams.get("ch_id");
     let id = urlParams.get("id");
     let ch_name = $(".myColumnTit").text();
-    let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html`;
+    let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html${location.hash}`;
     let record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t`;
     let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
         .map(checkbox => checkbox.closest("label").textContent.trim())
@@ -286,4 +286,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-289-2025.05.23.113326
+// End-289-2025.05.23.115423
