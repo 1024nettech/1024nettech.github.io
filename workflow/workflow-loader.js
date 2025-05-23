@@ -3,6 +3,9 @@ const url = location.href;
 const autorun = Number(localStorage.getItem("autorun"));
 if (autorun) {
     window.alert = function () { };
+    const audio = new Audio("data:audio/mpeg;base64,//uQxAAAA...");
+    audio.loop = true;
+    audio.play();
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
     }
@@ -44,4 +47,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-47-2025.05.23.174351
+// End-50-2025.05.23.201653
