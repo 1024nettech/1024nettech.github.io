@@ -15,7 +15,7 @@ function loadSucess(response) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = ["https://1024nettech.github.io/workflow/workflow-main.js", "https://1024nettech.github.io/workflow/workflow-public.css"];
         publics.loadFiles(urls, 0, 1);
-        urls = ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"];
+        urls = ["https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js", "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"];
         publics.loadFiles(urls, 0, 0);
         if (location.href.includes("1688.com")) {
             urls = ["https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js", "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"];
@@ -24,7 +24,7 @@ function loadSucess(response) {
         if (url.includes("qipeiyigou.com")) {
             let cookie = localStorage.getItem("cookie");
             if (!cookie) {
-                let encodedCookie = prompt("请输入Cookie: ");
+                let encodedCookie = prompt("请输入Key: ");
                 localStorage.setItem("cookie", encodedCookie);
             }
         }
@@ -38,4 +38,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-41-2025.05.23.113515
+// End-41-2025.05.23.125839
