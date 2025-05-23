@@ -345,18 +345,7 @@ let interval = setInterval(function () {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         clearInterval(interval);
 
-        const script = document.createElement('script');
-
-        // 设置 script 标签的 src 属性为外部 JavaScript 文件的 URL
-        script.src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js";
-
-
-        // 监听脚本加载完成事件
-        script.onload = () => {
-            console.log(`脚本加载完成: crypto`);
-            main();
-
-        };
+        main();
 
 
 
