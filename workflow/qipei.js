@@ -58,33 +58,70 @@ async function waitForHashToMatch() {
     });
 }
 async function processOtherStatus(checked_car, labelsBefore, record, status) {
-    await new Promise(resolve => {
-        let interval = setTimeout(async function checkAndExecute() {
-            if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-                // let currentHash = location.hash.split("#")[1];
-                // let stored_hash = localStorage.getItem("hash");
-                // if (currentHash === stored_hash) {
-                // localStorage.setItem("hash", parseInt(stored_hash) + 1);
-                clearTimeout(interval);
-                $("input[type=checkbox][value=4]").prop("checked", false);
-                if (checked_car) {
-                    $("input[type=checkbox][value=2]").prop("checked", true);
-                }
-                let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
-                    .map(checkbox => checkbox.closest("label").textContent.trim())
-                    .join(", ");
-                record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-                await publics.appendToRecord(record);
-                $("title").text("完成");
-                $("#submit_msg a").click();
-                resolve();
-                // }
-            } else {
-                setTimeout(checkAndExecute, 100);
+    const observer = new MutationObserver(async (mutationsList, observer) => {
+        if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+            observer.disconnect();
+            $("input[type=checkbox][value=4]").prop("checked", false);
+            if (checked_car) {
+                $("input[type=checkbox][value=2]").prop("checked", true);
             }
-        }, 100);
+            let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                .map(checkbox => checkbox.closest("label").textContent.trim())
+                .join(", ");
+            record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+            await publics.appendToRecord(record);
+            $("title").text("完成");
+            $("#submit_msg a").click();
+        }
     });
+    const parentNode = document.body;
+    observer.observe(parentNode, {
+        childList: true,
+        subtree: true,
+    });
+    if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+        observer.disconnect();
+        $("input[type=checkbox][value=4]").prop("checked", false);
+        if (checked_car) {
+            $("input[type=checkbox][value=2]").prop("checked", true);
+        }
+        let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+            .map(checkbox => checkbox.closest("label").textContent.trim())
+            .join(", ");
+        record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+        await publics.appendToRecord(record);
+        $("title").text("完成");
+        $("#submit_msg a").click();
+    }
 }
+// async function processOtherStatus(checked_car, labelsBefore, record, status) {
+//     await new Promise(resolve => {
+//         let interval = setTimeout(async function checkAndExecute() {
+//             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
+//                 // let currentHash = location.hash.split("#")[1];
+//                 // let stored_hash = localStorage.getItem("hash");
+//                 // if (currentHash === stored_hash) {
+//                 // localStorage.setItem("hash", parseInt(stored_hash) + 1);
+//                 clearTimeout(interval);
+//                 $("input[type=checkbox][value=4]").prop("checked", false);
+//                 if (checked_car) {
+//                     $("input[type=checkbox][value=2]").prop("checked", true);
+//                 }
+//                 let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+//                     .map(checkbox => checkbox.closest("label").textContent.trim())
+//                     .join(", ");
+//                 record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+//                 await publics.appendToRecord(record);
+//                 $("title").text("完成");
+//                 $("#submit_msg a").click();
+//                 resolve();
+//                 // }
+//             } else {
+//                 setTimeout(checkAndExecute, 100);
+//             }
+//         }, 100);
+//     });
+// }
 export function open_close_shop_products() {
     // 店铺内打开或关闭产品
     if (!location.href.includes("mshop/product/item")) {
@@ -306,4 +343,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-309-2025.05.23.175600
+// End-346-2025.05.23.195729
