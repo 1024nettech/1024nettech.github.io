@@ -485,95 +485,68 @@ export async function downloadRecordAsTSV(personName, fileName) {
 //     console.log("XLSX 文件已生成并开始下载");
 // }
 export async function downloadRecordAsXLSX(personName, fileName) {
-    try {
-        const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
-        console.log(keys);
 
-        if (stored_keys.length === 0) {
-            alert("没有找到可导出的数据！");
-            return;
-        }
+    const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
+    console.log(keys);
 
-        let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
-        let data = [];
-
-        for (let key of stored_keys) {
-            let record = await get(key);  // 获取每个 key 对应的记录
-            console.log(`处理记录: ${key}`, record);
-
-            // 检查 record 是否是非空对象
-            if (record && Object.keys(record).length > 0) {
-                // 遍历 record 的每个子项
-                for (let subKey in record) {
-                    let recordContent = record[subKey];
-
-                    // 如果 recordContent 是字符串且不为空，进行处理
-                    if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
-                        let updatedRecord = recordContent
-                            .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
-                            .replace("欢迎您：", "")  // 去掉 "欢迎您："
-                            .trim();
-
-                        let recordFields = updatedRecord.split("\t");  // 按制表符分割数据
-                        data.push(recordFields);  // 将数据添加到 data 数组
-                    } else {
-                        console.log(`跳过空记录: ${subKey}`, recordContent);  // 输出跳过的记录
-                    }
-                }
-            } else {
-                console.log(`跳过空 key: ${key}`, record);  // 输出跳过的空记录
-            }
-        }
-
-        // 进一步检查 data 是否为空
-        if (data.length === 0) {
-            alert("没有有效的数据可以导出！");
-            return;
-        }
-
-        data.unshift(headers);
-
-        // 调试：检查数据是否正确
-        console.table(data);
-
-        let ws = XLSX.utils.aoa_to_sheet(data);
-        let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
-        ws["!cols"] = colWidths.map(width => ({ wpx: width }));
-
-        let wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "记录数据");
-
-        // 生成 XLSX 文件的 Blob 对象
-        const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-
-        // 检查 wbout 是否为空
-        if (!wbout || wbout.length === 0) {
-            throw new Error("生成的 XLSX 文件内容为空！");
-        }
-
-        // 创建 Blob 对象
-        const blob = new Blob([wbout], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
-
-        // 检查 blob 是否有效
-        if (!blob || blob.size === 0) {
-            throw new Error("生成的 Blob 对象无效！");
-        }
-
-        // 创建下载链接
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = `${fileName}.xlsx`;
-
-        // 触发点击
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        console.log("XLSX 文件已生成并开始下载");
-    } catch (error) {
-        console.error("下载失败:", error);
-        alert("下载失败，请检查控制台日志！");
+    if (stored_keys.length === 0) {
+        alert("没有找到可导出的数据！");
+        return;
     }
+
+    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+    let data = [];
+
+    for (let key of stored_keys) {
+        let record = await get(key);  // 获取每个 key 对应的记录
+        console.log(`处理记录: ${key}`, record);
+
+        // 检查 record 是否是非空对象
+        if (record && Object.keys(record).length > 0) {
+            // 遍历 record 的每个子项
+            for (let subKey in record) {
+                let recordContent = record[subKey];
+
+                // 如果 recordContent 是字符串且不为空，进行处理
+                if (recordContent && typeof recordContent === 'string' && recordContent.trim() !== "") {
+                    let updatedRecord = recordContent
+                        .replace(/xxpersonname/g, personName)  // 替换 "xxpersonname" 为 personName
+                        .replace("欢迎您：", "")  // 去掉 "欢迎您："
+                        .trim();
+
+                    let recordFields = updatedRecord.split("\t");  // 按制表符分割数据
+                    data.push(recordFields);  // 将数据添加到 data 数组
+                } else {
+                    console.log(`跳过空记录: ${subKey}`, recordContent);  // 输出跳过的记录
+                }
+            }
+        } else {
+            console.log(`跳过空 key: ${key}`, record);  // 输出跳过的空记录
+        }
+    }
+
+    // 进一步检查 data 是否为空
+    if (data.length === 0) {
+        alert("没有有效的数据可以导出！");
+        return;
+    }
+
+    data.unshift(headers);
+
+    let ws = XLSX.utils.aoa_to_sheet(data);
+
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
+
+    ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+
+    let wb = XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
+
+    console.log("XLSX 文件已生成并开始下载");
+
 }
 
 export function parseJson(jsonString) {
