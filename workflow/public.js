@@ -315,7 +315,7 @@ export async function downloadRecordAsXLSX(personName, fileName) {
 
     // 遍历所有的 keys
     for (let key of stored_keys) {
-        console(key);
+        console.log(key);
         let record = await get(key);  // 获取每个 key 对应的记录
         console.log(record);
         if (record && record.trim() !== "") {
