@@ -344,17 +344,10 @@ async function main() {
 let interval = setInterval(function () {
     if (document.readyState === "complete" || document.readyState === "interactive") {
         clearInterval(interval);
-
         main();
-
-
-
-
-
-
         console.log("来自workflow-main.js输出: DOM 已加载完成, main()函数已执行");
     } else {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-355-2025.05.23.145857
+// End-353-2025.05.23.154433
