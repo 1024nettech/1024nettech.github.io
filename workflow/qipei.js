@@ -42,16 +42,18 @@ export async function handleProductAction(checked_car, status = "") {
         await processOtherStatus(checked_car, labelsBefore, record, status);
     }
 }
-function waitForHashToMatch() {
+async function waitForHashToMatch() {
     return new Promise(resolve => {
-        let interval = setInterval(() => {
+        function checkHash() {
             let currentHash = location.hash.split("#")[1];
             let stored_hash = localStorage.getItem("hash");
             if (currentHash === stored_hash) {
-                clearInterval(interval);
                 resolve();
+            } else {
+                setTimeout(checkHash, 100);
             }
-        }, 100);
+        }
+        checkHash();
     });
 }
 async function processOtherStatus(checked_car, labelsBefore, record, status) {
@@ -304,4 +306,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-307-2025.05.23.135119
+// End-309-2025.05.23.165056
