@@ -33,7 +33,7 @@ export async function loadFiles(urls, status, isModule = false) {
     }
     let totalFiles = urls.length;
     let loadedFiles = 0;
-    function loadNextFile(index) {
+    async function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
             let fileExtension = url.split(".").pop().split("?")[0].toLowerCase();
@@ -41,17 +41,17 @@ export async function loadFiles(urls, status, isModule = false) {
                 let script = document.createElement("script");
                 script.src = url;
                 script.type = isModule ? "module" : "text/javascript";
-                script.onload = function () {
+                script.onload = async function () {
                     console.log(`脚本加载完成: ${url}`);
                     loadedFiles++;
                     if (loadedFiles === totalFiles) {
                         onFilesLoaded();
                     }
-                    loadNextFile(index + 1);
+                    await loadNextFile(index + 1);
                 };
-                script.onerror = function (error) {
+                script.onerror = async function (error) {
                     console.error(`脚本加载失败: ${url}, 错误信息: `, error);
-                    loadNextFile(index + 1);
+                    await loadNextFile(index + 1);
                 };
                 console.log(`开始加载脚本: ${url}`);
                 document.head.append(script);
@@ -59,30 +59,30 @@ export async function loadFiles(urls, status, isModule = false) {
                 let link = document.createElement("link");
                 link.rel = "stylesheet";
                 link.href = url;
-                link.onload = function () {
+                link.onload = async function () {
                     console.log(`CSS 加载完成: ${url}`);
                     loadedFiles++;
                     if (loadedFiles === totalFiles) {
                         onFilesLoaded();
                     }
-                    loadNextFile(index + 1);
+                    await loadNextFile(index + 1);
                 };
-                link.onerror = function (error) {
+                link.onerror = async function (error) {
                     console.error(`CSS 加载失败: ${url}, 错误信息: `, error);
-                    loadNextFile(index + 1);
+                    await loadNextFile(index + 1);
                 };
                 console.log(`开始加载 CSS: ${url}`);
                 document.head.append(link);
             } else {
                 console.error(`无法识别的文件类型: ${url}`);
-                loadNextFile(index + 1);
+                await loadNextFile(index + 1);
             }
         }
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
     }
-    loadNextFile(0);
+    await loadNextFile(0);
 }
 export function generateTimestamp(format) {
     // 获取时间戳
@@ -170,7 +170,7 @@ export function moveElement(selector1, selector2) {
 }
 export function clearExceptAuth() {
     // 清除localStorage,保留列表里的键值
-    let keepKeys = ["auth", "autorun", "date", "screenshotMode", "name", "usernames", "cookie"];
+    let keepKeys = ["auth", "autorun", "date", "screenshotMode", "name", "usernames"];
     for (let key in localStorage) {
         if (!keepKeys.includes(key)) {
             localStorage.removeItem(key);
@@ -305,4 +305,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-308-2025.05.23.145007
+// End-308-2025.05.23.153958
