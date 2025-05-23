@@ -2,7 +2,6 @@ import * as admin from "./admin.js"
 import * as publics from "./public.js"
 import * as qipei from "./qipei.js"
 import * as ali from "./ali.js"
-import { use } from "react";
 import { set, get, del, keys } from "./idb-keyval.js";
 async function main() {
     const url = location.href;
@@ -280,6 +279,7 @@ async function main() {
             }
 
             // 将 channels 对象与用户名一起存储
+
             await set(username, channels);
 
             // 打开所有 channelId 的产品列表
