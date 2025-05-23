@@ -484,19 +484,29 @@ export async function downloadRecordAsTSV(personName, fileName) {
 
 //     console.log("XLSX 文件已生成并开始下载");
 // }
+export function parseJson(jsonString) {
+    try {
+        return JSON.parse(jsonString.trim());
+    } catch (error) {
+        console.error("Failed to parse JSON: ", error);
+        return null;
+    }
+}
 export async function downloadRecordAsXLSX(personName, fileName) {
 
     const stored_keys = await keys();  // 假设keys()是返回所有存储键的函数
-    console.log(keys);
+    console.log(stored_keys);
 
     if (stored_keys.length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
 
-    let headers = `日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态`;
+    // 定义表头
+    let headers = `日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态`.split("\t");
     let data = [];
 
+    // 遍历 stored_keys 获取数据
     for (let key of stored_keys) {
         let record = await get(key);  // 获取每个 key 对应的记录
         console.log(`处理记录: ${key}`, record);
@@ -543,28 +553,33 @@ export async function downloadRecordAsXLSX(personName, fileName) {
             console.log(`跳过空 key: ${key}`, record);  // 输出跳过的空记录
         }
     }
+
+    // 将表头插入到数据最前面
     data.unshift(headers);
 
-    let ws = XLSX.utils.aoa_to_sheet(data);
+    // 检查数据格式
+    console.log("Data before XLSX generation:", data);
 
+    let ws = XLSX.utils.aoa_to_sheet(data);  // 将数据转换为工作表
+
+    // 设置列宽
     let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
-
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
 
+    // 创建一个工作簿
     let wb = XLSX.utils.book_new();
 
+    // 将工作表添加到工作簿中
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
 
+    // 导出并保存为 XLSX 文件
     XLSX.writeFile(wb, `${fileName}.xlsx`);
 
     console.log("XLSX 文件已生成并开始下载");
 }
-export function parseJson(jsonString) {
-    try {
-        return JSON.parse(jsonString.trim());
-    } catch (error) {
-        console.error("Failed to parse JSON: ", error);
-        return null;
-    }
-}
+
+
+
+
+
 // End-310-2025.05.23.163035
