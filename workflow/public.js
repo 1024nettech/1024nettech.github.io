@@ -26,17 +26,18 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
     }
     window.GM_xmlhttpRequest(options);
 }
-export async function loadFiles(urls, status, isModule = false) {
+export async function loadFiles(urls) {
     // 动态加载外部文件(JS/CSS)
-    if (status === 1) {
-        urls = urls.map(url => url + "?t=" + Date.now());
-    }
     let totalFiles = urls.length;
     let loadedFiles = 0;
     async function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
             let fileExtension = url.split(".").pop().split("?")[0].toLowerCase();
+            if (url.includes("?time=1")) {
+                url = url.split("?")[0] + "?time=" + Date.now();
+            }
+            let isModule = url.includes("&module=1");
             if (fileExtension === "js") {
                 let script = document.createElement("script");
                 script.src = url;
@@ -305,4 +306,4 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-308-2025.05.23.153958
+// End-309-2025.05.23.161528
