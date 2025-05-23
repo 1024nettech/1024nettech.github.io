@@ -301,6 +301,15 @@ export async function downloadRecordAsTSV(personName, fileName) {
 // }
 
 export async function downloadRecordAsXLSX(personName, fileName) {
+    keys().then((allKeys) => {
+        console.log('所有键:', allKeys);
+
+        // 遍历每个键
+        allKeys.forEach(async (key) => {
+            const value = await keyval.get(key); // 获取对应的值
+            console.log(`键: ${key}, 值: ${value}`);
+        });
+    });
     // 直接遍历所有 keys
     const keys = await keys();  // 假设keys()是返回所有存储键的函数
 
