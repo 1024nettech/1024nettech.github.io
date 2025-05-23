@@ -18,10 +18,32 @@ async function main() {
         console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
+        // const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
+        // const encodedCookie = localStorage.getItem("cookie");
+        // const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
+        // const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+
+
         const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
         const encodedCookie = localStorage.getItem("cookie");
-        const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
-        const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+
+        let decodedCookie = null;
+
+        try {
+            const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
+            decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+            if (!decodedCookie) {
+                throw new Error("解密失败，返回空值");
+            }
+        } catch (error) {
+            console.error("解密过程中发生错误:", error);
+            decodedCookie = null;
+        }
+
+
+
+
+
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
