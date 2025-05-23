@@ -15,7 +15,6 @@ export function openProductsEdit() {
     }
 };
 export async function handleProductAction(checked_car, status = "") {
-    // 获取产品页面的相关数据, 并进行记录操作
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
     let username = $(".welcome").text().trim().replace("欢迎您：", "");
@@ -30,17 +29,33 @@ export async function handleProductAction(checked_car, status = "") {
         .join(", ");
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
+        await waitForHashToMatch();
         await publics.appendToRecord(record);
+        let stored_hash = localStorage.getItem("hash");
+        if (stored_hash) {
+            localStorage.setItem("hash", parseInt(stored_hash) + 1);
+        } else {
+            console.error("存储的哈希值无效或缺失");
+        }
+        window.close();
+    } else {
+        await processOtherStatus(checked_car, labelsBefore, record, status);
+    }
+}
+function waitForHashToMatch() {
+    return new Promise(resolve => {
         let interval = setInterval(() => {
             let currentHash = location.hash.split("#")[1];
             let stored_hash = localStorage.getItem("hash");
             if (currentHash === stored_hash) {
                 clearInterval(interval);
-                localStorage.setItem("hash", parseInt(stored_hash) + 1);
-                window.close();
+                resolve();
             }
         }, 100);
-    } else {
+    });
+}
+async function processOtherStatus(checked_car, labelsBefore, record, status) {
+    await new Promise(resolve => {
         let interval = setTimeout(async function checkAndExecute() {
             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
                 let currentHash = location.hash.split("#")[1];
@@ -58,14 +73,14 @@ export async function handleProductAction(checked_car, status = "") {
                     record += `${labelsBefore}\t${labelsAfter}\t${status}`;
                     await publics.appendToRecord(record);
                     $("title").text("完成");
+                    $("#submit_msg a").click();
+                    resolve();
                 }
-                $("#submit_msg a").click();
+            } else {
+                setTimeout(checkAndExecute, 100);
             }
-            else {
-                setTimeout(checkAndExecute, 1000);
-            }
-        }, 1000);
-    }
+        }, 100);
+    });
 }
 export function open_close_shop_products() {
     // 店铺内打开或关闭产品
@@ -289,4 +304,4 @@ export async function fetchChIdsAndTitles(url) {
         return {};
     }
 }
-// End-292-2025.05.23.132259
+// End-307-2025.05.23.135119
