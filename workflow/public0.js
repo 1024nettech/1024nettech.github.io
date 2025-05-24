@@ -246,6 +246,77 @@ export function parseJson(jsonString) {
         return null;
     }
 }
+// export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx') {
+//     // 使用 idb-keyval 获取记录对象，根据类型下载 xlsx 或 tsv 文件
+//     let records = await get("record");
+//     if (!records || Object.keys(records).length === 0) {
+//         alert("没有找到可导出的数据！");
+//         return;
+//     }
+
+//     // 定义表头，原始值和改后值作为标题行
+//     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
+//     let data = [];
+
+//     // 遍历 record 对象
+//     Object.keys(records).forEach(username => {
+//         let userRecord = records[username];  // 获取当前用户记录
+//         Object.keys(userRecord).forEach(ch_id => {
+//             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
+//             Object.keys(productRecord).forEach(proid => {
+//                 // 获取 proid 对应的值
+//                 let proidValue = productRecord[proid];
+
+//                 // 如果 proidValue 为空或没有有效数据，则跳过
+//                 if (!proidValue || proidValue.trim() === "") {
+//                     return;
+//                 }
+
+//                 // 在 proid 中替换 "xxpersonname" 为 personName
+//                 let updatedProidValue = proidValue.replace(/xxpersonname/g, personName);
+
+//                 // 分割 proidValue，如果 split 后字段为空，则填充默认值
+//                 let recordFields = updatedProidValue.split("\t").map(field => field.trim() || "无数据");
+
+//                 // 输出 proid 对应的值和处理后的字段
+//                 console.log("proid 对应的值:", proidValue);
+//                 console.log("更新后的 proid 值:", updatedProidValue);
+//                 console.log("分割后的字段:", recordFields);
+
+//                 // 如果没有有效的字段，跳过
+//                 if (recordFields.length === 0 || recordFields.every(field => field === "无数据")) {
+//                     return;
+//                 }
+
+//                 // 将拆分后的 proid 字段添加到数据行中
+//                 data.push(recordFields);
+//             });
+//         });
+//     });
+
+//     // 根据文件类型选择生成不同的文件
+//     if (fileType === 'xlsx') {
+//         // 生成XLSX格式
+//         let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+//         let colWidths = [70, 50, 50, 170, 170, 170, 170, 170, 170];  // 设置每列的宽度
+//         ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+//         let wb = XLSX.utils.book_new();
+//         XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+//         XLSX.writeFile(wb, `${fileName}.xlsx`);
+//         console.log("XLSX 文件已生成并开始下载");
+//     } else if (fileType === 'tsv') {
+//         // 生成TSV格式
+//         let tsvContent = [headers.join("\t"), ...data.map(row => row.join("\t"))].join("\n");
+//         let blob = new Blob([tsvContent], { type: 'text/tab-separated-values' });
+//         let link = document.createElement('a');
+//         link.href = URL.createObjectURL(blob);
+//         link.download = `${fileName}.tsv`;
+//         link.click();
+//         console.log("TSV 文件已生成并开始下载");
+//     } else {
+//         alert("不支持的文件类型！");
+//     }
+// }
 export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx') {
     // 使用 idb-keyval 获取记录对象，根据类型下载 xlsx 或 tsv 文件
     let records = await get("record");
@@ -263,7 +334,11 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         let userRecord = records[username];  // 获取当前用户记录
         Object.keys(userRecord).forEach(ch_id => {
             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
-            Object.keys(productRecord).forEach(proid => {
+
+            // 获取 proid 的键名并按降序排序
+            let sortedProids = Object.keys(productRecord).sort((a, b) => b.localeCompare(a));
+
+            sortedProids.forEach(proid => {
                 // 获取 proid 对应的值
                 let proidValue = productRecord[proid];
 
