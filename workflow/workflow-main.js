@@ -17,6 +17,19 @@ async function main() {
         console.log(localStorage);
     }
     if (url.includes("qipeiyigou.com")) {
+        // 首页和登录页面添加导出组件
+        if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
+            qipei.export_tsc();
+            let cookie = localStorage.getItem("cookie");
+            if (!cookie) {
+                let encodedCookie = prompt("请输入Key: ");
+                localStorage.setItem("cookie", encodedCookie);
+            }
+        }
+        const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
+        const encodedCookie = localStorage.getItem("cookie");
+        const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
+        const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
@@ -257,19 +270,6 @@ async function main() {
         if (autorun) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
-        // 首页和登录页面添加导出组件
-        if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
-            qipei.export_tsc();
-            let cookie = localStorage.getItem("cookie");
-            if (!cookie) {
-                let encodedCookie = prompt("请输入Key: ");
-                localStorage.setItem("cookie", encodedCookie);
-            }
-            const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
-            const encodedCookie = localStorage.getItem("cookie");
-            const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
-            const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
-        }
         // 退出后自动跳转登录页
         else if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
             location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
@@ -355,4 +355,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-358-2025.05.24.082021
+// End-358-2025.05.24.083823
