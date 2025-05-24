@@ -212,19 +212,17 @@ export async function openProductsEdit() {
     let ch_id = parseInt(url.split("&ch_id=")[1]);
     // 获取当前页面的分页信息
     let page = location.href.split("&page=")[1];
-    // 获取所有 "编辑" 链接
+    // 获取所有 "编辑" 链接，按顺序筛选出
     let productLinks = $("a").filter(function () {
         return $(this).text().trim() === "编辑";
     });
-    // 提取每个链接中的 id 值，并按顺序添加到 record
-    let productIds = [];
-    productLinks.each(function () {
+
+    // 使用 .map() 方法提取 id，并确保顺序
+    let productIds = productLinks.map(function () {
         let url = $(this).attr("href");
         let idMatch = url.match(/[?&]id=(\d+)/);
-        if (idMatch) {
-            productIds.push(idMatch[1]); // 提取 id
-        }
-    });
+        return idMatch ? idMatch[1] : null; // 提取 id 或返回 null
+    }).get(); // 使用 .get() 转换为数组
 
     // 获取当前记录
     let records = await get("record") || {};
@@ -258,6 +256,57 @@ export async function openProductsEdit() {
         window.close();
     }
 }
+// export async function openProductsEdit() {
+//     let username = $(".welcome").text().split("欢迎您：")[1].trim();
+//     let ch_id = parseInt(url.split("&ch_id=")[1]);
+//     // 获取当前页面的分页信息
+//     let page = location.href.split("&page=")[1];
+//     // 获取所有 "编辑" 链接
+//     let productLinks = $("a").filter(function () {
+//         return $(this).text().trim() === "编辑";
+//     });
+//     // 提取每个链接中的 id 值，并按顺序添加到 record
+//     let productIds = [];
+//     productLinks.each(function () {
+//         let url = $(this).attr("href");
+//         let idMatch = url.match(/[?&]id=(\d+)/);
+//         if (idMatch) {
+//             productIds.push(idMatch[1]); // 提取 id
+//         }
+//     });
+
+//     // 获取当前记录
+//     let records = await get("record") || {};
+
+//     // 如果当前记录中没有对应的用户名和栏目id，初始化它们
+//     if (!records[username]) {
+//         records[username] = {};
+//     }
+//     if (!records[username][ch_id]) {
+//         records[username][ch_id] = {};
+//     }
+
+//     // 按顺序将 productIds 添加到 record 中
+//     for (let proid of productIds) {
+//         records[username][ch_id][proid] = ""; // 设置为空字符串
+//     }
+
+//     // 将更新后的记录保存回 idb-keyval
+//     await set("record", records);
+//     console.log(`产品ID已添加到记录: ${productIds.join(", ")}`);
+
+//     // 存储完成后，一次性打开所有的产品编辑页面
+//     for (let index = 0; index < productLinks.length; index++) {
+//         window.open($(productLinks[index]).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
+//     }
+
+//     // 分页处理：如果有 "下一页" 链接，则跳转到下一页，否则关闭窗口
+//     if ($(".page-next").length) {
+//         location.href = $(".page-next").attr("href");
+//     } else {
+//         window.close();
+//     }
+// }
 // export async function openProductsEdit() {
 //     let username = $(".welcome").text().split("欢迎您：")[1].trim();
 //     let ch_id = parseInt(url.split("&ch_id=")[1]);
@@ -352,4 +401,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-355-2025.05.24.173219
+// End-404-2025.05.24.174448
