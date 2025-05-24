@@ -211,18 +211,27 @@ export async function clearAll() {
     console.log("所有数据已清除");
 }
 export async function appendToRecord(username, ch_id, proid, value) {
-    // 获取记录并根据条件追加数据到idb-keyval的record[]
+    // 获取记录并根据条件追加数据到idb-keyval的record对象
     try {
         let records = await get("record");
         if (!records) {
-            records = [];
+            records = {};  // 初始化为空对象，而不是数组
         }
-        let recordEntry = records.find(entry => entry.username === username && entry.ch_id === ch_id);
-        if (!recordEntry) {
-            recordEntry = { username, ch_id, records: {} };
-            records.push(recordEntry);
+
+        // 确保存在 username
+        if (!records[username]) {
+            records[username] = {};  // 如果没有此用户名，初始化一个对象
         }
-        recordEntry.records[proid] = value;
+
+        // 确保存在 ch_id
+        if (!records[username][ch_id]) {
+            records[username][ch_id] = {};  // 如果没有此 ch_id，初始化一个对象
+        }
+
+        // 更新 proid 的值
+        records[username][ch_id][proid] = value;
+
+        // 保存更新后的 records
         await set("record", records);
         console.log("来自workflow-main.js 的输出: appendToRecord记录已更新: ", records);
     } catch (error) {
@@ -285,4 +294,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-288-2025.05.24.154034
+// End-297-2025.05.24.155506
