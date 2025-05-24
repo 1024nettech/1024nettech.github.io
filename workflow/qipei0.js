@@ -246,14 +246,14 @@ export async function openProductsEdit() {
 
     // 存储完成后，一次性打开所有的产品编辑页面
     for (let index = 0; index < productLinks.length; index++) {
-        window.open($(productLinks[index]).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
+       // window.open($(productLinks[index]).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
     }
 
     // 分页处理：如果有 "下一页" 链接，则跳转到下一页，否则关闭窗口
     if ($(".page-next").length) {
         location.href = $(".page-next").attr("href");
     } else {
-        window.close();
+        //window.close();
     }
 }
 // export async function openProductsEdit() {
