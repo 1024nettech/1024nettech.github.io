@@ -206,7 +206,9 @@ export async function open_channel_product_list(chIds) {
         console.log("URL 不匹配, 跳过处理");
     }
 }
-export async function openProductsEdit(username, ch_id) {
+export async function openProductsEdit() {
+    let username = $(".welcome").text().split("欢迎您：")[1].trim();
+    let ch_id = parseInt(url.split("&ch_id=")[1]);
     // Esc打开产品栏目管理列表
     // 获取当前页面的参数, 处理分页
     let page = location.href.split("&page=")[1];
@@ -298,4 +300,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-301-2025.05.24.125027
+// End-303-2025.05.24.151624
