@@ -210,8 +210,10 @@ export async function open_channel_product_list(chIds) {
 export async function openProductsEdit() {
     let username = $(".welcome").text().split("欢迎您：")[1].trim();
     let ch_id = parseInt(url.split("&ch_id=")[1]);
+
     // 获取当前页面的分页信息
     let page = location.href.split("&page=")[1];
+
     // 获取所有 "编辑" 链接，按顺序筛选出
     let productLinks = $("a").filter(function () {
         return $(this).text().trim() === "编辑";
@@ -227,17 +229,21 @@ export async function openProductsEdit() {
     // 获取当前记录
     let records = await get("record") || {};
 
-    // 如果当前记录中没有对应的用户名和栏目id，初始化它们
+    // 如果当前记录中没有对应的用户名，初始化它
     if (!records[username]) {
         records[username] = {};
     }
+
+    // 如果没有对应的栏目ID，初始化为数组
     if (!records[username][ch_id]) {
-        records[username][ch_id] = {};
+        records[username][ch_id] = []; // ch_id 是一个数组，保持顺序
     }
 
-    // 按顺序将 productIds 添加到 record 中
+    // 按顺序将每个 proid 作为对象添加到 ch_id 数组中
     for (let proid of productIds) {
-        records[username][ch_id][proid] = ""; // 设置为空字符串
+        let proidObject = {}; // 创建一个对象
+        proidObject[proid] = ""; // 将 proid 作为键，空字符串作为值（或者其他值）
+        records[username][ch_id].push(proidObject); // 将对象插入到数组中
     }
 
     // 将更新后的记录保存回 idb-keyval
@@ -246,7 +252,7 @@ export async function openProductsEdit() {
 
     // 存储完成后，一次性打开所有的产品编辑页面
     for (let index = 0; index < productLinks.length; index++) {
-       // window.open($(productLinks[index]).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
+        // window.open($(productLinks[index]).attr("href") + "#page=" + page + "-" + (index + 1), "_blank");
     }
 
     // 分页处理：如果有 "下一页" 链接，则跳转到下一页，否则关闭窗口
@@ -401,4 +407,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-404-2025.05.24.174448
+// End-410-2025.05.24.193446
