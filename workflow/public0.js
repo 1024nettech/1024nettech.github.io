@@ -255,7 +255,7 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
     }
 
     // 定义表头，原始值和改后值作为标题行
-    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值"];
+    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
     let data = [];
 
     // 遍历 record 对象
@@ -264,6 +264,11 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         Object.keys(userRecord).forEach(ch_id => {
             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
             Object.keys(productRecord).forEach(proid => {
+                // 如果 proid 为空，则跳过
+                if (!proid) {
+                    return;
+                }
+
                 // 在 proid 中替换 "xxpersonname" 为 personName
                 let updatedProid = proid.replace(/xxpersonname/g, personName);
                 let recordFields = updatedProid.split("\t"); // 用 \t 分割 proid
@@ -297,4 +302,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-300-2025.05.24.161609
+// End-305-2025.05.24.162917
