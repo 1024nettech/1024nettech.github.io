@@ -15,6 +15,7 @@ async function loadSucess(response) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = [
             "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js?time=0&module=0",
+            "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
             "https://1024nettech.github.io/workflow/workflow-main.js?time=1&module=1",
             "https://1024nettech.github.io/workflow/workflow-public.css?time=1&module=0"
         ];
