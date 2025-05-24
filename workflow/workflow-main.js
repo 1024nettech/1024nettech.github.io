@@ -271,7 +271,7 @@ async function main() {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
         // 退出后自动跳转登录页
-        else if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
+        if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
             location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
         }
         // 栏目产品管理列表页Esc打开编辑产品
