@@ -6,6 +6,7 @@
 // @author       Kay
 // @noframes
 // @match        *://*/*
+// @connect      *
 // @run-at       document-start
 // @grant        GM_xmlhttpRequest
 // @icon         https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1633159205592221.png
@@ -21,7 +22,7 @@
     unsafeWindow.GM_info = GM_info;
     unsafeWindow.GM_xmlhttpRequest = GM_xmlhttpRequest;
     let script = document.createElement("script");
-    script.src = "https://1024nettech.github.io/workflow/workflow-loader.js?=" + Date.now();
+    script.src = "https://1024nettech.github.io/workflow/workflow-loader.js?time=" + Date.now();
     script.type = "module";
     script.async = true;
     if (document.head) {
@@ -41,4 +42,4 @@
         observer.observe(document, { childList: true, subtree: true });
     }
 })();
-// End-44-2025.05.20.160253
+// End-45-2025.05.20.160253
