@@ -1,3 +1,4 @@
+import { set, get, del, keys } from "./idb-keyval.js";
 import * as publics from "./public0.js"
 const url = location.href;
 export function export_tsc() {
@@ -300,4 +301,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-303-2025.05.24.151624
+// End-304-2025.05.24.152855
