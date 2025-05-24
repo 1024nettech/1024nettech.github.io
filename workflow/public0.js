@@ -240,26 +240,29 @@ export function parseJson(jsonString) {
 export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx') {
     // 使用 idb-keyval 获取记录对象, 根据类型下载 xlsx 或 tsv 文件
     let records = await get("record");
-    if (!records || records.length === 0) {
+    if (!records || Object.keys(records).length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
     let headers = ["姓名", "栏目id", "产品id", "原始值", "改后值"];
     let data = [];
-    records.forEach(recordEntry => {
-        Object.keys(recordEntry).forEach(username => {
-            let userRecord = recordEntry[username];
-            Object.keys(userRecord).forEach(ch_id => {
-                let productRecord = userRecord[ch_id];
-                Object.keys(productRecord).forEach(proid => {
-                    let recordFields = proid.split("\t");
-                    let updatedRecord = productRecord[proid].replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-                    recordFields.push(updatedRecord);
-                    data.push(recordFields);
-                });
+
+    // 遍历 record 对象
+    Object.keys(records).forEach(username => {
+        let userRecord = records[username];  // 获取当前用户记录
+        Object.keys(userRecord).forEach(ch_id => {
+            let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
+            Object.keys(productRecord).forEach(proid => {
+                // proid 是一个字符串，直接进行处理
+                let recordFields = proid.split("\t"); // 用 \t 分割 proid
+                let updatedRecord = productRecord[proid].replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
+                recordFields.push(updatedRecord);  // 将更新后的记录添加到行数据中
+                data.push(recordFields);  // 将这行数据添加到最终数据中
             });
         });
     });
+
+    // 根据文件类型选择生成不同的文件
     if (fileType === 'xlsx') {
         // 生成XLSX格式
         let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
@@ -282,4 +285,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-285-2025.05.24.112345
+// End-288-2025.05.24.154034
