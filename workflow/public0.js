@@ -253,7 +253,9 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("没有找到可导出的数据！");
         return;
     }
-    let headers = ["姓名", "栏目id", "产品id", "原始值", "改后值"];
+
+    // 定义表头，原始值和改后值作为标题行
+    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值"];
     let data = [];
 
     // 遍历 record 对象
@@ -262,12 +264,12 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         Object.keys(userRecord).forEach(ch_id => {
             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
             Object.keys(productRecord).forEach(proid => {
-                // proid 是一个字符串，直接进行处理
-                let recordFields = proid.split("\t"); // 用 \t 分割 proid
-                let updatedRecord = productRecord[proid].replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-                // 将更新后的记录添加到行数据中
-                recordFields.push(updatedRecord);  // 添加改后值
-                data.push([username, ch_id, ...recordFields]);  // 包括用户名和栏目id在内的数据
+                // 在 proid 中替换 "xxpersonname" 为 personName
+                let updatedProid = proid.replace(/xxpersonname/g, personName);
+                let recordFields = updatedProid.split("\t"); // 用 \t 分割 proid
+
+                // 将拆分后的 proid 字段添加到数据行中
+                data.push(recordFields);
             });
         });
     });
@@ -276,7 +278,7 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
     if (fileType === 'xlsx') {
         // 生成XLSX格式
         let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-        let colWidths = [70, 50, 50, 170, 170];  // 设置每列的宽度
+        let colWidths = [70, 50, 50, 170, 170, 170, 170, 170, 170];  // 设置每列的宽度
         ws["!cols"] = colWidths.map(width => ({ wpx: width }));
         let wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "记录数据");
@@ -295,4 +297,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-298-2025.05.24.160137
+// End-300-2025.05.24.161609
