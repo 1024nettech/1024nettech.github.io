@@ -264,14 +264,26 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         Object.keys(userRecord).forEach(ch_id => {
             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
             Object.keys(productRecord).forEach(proid => {
-                // 如果 proid 为空，则跳过
-                if (!proid) {
+                // 如果 proid 为空或没有有效数据，则跳过
+                if (!proid || proid.trim() === "") {
                     return;
                 }
 
                 // 在 proid 中替换 "xxpersonname" 为 personName
                 let updatedProid = proid.replace(/xxpersonname/g, personName);
-                let recordFields = updatedProid.split("\t"); // 用 \t 分割 proid
+
+                // 分割 proid，如果 split 后字段为空，则填充默认值
+                let recordFields = updatedProid.split("\t").map(field => field.trim() || "无数据");
+
+                // 输出 proid 和处理后的字段
+                console.log("原始 proid:", proid);
+                console.log("更新后的 proid:", updatedProid);
+                console.log("分割后的字段:", recordFields);
+
+                // 如果没有有效的字段，跳过
+                if (recordFields.length === 0 || recordFields.every(field => field === "无数据")) {
+                    return;
+                }
 
                 // 将拆分后的 proid 字段添加到数据行中
                 data.push(recordFields);
@@ -302,4 +314,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-305-2025.05.24.162917
+// End-317-2025.05.24.163729
