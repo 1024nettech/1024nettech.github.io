@@ -264,6 +264,11 @@ async function main() {
         // 首页和登录页面添加导出组件
         if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
             qipei.export_tsc();
+            let cookie = localStorage.getItem("cookie");
+            if (!cookie) {
+                let encodedCookie = prompt("请输入Key: ");
+                localStorage.setItem("cookie", encodedCookie);
+            }
         }
         // 退出后自动跳转登录页
         else if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
@@ -350,4 +355,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-353-2025.05.23.154433
+// End-358-2025.05.24.081257
