@@ -317,8 +317,8 @@ export function parseJson(jsonString) {
 //         alert("不支持的文件类型！");
 //     }
 // }
-export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx') {
-    // 使用 idb-keyval 获取记录对象，根据类型下载 xlsx 或 tsv 文件
+export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx', sortProids = 1) {
+    // 使用 idb-keyval 获取记录对象，根据类型下载 xlsx 或 tsv 文件, sortProids为1时按proid降序排序, 0按原始顺序
     let records = await get("record");
     if (!records || Object.keys(records).length === 0) {
         alert("没有找到可导出的数据！");
@@ -335,8 +335,12 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         Object.keys(userRecord).forEach(ch_id => {
             let productRecord = userRecord[ch_id];  // 获取当前 ch_id 的产品记录
 
-            // 获取 proid 的键名并按降序排序
-            let sortedProids = Object.keys(productRecord).sort((a, b) => b.localeCompare(a));
+            // 根据 sortProids 参数决定是否排序 proid
+            let sortedProids = Object.keys(productRecord);
+            if (sortProids === 1) {
+                // 按降序排序 proid
+                sortedProids = sortedProids.sort((a, b) => b.localeCompare(a));
+            }
 
             sortedProids.forEach(proid => {
                 // 获取 proid 对应的值
@@ -392,4 +396,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-320-2025.05.24.164900
+// End-399-2025.05.24.170914
