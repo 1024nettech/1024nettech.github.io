@@ -247,7 +247,7 @@ export function parseJson(jsonString) {
     }
 }
 export async function downloadRecordAsFile(personName, fileName, fileType = 'xlsx') {
-    // 使用 idb-keyval 获取记录对象, 根据类型下载 xlsx 或 tsv 文件
+    // 使用 idb-keyval 获取记录对象，根据类型下载 xlsx 或 tsv 文件
     let records = await get("record");
     if (!records || Object.keys(records).length === 0) {
         alert("没有找到可导出的数据！");
@@ -265,8 +265,9 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
                 // proid 是一个字符串，直接进行处理
                 let recordFields = proid.split("\t"); // 用 \t 分割 proid
                 let updatedRecord = productRecord[proid].replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-                recordFields.push(updatedRecord);  // 将更新后的记录添加到行数据中
-                data.push(recordFields);  // 将这行数据添加到最终数据中
+                // 将更新后的记录添加到行数据中
+                recordFields.push(updatedRecord);  // 添加改后值
+                data.push([username, ch_id, ...recordFields]);  // 包括用户名和栏目id在内的数据
             });
         });
     });
@@ -275,7 +276,7 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
     if (fileType === 'xlsx') {
         // 生成XLSX格式
         let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-        let colWidths = [70, 50, 50, 170, 170];
+        let colWidths = [70, 50, 50, 170, 170];  // 设置每列的宽度
         ws["!cols"] = colWidths.map(width => ({ wpx: width }));
         let wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "记录数据");
@@ -294,4 +295,4 @@ export async function downloadRecordAsFile(personName, fileName, fileType = 'xls
         alert("不支持的文件类型！");
     }
 }
-// End-297-2025.05.24.155506
+// End-298-2025.05.24.160137
