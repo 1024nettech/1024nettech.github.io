@@ -39,7 +39,7 @@ export function export_tsc() {
         }
         let time = publics.generateTimestamp(1);
         let fileName = `${personName}-${time}`;
-        publics.downloadRecordAsFile(personName, fileName);
+        publics.downloadRecordAsFile(personName, fileName, "xlsx", 0);
     });
     $("#clearLocalStorage").click(() => {
         localStorage.clear();
@@ -301,4 +301,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-304-2025.05.24.152855
+// End-304-2025.05.24.171045
