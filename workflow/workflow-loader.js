@@ -37,9 +37,9 @@ function loadSucess(response) {
             <a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点这里,弹出新窗口,按图1点击,刷新此页面,如果弹出图2的窗口,按图2点击,不弹不用点</a>
             <br>
             <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1748138914782311.png">
-            <span id="tip1">1. 点这里</span>
+            <button id="tip1">1. 点这里</button>
             <img src="https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1748139893223935.png">
-            <span id="tip2">2. 点这里</span>
+            <button id="tip2">2. 点这里</button>
             `
         $("body").html(html);
     }
@@ -50,4 +50,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-53-2025.05.25.104909
+// End-53-2025.05.25.111150
