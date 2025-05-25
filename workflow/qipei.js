@@ -230,7 +230,7 @@ export async function openProductsEdit() {
 export async function handleProductAction(checked_car, status = "") {
     let today = publics.generateTimestamp(0);
     let person = "xxpersonname";
-    let username = $(".welcome").text().trim().replace("欢迎您：", "");
+    let username = $(".welcome").text().split("欢迎您：")[1].trim();
     let ch_id = publics.getUrlParameter(url, "ch_id");
     let id = publics.getUrlParameter(url, "id");
     let ch_name = $(".myColumnTit").text();
@@ -276,4 +276,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-279-2025.05.25.132241
+// End-279-2025.05.25.140356
