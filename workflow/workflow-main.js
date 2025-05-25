@@ -1,5 +1,5 @@
-import * as admin from "./admin.js"
 import * as publics from "./public.js"
+import * as admin from "./admin.js"
 import * as qipei from "./qipei.js"
 import * as ali from "./ali.js"
 async function main() {
@@ -21,7 +21,7 @@ async function main() {
         if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
             qipei.export_tsc();
             let cookie = localStorage.getItem("cookie");
-            if (!cookie) {
+            if (!cookie || cookie.length < 10) {
                 let encodedCookie = prompt("请输入Key: ");
                 localStorage.setItem("cookie", encodedCookie);
             }
@@ -60,8 +60,8 @@ async function main() {
         }
         // 组长查店铺权限
         if (auth[1] === "1") {
-            let urls = ["https://1024nettech.github.io/workflow/workflow-admin.css"];
-            publics.loadFiles(urls, 1, 0);
+            let urls = ["https://1024nettech.github.io/workflow/workflow-admin.css?time=1&module=0"];
+            publics.loadFiles(urls);
             if (url.includes("mshop/?")) {
                 // 店铺首页
                 let html = `
@@ -179,26 +179,11 @@ async function main() {
             });
         }
         // 公共权限
-        $(document).on("mousedown", "a:contains(退出)", function () {
-            let usernames = localStorage.getItem("usernames");
-            if (!usernames) {
-                console.log("No usernames found in localStorage.");
-                return;
-            }
-            usernames = usernames.split(" ");
-            let currentUsername = $(".welcome").text().trim().replace("欢迎您：", "");
-            console.log("Current Username: ", currentUsername);
-            console.log("Usernames from localStorage: ", usernames);
-            if (currentUsername && usernames.includes(currentUsername)) {
-                usernames = usernames.filter(username => username !== currentUsername);
-                localStorage.setItem("usernames", usernames.join(" "));
-                localStorage.setItem("rightpassword", "");
-                console.log("Updated localStorage: ", localStorage);
-            } else {
-                console.log("Current username not found or not valid.");
-            }
-        });
-        //登录页自动填充密码
+        // 获取所有产品栏目id后打开有产品的产品管理页
+        if (autorun) {
+            await qipei.open_channel_product_list(Object.keys(channelNameMap));
+        }
+        // 登录页自动填充密码
         if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
                 let url = "http://admin.qipeiyigou.com/member_list.php";
@@ -266,14 +251,6 @@ async function main() {
                 }
             });
         }
-        // 获取所有产品栏目id后打开有产品的产品管理页
-        if (autorun) {
-            await qipei.open_channel_product_list(Object.keys(channelNameMap));
-        }
-        // 退出后自动跳转登录页
-        if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
-            location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
-        }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
             $(document).on("keyup", function (event) {
@@ -287,7 +264,6 @@ async function main() {
         // 产品编辑页自动取消勾选并提交
         else if (url.includes("sc_product.php")) {
             if (autorun) {
-                window.alert = function () { };
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
@@ -313,6 +289,29 @@ async function main() {
                 }
             }
         }
+        // 退出后自动跳转登录页
+        else if (url === "http://testpage.qipeiyigou.com/vip_qipeiyigouwang.html") {
+            location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
+        }
+        $(document).on("mousedown", "a:contains(退出)", function () {
+            let usernames = localStorage.getItem("usernames");
+            if (!usernames) {
+                console.log("No usernames found in localStorage.");
+                return;
+            }
+            usernames = usernames.split(" ");
+            let currentUsername = $(".welcome").text().split("欢迎您：")[1].trim();
+            console.log("Current Username: ", currentUsername);
+            console.log("Usernames from localStorage: ", usernames);
+            if (currentUsername && usernames.includes(currentUsername)) {
+                usernames = usernames.filter(username => username !== currentUsername);
+                localStorage.setItem("usernames", usernames.join(" "));
+                localStorage.setItem("rightpassword", "");
+                console.log("Updated localStorage: ", localStorage);
+            } else {
+                console.log("Current username not found or not valid.");
+            }
+        });
     }
     else if (url.includes("https://detail.1688.com/offer/") && auth[2] === "1") {
         let html = `
@@ -355,4 +354,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-358-2025.05.24.083823
+// End-357-2025.05.25.140738
