@@ -285,11 +285,11 @@ export async function downloadRecordAsFile(personName, fileName) {
         return serialA - serialB;
     });
     let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-    let colWidths = [70, 50, 50, 170, 170, 170, 170, 170, 170];
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 10, 10, 170, 170, 60];
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-295-2025.05.25.150003
+// End-295-2025.05.25.151423
