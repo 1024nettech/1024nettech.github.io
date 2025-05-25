@@ -285,7 +285,7 @@ export async function downloadRecordAsFile(personName, fileName) {
         return serialA - serialB;
     });
     let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-    let colWidths = [70, 40, 120, 50, 50, 90, 550, 10, 10, 170, 170, 60];
+    let colWidths = [70, 40, 120, 50, 50, 90, 550, 30, 30, 150, 150, 60];
     ws["!cols"] = colWidths.map(width => ({ wpx: width }));
     let wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "记录数据");
