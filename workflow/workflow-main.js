@@ -334,6 +334,7 @@ async function main() {
             location.href = "http://testpage.qipeiyigou.com/dom/denglu.php?username=qipeiyigouwang";
         }
         $(document).on("mousedown", "a:contains(退出)", function () {
+            localStorage.setItem("rightpassword", "");
             let usernames = localStorage.getItem("usernames");
             if (!usernames) {
                 console.log("No usernames found in localStorage.");
@@ -346,7 +347,6 @@ async function main() {
             if (currentUsername && usernames.includes(currentUsername)) {
                 usernames = usernames.filter(username => username !== currentUsername);
                 localStorage.setItem("usernames", usernames.join(" "));
-                localStorage.setItem("rightpassword", "");
                 console.log("Updated localStorage: ", localStorage);
             } else {
                 console.log("Current username not found or not valid.");
@@ -394,4 +394,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-397-2025.05.25.210859
+// End-397-2025.05.25.211855
