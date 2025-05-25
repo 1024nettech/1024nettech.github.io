@@ -2,6 +2,7 @@ import * as publics from "./public.js"
 const url = location.href;
 const autorun = Number(localStorage.getItem("autorun"));
 if (autorun) {
+    window.alert = function () { };
     if (url === "http://testpage.qipeiyigou.com/dom/action/sc_product.php?username=qipeiyigouwang" || (url.includes("sc_product_list.php") && url.includes("&t="))) {
         window.close();
     }
@@ -17,10 +18,9 @@ function loadSucess(response) {
         console.log(`workflow.user.js 已是最新版本: ${GM_info.script.version}\n${version_url}`);
         let urls = [
             "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js?time=0&module=0",
-            "https://cdnjs.cloudflare.com/ajax/libs/dexie/4.1.0-alpha.8/dexie.min.js?time=0&module=0",
             "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js?time=0&module=0",
-            "https://1024nettech.github.io/workflow/workflow-main.js?time=1&module=1",
-            "https://1024nettech.github.io/workflow/workflow-public.css?time=1&module=0"
+            "https://1024nettech.github.io/workflow/workflow-main.js?time=0&module=1",
+            "https://1024nettech.github.io/workflow/workflow-public.css?time=0&module=0"
         ];
         publics.loadFiles(urls);
         if (location.href.includes("1688.com")) {
@@ -31,7 +31,7 @@ function loadSucess(response) {
             publics.loadFiles(urls);
         }
     } else {
-        let urls = ["https://1024nettech.github.io/workflow/workflow-public.css?time=1&module=0"];
+        let urls = ["https://1024nettech.github.io/workflow/workflow-public.css?time=0&module=0"];
         publics.loadFiles(urls);
         let html = `
             <a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点这里,弹出新窗口,按图1点击,刷新此页面,如果弹出图2的窗口,按图2点击,不弹不用点</a>
@@ -50,4 +50,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-53-2025.05.25.111150
+// End-53-2025.05.25.154324
