@@ -229,7 +229,7 @@ async function main() {
             else {
                 $("#commonName").focus();
             }
-            $(".commonPassword").click(async () => {
+            $("#commonPassword").click(async () => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
@@ -394,4 +394,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-397-2025.05.25.210241
+// End-397-2025.05.25.210859
