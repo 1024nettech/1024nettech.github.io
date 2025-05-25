@@ -1,4 +1,4 @@
-import { set, get, del, keys } from "./idb-keyval.js";
+import { set, get, del, keys } from "./idb-keyval.js"
 const url = location.href;
 export function sendRequest(url, cookie, method, doSuccess, formData = null) {
     // 发送请求, formData为{k:v}键值对
@@ -268,12 +268,12 @@ export async function downloadRecordAsFile(personName, fileName) {
         let usernameIndexA = usernames.indexOf(a[2]);
         let usernameIndexB = usernames.indexOf(b[2]);
         if (usernameIndexA !== usernameIndexB) {
-            return usernameIndexB - usernameIndexA;
+            return usernameIndexA - usernameIndexB;
         }
         let chIdIndexA = chIds.indexOf(a[3]);
         let chIdIndexB = chIds.indexOf(b[3]);
         if (chIdIndexA !== chIdIndexB) {
-            return chIdIndexB - chIdIndexA;
+            return chIdIndexA - chIdIndexB;
         }
         let pageA = parseInt(a[7]);
         let pageB = parseInt(b[7]);
@@ -292,4 +292,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-295-2025.05.25.125029
+// End-295-2025.05.25.150003
