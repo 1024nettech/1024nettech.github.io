@@ -26,11 +26,11 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
     }
     window.GM_xmlhttpRequest(options);
 }
-export async function loadFiles(urls) {
+export function loadFiles(urls) {
     // 动态加载外部文件(JS/CSS)
     let totalFiles = urls.length;
     let loadedFiles = 0;
-    async function loadNextFile(index) {
+    function loadNextFile(index) {
         if (index < totalFiles) {
             let url = urls[index];
             let fileExtension = url.split(".").pop().split("?")[0].toLowerCase();
@@ -43,17 +43,17 @@ export async function loadFiles(urls) {
                 let script = document.createElement("script");
                 script.src = url;
                 script.type = isModule ? "module" : "text/javascript";
-                script.onload = async function () {
+                script.onload = function () {
                     console.log(`脚本加载完成: ${url}`);
                     loadedFiles++;
                     if (loadedFiles === totalFiles) {
                         onFilesLoaded();
                     }
-                    await loadNextFile(index + 1);
+                    loadNextFile(index + 1);
                 };
-                script.onerror = async function (error) {
+                script.onerror = function (error) {
                     console.error(`脚本加载失败: ${url}, 错误信息: `, error);
-                    await loadNextFile(index + 1);
+                    loadNextFile(index + 1);
                 };
                 console.log(`开始加载脚本: ${url}`);
                 document.head.append(script);
@@ -61,30 +61,30 @@ export async function loadFiles(urls) {
                 let link = document.createElement("link");
                 link.rel = "stylesheet";
                 link.href = url;
-                link.onload = async function () {
+                link.onload = function () {
                     console.log(`CSS 加载完成: ${url}`);
                     loadedFiles++;
                     if (loadedFiles === totalFiles) {
                         onFilesLoaded();
                     }
-                    await loadNextFile(index + 1);
+                    loadNextFile(index + 1);
                 };
-                link.onerror = async function (error) {
+                link.onerror = function (error) {
                     console.error(`CSS 加载失败: ${url}, 错误信息: `, error);
-                    await loadNextFile(index + 1);
+                    loadNextFile(index + 1);
                 };
                 console.log(`开始加载 CSS: ${url}`);
                 document.head.append(link);
             } else {
                 console.error(`无法识别的文件类型: ${url}`);
-                await loadNextFile(index + 1);
+                loadNextFile(index + 1);
             }
         }
     }
     function onFilesLoaded() {
         console.log("所有文件加载完成！");
     }
-    await loadNextFile(0);
+    loadNextFile(0);
 }
 export function generateTimestamp(format) {
     // 获取时间戳
@@ -171,8 +171,8 @@ export function moveElement(selector1, selector2) {
     $(selector1).css("display", "");
 }
 export function clearExceptAuth() {
-    // 清除localStorage,保留列表里的键值
-    let keepKeys = ["auth", "autorun", "date", "screenshotMode", "name", "usernames"];
+    // 清除localStorage, 保留列表里的键值
+    let keepKeys = ["auth", "autorun", "date", "screenshotMode", "name", "usernames", "cookie"];
     for (let key in localStorage) {
         if (!keepKeys.includes(key)) {
             localStorage.removeItem(key);
@@ -180,124 +180,35 @@ export function clearExceptAuth() {
     }
     console.log("localStorage 已清除完毕: ", localStorage);
 }
-export function waitForElementOrCookie(selector, callback, interval = 100, maxAttempts = 1000) {
-    // 等待元素或cookie存在后执行
-    let attempts = 0;
-    let intervalId = setInterval(function () {
-        attempts++;
-        if (selector === "cookie") {
-            if (cookie !== "") {
-                callback();
-                clearInterval(intervalId);
-            }
-        } else {
-            if ($(selector).length > 0) {
-                callback();
-                clearInterval(intervalId);
-            }
-        }
-        if (attempts >= maxAttempts) {
-            clearInterval(intervalId);
-            if (selector === "cookie") {
-                console.warn(`Cookie not set after ${maxAttempts} attempts.`);
-            } else {
-                console.warn(`Element ${selector} not found after ${maxAttempts} attempts.`);
-            }
-        }
-    }, interval);
-}
 export async function clearAll() {
     // 清除所有idb-keyval数据
     let allKeys = await keys();
     for (let key of allKeys) {
         await del(key);
     }
-    console.log("所有数据已清除");
+    console.log("所有数据已清除……");
 }
-export async function setAndLog(key, value) {
-    // idb-keyval存储数据
-    await set(key, value);
-    console.log(`${key} 已设置为: `, value);
-}
-export async function appendToRecord(newValue, maxRetries = 1000, retryInterval = 1000) {
-    // 获取记录并根据条件追加数据到idb-keyval的record{}
-    let lockKey = "recordLock";
-    let retries = 0;
-    while (retries < maxRetries) {
-        let isLocked = localStorage.getItem(lockKey);
-        if (isLocked !== "true") {
-            try {
-                localStorage.setItem(lockKey, "true");
-                let records = await get("record");
-                if (!records) {
-                    records = {};
-                }
-                let urlParams = new URLSearchParams(window.location.search);
-                let ch_id = urlParams.get("ch_id");
-                let _id = urlParams.get("id");
-                if (!ch_id || !_id) {
-                    console.error("URL 中缺少 ch_id 或 id 参数");
-                    return;
-                }
-                let recordKey = `${ch_id}_${_id}`;
-                records[recordKey] = newValue;
-                await set("record", records);
-                console.log("来自workflow-main.js 的输出: appendToRecord记录已更新: ", records);
-                return;
-            } finally {
-                localStorage.removeItem(lockKey);
+export async function waitfor(selectors, delayTime, doCallback) {
+    // 等待元素存在后延时执行
+    return new Promise((resolve, reject) => {
+        let observer = new MutationObserver((mutationsList, observer) => {
+            let elementsExist = selectors.every(selector => document.querySelector(selector) !== null);
+            if (elementsExist) {
+                observer.disconnect();
+                setTimeout(async () => {
+                    try {
+                        let elements = selectors.map(selector => document.querySelector(selector));
+                        await doCallback(elements);
+                        resolve();
+                    } catch (err) {
+                        reject(err);
+                    }
+                }, delayTime);
             }
-        } else {
-            console.log(`来自workflow-main.js的输出: 记录已被锁定, 等待重试 (重试 ${retries + 1} / ${maxRetries})……`);
-            retries++;
-            await new Promise(resolve => setTimeout(resolve, retryInterval));
-        }
-    }
-    console.error("无法获取锁, 已达到最大重试次数, 请稍后再试……");
-}
-export async function downloadRecordAsTSV(personName, fileName) {
-    // idb-keyval获取record 对象,下载为tsv文件
-    let records = await get("record");
-    if (!records || Object.keys(records).length === 0) {
-        alert("没有找到可导出的数据！");
-        return;
-    }
-    let tsvContent = "日期\t姓名\t会员名\t栏目id\t产品id\t栏目名\t产品链接\t原始值\t改后值\t处理状态\n";
-    Object.keys(records).forEach(key => {
-        let recordValue = records[key];
-        let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-        tsvContent += `${updatedRecord}\n`;
+        });
+        let config = { childList: true, subtree: true };
+        observer.observe(document.body, config);
     });
-    let blob = new Blob([tsvContent], { type: "text/tab-separated-values" });
-    let link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = `${fileName}.tsv`;
-    link.click();
-    console.log("TSV 文件已生成并开始下载");
-}
-export async function downloadRecordAsXLSX(personName, fileName) {
-    // 使用 idb-keyval 获取记录对象, 下载为 xlsx 文件
-    let records = await get("record");
-    if (!records || Object.keys(records).length === 0) {
-        alert("没有找到可导出的数据！");
-        return;
-    }
-    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "原始值", "改后值", "处理状态"];
-    let data = [];
-    Object.keys(records).forEach(key => {
-        let recordValue = records[key];
-        let updatedRecord = recordValue.replace(/xxpersonname/g, personName).replace("欢迎您：", "").trim();
-        let recordFields = updatedRecord.split("\t");
-        data.push(recordFields);
-    });
-    data.unshift(headers);
-    let ws = XLSX.utils.aoa_to_sheet(data);
-    let colWidths = [70, 40, 120, 50, 50, 90, 550, 170, 170, 60];
-    ws["!cols"] = colWidths.map(width => ({ wpx: width }));
-    let wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "记录数据");
-    XLSX.writeFile(wb, `${fileName}.xlsx`);
-    console.log("XLSX 文件已生成并开始下载");
 }
 export function parseJson(jsonString) {
     try {
@@ -307,4 +218,78 @@ export function parseJson(jsonString) {
         return null;
     }
 }
-// End-310-2025.05.23.163035
+export function getUrlParameter(url, paramName) {
+    // 查询url中参数值, 包括#后面参数
+    let urlParams = new URLSearchParams(new URL(url).search);
+    let paramValue = urlParams.get(paramName);
+    if (!paramValue) {
+        let hashParams = new URLSearchParams(new URL(url).hash.substring(1));
+        paramValue = hashParams.get(paramName);
+    }
+    return paramValue;
+}
+export async function appendToRecord(key, value) {
+    try {
+        let records = await get(key);
+        if (!records) {
+            records = [];
+        }
+        if (!records.includes(value)) {
+            records.push(value);
+            await set(key, records);
+            console.log(`来自workflow-main.js 的输出: appendToRecord记录已更新: `, records);
+        } else {
+            console.log("该记录已存在, 无需更新");
+        }
+    } catch (error) {
+        console.error("无法更新记录, 发生错误: ", error);
+    }
+}
+export async function downloadRecordAsFile(personName, fileName) {
+    // 使用 idb-keyval 获取记录对象, 生成 xlsx 文件
+    let records = await get("record");
+    if (!records || records.length === 0) {
+        alert("没有找到可导出的数据！");
+        return;
+    }
+    let usernames = await get("usernames");
+    let chIds = await get("chIds");
+    let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "页数", "序号", "原始值", "改后值", "处理状态"];
+    let data = [];
+    records.forEach(record => {
+        let recordFields = record.split("\t").map(field => field.trim() || "无数据");
+        if (recordFields.length === 0 || recordFields.every(field => field === "无数据")) {
+            return;
+        }
+        recordFields = recordFields.map(field => field.replace(/xxpersonname/g, personName));
+        data.push(recordFields);
+    });
+    data.sort((a, b) => {
+        let usernameIndexA = usernames.indexOf(a[2]);
+        let usernameIndexB = usernames.indexOf(b[2]);
+        if (usernameIndexA !== usernameIndexB) {
+            return usernameIndexB - usernameIndexA;
+        }
+        let chIdIndexA = chIds.indexOf(a[3]);
+        let chIdIndexB = chIds.indexOf(b[3]);
+        if (chIdIndexA !== chIdIndexB) {
+            return chIdIndexB - chIdIndexA;
+        }
+        let pageA = parseInt(a[7]);
+        let pageB = parseInt(b[7]);
+        if (pageA !== pageB) {
+            return pageA - pageB;
+        }
+        let serialA = parseInt(a[8]);
+        let serialB = parseInt(b[8]);
+        return serialA - serialB;
+    });
+    let ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+    let colWidths = [70, 50, 50, 170, 170, 170, 170, 170, 170];
+    ws["!cols"] = colWidths.map(width => ({ wpx: width }));
+    let wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "记录数据");
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
+    console.log("XLSX 文件已生成并开始下载");
+}
+// End-295-2025.05.25.124856
