@@ -1,3 +1,4 @@
+import { set, get, del, keys } from "./idb-keyval.js";
 import * as publics from "./public.js"
 const url = location.href;
 export function export_tsc() {
@@ -153,7 +154,7 @@ export async function fetchChIdsAndTitles(url) {
                 }
             }
         });
-        if (chIdDict) { await publics.appendToRecord("chIds", Object.keys(chIdDict)); }
+        if (chIdDict) { await set("chIds", Object.keys(chIdDict)); }
         console.log("提取到的 ch_id 和标题字典: ", chIdDict);
         return chIdDict;
     } catch (error) {
@@ -276,4 +277,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-279-2025.05.25.143329
+// End-280-2025.05.25.144605
