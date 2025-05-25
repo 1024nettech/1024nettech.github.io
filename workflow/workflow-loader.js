@@ -31,6 +31,8 @@ function loadSucess(response) {
             publics.loadFiles(urls);
         }
     } else {
+        let urls = ["https://1024nettech.github.io/workflow/workflow-public.css?time=1&module=0"];
+        publics.loadFiles(urls);
         let html = `
             <a id="update_tip" href="https://1024nettech.github.io/workflow/workflow.user.js" target="_blank">点这里,弹出新窗口,按图1点击,刷新此页面,如果弹出图2的窗口,按图2点击,不弹不用点</a>
             <br>
@@ -48,4 +50,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-51-2025.05.25.103707
+// End-53-2025.05.25.104909
