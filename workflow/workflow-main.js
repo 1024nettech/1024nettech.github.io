@@ -230,26 +230,60 @@ async function main() {
             else {
                 $("#commonName").focus();
             }
-            $(".web-user-pass i").click(() => {
+            $(".web-user-pass i").click(async () => {
                 let username = $("#commonName").val().trim();
                 $("#commonPassword").val("");
                 $("#commonPassword").attr("placeholder", "查询中……");
-                if (rightpassword) {
-                    $("#commonPassword").val(rightpassword);
+                function handleSuccess(password) {
+                    $("#commonPassword").val(password);
                     $("#commonYzm").focus();
+                    localStorage.setItem("rightpassword", password);
                     $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
                 }
-                else {
-                    queryUserId(username, decodedCookie, function (password) {
-                        console.log("最终获取到的密码: ", password);
-                        $("#commonName").val(username);
-                        $("#commonPassword").val(password);
-                        localStorage.setItem("rightpassword", password);
-                        $("#commonYzm").focus();
-                        $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
+                function testPassword(password) {
+                    return new Promise((resolve, reject) => {
+                        let url = "http://testpage.qipeiyigou.com/dom/denglu.php";
+                        let formData = {
+                            "login_type": 0,
+                            "login_name": username,
+                            "login_pwd": password,
+                            "validatecode": "",
+                            "trespass": "http://testpage.qipeiyigouwang.com/vip_qipeiyigouwang.html"
+                        };
+                        publics.sendRequest(url, document.cookie, "POST", function (response) {
+                            if (response.responseText.includes("成功")) {
+                                console.log(password);
+                                resolve(password);
+                            } else if (response.responseText.includes("错误")) {
+                                resolve(null);
+                            } else {
+                                console.error("未知响应: ", response.responseText);
+                                resolve(null);
+                            }
+                        }, formData);
                     });
                 }
+                try {
+                    let [password666, password888] = await Promise.all([
+                        testPassword("666666"),
+                        testPassword("888888")
+                    ]);
+                    if (password666) {
+                        handleSuccess(password666);
+                    } else if (password888) {
+                        handleSuccess(password888);
+                    } else {
+                        queryUserId(username, decodedCookie, function (password) {
+                            console.log("最终获取到的密码: ", password);
+                            $("#commonName").val(username);
+                            handleSuccess(password);
+                        });
+                    }
+                } catch (error) {
+                    console.error("发生错误: ", error);
+                }
             });
+            $("#commonLoginBut").mousedown(() => { $('#form2').submit(); });
         }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
@@ -354,4 +388,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-357-2025.05.25.140738
+// End-391-2025.05.25.190423
