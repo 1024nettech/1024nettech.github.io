@@ -296,4 +296,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-299-2025.05.26.100428
+// End-299-2025.05.26.135744
