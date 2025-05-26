@@ -62,22 +62,10 @@ export function export_tsc() {
         $("#commonName").val(first_username);
         $("#commonName").focus();
         $("#commonName").prop("disabled", true);
-        $("#commonPassword").val("111111");
         $("#commonPassword").focus();
-        $("#commonYzm").focus();
+        $("#commonPassword").click();
         $("#usernameInput").val(`当前用户名: ${first_username}`);
     });
-    let stored_usernames = localStorage.getItem("usernames");
-    if (stored_usernames) {
-        let first_stored_username = stored_usernames.split(" ")[0];
-        $("#commonName").val(first_stored_username);
-        $("#commonName").focus();
-        $("#commonName").prop("disabled", true);
-        $("#commonPassword").val("111111");
-        $("#commonPassword").focus();
-        $("#commonYzm").focus();
-        $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
-    }
 }
 export function open_close_shop_products() {
     // 店铺内打开或关闭产品
@@ -277,4 +265,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-280-2025.05.25.144605
+// End-268-2025.05.26.084109
