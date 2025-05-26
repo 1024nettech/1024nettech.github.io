@@ -19,7 +19,7 @@ function loadSucess(response) {
         let urls = [
             "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js?time=0&module=0",
             "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js?time=0&module=0",
-            "https://1024nettech.github.io/workflow/workflow-main.js?time=0&module=1",
+            "https://1024nettech.github.io/workflow/workflow-main.js?time=1&module=1",
             "https://1024nettech.github.io/workflow/workflow-public.css?time=0&module=0"
         ];
         publics.loadFiles(urls);
@@ -50,4 +50,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-53-2025.05.25.154324
+// End-53-2025.05.26.144500
