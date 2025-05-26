@@ -192,6 +192,15 @@ export async function clearAll() {
     }
     console.log("所有数据已清除……");
 }
+export async function setAndLog(key, value) {
+    // 存储并输出数据
+    try {
+        await set(key, value);
+        console.log(`来自workflow-main.js 的输出: setAndLog已更新 - Key: ${key}, Value: `, value);
+    } catch (error) {
+        console.error("无法设置记录, 发生错误: ", error);
+    }
+}
 export async function waitfor(selectors, delayTime, doCallback) {
     // 等待元素存在后延时执行
     return new Promise((resolve, reject) => {
@@ -232,18 +241,24 @@ export function getUrlParameter(url, paramName) {
     }
     return paramValue;
 }
-export async function appendToRecord(key, value) {
+export async function appendToData(key, valueOrDictKey, dictValue = null) {
+    // 添加数据到[]或{}
     try {
         let records = await get(key);
-        if (!records) {
-            records = [];
-        }
-        if (!records.includes(value)) {
-            records.push(value);
+        if (Array.isArray(records)) {
+            if (!records.includes(valueOrDictKey)) {
+                records.push(valueOrDictKey);
+                await set(key, records);
+                console.log(`来自workflow-main.js 的输出: appendToData已更新(数组): `, records);
+            } else {
+                console.log("该记录已存在, 无需更新(数组)");
+            }
+        } else if (typeof records === 'object' && records !== null) {
+            records[valueOrDictKey] = dictValue;
             await set(key, records);
-            console.log(`来自workflow-main.js 的输出: appendToRecord记录已更新: `, records);
+            console.log(`来自workflow-main.js 的输出: appendToData已更新(对象): `, records);
         } else {
-            console.log("该记录已存在, 无需更新");
+            console.log("记录类型未知，无法更新");
         }
     } catch (error) {
         console.error("无法更新记录, 发生错误: ", error);
@@ -297,4 +312,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-300-2025.05.26.201655
+// End-315-2025.05.27.015031
