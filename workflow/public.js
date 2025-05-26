@@ -267,11 +267,11 @@ export async function appendToData(key, valueOrDictKey, dictValue = null) {
 export async function downloadRecordAsFile(personName, fileName) {
     // 使用 idb-keyval 获取记录对象, 生成 xlsx 文件
     let records = await get("record");
-    if (!records || records.length === 0) {
+    if (!records || Object.keys(records).length === 0) {
         alert("没有找到可导出的数据！");
         return;
     }
-    records = Array.from(new Set(records.map(record => record.trim())));
+    records = Array.from(new Set(Object.values(records).map(record => record.trim())));
     let usernames = await get("usernames");
     let chIds = await get("chIds");
     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "页数", "序号", "原始值", "改后值", "处理状态"];
@@ -312,4 +312,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-315-2025.05.27.015031
+// End-315-2025.05.27.020150
