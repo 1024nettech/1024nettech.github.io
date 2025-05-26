@@ -241,28 +241,49 @@ export function getUrlParameter(url, paramName) {
     }
     return paramValue;
 }
-export async function appendToData(key, valueOrDictKey, dictValue = null) {
-    // 添加数据到[]或{}
-    try {
-        let records = await get(key);
-        if (Array.isArray(records)) {
-            if (!records.includes(valueOrDictKey)) {
-                records.push(valueOrDictKey);
+export async function appendToData(key, valueOrDictKey, dictValue = null, maxRetries = 3) {
+    //存储数据到[]或{}
+    let attempt = 0;
+    async function trySet() {
+        try {
+            let records = await get(key);
+
+            if (Array.isArray(records)) {
+                if (!records.includes(valueOrDictKey)) {
+                    records.push(valueOrDictKey);
+                    await set(key, records);
+                    let updatedRecords = await get(key);
+                    if (updatedRecords.includes(valueOrDictKey)) {
+                        console.log(`数据已成功存储(数组): `, updatedRecords);
+                    } else {
+                        throw new Error("数据未成功存储，正在重试...");
+                    }
+                } else {
+                    console.log("该记录已存在, 无需更新(数组)");
+                }
+            } else if (typeof records === 'object' && records !== null) {
+                records[valueOrDictKey] = dictValue;
                 await set(key, records);
-                console.log(`来自workflow-main.js 的输出: appendToData已更新(数组): `, records);
+                let updatedRecords = await get(key);
+                if (updatedRecords[valueOrDictKey] === dictValue) {
+                    console.log(`数据已成功存储(对象): `, updatedRecords);
+                } else {
+                    throw new Error("数据未成功存储，正在重试...");
+                }
             } else {
-                console.log("该记录已存在, 无需更新(数组)");
+                console.log("记录类型未知，无法更新");
             }
-        } else if (typeof records === 'object' && records !== null) {
-            records[valueOrDictKey] = dictValue;
-            await set(key, records);
-            console.log(`来自workflow-main.js 的输出: appendToData已更新(对象): `, records);
-        } else {
-            console.log("记录类型未知，无法更新");
+        } catch (error) {
+            attempt++;
+            if (attempt < maxRetries) {
+                console.log(`尝试第 ${attempt} 次存储失败，正在重试...`);
+                await trySet();
+            } else {
+                console.error("无法更新记录, 达到最大重试次数, 发生错误: ", error);
+            }
         }
-    } catch (error) {
-        console.error("无法更新记录, 发生错误: ", error);
     }
+    await trySet();
 }
 export async function downloadRecordAsFile(personName, fileName) {
     // 使用 idb-keyval 获取记录对象, 生成 xlsx 文件
@@ -312,4 +333,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-315-2025.05.27.020150
+// End-336-2025.05.27.025126
