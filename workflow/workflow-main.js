@@ -34,7 +34,10 @@ async function main() {
         } catch (error) {
             console.error("解密 cookie 发生错误，跳过此操作", error);
         }
-        let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
+        let channelNameMap = {};
+        if ($("a:contains(退出)").length) {
+            channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
+        }
         // admin权限
         if (auth[0] === "1") {
             if (url.includes("design-mode")) {
@@ -184,7 +187,7 @@ async function main() {
         }
         // 公共权限
         // 获取所有产品栏目id后打开有产品的产品管理页
-        if (autorun) {
+        if (autorun && $("a:contains(退出)").length) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
         // 登录页自动填充密码
@@ -406,4 +409,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-409-2025.05.26.101350
+// End-412-2025.05.26.132934
