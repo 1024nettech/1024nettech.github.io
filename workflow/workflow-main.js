@@ -220,73 +220,79 @@ async function main() {
                     }
                 });
             }
-            let rightpassword = localStorage.getItem("rightpassword");
-            if (rightpassword) { $("#commonPassword").val(rightpassword); }
-            $("#commonPassword").focus();
-            if ($("#commonName").val()) {
-                $("#commonYzm").focus();
+            function handleSuccess(password) {
+                let username = $("#commonName").val().trim();
+                $("#commonName").val(username);
+                $("#commonPassword").val(password);
+                localStorage.setItem("rightpassword", password);
+                $('#form2').submit();
+                $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
             }
-            else {
-                $("#commonName").focus();
+            function testPassword(password) {
+                return new Promise((resolve, reject) => {
+                    let url = "http://testpage.qipeiyigou.com/dom/denglu.php";
+                    let username = $("#commonName").val().trim();
+                    let formData = {
+                        "login_type": 0,
+                        "login_name": username,
+                        "login_pwd": password,
+                        "validatecode": "",
+                        "trespass": "http://testpage.qipeiyigouwang.com/vip_qipeiyigouwang.html"
+                    };
+                    publics.sendRequest(url, document.cookie, "POST", function (response) {
+                        if (response.responseText.includes("成功")) {
+                            console.log(password);
+                            resolve(password);
+                        } else if (response.responseText.includes("错误")) {
+                            resolve(null);
+                        } else {
+                            console.error("未知响应: ", response.responseText);
+                            resolve(null);
+                        }
+                    }, formData);
+                });
+            }
+            async function testPasswordsSequentially(passwords) {
+                for (let i = 0; i < passwords.length; i++) {
+                    let password = await testPassword(passwords[i]);
+                    if (password) {
+                        handleSuccess(password);
+                        return;
+                    }
+                    if (i < passwords.length - 1) {
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                    }
+                }
+                setTimeout(() => {
+                    let username = $("#commonName").val().trim();
+                    queryUserId(username, decodedCookie, function (password) {
+                        console.log("最终获取到的密码: ", password);
+                        $("#commonName").val(username);
+                        handleSuccess(password);
+                    });
+                }, 1000);
+            }
+            $("#commonName").focus();
+            let stored_usernames = localStorage.getItem("usernames");
+            if (stored_usernames) {
+                let first_stored_username = stored_usernames.split(" ")[0];
+                $("#commonName").val(first_stored_username);
+                $("#commonName").prop("disabled", true);
+                $("#commonPassword").focus();
+                $("#commonPassword").click();
+                $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
             }
             $("#commonPassword").click(async () => {
-                let username = $("#commonName").val().trim();
-                $("#commonPassword").val("");
-                $("#commonPassword").attr("placeholder", "查询中……");
-                function handleSuccess(password) {
-                    $("#commonName").val(username);
-                    $("#commonPassword").val(password);
-                    $("#commonYzm").focus();
-                    localStorage.setItem("rightpassword", password);
-                    $('#form2').submit();
-                    $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
-                }
-                function testPassword(password) {
-                    return new Promise((resolve, reject) => {
-                        let url = "http://testpage.qipeiyigou.com/dom/denglu.php";
-                        let formData = {
-                            "login_type": 0,
-                            "login_name": username,
-                            "login_pwd": password,
-                            "validatecode": "",
-                            "trespass": "http://testpage.qipeiyigouwang.com/vip_qipeiyigouwang.html"
-                        };
-                        publics.sendRequest(url, document.cookie, "POST", function (response) {
-                            if (response.responseText.includes("成功")) {
-                                console.log(password);
-                                resolve(password);
-                            } else if (response.responseText.includes("错误")) {
-                                resolve(null);
-                            } else {
-                                console.error("未知响应: ", response.responseText);
-                                resolve(null);
-                            }
-                        }, formData);
-                    });
-                }
-                async function testPasswordsSequentially(passwords) {
-                    for (let i = 0; i < passwords.length; i++) {
-                        let password = await testPassword(passwords[i]);
-                        if (password) {
-                            handleSuccess(password);
-                            return;
-                        }
-                        if (i < passwords.length - 1) {
-                            await new Promise(resolve => setTimeout(resolve, 1000));
-                        }
+                let rightpassword = localStorage.getItem("rightpassword");
+                if (rightpassword) { $("#commonPassword").val(rightpassword); $('#form2').submit(); }
+                else {
+                    $("#commonPassword").val("");
+                    $("#commonPassword").attr("placeholder", "查询中……");
+                    try {
+                        await testPasswordsSequentially(["111111", "666666", "888888"]);
+                    } catch (error) {
+                        console.error("发生错误: ", error);
                     }
-                    setTimeout(() => {
-                        queryUserId(username, decodedCookie, function (password) {
-                            console.log("最终获取到的密码: ", password);
-                            $("#commonName").val(username);
-                            handleSuccess(password);
-                        });
-                    }, 1000);
-                }
-                try {
-                    await testPasswordsSequentially(["111111", "666666", "888888"]);
-                } catch (error) {
-                    console.error("发生错误: ", error);
                 }
             });
             $("#commonLoginBut").mousedown(() => { $('#form2').submit(); });
@@ -394,4 +400,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-397-2025.05.25.211855
+// End-403-2025.05.26.084315
