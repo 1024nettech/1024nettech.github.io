@@ -172,7 +172,7 @@ async function main() {
                     if (!$(".main .v-x-scroll #tipx").length) {
                         publics.moveElement("#tipx", ".main .v-x-scroll");
                         let top = $(".content-wrap").offset().top + "px";
-                        let left = (($("body").width() - 1200) / 2 + 1210) + "px";
+                        let left = (($("body").width() - 1200) / 2 + 1223) + "px";
                         $("#divx").css("top", top);
                         $("#divx").css("left", left);
                     }
@@ -410,4 +410,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-413-2025.05.26.142840
+// End-413-2025.05.26.144312
