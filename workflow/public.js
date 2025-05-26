@@ -5,9 +5,7 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
     let options = {
         method: method,
         url: url,
-        headers: {
-            "Cookie": cookie
-        },
+        headers: {},
         onload: function (response) {
             if (response.status === 200) {
                 doSuccess(response);
@@ -19,6 +17,9 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
             console.error("请求发生错误: ", error);
         }
     };
+    if (cookie) {
+        options.headers["Cookie"] = cookie;
+    }
     if (method.toUpperCase() === "POST" && formData) {
         options.headers["Content-Type"] = "application/x-www-form-urlencoded";
         let urlEncodedData = new URLSearchParams(formData).toString();
@@ -292,4 +293,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-295-2025.05.25.153322
+// End-296-2025.05.26.095343
