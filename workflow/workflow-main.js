@@ -15,6 +15,8 @@ async function main() {
         await publics.clearAll();
         console.log(`${today}新的一天开始了: 所有数据已清除……\n清除后的数据为……`);
         console.log(localStorage);
+        setAndLog("usernames", []);
+        setAndLog("record", {});
     }
     if (url.includes("qipeiyigou.com")) {
         // 首页和登录页面添加导出组件
@@ -410,4 +412,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-413-2025.05.26.203344
+// End-415-2025.05.27.020923
