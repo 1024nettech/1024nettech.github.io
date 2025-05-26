@@ -26,7 +26,7 @@ async function main() {
                 localStorage.setItem("cookie", encodedCookie);
             }
         }
-        const decodedCookie = "";
+        let decodedCookie = "";
         try {
             const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
             const encodedCookie = localStorage.getItem("cookie");
@@ -410,4 +410,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-413-2025.05.26.142349
+// End-413-2025.05.26.142840
