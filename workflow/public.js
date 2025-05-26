@@ -247,7 +247,6 @@ export async function appendToData(key, valueOrDictKey, dictValue = null, maxRet
     async function trySet() {
         try {
             let records = await get(key);
-
             if (Array.isArray(records)) {
                 if (!records.includes(valueOrDictKey)) {
                     records.push(valueOrDictKey);
@@ -333,4 +332,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-336-2025.05.27.025126
+// End-335-2025.05.27.025422
