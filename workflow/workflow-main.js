@@ -26,10 +26,14 @@ async function main() {
                 localStorage.setItem("cookie", encodedCookie);
             }
         }
-        const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
-        const encodedCookie = localStorage.getItem("cookie");
-        const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
-        const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+        try {
+            const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
+            const encodedCookie = localStorage.getItem("cookie");
+            const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
+            const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+        } catch (error) {
+            console.error("解密 cookie 发生错误，跳过此操作", error);
+        }
         let channelNameMap = await qipei.fetchChIdsAndTitles("http://testpage.qipeiyigou.com/dom/shops/shop_pro_manage.php");
         // admin权限
         if (auth[0] === "1") {
@@ -74,7 +78,7 @@ async function main() {
                     `;
                 $("body").append(html);
                 let shopId = window.__NUXT__.data["/api/siteData?undefined"]["dev"]["rawdata"]["basic_info"]["shop_info"]["id"];
-                publics.sendRequest(`http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`, "", "GET", function (response) {
+                publics.sendRequest(`http://admin.qipeiyigou.com/shops/shops_add.php?shops_id=${shopId}`, decodedCookie, "GET", function (response) {
                     let bigId = response.responseText.match(/big_id.*?>/)[0].match(/(\d+)/)[0];
                     let subId = response.responseText.match(/sub_id".*>/)[0].match(/(\d+)/)[0];
                     let certifiedInfo = "无";
@@ -152,7 +156,7 @@ async function main() {
                         let subId = response.responseText.split(`"sub_id"`)[2].split(`"`)[1];
                         // 获取系统分类名
                         req_url = `http://admin.qipeiyigou.com/Ajax/VT/AjaxGetInfo.php?ch_id=${channelId}&req_method=5&one_cid=${bigId}&two_cid=${subId}`;
-                        publics.sendRequest(req_url, "", "GET", function (response) {
+                        publics.sendRequest(req_url, decodedCookie, "GET", function (response) {
                             let one_class = response.responseText.split(`"${bigId}","classname":`)[1].split(",")[0].split(`"`)[1];
                             let two_class = response.responseText.split(`"${subId}","classname":`)[1].split(",")[0].split(`"`)[1];
                             $("#span2").text(`系统分类: ${channelName}-${one_class}-${two_class}`);
@@ -402,4 +406,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-405-2025.05.26.093200
+// End-409-2025.05.26.101350
