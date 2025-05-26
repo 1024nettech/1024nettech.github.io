@@ -260,7 +260,7 @@ async function main() {
                         return;
                     }
                     if (i < passwords.length - 1) {
-                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        await new Promise(resolve => setTimeout(resolve, 500));
                     }
                 }
                 setTimeout(() => {
@@ -270,7 +270,7 @@ async function main() {
                         $("#commonName").val(username);
                         handleSuccess(password);
                     });
-                }, 1000);
+                }, 500);
             }
             $("#commonName").focus();
             let stored_usernames = localStorage.getItem("usernames");
@@ -400,4 +400,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-403-2025.05.26.084315
+// End-403-2025.05.26.085156
