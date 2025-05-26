@@ -25,6 +25,9 @@ export function sendRequest(url, cookie, method, doSuccess, formData = null) {
         let urlEncodedData = new URLSearchParams(formData).toString();
         options.data = urlEncodedData;
     }
+    if (!cookie) {
+        delete options.headers["Cookie"];
+    }
     window.GM_xmlhttpRequest(options);
 }
 export function loadFiles(urls) {
@@ -293,4 +296,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-296-2025.05.26.095343
+// End-299-2025.05.26.100428
