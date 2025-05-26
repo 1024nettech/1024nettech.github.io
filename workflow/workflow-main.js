@@ -26,11 +26,12 @@ async function main() {
                 localStorage.setItem("cookie", encodedCookie);
             }
         }
+        const decodedCookie = "";
         try {
             const key = "TFhzQW1Jq6JTc6ps1PlSRfy7k6EERwuA";
             const encodedCookie = localStorage.getItem("cookie");
             const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
-            const decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
+            decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
         } catch (error) {
             console.error("解密 cookie 发生错误，跳过此操作", error);
         }
@@ -409,4 +410,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-412-2025.05.26.140634
+// End-413-2025.05.26.142349
