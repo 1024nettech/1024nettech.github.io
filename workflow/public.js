@@ -211,7 +211,7 @@ export async function waitfor(selectors, delayTime, doCallback) {
             }
         });
         let config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
+        observer.observe("#form1", config);
     });
 }
 export function parseJson(jsonString) {
@@ -297,4 +297,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-300-2025.05.26.193039
+// End-300-2025.05.26.201655
