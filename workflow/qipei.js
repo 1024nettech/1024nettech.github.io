@@ -157,7 +157,7 @@ export async function open_channel_product_list(chIds) {
         return;
     }
     console.log("函数 open_channel_product_list 被调用\n频道 ID 列表:\n", chIds);
-    if (url === "http://testpage.qipeiyigou.com/" || url.contains("http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang")) {
+    if (url === "http://testpage.qipeiyigou.com/" || url.includes("http://testpage.qipeiyigou.com/dom/sc_user_center.php?username=qipeiyigouwang")) {
         console.log("URL 匹配, 开始处理频道 ID 列表");
         let promises = chIds.map((id, index) => {
             return new Promise((resolve, reject) => {
@@ -265,4 +265,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-268-2025.05.26.132529
+// End-268-2025.05.26.133945
