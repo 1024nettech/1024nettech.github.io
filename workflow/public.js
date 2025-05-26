@@ -256,6 +256,7 @@ export async function downloadRecordAsFile(personName, fileName) {
         alert("没有找到可导出的数据！");
         return;
     }
+    records = Array.from(new Set(records.map(record => record.trim())));
     let usernames = await get("usernames");
     let chIds = await get("chIds");
     let headers = ["日期", "姓名", "会员名", "栏目id", "产品id", "栏目名", "产品链接", "页数", "序号", "原始值", "改后值", "处理状态"];
@@ -296,4 +297,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-299-2025.05.26.135744
+// End-300-2025.05.26.193039
