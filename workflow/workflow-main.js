@@ -21,7 +21,7 @@ async function main() {
         if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
             qipei.export_tsc();
             let cookie = localStorage.getItem("cookie");
-            if (!cookie || cookie.length < 10) {
+            if (!cookie) {
                 let encodedCookie = prompt("请输入Key: ");
                 localStorage.setItem("cookie", encodedCookie);
             }
@@ -402,4 +402,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-405-2025.05.26.092858
+// End-405-2025.05.26.093200
