@@ -281,16 +281,6 @@ async function main() {
                     }
                 }, 1000);
             }
-            $("#commonName").focus();
-            let stored_usernames = localStorage.getItem("usernames");
-            if (stored_usernames) {
-                let first_stored_username = stored_usernames.split(" ")[0];
-                $("#commonName").val(first_stored_username);
-                $("#commonName").prop("disabled", true);
-                $("#commonPassword").focus();
-                $("#commonPassword").click();
-                $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
-            }
             $("#commonPassword").click(async () => {
                 let rightpassword = localStorage.getItem("rightpassword");
                 if (rightpassword) { $("#commonPassword").val(rightpassword); $('#form2').submit(); }
@@ -305,6 +295,16 @@ async function main() {
                 }
             });
             $("#commonLoginBut").mousedown(() => { $('#form2').submit(); });
+            $("#commonName").focus();
+            let stored_usernames = localStorage.getItem("usernames");
+            if (stored_usernames) {
+                let first_stored_username = stored_usernames.split(" ")[0];
+                $("#commonName").val(first_stored_username);
+                $("#commonName").prop("disabled", true);
+                $("#commonPassword").focus();
+                $("#commonPassword").click();
+                $("#usernameInput").val(`当前用户名: ${first_stored_username}`);
+            }
         }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
@@ -409,4 +409,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-412-2025.05.26.134816
+// End-412-2025.05.26.140634
