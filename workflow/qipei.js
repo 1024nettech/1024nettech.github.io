@@ -203,7 +203,7 @@ export async function open_channel_product_list(chIds) {
 export async function openProductsEdit() {
     // ESC打开产品栏目管理列表页
     let username = $(".welcome").text().split("欢迎您：")[1].trim();
-    await publics.appendToRecord("usernames", username);
+    await publics.appendToData("usernames", username);
     let page = publics.getUrlParameter(url, "page");
     $("a").filter(function () {
         return $(this).text().trim() === "编辑";
@@ -232,7 +232,7 @@ export async function handleProductAction(checked_car, status = "") {
         .join(", ");
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
-        await publics.appendToRecord("record", record);
+        await publics.appendToData("record", `${ch_id}_${id}`, record);
         window.close();
     } else {
         async function processing(elements) {
@@ -244,7 +244,7 @@ export async function handleProductAction(checked_car, status = "") {
                 .map(checkbox => checkbox.closest("label").textContent.trim())
                 .join(", ");
             record += `${labelsBefore}\t${labelsAfter}\t${status}`;
-            await publics.appendToRecord("record", record);
+            await publics.appendToData("record", `${ch_id}_${id}`, record);
             $("title").text("完成");
             $("#submit_msg a").click();
         }
@@ -265,4 +265,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-268-2025.05.26.200151
+// End-268-2025.05.27.015344
