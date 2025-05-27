@@ -1,7 +1,7 @@
 import * as publics from "./public.2025.05.28.065107.js"
 import * as admin from "./admin.2025.05.28.065107.js"
 import * as qipei from "./qipei.2025.05.28.065107.js"
-import * as ali from "./ali.js"
+import * as ali from "./ali.2025.05.28.065107.js"
 async function main() {
     const url = location.href;
     const auth = localStorage.getItem("auth"); // 000: 第一位为admin权限,第二位为组长查店铺权限,第三位为截图权限
