@@ -1,5 +1,5 @@
 import { set, get, del, keys } from "./idb-keyval.js";
-import * as publics from "./public.js"
+import * as publics from "./public.2025.05.28.065107.js"
 const url = location.href;
 export function export_tsc() {
     // 首页导出数据组件
