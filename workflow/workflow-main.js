@@ -180,13 +180,13 @@ async function main() {
                     }
                 });
             }
-            $(document).on("keyup", function (event) {
-                switch (event.key) {
-                    case "F2":
-                        qipei.open_close_shop_products();
-                        break;
-                }
-            });
+            // $(document).on("keyup", function (event) {
+            //     switch (event.key) {
+            //         case "F2":
+            //             qipei.open_close_shop_products();
+            //             break;
+            //     }
+            // });
         }
         // 公共权限
         // 获取所有产品栏目id后打开有产品的产品管理页
@@ -421,4 +421,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-424-2025.05.27.145021
+// End-424-2025.05.27.145457
