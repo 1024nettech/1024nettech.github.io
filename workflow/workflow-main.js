@@ -366,13 +366,13 @@ async function main() {
                         // // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
                         // // await publics.waitfor(selectors, 0, processing);
                         // setTimeout(() => { processing(); }, 2000);
-                        function checkSelectors() {
+                        async function checkSelectors() {
                             let selector1 = document.querySelector("#sub_id option:selected");
                             let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
 
                             // Check if both selectors have been selected
                             if (selector1 && selector2) {
-                                processing(); // Call processing when both elements are selected
+                                await processing(); // Call processing when both elements are selected
                             } else {
                                 setTimeout(checkSelectors, 500); // Retry every 500ms if not selected
                             }
