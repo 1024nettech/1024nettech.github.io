@@ -233,7 +233,7 @@ export async function handleProductAction(checked_car, status = "") {
     if (status === "未处理") {
         record += `${labelsBefore}\t${labelsBefore}\t${status}`;
         await publics.appendToData("record", `${ch_id}_${id}`, record);
-        setTimeout(() => { window.close(); }, 200);
+        window.close();
     } else {
         async function processing(elements) {
             $("input[type=checkbox][value=4]").prop("checked", false);
@@ -265,4 +265,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-268-2025.05.27.030321
+// End-268-2025.05.27.091014
