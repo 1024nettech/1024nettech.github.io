@@ -235,7 +235,7 @@ export async function handleProductAction(checked_car, status = "") {
         await publics.appendToData("record", `${ch_id}_${id}`, record);
         window.close();
     } else {
-        async function processing(elements) {
+        async function processing() {
             $("input[type=checkbox][value=4]").prop("checked", false);
             if (checked_car) {
                 $("input[type=checkbox][value=2]").prop("checked", true);
@@ -265,4 +265,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-268-2025.05.27.091014
+// End-268-2025.05.27.143300
