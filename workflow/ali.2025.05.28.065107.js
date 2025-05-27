@@ -1,5 +1,5 @@
 const url = location.href;
-import * as publics from "./public.js"
+import * as publics from "./public.2025.05.28.065107.js"
 export function img_rename() {
     // 主图修改：修改 .detail-gallery-img 的图片 alt 和 src 后缀
     document.querySelectorAll(".detail-gallery-img:not(.video-icon + .detail-gallery-img)").forEach((img, index) => {
@@ -36,4 +36,4 @@ export function img_rename() {
         }
     });
 }
-// End-39-2025.05.19.042808
+// End-39-2025.05.28.075532
