@@ -374,7 +374,7 @@ async function main() {
                             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
                                 await processing(); // Call processing when both elements are selected
                             } else {
-                                setTimeout(checkSelectors, 500); // Retry every 500ms if not selected
+                                setTimeout(checkSelectors, 100); // Retry every 500ms if not selected
                             }
                         }
 
