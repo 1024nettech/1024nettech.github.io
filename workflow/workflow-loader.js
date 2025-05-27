@@ -1,4 +1,4 @@
-import * as publics from "./public.js"
+import * as publics from "./public.2025.05.28.065107.js"
 const url = location.href;
 const autorun = Number(localStorage.getItem("autorun"));
 if (autorun) {
@@ -47,4 +47,4 @@ function update() {
 }
 let version_url = `https://1024nettech.github.io/workflow/version.json?t=${Date.now()}`;
 update();
-// End-50-2025.05.27.135012
+// End-50-2025.05.28.075126
