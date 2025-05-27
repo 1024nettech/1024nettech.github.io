@@ -202,16 +202,14 @@ export async function setAndLog(key, value) {
     }
 }
 export async function waitfor(selectors, delayTime, doCallback) {
-    // 等待元素存在后延时执行
     return new Promise((resolve, reject) => {
         let observer = new MutationObserver((mutationsList, observer) => {
-            let elementsExist = selectors.every(selector => document.querySelector(selector) !== null);
+            let elementsExist = selectors.every(selector => $(selector).length > 0);
             if (elementsExist) {
                 observer.disconnect();
                 setTimeout(async () => {
                     try {
-                        let elements = selectors.map(selector => document.querySelector(selector));
-                        await doCallback(elements);
+                        await doCallback();
                         resolve();
                     } catch (err) {
                         reject(err);
@@ -220,7 +218,7 @@ export async function waitfor(selectors, delayTime, doCallback) {
             }
         });
         let config = { childList: true, subtree: true };
-        observer.observe(document.body, config);
+        observer.observe("#form1", config);
     });
 }
 export function parseJson(jsonString) {
@@ -332,4 +330,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-335-2025.05.27.141359
+// End-333-2025.05.27.160454
