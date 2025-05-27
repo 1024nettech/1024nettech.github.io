@@ -371,7 +371,7 @@ async function main() {
                             let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
 
                             // Check if both selectors have been selected
-                            if (selector1 && selector2) {
+                            if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
                                 await processing(); // Call processing when both elements are selected
                             } else {
                                 setTimeout(checkSelectors, 500); // Retry every 500ms if not selected
