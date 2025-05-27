@@ -248,9 +248,23 @@ export async function handleProductAction(checked_car, status = "") {
             $("title").text("完成");
             $("#submit_msg a").click();
         }
-        // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
-        // await publics.waitfor(selectors, 0, processing);
-        setTimeout(() => { processing(); }, 2000);
+        // // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
+        // // await publics.waitfor(selectors, 0, processing);
+        // setTimeout(() => { processing(); }, 2000);
+        function checkSelectors() {
+            let selector1 = document.querySelector("#sub_id option:selected");
+            let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
+
+            // Check if both selectors have been selected
+            if (selector1 && selector2) {
+                processing(); // Call processing when both elements are selected
+            } else {
+                setTimeout(checkSelectors, 500); // Retry every 500ms if not selected
+            }
+        }
+
+        // Start the checking process
+        checkSelectors();
     }
 }
 export function extractDataAsObject() {
