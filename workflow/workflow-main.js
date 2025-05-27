@@ -367,8 +367,8 @@ async function main() {
                         // // await publics.waitfor(selectors, 0, processing);
                         // setTimeout(() => { processing(); }, 2000);
                         async function checkSelectors() {
-                            let selector1 = document.querySelector("#sub_id option:selected");
-                            let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
+                            // let selector1 = document.querySelector("#sub_id option:selected");
+                            // let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
 
                             // Check if both selectors have been selected
                             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
