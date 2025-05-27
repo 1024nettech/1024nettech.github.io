@@ -331,26 +331,91 @@ async function main() {
         // 产品编辑页自动取消勾选并提交
         else if (url.includes("sc_product.php")) {
             if (autorun) {
+                async function handleProductAction0(checked_car, status = "") {
+                    let today = publics.generateTimestamp(0);
+                    let person = "xxpersonname";
+                    let username = $(".welcome").text().split("欢迎您：")[1].trim();
+                    let ch_id = publics.getUrlParameter(url, "ch_id");
+                    let id = publics.getUrlParameter(url, "id");
+                    let ch_name = $(".myColumnTit").text();
+                    let product_link = `http://testpage.qipeiyigou.com/qipeiyigouwang/products/${id}.html${location.hash}`;
+                    let page = publics.getUrlParameter(url, "page");
+                    let num = publics.getUrlParameter(url, "num");
+                    let record = `${today}\t${person}\t${username}\t${ch_id}\t${id}\t${ch_name}\t${product_link}\t${page}\t${num}\t`;
+                    let labelsBefore = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                        .map(checkbox => checkbox.closest("label").textContent.trim())
+                        .join(", ");
+                    if (status === "未处理") {
+                        record += `${labelsBefore}\t${labelsBefore}\t${status}`;
+                        await publics.appendToData("record", `${ch_id}_${id}`, record);
+                        window.close();
+                    } else {
+                        async function processing() {
+                            $("input[type=checkbox][value=4]").prop("checked", false);
+                            if (checked_car) {
+                                $("input[type=checkbox][value=2]").prop("checked", true);
+                            }
+                            let labelsAfter = Array.from(document.querySelectorAll(`input[name="properties[]"]:checked`))
+                                .map(checkbox => checkbox.closest("label").textContent.trim())
+                                .join(", ");
+                            record += `${labelsBefore}\t${labelsAfter}\t${status}`;
+                            await publics.appendToData("record", `${ch_id}_${id}`, record);
+                            $("title").text("完成");
+                            $("#submit_msg a").click();
+                        }
+                        // // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
+                        // // await publics.waitfor(selectors, 0, processing);
+                        // setTimeout(() => { processing(); }, 2000);
+                        function checkSelectors() {
+                            let selector1 = document.querySelector("#sub_id option:selected");
+                            let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
+
+                            // Check if both selectors have been selected
+                            if (selector1 && selector2) {
+                                processing(); // Call processing when both elements are selected
+                            } else {
+                                setTimeout(checkSelectors, 500); // Retry every 500ms if not selected
+                            }
+                        }
+
+                        // Start the checking process
+                        checkSelectors();
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
-                    await qipei.handleProductAction(0, "未处理");
+                    handleProductAction0(0, "未处理");
                 }
                 else {
                     if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            await qipei.handleProductAction(1, "已处理");
+                            handleProductAction0(1, "已处理");
                         }
                         else {
-                            await qipei.handleProductAction(0, "未处理");
+                            handleProductAction0(0, "未处理");
                         }
                     }
                     else {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            await qipei.handleProductAction(0, "已处理");
+                            handleProductAction0(0, "已处理");
                         }
                         else {
-                            await qipei.handleProductAction(0, "未处理");
+                            handleProductAction0(0, "未处理");
                         }
                     }
                 }
