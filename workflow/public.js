@@ -201,8 +201,8 @@ export async function setAndLog(key, value) {
         console.error("无法设置记录, 发生错误: ", error);
     }
 }
-export async function waitfor(selectors, delayTime, doCallback, method = 'timeout') {
-    //等待元素出现后执行回调, method 可选timeout或observer调用不同观察方法
+export async function waitfor(selectors, delayTime, doCallback, method = "timeout") {
+    // 等待元素出现后执行回调, method 可选timeout或observer调用不同观察方法
     return new Promise((resolve, reject) => {
         function checkElements() {
             let elementsExist = selectors.every(selector => $(selector).length > 0);
@@ -233,12 +233,12 @@ export async function waitfor(selectors, delayTime, doCallback, method = 'timeou
             let config = { childList: true, subtree: true };
             observer.observe(document.body, config);
         }
-        if (method === 'timeout') {
+        if (method === "timeout") {
             checkElements();
-        } else if (method === 'observer') {
+        } else if (method === "observer") {
             observeElements();
         } else {
-            reject(new Error('Invalid method parameter. Use "timeout" or "observer".'));
+            reject(new Error(`Invalid method parameter. Use "timeout" or "observer".`));
         }
     });
 }
@@ -261,7 +261,7 @@ export function getUrlParameter(url, paramName) {
     return paramValue;
 }
 export async function appendToData(key, valueOrDictKey, dictValue = null, maxRetries = 3) {
-    //存储数据到[]或{}
+    // 存储数据到[]或{}
     let attempt = 0;
     async function trySet() {
         try {
@@ -279,7 +279,7 @@ export async function appendToData(key, valueOrDictKey, dictValue = null, maxRet
                 } else {
                     console.log("该记录已存在, 无需更新(数组)");
                 }
-            } else if (typeof records === 'object' && records !== null) {
+            } else if (typeof records === "object" && records !== null) {
                 records[valueOrDictKey] = dictValue;
                 await set(key, records);
                 let updatedRecords = await get(key);
@@ -351,4 +351,4 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
-// End-354-2025.05.27.163102
+// End-354-2025.05.27.164432
