@@ -35,7 +35,7 @@ async function main() {
             const bytes = CryptoJS.AES.decrypt(encodedCookie, key);
             decodedCookie = bytes.toString(CryptoJS.enc.Utf8);
         } catch (error) {
-            console.error("解密 cookie 发生错误，跳过此操作", error);
+            console.error("解密 cookie 发生错误, 跳过此操作", error);
         }
         let channelNameMap = "";
         if ($("a:contains(退出)").length) {
@@ -180,19 +180,13 @@ async function main() {
                     }
                 });
             }
-            // $(document).on("keyup", function (event) {
-            //     switch (event.key) {
-            //         case "F2":
-            //             qipei.open_close_shop_products();
-            //             break;
-            //     }
-            // });
         }
         // 公共权限
         // 获取所有产品栏目id后打开有产品的产品管理页
         if (autorun && channelNameMap) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
+        // 店铺内打开、关闭产品
         if (url.includes("mshop/?") || url.includes("mshop/product/item")) {
             $(document).on("keyup", function (event) {
                 switch (event.key) {
@@ -203,7 +197,7 @@ async function main() {
             });
         }
         // 登录页自动填充密码
-        if (url.includes("denglu.php")) {
+        else if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
                 let url = "http://admin.qipeiyigou.com/member_list.php";
                 let formData = {
@@ -244,7 +238,7 @@ async function main() {
                 $("#commonName").val(username);
                 $("#commonPassword").val(password);
                 localStorage.setItem("rightpassword", password);
-                $('#form2').submit();
+                $("#form2").submit();
                 $(".web-login .item-list i").css("background-image", "url(https://aimg8.dlssyht.cn/u/1533835/ueditor/image/767/1533835/1747535858129383.png)");
             }
             function testPassword(password) {
@@ -295,7 +289,7 @@ async function main() {
             }
             $("#commonPassword").click(async () => {
                 let rightpassword = localStorage.getItem("rightpassword");
-                if (rightpassword) { $("#commonPassword").val(rightpassword); $('#form2').submit(); }
+                if (rightpassword) { $("#commonPassword").val(rightpassword); $("#form2").submit(); }
                 else {
                     $("#commonPassword").val("");
                     $("#commonPassword").attr("placeholder", "查询中……");
@@ -306,7 +300,7 @@ async function main() {
                     }
                 }
             });
-            $("#commonLoginBut").mousedown(() => { $('#form2').submit(); });
+            $("#commonLoginBut").mousedown(() => { $("#form2").submit(); });
             $("#commonName").focus();
             let stored_usernames = localStorage.getItem("usernames");
             if (stored_usernames) {
@@ -331,7 +325,7 @@ async function main() {
         // 产品编辑页自动取消勾选并提交
         else if (url.includes("sc_product.php")) {
             if (autorun) {
-                async function handleProductAction0(checked_car, status = "") {
+                async function handleProductAction(checked_car, status = "") {
                     let today = publics.generateTimestamp(0);
                     let person = "xxpersonname";
                     let username = $(".welcome").text().split("欢迎您：")[1].trim();
@@ -363,59 +357,36 @@ async function main() {
                             $("title").text("完成");
                             $("#submit_msg a").click();
                         }
-                        // // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
-                        // // await publics.waitfor(selectors, 0, processing);
-                        // setTimeout(() => { processing(); }, 2000);
                         async function checkSelectors() {
-                            // let selector1 = document.querySelector("#sub_id option:selected");
-                            // let selector2 = document.querySelector("#shop_pro_class_big_id option:selected");
-
-                            // Check if both selectors have been selected
                             if ($("#sub_id option:selected").length && $("#shop_pro_class_big_id option:selected").length) {
-                                await processing(); // Call processing when both elements are selected
+                                await processing();
                             } else {
-                                setTimeout(checkSelectors, 100); // Retry every 500ms if not selected
+                                setTimeout(checkSelectors, 100);
                             }
                         }
-
-                        // Start the checking process
                         checkSelectors();
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 let proname = $("#proname").val();
                 let checked_box_num = $("input[type=checkbox]:checked").length;
                 if (proname.includes("库存件")) {
-                    handleProductAction0(0, "未处理");
+                    handleProductAction(0, "未处理");
                 }
                 else {
                     if (checked_box_num === 1) {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            handleProductAction0(1, "已处理");
+                            handleProductAction(1, "已处理");
                         }
                         else {
-                            handleProductAction0(0, "未处理");
+                            handleProductAction(0, "未处理");
                         }
                     }
                     else {
                         if ($("input[type=checkbox][value=4]:checked").length) {
-                            handleProductAction0(0, "已处理");
+                            handleProductAction(0, "已处理");
                         }
                         else {
-                            handleProductAction0(0, "未处理");
+                            handleProductAction(0, "未处理");
                         }
                     }
                 }
@@ -486,4 +457,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-424-2025.05.27.145457
+// End-460-2025.05.27.171624
