@@ -193,6 +193,15 @@ async function main() {
         if (autorun && channelNameMap) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
+        if (url.includes("mshop/?") || url.includes("mshop/product/item")) {
+            $(document).on("keyup", function (event) {
+                switch (event.key) {
+                    case "F2":
+                        qipei.open_close_shop_products();
+                        break;
+                }
+            });
+        }
         // 登录页自动填充密码
         if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
@@ -412,4 +421,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-415-2025.05.27.021331
+// End-424-2025.05.27.145021
