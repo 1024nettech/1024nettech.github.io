@@ -248,8 +248,9 @@ export async function handleProductAction(checked_car, status = "") {
             $("title").text("完成");
             $("#submit_msg a").click();
         }
-        let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
-        await publics.waitfor(selectors, 0, processing);
+        // let selectors = ["#sub_id option:selected", "#shop_pro_class_big_id option:selected"];
+        // await publics.waitfor(selectors, 0, processing);
+        setTimeout(() => { processing(); }, 2000);
     }
 }
 export function extractDataAsObject() {
@@ -265,4 +266,4 @@ export function extractDataAsObject() {
     console.log(dataObj);
     return dataObj;
 }
-// End-268-2025.05.27.143300
+// End-269-2025.05.27.144015
