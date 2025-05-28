@@ -19,6 +19,16 @@ async function main() {
         await publics.setAndLog("record", {});
     }
     if (url.includes("qipeiyigou.com")) {
+        // 店铺内打开、关闭产品
+        if (url.includes("mshop/?") || url.includes("mshop/product/item")) {
+            $(document).on("keyup", function (event) {
+                switch (event.key) {
+                    case "F2":
+                        qipei.open_close_shop_products();
+                        break;
+                }
+            });
+        }
         // 首页和登录页面添加导出组件
         if (url === "http://testpage.qipeiyigou.com/" || url.includes("denglu.php")) {
             qipei.export_tsc();
@@ -185,16 +195,6 @@ async function main() {
         // 获取所有产品栏目id后打开有产品的产品管理页
         if (autorun && channelNameMap) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
-        }
-        // 店铺内打开、关闭产品
-        if (url.includes("mshop/?") || url.includes("mshop/product/item")) {
-            $(document).on("keyup", function (event) {
-                switch (event.key) {
-                    case "F2":
-                        qipei.open_close_shop_products();
-                        break;
-                }
-            });
         }
         // 登录页自动填充密码
         else if (url.includes("denglu.php")) {
@@ -457,4 +457,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-460-2025.05.28.065107
+// End-460-2025.05.28.091404
