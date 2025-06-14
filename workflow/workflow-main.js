@@ -192,6 +192,7 @@ async function main() {
             }
         }
         // 公共权限
+        console.log(url);
         // 获取所有产品栏目id后打开有产品的产品管理页
         if (autorun && channelNameMap) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
