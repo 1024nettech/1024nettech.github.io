@@ -317,6 +317,7 @@ async function main() {
             $(document).on("keyup", function (event) {
                 switch (event.key) {
                     case "Escape":
+                        alert();
                         qipei.openProductsEdit();
                         break;
                 }
