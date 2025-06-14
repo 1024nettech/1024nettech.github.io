@@ -314,9 +314,11 @@ async function main() {
         }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
-            document.addEventListener("keyup", function (event) {
-                if (event.key === "Escape") {
-                    qipei.openProductsEdit();
+            $(document).on("keyup", function (event) {
+                switch (event.key) {
+                    case "Escape":
+                        qipei.openProductsEdit();
+                        break;
                 }
             });
         }
@@ -447,12 +449,17 @@ async function main() {
     }
 }
 let interval = setInterval(function () {
-    if (document.readyState === "complete" || document.readyState === "interactive") {
+    if ((document.readyState === "complete" || document.readyState === "interactive") && window.jQuery) {
         clearInterval(interval);
         main();
-        console.log("来自workflow-main.js输出: DOM 已加载完成, main()函数已执行");
+        console.log("来自workflow-main.js输出: DOM 已加载完成, jQuery 已加载, main()函数已执行");
     } else {
-        console.log("来自workflow-main.js输出: DOM 还未加载");
+        if (document.readyState !== "complete" && document.readyState !== "interactive") {
+            console.log("来自workflow-main.js输出: DOM 还未加载");
+        }
+        if (!window.jQuery) {
+            console.log("来自workflow-main.js输出: jQuery 还未加载");
+        }
     }
 }, 10);
-// End-458-2025.05.28.091404
+// End-465-2025.06.14.123856
