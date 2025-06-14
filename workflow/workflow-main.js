@@ -314,10 +314,10 @@ async function main() {
         }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
+            alert();
             $(document).on("keyup", function (event) {
                 switch (event.key) {
                     case "Escape":
-                        alert();
                         qipei.openProductsEdit();
                         break;
                 }
