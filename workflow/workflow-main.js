@@ -192,13 +192,12 @@ async function main() {
             }
         }
         // 公共权限
-        console.log(url);
         // 获取所有产品栏目id后打开有产品的产品管理页
         if (autorun && channelNameMap) {
             await qipei.open_channel_product_list(Object.keys(channelNameMap));
         }
         // 登录页自动填充密码
-        else if (url.includes("denglu.php")) {
+        if (url.includes("denglu.php")) {
             function queryUserId(username, cookie, doSuccess) {
                 let url = "http://admin.qipeiyigou.com/member_list.php";
                 let formData = {
@@ -315,12 +314,9 @@ async function main() {
         }
         // 栏目产品管理列表页Esc打开编辑产品
         else if (url.includes("sc_product_list.php")) {
-            alert();
-            $(document).on("keyup", function (event) {
-                switch (event.key) {
-                    case "Escape":
-                        qipei.openProductsEdit();
-                        break;
+            document.addEventListener("keyup", function (event) {
+                if (event.key === "Escape") {
+                    qipei.openProductsEdit();
                 }
             });
         }
@@ -459,4 +455,4 @@ let interval = setInterval(function () {
         console.log("来自workflow-main.js输出: DOM 还未加载");
     }
 }, 10);
-// End-460-2025.05.28.091404
+// End-458-2025.05.28.091404
