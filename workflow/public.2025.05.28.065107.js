@@ -354,44 +354,26 @@ export async function downloadRecordAsFile(personName, fileName) {
 // 导出后台管理会员电话处理记录
 // 会员资料详情页保存
 export async function gatherMemberDataAndSave() {
-    const rows = $('tr[bgcolor="#ffffff"]');
-    const memberData = {};
-
     // 获取用户名、联系电话、会员卡号
-    rows.each(function () {
-        const label = $(this).find('td.right').text().trim();
-        const value = $(this).find('td.left').text().trim();
+    let username = $("td:contains(用户名)+td").text().trim();
+    let tel = $("#tel").val().trim();
+    let card_id = $("#card_id").val().trim();
+    const record = `${username}\t${tel}\t${card_id}`;
 
-        if (label === '用户名：') {
-            memberData.username = value;
-        }
-        if (label === '联系电话：') {
-            memberData.tel = value;
-        }
-        if (label === '会员卡号：') {
-            memberData.card_id = value;
-        }
-    });
+    // 获取现有的 tel 数据，初始化为空对象 {}
+    let currentData = await get('tel');
+    // 在现有数据基础上添加新记录，使用会员名为键
+    currentData[username] = record;
 
-    if (memberData.username && memberData.tel && memberData.card_id) {
-        const record = `${memberData.username}\t${memberData.tel}\t${memberData.card_id}`;
+    // 存储更新后的数据
+    await set('tel', currentData);
 
-        // 获取现有的 tel 数据
-        const currentData = await get('tel');  // 如果没有数据，返回一个空对象
-
-        // 在现有数据基础上添加新记录
-        currentData[memberData.username] = record;
-
-        // 存储更新后的数据
-        await set('tel', currentData);
-    }
 }
-
 
 // 保存后台管理会员电话处理记录为xlsx
 export async function save_tel_record() {
     // 获取 idb-keyval 中存储的 tel 数据
-    const telData = await get('tel') || {};  // 获取 tel 数据，如果没有则为空对象
+    const telData = await get('tel');// 获取 tel 数据，如果没有则为空对象
 
     if (Object.keys(telData).length > 0) {
         // 获取所有记录并按会员卡号降序排序
