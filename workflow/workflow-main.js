@@ -98,6 +98,10 @@ async function main() {
                         window.close();
                     }
                 }
+                else if (url.includes("shops_pass.php")) {
+                    // 店铺申请批量通过审核
+                    admin.shop_pass();
+                }
             }
             $(document).on("mouseenter", "div[id^='evMo_']", function () {
                 let $this = $(this);
@@ -495,4 +499,4 @@ let interval = setInterval(function () {
         }
     }
 }, 10);
-// End-498-2025.06.18.131212
+// End-502-2025.06.18.162612
