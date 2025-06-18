@@ -357,6 +357,7 @@ export async function getTelData() {
     let data = await get('tel');
     if (!data) {
         data = [];
+        await set("tel", data);
     }
     return data;
 }
