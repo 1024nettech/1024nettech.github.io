@@ -358,15 +358,21 @@ export async function gatherMemberDataAndSave() {
     let username = $("td:contains(用户名)+td").text().trim();
     let tel = $("#tel").val().trim();
     let card_id = $("#card_id").val().trim();
-    const record = `${username}\t${tel}\t${card_id}`;
 
-    // 获取现有的 tel 数据，初始化为空对象 {}
-    let currentData = await get('tel');
-    // 在现有数据基础上添加新记录，使用会员名为键
-    currentData[username] = record;
 
-    // 存储更新后的数据
-    await set('tel', currentData);
+
+
+    if (tel != "") {
+        const record = `${username}\t${tel}\t${card_id}`;
+
+        // 获取现有的 tel 数据，初始化为空对象 {}
+        let currentData = await get('tel');
+        // 在现有数据基础上添加新记录，使用会员名为键
+        currentData[username] = record;
+
+        // 存储更新后的数据
+        await set('tel', currentData);
+    }
 
 }
 
