@@ -1,3 +1,4 @@
+import { set, get, del, keys } from "./idb-keyval.js"
 export function get_img_src() {
     // 商铺设计图片模块获取图片src, 复制到剪贴板
     let a = $(".n-upload-file-info a").attr("href");
@@ -15,4 +16,38 @@ export function setPosition() {
         $(".curEditModuleSize").css("top", `${top}px`);
     }
 }
-// End-18-2025.05.20.172031
+export async function gatherMemberDataAndSave() {
+    // 管理后台会员详情页电话处理记录保存
+    let username = $("td:contains(用户名)+td").text().trim();
+    let tel = $("#tel").val().trim();
+    let card_id = $("#card_id").val().trim();
+    let record = `${username}\t${tel}\t${card_id}`;
+    let currentData = await get("tel");
+    currentData[username] = record;
+    await set("tel", currentData);
+}
+export async function save_tel_record() {
+    // 导出管理后台会员电话处理记录为xlsx
+    let telData = await get("tel");
+    if (Object.keys(telData).length > 0) {
+        // 获取所有记录并按会员卡号降序排序
+        let sortedData = Object.values(telData).sort((a, b) => {
+            let cardIdA = a.split("\t")[2];
+            let cardIdB = b.split("\t")[2];
+            return cardIdB.localeCompare(cardIdA);
+        });
+        let sheetData = [["用户名", "联系电话", "会员卡号"]];
+        sortedData.forEach(row => {
+            sheetData.push(row.split("\t"));
+        });
+        let ws = XLSX.utils.aoa_to_sheet(sheetData);
+        let wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "会员数据");
+        let timestamp = new Date().toISOString().replace(/[-:.]/g, "").slice(0, 14);
+        let filename = `管理后台会员电话清空处理记录-${timestamp}.xlsx`;
+        XLSX.writeFile(wb, filename);
+    } else {
+        alert("没有数据可导出！");
+    }
+}
+// End-53-2025.06.18.125947
