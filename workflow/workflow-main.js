@@ -17,6 +17,7 @@ async function main() {
         console.log(localStorage);
         await publics.setAndLog("usernames", []);
         await publics.setAndLog("record", {});
+        await publics.setAndLog("tel", []);
     }
     if (url.includes("qipeiyigou.com")) {
         // 店铺内打开、关闭产品
