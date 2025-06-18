@@ -67,11 +67,43 @@ async function main() {
                 // 管理后台功能
                 if (url.includes("member_list.php")) {
                     // 会员管理列表页
+                    const searchType = $('select[name="search_type"]').val();
+                    if (searchType !== '3') {
+                        $('select[name="search_type"]').val('3');
+                        $('#member_name').val('13000000000');
+                        submit_check();
+                    }
+                    $(document).on('keydown', function (e) {
+                        if (e.key === 'Escape') {
+                            // 按下Esc键时，获取并打开会员编辑页面
+                            $('#form1 a').each(function () {
+                                if ($(this).text().trim() === '编辑') {
+                                    window.open($(this).attr('href'), '_blank');
+                                }
+                            });
+                            const nextPageLink = $('a.page-next').attr('href');
+                            if (nextPageLink) {
+                                location.href = nextPageLink;
+                            }
+                        }
+                    });
                     $("body").append(`<button id="exportx">导出数据为 xlsx</button>`);
                     $("#exportx").click(() => {
                         publics.save_tel_record();
                     });
                 }
+                else if (url.includes("member_manage_detail.php")) {
+                    // 会员管理资料详情页
+                    publics.gatherMemberDataAndSave();
+                    if (!$('td.right:contains("短信验证手机号")').length && $('#tel').val() === '13000000000') {
+                        $('#tel').val('');  // 清空电话号码
+                        $('#sub_btn').click();  // 提交表单
+                    }
+                    else {
+                        window.close();  // 关闭窗口
+                    }
+                }
+
 
                 $(document).on("mouseenter", "div[id^='evMo_']", function () {
                     let $this = $(this);
