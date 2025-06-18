@@ -65,7 +65,7 @@ export async function shop_pass() {
         $("#class_form").submit();
     }
     else {
-        setTimeout(() => { location.reload(); }, 10000);
+        setTimeout(() => { location.href = "http://admin.qipeiyigou.com/shops/shops_pass.php?no_navi=0&is_frame=2&dom_id=18"; }, 10000);
     }
 }
-// End-71-2025.06.18.163654
+// End-71-2025.06.18.164149
