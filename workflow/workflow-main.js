@@ -68,12 +68,6 @@ async function main() {
                 // 管理后台功能
                 if (url.includes("member_list.php")) {
                     // 会员管理列表页
-                    const searchType = $('select[name="search_type"]').val();
-                    if (searchType !== '3') {
-                        $('select[name="search_type"]').val('3');
-                        $('#member_name').val('13000000000');
-                        submit_check();
-                    }
                     $(document).on('keydown', function (e) {
                         if (e.key === 'Escape') {
                             // 按下Esc键时，获取并打开会员编辑页面
@@ -82,7 +76,7 @@ async function main() {
                                     window.open($(this).attr('href'), '_blank');
                                 }
                             });
-                            const nextPageLink = $('a.page-next').attr('href');
+                            let nextPageLink = $('a.page-next').attr('href');
                             if (nextPageLink) {
                                 location.href = nextPageLink;
                             }
@@ -90,34 +84,32 @@ async function main() {
                     });
                     $("body").append(`<button id="exportx">导出数据为 xlsx</button>`);
                     $("#exportx").click(() => {
-                        publics.save_tel_record();
+                        admin.save_tel_record();
                     });
                 }
                 else if (url.includes("member_manage_detail.php")) {
                     // 会员管理资料详情页
-                    await publics.gatherMemberDataAndSave();
-                    if (!$('td.right:contains("短信验证手机号")').length && $('#tel').val() === '13000000000') {
-                        $('#tel').val('');  // 清空电话号码
-                        $('#sub_btn').click();  // 提交表单
+                    if (!$('td.right:contains("短信验证手机号")').length && $('#tel').val().trim() === '13000000000') {
+                        await admin.gatherMemberDataAndSave();
+                        $('#tel').val('');
+                        $('#sub_btn').click();
                     }
                     else {
-                        // window.close();  // 关闭窗口
+                        window.close();
                     }
                 }
-
-
-                $(document).on("mouseenter", "div[id^='evMo_']", function () {
-                    let $this = $(this);
-                    $this.attr("title", `宽度: ${$this.css("width")}\n高度: ${$this.css("height")}\n左: ${$this.css("left")}\n上: ${$this.css("top")}`);
-                });
-                $(document).on("keyup", function (event) {
-                    switch (event.key) {
-                        case "F2":
-                            admin.setPosition();
-                            break;
-                    }
-                });
             }
+            $(document).on("mouseenter", "div[id^='evMo_']", function () {
+                let $this = $(this);
+                $this.attr("title", `宽度: ${$this.css("width")}\n高度: ${$this.css("height")}\n左: ${$this.css("left")}\n上: ${$this.css("top")}`);
+            });
+            $(document).on("keyup", function (event) {
+                switch (event.key) {
+                    case "F2":
+                        admin.setPosition();
+                        break;
+                }
+            });
         }
         // 组长查店铺权限
         if (auth[1] === "1") {
@@ -503,4 +495,4 @@ let interval = setInterval(function () {
         }
     }
 }, 10);
-// End-465-2025.06.14.123856
+// End-498-2025.06.18.124034
