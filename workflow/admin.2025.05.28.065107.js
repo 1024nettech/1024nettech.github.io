@@ -56,4 +56,17 @@ export async function save_tel_record() {
         alert("没有数据可导出！");
     }
 }
-// End-59-2025.06.18.132205
+export async function shop_pass() {
+    // 管理后台店铺审核批量通过
+    if ($('#all_checkbox').length) {
+        $("#class_form input:checkbox[name='key[]']").prop('checked', true);
+        $('#all_checkbox').prop('checked', true);
+        $("#operation").val("set_top");
+        $("#class_form").submit();
+    }
+    else {
+        setTimeout(() => {
+        }, 10000);
+    }
+}
+// End-72-2025.06.18.163559
