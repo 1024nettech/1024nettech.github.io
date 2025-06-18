@@ -95,7 +95,7 @@ async function main() {
                 }
                 else if (url.includes("member_manage_detail.php")) {
                     // 会员管理资料详情页
-                    publics.gatherMemberDataAndSave();
+                    await publics.gatherMemberDataAndSave();
                     if (!$('td.right:contains("短信验证手机号")').length && $('#tel').val() === '13000000000') {
                         $('#tel').val('');  // 清空电话号码
                         $('#sub_btn').click();  // 提交表单
