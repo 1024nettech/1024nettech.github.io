@@ -361,7 +361,7 @@ export async function getTelData() {
     return data;
 }
 // 会员资料详情页保存
-async function gatherMemberDataAndSave() {
+export async function gatherMemberDataAndSave() {
     const rows = $('tr[bgcolor="#ffffff"]');
     const memberData = {};
 
