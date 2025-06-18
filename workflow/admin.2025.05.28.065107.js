@@ -43,11 +43,17 @@ export async function save_tel_record() {
         let ws = XLSX.utils.aoa_to_sheet(sheetData);
         let wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "会员数据");
-        let timestamp = new Date().toISOString().replace(/[-:.]/g, "").slice(0, 14);
-        let filename = `管理后台会员电话清空处理记录-${timestamp}.xlsx`;
+        let timestamp = new Date();
+        let formattedTimestamp = timestamp.getFullYear().toString().padStart(4, '0') +
+            (timestamp.getMonth() + 1).toString().padStart(2, '0') +
+            timestamp.getDate().toString().padStart(2, '0') +
+            timestamp.getHours().toString().padStart(2, '0') +
+            timestamp.getMinutes().toString().padStart(2, '0') +
+            timestamp.getSeconds().toString().padStart(2, '0');
+        let filename = `管理后台会员电话清空处理记录-${formattedTimestamp}.xlsx`;
         XLSX.writeFile(wb, filename);
     } else {
         alert("没有数据可导出！");
     }
 }
-// End-53-2025.06.18.125947
+// End-59-2025.06.18.132205
