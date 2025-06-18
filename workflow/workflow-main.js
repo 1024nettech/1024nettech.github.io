@@ -82,7 +82,7 @@ async function main() {
                             }
                         }
                     });
-                    $("body").append(`<button id="exportx">导出数据为 xlsx</button>`);
+                    $("body").append(`<button id="exportx" style="top: 20px;">导出数据为 xlsx</button>`);
                     $("#exportx").click(() => {
                         admin.save_tel_record();
                     });
@@ -495,4 +495,4 @@ let interval = setInterval(function () {
         }
     }
 }, 10);
-// End-498-2025.06.18.124034
+// End-498-2025.06.18.131212
