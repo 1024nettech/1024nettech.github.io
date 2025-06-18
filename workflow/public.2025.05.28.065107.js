@@ -360,6 +360,36 @@ export async function getTelData() {
     }
     return data;
 }
+// 会员资料详情页保存
+async function gatherMemberDataAndSave() {
+    const rows = $('tr[bgcolor="#ffffff"]');
+    const memberData = {};
+
+    // 获取用户名、联系电话、会员卡号
+    rows.each(function () {
+        const label = $(this).find('td.right').text().trim();
+        const value = $(this).find('td.left').text().trim();
+
+        if (label === '用户名：') {
+            memberData.username = value;
+        }
+        if (label === '联系电话：') {
+            memberData.tel = value;
+        }
+        if (label === '会员卡号：') {
+            memberData.card_id = value;
+        }
+    });
+
+    if (memberData.username && memberData.tel && memberData.card_id) {
+        const record = `${memberData.username}\t${memberData.tel}\t${memberData.card_id}`;
+        // 使用 idb-keyval 存储数据
+        const currentData = await getTelData();
+        currentData.push(record);
+        await set('tel', currentData);
+    }
+}
+
 // 保存后台管理会员电话处理记录为xlsx
 export async function save_tel_record() {
     // 获取 idb-keyval 中存储的 tel 数据
