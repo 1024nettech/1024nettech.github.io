@@ -352,15 +352,6 @@ export async function downloadRecordAsFile(personName, fileName) {
     console.log("XLSX 文件已生成并开始下载");
 }
 // 导出后台管理会员电话处理记录
-// 获取存储的tel数据
-export async function getTelData() {
-    let data = await get('tel');
-    if (!data) {
-        data = [];
-        await set("tel", data);
-    }
-    return data;
-}
 // 会员资料详情页保存
 export async function gatherMemberDataAndSave() {
     const rows = $('tr[bgcolor="#ffffff"]');
@@ -384,21 +375,27 @@ export async function gatherMemberDataAndSave() {
 
     if (memberData.username && memberData.tel && memberData.card_id) {
         const record = `${memberData.username}\t${memberData.tel}\t${memberData.card_id}`;
-        // 使用 idb-keyval 存储数据
-        const currentData = await getTelData();
-        currentData.push(record);
+
+        // 获取现有的 tel 数据
+        const currentData = await get('tel');  // 如果没有数据，返回一个空对象
+
+        // 在现有数据基础上添加新记录
+        currentData[memberData.username] = record;
+
+        // 存储更新后的数据
         await set('tel', currentData);
     }
 }
 
+
 // 保存后台管理会员电话处理记录为xlsx
 export async function save_tel_record() {
     // 获取 idb-keyval 中存储的 tel 数据
-    const telData = await getTelData();
+    const telData = await get('tel') || {};  // 获取 tel 数据，如果没有则为空对象
 
-    if (telData.length > 0) {
-        // 按会员卡号降序排序
-        telData.sort((a, b) => {
+    if (Object.keys(telData).length > 0) {
+        // 获取所有记录并按会员卡号降序排序
+        const sortedData = Object.values(telData).sort((a, b) => {
             const cardIdA = a.split("\t")[2]; // 获取会员卡号
             const cardIdB = b.split("\t")[2]; // 获取会员卡号
             return cardIdB.localeCompare(cardIdA); // 降序排列
@@ -406,7 +403,7 @@ export async function save_tel_record() {
 
         // 准备数据为 xlsx 格式
         const sheetData = [['用户名', '联系电话', '会员卡号']]; // 标题行
-        telData.forEach(row => {
+        sortedData.forEach(row => {
             sheetData.push(row.split("\t"));
         });
 
@@ -425,5 +422,4 @@ export async function save_tel_record() {
         alert("没有数据可导出！");
     }
 }
-
 // End-354-2025.05.27.164432
