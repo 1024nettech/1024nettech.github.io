@@ -65,6 +65,14 @@ async function main() {
             }
             else {
                 // 管理后台功能
+                if (url.includes("member_list.php")) {
+                    // 会员管理列表页
+                    $("body").append(`<button id="exportx">导出数据为 xlsx</button>`);
+                    $("#exportx").click(() => {
+                        publics.save_tel_record();
+                    });
+                }
+
                 $(document).on("mouseenter", "div[id^='evMo_']", function () {
                     let $this = $(this);
                     $this.attr("title", `宽度: ${$this.css("width")}\n高度: ${$this.css("height")}\n左: ${$this.css("left")}\n上: ${$this.css("top")}`);
