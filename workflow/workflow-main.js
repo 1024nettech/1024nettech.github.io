@@ -101,7 +101,7 @@ async function main() {
                         $('#sub_btn').click();  // 提交表单
                     }
                     else {
-                        window.close();  // 关闭窗口
+                        // window.close();  // 关闭窗口
                     }
                 }
 
