@@ -65,8 +65,7 @@ export async function shop_pass() {
         $("#class_form").submit();
     }
     else {
-        setTimeout(() => {
-        }, 10000);
+        setTimeout(() => { location.reload(); }, 10000);
     }
 }
-// End-72-2025.06.18.163559
+// End-71-2025.06.18.163654
