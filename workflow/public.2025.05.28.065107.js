@@ -351,4 +351,48 @@ export async function downloadRecordAsFile(personName, fileName) {
     XLSX.writeFile(wb, `${fileName}.xlsx`);
     console.log("XLSX 文件已生成并开始下载");
 }
+// 导出后台管理会员电话处理记录
+// 获取存储的tel数据
+export async function getTelData() {
+    let data = await get('tel');
+    if (!data) {
+        data = [];
+    }
+    return data;
+}
+// 保存后台管理会员电话处理记录为xlsx
+export async function save_tel_record() {
+    // 获取 idb-keyval 中存储的 tel 数据
+    const telData = await getTelData();
+
+    if (telData.length > 0) {
+        // 按会员卡号降序排序
+        telData.sort((a, b) => {
+            const cardIdA = a.split("\t")[2]; // 获取会员卡号
+            const cardIdB = b.split("\t")[2]; // 获取会员卡号
+            return cardIdB.localeCompare(cardIdA); // 降序排列
+        });
+
+        // 准备数据为 xlsx 格式
+        const sheetData = [['用户名', '联系电话', '会员卡号']]; // 标题行
+        telData.forEach(row => {
+            sheetData.push(row.split("\t"));
+        });
+
+        // 创建工作表
+        const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
+        // 创建工作簿
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, '会员数据');
+
+        // 导出为 xlsx 文件，文件名包含当前时间戳
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 14);
+        const filename = `会员电话数据-${timestamp}.xlsx`; // 文件名包含时间戳
+        XLSX.writeFile(wb, filename); // 导出文件
+    } else {
+        alert("没有数据可导出！");
+    }
+}
+
 // End-354-2025.05.27.164432
