@@ -20,11 +20,11 @@ document.body.addEventListener('mouseleave', function () {
                 const img = document.createElement('img');
                 img.src = bgImage;
 
-                // 将 img 元素添加到 body 中
-                document.body.appendChild(img);
-
                 // 隐藏 img 元素
                 img.style.display = 'none';
+
+                // 将 img 元素作为当前元素的兄弟元素插入
+                element.parentNode.insertBefore(img, element.nextSibling);
 
                 // 将该背景图对应的 img 元素加入到已添加集合中
                 addedImages.add(bgImage);
@@ -32,4 +32,4 @@ document.body.addEventListener('mouseleave', function () {
         }
     });
 });
-// End-35-2025.06.26.173610
+// End-35-2025.06.26.174542
