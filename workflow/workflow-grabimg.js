@@ -1,9 +1,9 @@
+// 用于存储已添加的图片元素的集合（全局变量）
+const addedImages = new Set();
+
 document.body.addEventListener('mouseleave', function () {
     // 获取所有具有背景图的元素
     const elementsWithBg = document.querySelectorAll('[style*="background-image"]');
-
-    // 用于存储已添加的图片元素的集合
-    const addedImages = new Set();
 
     elementsWithBg.forEach(function (element) {
         // 获取背景图的 URL
@@ -32,4 +32,4 @@ document.body.addEventListener('mouseleave', function () {
         }
     });
 });
-// End-35-2025.06.26.173109
+// End-35-2025.06.26.173610
