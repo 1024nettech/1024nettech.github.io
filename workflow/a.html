@@ -231,6 +231,7 @@
             }
             function downloadProcessedImage800(previewContainer) {
                 $(".mask").css("background-color", "white");
+                $(".download-btn").css("display", "none");
                 html2canvas(previewContainer).then((canvas) => {
                     const imageUrl = canvas.toDataURL('image/png');
                     const downloadLink = $('<a>', {
@@ -240,6 +241,7 @@
                 }).catch(error => {
                     console.error("html2canvas error:", error);
                 });
+                $(".download-btn").css("display", "flex");
             }
             $(document).on('mousemove', function (event) {
                 if (isDraggingLine1) {
@@ -326,4 +328,4 @@
 </body>
 
 </html>
-<!-- End-329-2025.07.19.125824 -->
+<!-- End-331-2025.07.19.130930 -->
