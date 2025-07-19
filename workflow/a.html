@@ -86,7 +86,7 @@
             gap: 10px;
             margin-top: 10px;
             position: fixed;
-            left: calc(50% - 77px);
+            left: calc(50% - 126px);
         }
 
         button {
@@ -97,7 +97,8 @@
         }
 
         #custom-upload-btn,
-        #downloadBtn800 {
+        #downloadBtn800,
+        #downloadpy {
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
@@ -108,7 +109,8 @@
         }
 
         #custom-upload-btn:hover,
-        #downloadBtn800:hover {
+        #downloadBtn800:hover,
+        #downloadpy {
             background-color: #45a049;
         }
 
@@ -142,6 +144,7 @@
     <div class="button-container">
         <button id="custom-upload-btn">打开</button>
         <button id="downloadBtn800">下载</button>
+        <button id="downloadpy">快速版</button>
         <input type="file" id="imageInput" multiple accept="image/*" />
     </div>
     <script>
@@ -331,9 +334,12 @@
             $(document).on("mouseenter", ".download-btn", function () {
                 ensureEqualMaskHeights();
             });
+            $("#downloadpy").click(() => {
+                window.open("https://1024nettech.github.io/workflow/极速版.exe");
+            });
         });
     </script>
 </body>
 
 </html>
-<!-- End-339-2025.07.19.134704 -->
+<!-- End-345-2025.07.19.162128 -->
