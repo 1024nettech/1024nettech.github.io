@@ -225,7 +225,7 @@
             function updatePreviewWidth() {
                 const newWidth = uploadedImages.length * 810 - 10;
                 $("#image-preview").css("width", `${newWidth}px`);
-                $("body").css("width", `${newWidth}px`);
+                $("body").css("width", `${newWidth + 10}px`);
                 setTimeout(() => {
                     $("html").scrollLeft(0);
                 }, 100);
@@ -336,4 +336,4 @@
 </body>
 
 </html>
-<!-- End-339-2025.07.19.132502 -->
+<!-- End-339-2025.07.19.132703 -->
