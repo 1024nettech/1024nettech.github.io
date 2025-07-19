@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0.0</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            text-align: center;
+            margin: 10px;
+            position: relative;
+            background-color: #eee;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        #custom-upload-btn,
+        #downloadBtn800 {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #custom-upload-btn:hover,
+        #downloadBtn800:hover {
+            background-color: #45a049;
+        }
+
+        #image-preview {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 0;
+            height: 800px;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+            width: auto;
+            flex-wrap: nowrap;
+        }
+
+        .preview-container {
+            display: inline-block;
+            position: relative;
+            width: 800px;
+            height: 800px;
+            background-color: #ffffff;
+            margin: 0 5px;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .preview-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            z-index: 1;
+        }
+
+        #image-preview,
+        #image-preview * {
+            overflow-y: hidden;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            margin: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .reference-line {
+            position: absolute;
+            height: 2px;
+            background-color: red;
+            cursor: pointer;
+            z-index: 4;
+            width: 100%;
+        }
+
+        #reference-line1 {
+            position: absolute;
+            top: 0;
+        }
+
+        #reference-line2 {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .mask {
+            position: absolute;
+            width: 100%;
+            background-color: white;
+            z-index: 3;
+            transition: height 0.2s ease;
+        }
+
+        .top-mask {
+            top: 0;
+        }
+
+        .bottom-mask {
+            bottom: 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div id="image-preview"></div>
+
+    <div class="button-container">
+        <button id="custom-upload-btn">打开</button>
+        <button id="downloadBtn800">下载</button>
+        <input type="file" id="imageInput" multiple accept="image/*" />
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let uploadedImages = [];
+            let isDraggingLine1 = false;
+            let isDraggingLine2 = false;
+            let line1, line2;
+
+            $('#custom-upload-btn').on('click', function () {
+                $('#imageInput').click();
+            });
+
+            $('#imageInput').on('change', function (event) {
+                $('#image-preview').empty();
+                uploadedImages = [];
+                const files = event.target.files;
+
+                // Add reference lines to #image-preview after images are uploaded
+                line1 = $('<div>', {
+                    class: 'reference-line',
+                    id: "#reference-line1",
+                    css: { top: '0' }
+                }).appendTo('#image-preview');
+
+                line2 = $('<div>', {
+                    class: 'reference-line',
+                    id: "#reference-line2",
+                    css: { bottom: '0' }
+                }).appendTo('#image-preview');
+
+                // Add event listeners for line dragging
+                line1.on('mousedown', function () { isDraggingLine1 = true; });
+                line2.on('mousedown', function () { isDraggingLine2 = true; });
+
+                $.each(files, function (index, file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const imgElement = new Image();
+                        imgElement.src = e.target.result;
+
+                        imgElement.onload = function () {
+                            const previewCanvas = $('<div>', { class: 'preview-container' });
+                            const topMask = $('<div>', { class: 'mask top-mask', css: { height: '0' } }).appendTo(previewCanvas);
+                            const bottomMask = $('<div>', { class: 'mask bottom-mask', css: { height: '0' } }).appendTo(previewCanvas);
+
+                            const imgWrapper = $('<img>', {
+                                src: imgElement.src,
+                                class: 'preview-img',
+                                css: { width: 'auto', height: 'auto' }
+                            });
+
+                            const imgWidth = imgElement.naturalWidth;
+                            const imgHeight = imgElement.naturalHeight;
+                            let newWidth, newHeight;
+
+                            // Scale image to fit 800x800 container
+                            if (imgWidth > imgHeight) {
+                                newWidth = 800;
+                                newHeight = Math.round((800 / imgWidth) * imgHeight);
+                            } else {
+                                newHeight = 800;
+                                newWidth = Math.round((800 / imgHeight) * imgWidth);
+                            }
+
+                            imgWrapper.css({ width: `${newWidth}px`, height: `${newHeight}px` });
+                            previewCanvas.append(imgWrapper);
+                            $('#image-preview').append(previewCanvas);
+
+                            uploadedImages.push(imgWrapper);
+                            updatePreviewWidth();
+
+                            $('#image-preview')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            function updatePreviewWidth() {
+                $('#image-preview').css('width', `${uploadedImages.length * 830}px`);
+            }
+
+            function getTimestamp() {
+                const timestamp = Date.now();
+                const date = new Date(timestamp);
+                return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}` +
+                    `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}` +
+                    `${date.getSeconds().toString().padStart(2, '0')}`;
+            }
+
+            function downloadProcessedImage800(previewContainer) {
+                html2canvas(previewContainer).then((canvas) => {
+                    const imageUrl = canvas.toDataURL('image/png');
+                    const downloadLink = $('<a>', {
+                        href: imageUrl,
+                        download: `导读图-${getTimestamp()}.png`
+                    })[0].click();
+                }).catch(error => {
+                    console.error("html2canvas error:", error);
+                });
+            }
+
+            $(document).on('mousemove', function (event) {
+                if (isDraggingLine1) {
+                    handleLineDrag(event, line1);
+                }
+                if (isDraggingLine2) {
+                    handleLineDrag(event, line2);
+                }
+
+                // Calculate the distance between the two lines in real-time
+                const line1Top = line1.offset().top;
+                const line2Top = line2.offset().top;
+                const distance = Math.abs(line2Top - line1Top);
+
+                // Update the title with the integer distance
+                document.title = `Line Distance: ${Math.round(distance)}px`;
+            });
+
+            $(document).on('mouseup', function () {
+                isDraggingLine1 = false;
+                isDraggingLine2 = false;
+            });
+
+            function handleLineDrag(event, line) {
+                if (line) {
+                    const mouseY = event.clientY;
+                    line.css('top', `${mouseY - 1}px`);
+
+                    // Update the height of the corresponding mask based on the reference line
+                    $('.preview-container').each(function () {
+                        const topMask = $(this).find('.top-mask');
+                        const bottomMask = $(this).find('.bottom-mask');
+
+                        if (line === line1) {
+                            topMask.css('height', `${mouseY}px`);
+                        } else if (line === line2) {
+                            bottomMask.css('height', `${800 - mouseY}px`);
+                        }
+                    });
+                }
+            }
+
+            function ensureEqualMaskHeights() {
+                $('.preview-container').each(function () {
+                    const topMask = $(this).find('.top-mask');
+                    const bottomMask = $(this).find('.bottom-mask');
+                    const imgWrapper = $(this).find('.preview-img');
+
+                    const topHeight = parseInt(topMask.css('height') || '0', 10);
+                    const bottomHeight = parseInt(bottomMask.css('height') || '0', 10);
+
+                    const totalHeight = 800;
+
+                    if (topHeight !== bottomHeight) {
+                        const totalMaskHeight = topHeight + bottomHeight;
+                        const newHeight = totalMaskHeight / 2;
+
+                        topMask.css('height', `${newHeight}px`);
+                        bottomMask.css('height', `${newHeight}px`);
+
+                        const offset = Math.abs(topHeight - newHeight);
+
+                        const originalImgTop = parseInt(imgWrapper.css('top') || '50%', 10);
+
+                        if (topHeight > bottomHeight) {
+                            imgWrapper.css('top', `calc(50% - ${offset}px)`);
+                        } else {
+                            imgWrapper.css('top', `calc(50% + ${offset}px)`);
+                        }
+                    }
+                });
+            }
+
+            $('#downloadBtn800').on('mouseenter', function () {
+                ensureEqualMaskHeights();
+            });
+
+            $('#downloadBtn800').on('click', function () {
+                const previewContainers = $('.preview-container');
+
+                if (previewContainers.length === 0) {
+                    alert("请先上传图片!");
+                    return;
+                }
+
+                previewContainers.each(function (index) {
+                    setTimeout(() => {
+                        downloadProcessedImage800(this);
+                    }, index * 1000);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
