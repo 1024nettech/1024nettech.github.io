@@ -52,16 +52,15 @@
             position: absolute;
             width: 100%;
             z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
         }
 
         .top-mask {
             top: 0;
-            background: rgba(0, 0, 0, 0.5);
         }
 
         .bottom-mask {
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
         }
 
         .reference-line {
@@ -250,6 +249,7 @@
                     console.error("html2canvas error:", error);
                 });
                 $(".download-btn").css("display", "flex");
+                $(".mask").css("background-color", "rgba(0, 0, 0, 0.5)");
             }
             $(document).on("mousemove", function (event) {
                 if (isDraggingLine1) {
@@ -336,4 +336,4 @@
 </body>
 
 </html>
-<!-- End-339-2025.07.19.132703 -->
+<!-- End-339-2025.07.19.133600 -->
