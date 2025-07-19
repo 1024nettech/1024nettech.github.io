@@ -151,50 +151,50 @@
             let isDraggingLine1 = false;
             let isDraggingLine2 = false;
             let line1, line2;
-            $('#custom-upload-btn').on('click', function () {
-                $('#imageInput').click();
+            $("#custom-upload-btn").on("click", function () {
+                $("#imageInput").click();
             });
-            $('#imageInput').on('change', function (event) {
-                $('#image-preview').empty();
+            $("#imageInput").on("change", function (event) {
+                $("#image-preview").empty();
                 uploadedImages = [];
                 const files = event.target.files;
-                line1 = $('<div>', {
-                    class: 'reference-line',
+                line1 = $("<div>", {
+                    class: "reference-line",
                     id: "reference-line1",
-                    css: { top: '0' }
-                }).appendTo('#image-preview');
-                line2 = $('<div>', {
-                    class: 'reference-line',
+                    css: { top: "0" }
+                }).appendTo("#image-preview");
+                line2 = $("<div>", {
+                    class: "reference-line",
                     id: "reference-line2",
-                    css: { bottom: '0' }
-                }).appendTo('#image-preview');
-                line1.on('mousedown', function () { isDraggingLine1 = true; });
-                line2.on('mousedown', function () { isDraggingLine2 = true; });
+                    css: { bottom: "0" }
+                }).appendTo("#image-preview");
+                line1.on("mousedown", function () { isDraggingLine1 = true; });
+                line2.on("mousedown", function () { isDraggingLine2 = true; });
                 $.each(files, function (index, file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
                         const imgElement = new Image();
                         imgElement.src = e.target.result;
                         imgElement.onload = function () {
-                            const previewCanvas = $('<div>', { class: 'preview-container' });
-                            const overlay = $('<div>', {
-                                class: 'overlay',
+                            const previewCanvas = $("<div>", { class: "preview-container" });
+                            const overlay = $("<div>", {
+                                class: "overlay",
                                 css: {
-                                    position: 'absolute',
+                                    position: "absolute",
                                     top: 0,
                                     left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    background: 'rgba(255, 255, 255, 0)',
+                                    width: "100%",
+                                    height: "100%",
+                                    background: "rgba(255, 255, 255, 0)",
                                     zIndex: 1000
                                 }
                             }).appendTo(previewCanvas);
-                            const topMask = $('<div>', { class: 'mask top-mask', css: { height: '0' } }).appendTo(previewCanvas);
-                            const bottomMask = $('<div>', { class: 'mask bottom-mask', css: { height: '0' } }).appendTo(previewCanvas);
-                            const imgWrapper = $('<img>', {
+                            const topMask = $("<div>", { class: "mask top-mask", css: { height: "0" } }).appendTo(previewCanvas);
+                            const bottomMask = $("<div>", { class: "mask bottom-mask", css: { height: "0" } }).appendTo(previewCanvas);
+                            const imgWrapper = $("<img>", {
                                 src: imgElement.src,
-                                class: 'preview-img',
-                                css: { width: 'auto', height: 'auto' }
+                                class: "preview-img",
+                                css: { width: "auto", height: "auto" }
                             });
                             const imgWidth = imgElement.naturalWidth;
                             const imgHeight = imgElement.naturalHeight;
@@ -208,37 +208,39 @@
                             }
                             imgWrapper.css({ width: `${newWidth}px`, height: `${newHeight}px` });
                             previewCanvas.append(imgWrapper);
-                            const downloadButton = $('<button>', {
-                                text: '下载',
-                                class: 'download-btn',
-                                css: { position: 'absolute', bottom: '0', right: '0', width: '30px', height: '30px' }
+                            const downloadButton = $("<button>", {
+                                text: "下载",
+                                class: "download-btn",
+                                css: { position: "absolute", bottom: "0", right: "0", width: "30px", height: "30px" }
                             }).appendTo(previewCanvas);
-                            $('#image-preview').append(previewCanvas);
+                            $("#image-preview").append(previewCanvas);
                             uploadedImages.push(imgWrapper);
                             updatePreviewWidth();
-                            $('#image-preview')[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            $("#image-preview")[0].scrollIntoView({ behavior: "smooth", block: "start" });
                         };
                     };
                     reader.readAsDataURL(file);
                 });
             });
             function updatePreviewWidth() {
-                $('#image-preview').css('width', `${uploadedImages.length * 810 - 10}px`);
-                $('body').css('width', `${uploadedImages.length * 810}px`);
+                const newWidth = uploadedImages.length * 810 - 10;
+                $("#image-preview").css("width", `${newWidth}px`);
+                $("body").css("width", `${newWidth}px`);
+                $("html").scrollLeft(0);
             }
             function getTimestamp() {
                 const timestamp = Date.now();
                 const date = new Date(timestamp);
-                return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, '0')}${date.getDate().toString().padStart(2, '0')}` +
-                    `${date.getHours().toString().padStart(2, '0')}${date.getMinutes().toString().padStart(2, '0')}` +
-                    `${date.getSeconds().toString().padStart(2, '0')}`;
+                return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}` +
+                    `${date.getHours().toString().padStart(2, "0")}${date.getMinutes().toString().padStart(2, "0")}` +
+                    `${date.getSeconds().toString().padStart(2, "0")}`;
             }
             function downloadProcessedImage800(previewContainer) {
                 $(".mask").css("background-color", "white");
                 $(".download-btn").css("display", "none");
                 html2canvas(previewContainer).then((canvas) => {
-                    const imageUrl = canvas.toDataURL('image/png');
-                    const downloadLink = $('<a>', {
+                    const imageUrl = canvas.toDataURL("image/png");
+                    const downloadLink = $("<a>", {
                         href: imageUrl,
                         download: `导读图-${getTimestamp()}.png`
                     })[0].click();
@@ -247,7 +249,7 @@
                 });
                 $(".download-btn").css("display", "flex");
             }
-            $(document).on('mousemove', function (event) {
+            $(document).on("mousemove", function (event) {
                 if (isDraggingLine1) {
                     handleLineDrag(event, line1);
                 }
@@ -261,53 +263,53 @@
                     document.title = `Line Distance: ${Math.round(distance)}px`;
                 }
             });
-            $(document).on('mouseup', function () {
+            $(document).on("mouseup", function () {
                 isDraggingLine1 = false;
                 isDraggingLine2 = false;
             });
             function handleLineDrag(event, line) {
                 if (line) {
                     const mouseY = event.clientY;
-                    line.css('top', `${mouseY - 1}px`);
-                    $('.preview-container').each(function () {
-                        const topMask = $(this).find('.top-mask');
-                        const bottomMask = $(this).find('.bottom-mask');
+                    line.css("top", `${mouseY - 1}px`);
+                    $(".preview-container").each(function () {
+                        const topMask = $(this).find(".top-mask");
+                        const bottomMask = $(this).find(".bottom-mask");
                         if (line === line1) {
-                            topMask.css('height', `${mouseY}px`);
+                            topMask.css("height", `${mouseY}px`);
                         } else if (line === line2) {
-                            bottomMask.css('height', `${800 - mouseY}px`);
+                            bottomMask.css("height", `${800 - mouseY}px`);
                         }
                     });
                 }
             }
             function ensureEqualMaskHeights() {
-                $('.preview-container').each(function () {
-                    const topMask = $(this).find('.top-mask');
-                    const bottomMask = $(this).find('.bottom-mask');
-                    const imgWrapper = $(this).find('.preview-img');
-                    const topHeight = parseInt(topMask.css('height') || '0', 10);
-                    const bottomHeight = parseInt(bottomMask.css('height') || '0', 10);
+                $(".preview-container").each(function () {
+                    const topMask = $(this).find(".top-mask");
+                    const bottomMask = $(this).find(".bottom-mask");
+                    const imgWrapper = $(this).find(".preview-img");
+                    const topHeight = parseInt(topMask.css("height") || "0", 10);
+                    const bottomHeight = parseInt(bottomMask.css("height") || "0", 10);
                     const totalHeight = 800;
                     if (topHeight !== bottomHeight) {
                         const totalMaskHeight = topHeight + bottomHeight;
                         const newHeight = totalMaskHeight / 2;
-                        topMask.css('height', `${newHeight}px`);
-                        bottomMask.css('height', `${newHeight}px`);
+                        topMask.css("height", `${newHeight}px`);
+                        bottomMask.css("height", `${newHeight}px`);
                         const offset = Math.abs(topHeight - newHeight);
-                        const originalImgTop = parseInt(imgWrapper.css('top') || '0', 10);
+                        const originalImgTop = parseInt(imgWrapper.css("top") || "0", 10);
                         if (topHeight > bottomHeight) {
-                            imgWrapper.css('top', `${originalImgTop - offset}px`);
+                            imgWrapper.css("top", `${originalImgTop - offset}px`);
                         } else {
-                            imgWrapper.css('top', `${originalImgTop + offset}px`);
+                            imgWrapper.css("top", `${originalImgTop + offset}px`);
                         }
                     }
                 });
             }
-            $('#downloadBtn800').on('mouseenter', function () {
+            $("#downloadBtn800").on("mouseenter", function () {
                 ensureEqualMaskHeights();
             });
-            $('#downloadBtn800').on('click', function () {
-                const previewContainers = $('.preview-container');
+            $("#downloadBtn800").on("click", function () {
+                const previewContainers = $(".preview-container");
                 if (previewContainers.length === 0) {
                     alert("请先上传图片!");
                     return;
@@ -318,13 +320,13 @@
                     }, index * 1000);
                 });
             });
-            $(document).on('click', '.download-btn', function () {
-                const previewContainer = $(this).closest('.preview-container')[0];
+            $(document).on("click", ".download-btn", function () {
+                const previewContainer = $(this).closest(".preview-container")[0];
                 $(this).hide();
                 downloadProcessedImage800(previewContainer);
                 $(this).show();
             });
-            $(document).on('mouseenter', '.download-btn', function () {
+            $(document).on("mouseenter", ".download-btn", function () {
                 ensureEqualMaskHeights();
             });
         });
@@ -332,4 +334,4 @@
 </body>
 
 </html>
-<!-- End-335-2025.07.19.131125 -->
+<!-- End-337-2025.07.19.132121 -->
