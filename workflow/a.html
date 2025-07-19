@@ -98,7 +98,8 @@
 
         #custom-upload-btn,
         #downloadBtn800,
-        #downloadpy {
+        #downloadpy,
+        #shuoming {
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
@@ -110,7 +111,8 @@
 
         #custom-upload-btn:hover,
         #downloadBtn800:hover,
-        #downloadpy:hover {
+        #downloadpy:hover,
+        #shuoming:hover {
             background-color: #45a049;
         }
 
@@ -145,6 +147,7 @@
         <button id="custom-upload-btn">打开</button>
         <button id="downloadBtn800">下载</button>
         <button id="downloadpy">极速版</button>
+        <button id="shuoming">使用说明</button>
         <input type="file" id="imageInput" multiple accept="image/*" />
     </div>
     <script>
@@ -337,10 +340,12 @@
             $("#downloadpy").click(() => {
                 window.open("https://1024nettech.github.io/workflow/极速版.exe");
             });
+            $("#shuoming").click(() => {
+                window.open("https://1024nettech.github.io/workflow/b.html");
+            });
         });
     </script>
 </body>
 
 </html>
-<!-- End-345-2025.07.19.162840 -->
- 
+<!-- End-351-2025.07.19.170142 -->
