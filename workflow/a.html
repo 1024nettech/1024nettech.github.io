@@ -226,7 +226,9 @@
                 const newWidth = uploadedImages.length * 810 - 10;
                 $("#image-preview").css("width", `${newWidth}px`);
                 $("body").css("width", `${newWidth}px`);
-                $("html").scrollLeft(0);
+                setTimeout(() => {
+                    $("html").scrollLeft(0);
+                }, 100);
             }
             function getTimestamp() {
                 const timestamp = Date.now();
@@ -334,4 +336,4 @@
 </body>
 
 </html>
-<!-- End-337-2025.07.19.132121 -->
+<!-- End-339-2025.07.19.132502 -->
