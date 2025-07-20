@@ -205,8 +205,8 @@
                         css: { bottom: "0" }
                     })
                 ).appendTo("#image-preview");
-                line1.on("mousedown", function () { isDraggingLine1 = true; }); // 鼠标按下时开始拖动参考线1
-                line2.on("mousedown", function () { isDraggingLine2 = true; }); // 鼠标按下时开始拖动参考线2
+                line1.on("mousedown", function () { isDraggingLine1 = true; $("body").css("cursor", "n-resize"); }); // 鼠标按下时开始拖动参考线1
+                line2.on("mousedown", function () { isDraggingLine2 = true; $("body").css("cursor", "n-resize"); }); // 鼠标按下时开始拖动参考线2
                 $.each(files, function (index, file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
@@ -297,6 +297,7 @@
                     handleLineDrag(event, line2); // 拖动参考线2
                 }
                 if (line1 && line2 && (isDraggingLine1 || isDraggingLine2)) {
+                    $("body").css("cursor", "n-resize");
                     const line1Top = line1.offset() ? line1.offset().top : 0;
                     const line2Top = line2.offset() ? line2.offset().top : 0;
                     const distance = Math.abs(line2Top - line1Top); // 计算参考线之间的距离
@@ -304,6 +305,7 @@
                 }
             });
             $(document).on("mouseup", function () {
+                $("body").css("cursor", "auto");
                 isDraggingLine1 = false;
                 isDraggingLine2 = false; // 释放拖动标记
             });
@@ -382,4 +384,4 @@
 </body>
 
 </html>
-<!-- End-385-2025.07.20.093712 -->
+<!-- End-387-2025.07.20.094451 -->
