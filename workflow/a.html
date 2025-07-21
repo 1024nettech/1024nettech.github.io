@@ -84,7 +84,7 @@
         }
 
         #reference-line-drag2 {
-            bottom: -9px;
+            bottom: 0;
         }
 
         .reference-line {
@@ -93,10 +93,8 @@
             /* 参考线的高度 */
             background-color: red;
             /* 参考线颜色 */
-            top: 50%;
             left: 0;
             width: 100%;
-            transform: translateY(-50%);
             /* 参考线居中 */
         }
 
@@ -302,7 +300,7 @@
                     const line1Top = line1.offset() ? line1.offset().top : 0;
                     const line2Top = line2.offset() ? line2.offset().top : 0;
                     const distance = Math.abs(line2Top - line1Top); // 计算参考线之间的距离
-                    document.title = `Line Distance: ${Math.round(distance) + 9}px`; // 更新页面标题显示距离
+                    document.title = `Line Distance: ${Math.round(distance) + 18}px`; // 更新页面标题显示距离
                 }
             });
             $(document).on("mouseup", function () {
@@ -320,7 +318,7 @@
                         if (line === line1) {
                             topMask.css("height", `${mouseY}px`); // 更新上部遮罩层高度
                         } else if (line === line2) {
-                            bottomMask.css("height", `${800 - mouseY - 9}px`); // 更新下部遮罩层高度
+                            bottomMask.css("height", `${800 - mouseY - 19}px`); // 更新下部遮罩层高度
                         }
                     });
                 }
@@ -344,7 +342,7 @@
                         // 调整参考线1的位置
                         $("#reference-line-drag1").css("top", function () { return (newHeight - 1) + "px" });
                         // 调整参考线2的位置
-                        $("#reference-line-drag2").css("top", function () { return (800 - newHeight - 10) + "px" });
+                        $("#reference-line-drag2").css("top", function () { return (800 - newHeight - 20) + "px" });
                         const imgOffset = parseInt(imgWrapper.css("top") || "0", 10);
                         const offset = Math.abs(topHeight - newHeight);
                         const originalImgTop = parseInt(imgWrapper.css("top") || "0", 10);
@@ -385,4 +383,4 @@
 </body>
 
 </html>
-<!-- End-388-2025.07.21.095506 -->
+<!-- End-386-2025.07.21.154612 -->
