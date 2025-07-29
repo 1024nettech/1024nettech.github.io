@@ -101,6 +101,20 @@ function runJQueryCode() {
     // 监听鼠标离开事件
     $('body').on('mouseleave', function () {
         if (url.includes("https://b2b.baidu.com")) {
+            // 获取当前日期和时间
+            function getCurrentDateTime() {
+                const now = new Date();
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始，所以加1
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                // 返回无分隔符的格式：YYYYMMDDHHMMSS
+                return `${year}${month}${day}${hours}${minutes}${seconds}`;
+            }
+            $("title").text(function (n, v) { let time = getCurrentDateTime(); return time + "-" + v; });
             // 1. 移除 .thumb-play + div 的 class 值
             $('.thumb-play+div').removeClass();
             // 2. 检查并将 .thumb-item .img 的背景图像转换为 img 元素
@@ -133,4 +147,4 @@ function runJQueryCode() {
         }
     });
 }
-// End-136-2025.07.29.110408
+// End-150-2025.07.29.112136
