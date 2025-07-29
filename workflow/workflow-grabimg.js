@@ -65,18 +65,18 @@ if (url.includes("https://b2b.baidu.com")) {
     styleElement.id = "stylex";
     styleElement.innerHTML = style;
     document.head.appendChild(styleElement);
-    let a = document.querySelector(".album video").src;
-    if (a) {
-        let firstThumbItem = document.querySelector(".thumb-item:first-child");
+    let firstThumbItem = document.querySelector(".thumb-item:first-child");
+    let videoContainer = document.querySelector(".video-container");
+    let video = document.querySelector(".album video");
+    if (video) {
         if (firstThumbItem) {
             firstThumbItem.addEventListener("mouseenter", function () {
-                let videoContainer = document.querySelector(".video-container");
                 if (videoContainer) {
-                    videoContainer.innerHTML = `<video id="videox" autoplay controls muted loop src="${a}"></video>`;
+                    videoContainer.innerHTML = `<video id="videox" autoplay controls muted loop src="${video.src}"></video>`;
                 }
             });
             firstThumbItem.addEventListener("click", function () {
-                window.open(a);
+                window.open(video.src);
             });
         }
     }
@@ -122,6 +122,12 @@ document.addEventListener("mouseleave", function () {
         allElements.forEach(function (element) {
             convertBgToImg(element);
         });
+        // 获取所有的 img 元素
+        let images = document.querySelectorAll('img');
+        // 遍历所有 img 元素并设置 alt 属性
+        images.forEach((img, index) => {
+            img.alt = index + 1;
+        });
     }
 });
-// End-127-2025.07.29.153639
+// End-133-2025.07.29.190201
