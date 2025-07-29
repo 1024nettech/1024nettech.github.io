@@ -58,32 +58,39 @@ function runJQueryCode() {
 
     // 设置定时器, 每 1000ms 执行一次
     const intervalId = setInterval(function () {
-        // 1. 移除 .thumb-play + div 的 class 值
-        $(".thumb-play+div").removeClass();
+        if (url.includes("https://b2b.baidu.com")) {
+            // 1. 移除 .thumb-play + div 的 class 值
+            $(".thumb-play+div").removeClass();
 
-        // 2. 检查并将 .thumb-item .img 的背景图像转换为 img 元素
-        $(".thumb-item .img").each(function () {
-            convertBgToImg(this);  // 使用同样的函数来处理
-        });
+            // 2. 检查并将 .thumb-item .img 的背景图像转换为 img 元素
+            $(".thumb-item .img").each(function () {
+                convertBgToImg(this);  // 使用同样的函数来处理
+            });
 
-        // 3. 处理 .thumb-item 中的 img 元素, 赋值 alt 和修改 src
-        $(".thumb-item img").each(function (index) {
-            $(this).attr("alt", `导读图-${index + 1}`);
-            // 检查并修改 src 地址, 如果末尾没有 #1024, 则添加
-            let imgSrc = $(this).attr("src");
-            if (!imgSrc.endsWith("#1024")) {
-                $(this).attr("src", imgSrc + "#1024");
-            }
-        });
+            // 3. 处理 .thumb-item 中的 img 元素, 赋值 alt 和修改 src
+            $(".thumb-item img").each(function (index) {
+                $(this).attr("alt", `导读图-${index + 1}`);
+                // 检查并修改 src 地址, 如果末尾没有 #1024, 则添加
+                let imgSrc = $(this).attr("src");
+                if (!imgSrc.endsWith("#1024")) {
+                    $(this).attr("src", imgSrc + "#1024");
+                }
+            });
 
-        // 4. 修改 .questionable-detail 中的 img, alt 赋值为“详情图-1”、“详情图-2”等
-        $(".questionable-detail img").each(function (index) {
-            $(this).attr("alt", `详情图-${index + 1}`);
-            // 检查并修改 src 地址, 如果末尾没有 #1024, 则添加
-            let imgSrc = $(this).attr("src");
-            if (!imgSrc.endsWith("#1024")) {
-                $(this).attr("src", imgSrc + "#1024");
-            }
-        });
+            // 4. 修改 .questionable-detail 中的 img, alt 赋值为“详情图-1”、“详情图-2”等
+            $(".questionable-detail img").each(function (index) {
+                $(this).attr("alt", `详情图-${index + 1}`);
+                // 检查并修改 src 地址, 如果末尾没有 #1024, 则添加
+                let imgSrc = $(this).attr("src");
+                if (!imgSrc.endsWith("#1024")) {
+                    $(this).attr("src", imgSrc + "#1024");
+                }
+            });
+        }
+        else {
+            $("*").each(function () {
+                convertBgToImg(this);  // 使用同样的函数来处理
+            });
+        }
     }, 1000); // 每 1000ms 执行一次
 }
