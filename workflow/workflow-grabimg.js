@@ -72,7 +72,7 @@ if (url.includes("https://b2b.baidu.com")) {
             firstThumbItem.addEventListener("mouseenter", function () {
                 let videoContainer = document.querySelector(".video-container");
                 if (videoContainer) {
-                    videoContainer.innerHTML = `<video id="videox" autoplay muted loop src="${a}"></video>`;
+                    videoContainer.innerHTML = `<video id="videox" autoplay controls muted loop src="${a}"></video>`;
                 }
             });
             firstThumbItem.addEventListener("click", function () {
@@ -124,4 +124,4 @@ document.addEventListener("mouseleave", function () {
         });
     }
 });
-// End-127-2025.07.29.150926
+// End-127-2025.07.29.153639
