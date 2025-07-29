@@ -37,7 +37,10 @@ function convertBgToImg(element) {
         }
     }
 }
-// 爱采购
+// 格式化为两位数
+function formatIndex(index) {
+    return String(index + 1).padStart(2, '0');
+}
 if (url.includes("https://b2b.baidu.com")) {
     let style = `
             .thumb-play+div {
@@ -101,16 +104,16 @@ document.addEventListener("mouseleave", function () {
         // 3. 处理 .thumb-item 中的 img 元素, 赋值 alt 和修改 src
         let thumbItemImages = document.querySelectorAll(".thumb-item img");
         thumbItemImages.forEach(function (imgElement, index) {
-            imgElement.alt = `导读图-${index + 1}`;
+            imgElement.alt = `导读图-${formatIndex(index)}`; // 使用格式化后的 alt 值
             let imgSrc = imgElement.src;
             if (!imgSrc.endsWith("#1024")) {
                 imgElement.src = imgSrc + "#1024";
             }
         });
-        // 4. 修改 .questionable-detail 中的 img, alt 赋值为“详情图-1”、“详情图-2”等
+        // 4. 修改 .questionable-detail 中的 img, alt 赋值为“详情图-01”、“详情图-02”等
         let questionableDetailImages = document.querySelectorAll(".questionable-detail img");
         questionableDetailImages.forEach(function (imgElement, index) {
-            imgElement.alt = `详情图-${index + 1}`;
+            imgElement.alt = `详情图-${formatIndex(index)}`; // 使用格式化后的 alt 值
             let imgSrc = imgElement.src;
             if (!imgSrc.endsWith("#1024")) {
                 imgElement.src = imgSrc + "#1024";
@@ -126,8 +129,8 @@ document.addEventListener("mouseleave", function () {
         let images = document.querySelectorAll('img');
         // 遍历所有 img 元素并设置 alt 属性
         images.forEach((img, index) => {
-            img.alt = index + 1;
+            img.alt = formatIndex(index); // 使用格式化后的 alt 值
         });
     }
 });
-// End-133-2025.07.29.190201
+// End-136-2025.07.29.191934
