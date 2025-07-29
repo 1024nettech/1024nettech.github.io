@@ -62,7 +62,7 @@ if (list.some(item => url.includes(item))) {
                 }
                 $(".thumb-item:first").mouseenter(() => {
                     let a = $(".album video").attr("src");
-                    $(".video-container").html("<video id='videox' src=" + a + ">");
+                    $(".video-container").html("<video id='videox' autoplay muted loop src=" + a + ">");
                 });
             }
             runJQueryCode();  // 加载完 jQuery 后运行主要代码
@@ -133,4 +133,4 @@ function runJQueryCode() {
         }
     });
 }
-// End-136-2025.07.29.110138
+// End-136-2025.07.29.110408
