@@ -27,6 +27,7 @@ if (list.some(item => url.includes(item))) {
                         right: 0;
                         top: 0;
                     }
+
                     #buttonx {
                         border-radius: 10px;
                         border: 0;
@@ -40,6 +41,16 @@ if (list.some(item => url.includes(item))) {
                         color: white;
                         font-size: 20px;
                     }
+
+                    #videox {
+                        width: 100%;
+                    }
+
+                    .video-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 </style>
                 `;
                 if (!$("#stylex").length) {
@@ -49,6 +60,10 @@ if (list.some(item => url.includes(item))) {
                         window.open(a);
                     });
                 }
+                $(".thumb-item:first").mouseenter(() => {
+                    let a = $(".album video").attr("src");
+                    $(".video-container").html("<video id='videox' src=" + a + ">");
+                });
             }
             runJQueryCode();  // 加载完 jQuery 后运行主要代码
         };
@@ -118,4 +133,4 @@ function runJQueryCode() {
         }
     });
 }
-// End-121-2025.07.29.094821
+// End-136-2025.07.29.110138
