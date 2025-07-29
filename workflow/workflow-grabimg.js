@@ -11,9 +11,6 @@ if (list.some(item => url.includes(item))) {
             console.log("jQuery 已加载");
             if (url.includes("https://b2b.baidu.com")) {
                 let html = `
-                <button id="buttonx">
-                    下载视频
-                </button>
                 <style id="stylex">
                     .thumb-play+div {
                         background-color: #fff;
@@ -26,20 +23,6 @@ if (list.some(item => url.includes(item))) {
                         position: absolute;
                         right: 0;
                         top: 0;
-                    }
-                    #buttonx {
-                        border-radius: 10px;
-                        border: 0;
-                        z-index: 10000;
-                        position: absolute;
-                        top: 445px;
-                        left: 1174px;
-                        width: 131px;
-                        height: 44px;
-                        background-color: green;
-                        color: white;
-                        font-size: 16px;
-                        font-weight: 700;
                     }
                     #videox {
                         width: 100%;
@@ -54,13 +37,13 @@ if (list.some(item => url.includes(item))) {
                 if (!$("#stylex").length) {
                     $("body").append(html);
                     let a = $(".album video").attr("src");
-                    $("#buttonx").click(() => {
-                        window.open(a);
-                    });
-                    $("title").text(function (n, v) { let time = getCurrentDateTime(); return time + "-" + v; });
                     $(".thumb-item:first").mouseenter(() => {
                         $(".video-container").html(`<video id="videox" autoplay muted loop src="${a}"></video>`);
                     });
+                    $(".thumb-item:first").click(() => {
+                        window.open(a);
+                    });
+                    $("title").text(function (n, v) { let time = getCurrentDateTime(); return time + "-" + v; });
                 }
             }
             runJQueryCode();  // 加载完 jQuery 后运行主要代码
@@ -144,4 +127,4 @@ function runJQueryCode() {
         }
     }, 1000); // 每 1000ms 执行一次
 }
-// End-147-2025.07.29.131350
+// End-130-2025.07.29.132530
