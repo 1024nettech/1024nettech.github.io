@@ -27,6 +27,7 @@ if (list.some(item => url.includes(item))) {
                         right: 0;
                         top: 0;
                     }
+
                     #buttonx {
                         border-radius: 10px;
                         border: 0;
@@ -38,11 +39,14 @@ if (list.some(item => url.includes(item))) {
                         height: 44px;
                         background-color: green;
                         color: white;
-                        font-size: 20px;
+                        font-size: 16px;
+                        font-weight: 700;
                     }
+
                     #videox {
                         width: 100%;
                     }
+
                     .video-container {
                         display: flex;
                         justify-content: center;
@@ -143,4 +147,4 @@ function runJQueryCode() {
         }
     });
 }
-// End-146-2025.07.29.113222
+// End-150-2025.07.29.124404
