@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>图片转换为正方形</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0-beta.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            user-select: none;
+            /* 禁用所有元素的文本选择*/
+        }
+
+        body {
+            padding: 10px;
+            margin: 0;
+            position: relative;
+            background-color: #eee;
+            /* 设置页面背景颜色 */
+        }
+
+        #image-preview {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            height: 800px;
+            /* 图片预览区域的高度 */
+            position: relative;
+        }
+
+        .preview-container {
+            display: inline-block;
+            position: relative;
+            margin-right: 10px;
+            width: 800px;
+            height: 800px;
+            /* 预览容器的宽高 */
+            background-color: white;
+        }
+
+        .preview-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            user-select: none;
+            /* 禁用图片的文本选择 */
+            z-index: 1;
+        }
+
+        .mask {
+            position: absolute;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.5);
+            /* 遮罩层的样式 */
+        }
+
+        .top-mask {
+            top: 0;
+            /* 上部遮罩 */
+        }
+
+        .bottom-mask {
+            bottom: 0;
+            /* 下部遮罩 */
+        }
+
+        .reference-line-drag {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            /* 增加透明拖动区域 */
+            cursor: n-resize;
+            /* 鼠标悬停时显示为拖动状态 */
+            z-index: 99999;
+            /* 确保拖动区域位于参考线之上 */
+        }
+
+        #reference-line-drag2 {
+            bottom: 0;
+        }
+
+        .reference-line {
+            position: absolute;
+            height: 1px;
+            /* 参考线的高度 */
+            background-color: red;
+            /* 参考线颜色 */
+            left: 0;
+            width: 100%;
+            /* 参考线居中 */
+        }
+
+        #reference-line1 {
+            top: 0;
+        }
+
+        #reference-line2 {
+            bottom: 0;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            position: fixed;
+            left: calc(50% - 183px);
+        }
+
+        button {
+            margin: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        a {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none !important;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        .download-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 3px 6px;
+            border-radius: 0;
+        }
+
+        input[type="file"] {
+            display: none;
+            /* 隐藏文件输入框 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="image-preview"></div>
+    <div class="button-container">
+        <a id="custom-upload-btn">打开</a> <!-- 打开文件上传按钮 -->
+        <a id="downloadBtn800">下载</a> <!-- 下载按钮 -->
+        <a id="downloadpy" href="https://1024nettech.lanzouw.com/iuNVk31hajqh" target="_blank">极速版</a>
+        <!-- 极速版下载链接 -->
+        <a id="shuoming" href="https://1024nettech.github.io/workflow/help.html" target="_blank">使用说明</a>
+        <!-- 使用说明链接 -->
+        <input type="file" id="imageInput" multiple accept="image/*" /> <!-- 图片上传输入框 -->
+    </div>
+    <script>
+        $(document).ready(function () {
+            let uploadedImages = []; // 存储上传的图片
+            let isDraggingLine1 = false; // 是否正在拖动参考线1
+            let isDraggingLine2 = false; // 是否正在拖动参考线2
+            let line1, line2; // 参考线1和参考线2的DOM元素
+            $("#custom-upload-btn").on("click", function () {
+                $("#imageInput").click(); // 点击打开文件选择框
+            });
+            $("#imageInput").on("change", function (event) {
+                $("#image-preview").empty(); // 清空现有的预览图
+                uploadedImages = []; // 清空已上传的图片数组
+                const files = event.target.files; // 获取上传的文件
+                line1 = $("<div>", {
+                    class: "reference-line-drag", // 创建参考线1的拖动区域
+                    id: "reference-line-drag1",
+                }).append(
+                    $("<div>", {
+                        class: "reference-line",
+                        id: "reference-line1",
+                        css: { top: "0" }
+                    })
+                ).appendTo("#image-preview");
+                line2 = $("<div>", {
+                    class: "reference-line-drag", // 创建参考线2的拖动区域
+                    id: "reference-line-drag2",
+                }).append(
+                    $("<div>", {
+                        class: "reference-line",
+                        id: "reference-line2",
+                        css: { bottom: "0" }
+                    })
+                ).appendTo("#image-preview");
+                line1.on("mousedown", function () { isDraggingLine1 = true; $("body").css("cursor", "n-resize"); }); // 鼠标按下时开始拖动参考线1
+                line2.on("mousedown", function () { isDraggingLine2 = true; $("body").css("cursor", "n-resize"); }); // 鼠标按下时开始拖动参考线2
+                $.each(files, function (index, file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const imgElement = new Image();
+                        imgElement.src = e.target.result;
+                        imgElement.onload = function () {
+                            const previewCanvas = $("<div>", { class: "preview-container" });
+                            const overlay = $("<div>", {
+                                class: "overlay",
+                                css: {
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    background: "rgba(255, 255, 255, 0)",
+                                    zIndex: 1000
+                                }
+                            }).appendTo(previewCanvas);
+                            const topMask = $("<div>", { class: "mask top-mask", css: { height: "0" } }).appendTo(previewCanvas);
+                            const bottomMask = $("<div>", { class: "mask bottom-mask", css: { height: "0" } }).appendTo(previewCanvas);
+                            const imgWrapper = $("<img>", {
+                                src: imgElement.src,
+                                class: "preview-img",
+                                css: { width: "auto", height: "auto" }
+                            });
+                            const imgWidth = imgElement.naturalWidth;
+                            const imgHeight = imgElement.naturalHeight;
+                            let newWidth, newHeight;
+                            if (imgWidth > imgHeight) {
+                                newWidth = 800;
+                                newHeight = Math.round((800 / imgWidth) * imgHeight); // 计算新的高度
+                            } else {
+                                newHeight = 800;
+                                newWidth = Math.round((800 / imgHeight) * imgWidth); // 计算新的宽度
+                            }
+                            imgWrapper.css({ width: `${newWidth}px`, height: `${newHeight}px` });
+                            previewCanvas.append(imgWrapper);
+                            const downloadButton = $("<a>", {
+                                text: "下载",
+                                class: "download-btn",
+                                css: { position: "absolute", bottom: "0", right: "0" }
+                            }).appendTo(previewCanvas);
+                            $("#image-preview").append(previewCanvas);
+                            uploadedImages.push(imgWrapper); // 将图片添加到上传的图片列表
+                            updatePreviewWidth(); // 更新预览区域宽度
+                            $("#image-preview")[0].scrollIntoView({ behavior: "smooth", block: "start" }); // 滚动到最新上传的图片
+                        };
+                    };
+                    reader.readAsDataURL(file); // 读取文件并将其转换为Data URL
+                });
+            });
+            function updatePreviewWidth() {
+                const newWidth = uploadedImages.length * 810 - 10;
+                $("#image-preview").css("width", `${newWidth}px`); // 更新预览区域的宽度
+                $("body").css("width", `${newWidth}px`); // 更新整个页面的宽度
+                setTimeout(() => {
+                    $("html").scrollLeft(0); // 防止水平滚动条
+                }, 100);
+            }
+            function getTimestamp() {
+                const timestamp = Date.now();
+                const date = new Date(timestamp);
+                return `${date.getFullYear()}${(date.getMonth() + 1).toString().padStart(2, "0")}${date.getDate().toString().padStart(2, "0")}` +
+                    `${date.getHours().toString().padStart(2, "0")}${date.getMinutes().toString().padStart(2, "0")}` +
+                    `${date.getSeconds().toString().padStart(2, "0")}`; // 获取当前时间戳
+            }
+            function downloadProcessedImage800(previewContainer) {
+                $(".mask").css("background-color", "white"); // 设置遮罩为白色
+                $(".download-btn").css("display", "none"); // 隐藏下载按钮
+                html2canvas(previewContainer).then((canvas) => {
+                    const imageUrl = canvas.toDataURL("image/png"); // 将截图转换为PNG格式
+                    const downloadLink = $("<a>", {
+                        href: imageUrl,
+                        download: `导读图-${getTimestamp()}.png`
+                    })[0].click(); // 自动下载图片
+                }).catch(error => {
+                    console.error("html2canvas error:", error); // 捕获错误并输出到控制台
+                });
+                $(".download-btn").css("display", "flex"); // 显示下载按钮
+                $(".mask").css("background-color", "rgba(0, 0, 0, 0.5)"); // 恢复遮罩效果
+            }
+            $(document).on("mousemove", function (event) {
+                if (isDraggingLine1) {
+                    handleLineDrag(event, line1); // 拖动参考线1
+                }
+                if (isDraggingLine2) {
+                    handleLineDrag(event, line2); // 拖动参考线2
+                }
+                if (line1 && line2 && (isDraggingLine1 || isDraggingLine2)) {
+                    $("body").css("cursor", "n-resize");
+                    const line1Top = line1.offset() ? line1.offset().top : 0;
+                    const line2Top = line2.offset() ? line2.offset().top : 0;
+                    const distance = Math.abs(line2Top - line1Top); // 计算参考线之间的距离
+                    document.title = `Line Distance: ${Math.round(distance) + 18}px`; // 更新页面标题显示距离
+                }
+            });
+            $(document).on("mouseup", function () {
+                $("body").css("cursor", "auto");
+                isDraggingLine1 = false;
+                isDraggingLine2 = false; // 释放拖动标记
+            });
+            function handleLineDrag(event, line) {
+                if (line) {
+                    const mouseY = event.clientY; // 获取鼠标当前位置的Y坐标
+                    line.css("top", `${mouseY - 1}px`); // 更新参考线的位置
+                    $(".preview-container").each(function () {
+                        const topMask = $(this).find(".top-mask");
+                        const bottomMask = $(this).find(".bottom-mask");
+                        if (line === line1) {
+                            topMask.css("height", `${mouseY}px`); // 更新上部遮罩层高度
+                        } else if (line === line2) {
+                            bottomMask.css("height", `${800 - mouseY - 19}px`); // 更新下部遮罩层高度
+                        }
+                    });
+                }
+            }
+            function ensureEqualMaskHeights() {
+                $(".preview-container").each(function () {
+                    const topMask = $(this).find(".top-mask");
+                    const bottomMask = $(this).find(".bottom-mask");
+                    const imgWrapper = $(this).find(".preview-img");
+                    const line1 = $("#reference-line1");
+                    const line2 = $("#reference-line2");
+                    const topHeight = parseInt(topMask.css("height") || "0", 10);
+                    const bottomHeight = parseInt(bottomMask.css("height") || "0", 10);
+                    const totalHeight = 800;
+                    if (topHeight !== bottomHeight) {
+                        const totalMaskHeight = topHeight + bottomHeight;
+                        const newHeight = totalMaskHeight / 2; // 确保上、下遮罩层高度一致
+                        // 更新遮罩层的高度
+                        topMask.css("height", `${newHeight}px`);
+                        bottomMask.css("height", `${newHeight}px`);
+                        // 调整参考线1的位置
+                        $("#reference-line-drag1").css("top", function () { return (newHeight - 1) + "px" });
+                        // 调整参考线2的位置
+                        $("#reference-line-drag2").css("top", function () { return (800 - newHeight - 20) + "px" });
+                        const imgOffset = parseInt(imgWrapper.css("top") || "0", 10);
+                        const offset = Math.abs(topHeight - newHeight);
+                        const originalImgTop = parseInt(imgWrapper.css("top") || "0", 10);
+                        if (topHeight > bottomHeight) {
+                            imgWrapper.css("top", `${originalImgTop - offset}px`);
+                        } else {
+                            imgWrapper.css("top", `${originalImgTop + offset}px`);
+                        }
+                    }
+                });
+            }
+            $("#downloadBtn800").on("mouseenter", function () {
+                ensureEqualMaskHeights(); // 鼠标进入下载按钮时调整遮罩层高度
+            });
+            $("#downloadBtn800").on("click", function () {
+                const previewContainers = $(".preview-container");
+                if (previewContainers.length === 0) {
+                    alert("请先上传图片!"); // 如果没有上传图片，则提示上传
+                    return;
+                }
+                previewContainers.each(function (index) {
+                    setTimeout(() => {
+                        downloadProcessedImage800(this); // 每个预览容器下载图片
+                    }, index * 1000); // 每次下载间隔1秒
+                });
+            });
+            $(document).on("click", ".download-btn", function () {
+                const previewContainer = $(this).closest(".preview-container")[0];
+                $(this).hide();
+                downloadProcessedImage800(previewContainer); // 点击下载按钮时处理图片下载
+                $(this).show();
+            });
+            $(document).on("mouseenter", ".download-btn", function () {
+                ensureEqualMaskHeights(); // 鼠标悬停下载按钮时调整遮罩层高度
+            });
+        });
+    </script>
+</body>
+
+</html>
+<!-- End-387-2025.08.08.163646 -->
