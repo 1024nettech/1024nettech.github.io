@@ -117,10 +117,7 @@ function main() {
                             if (backgroundImage && backgroundImage !== "none") {
                                 let videoSrc = backgroundImage.replace('url("', '').replace('")', ''); // 获取背景图片的 URL
                                 let videoElement = $("<video></video>", {
-                                    src: videoSrc,  // 设置视频源
-                                    autoplay: true,
-                                    loop: true,
-                                    muted: true,
+                                    src: videoSrc.split("?x-oss-process=")[0],  // 设置视频源
                                     width: "100%", // 设置宽度为父元素 100%
                                     height: "100%", // 设置高度为父元素 100%
                                     style: "position: absolute; top: 0; left: 0;"
