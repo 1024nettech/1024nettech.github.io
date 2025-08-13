@@ -83,7 +83,7 @@ function main() {
                                 setTimeout(function () {
                                     $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
                                     processHTML(); // 继续处理 HTML
-                                }, 2000); // 延迟 2 秒后继续滚动
+                                }, 1500); // 延迟 2 秒后继续滚动
                             } else {
                                 console.log("已滚动到页面底部，停止滚动。");
 
