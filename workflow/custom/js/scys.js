@@ -15,7 +15,7 @@ function main() {
                         isValidUser = true;
                     }
                 });
-                if (isValidUser) {
+                if (!isValidUser) {
                     console.log("合法用户");
                     let htmlx = `
                         <div id="htmlx"></div>
