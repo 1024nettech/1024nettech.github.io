@@ -65,6 +65,31 @@ function main() {
                     // 为保存按钮绑定点击事件
                     $("#buttonx").on('click', function () {
 
+                        $('.container-catalogue .catalogue__list-item').each(function () {
+                            // 获取当前 li 元素的 id（去掉 "header_" 前缀）
+                            let listItemId = $(this).attr('id').split("header_")[1];
+                            // 获取当前 li 元素内的 .title_text 元素
+                            let titleTextElement = $(this).find('.title_text');
+                            if (titleTextElement.length) {
+                                // 获取 .title_text 内的文本内容
+                                let titleText = titleTextElement.text();
+                                // 创建一个新的 <a> 标签，设置 href 为当前 li 的 id
+                                let anchor = $('<a></a>', {
+                                    href: `#${listItemId}`,  // 设置锚点链接
+                                    text: titleText  // 设置锚点文本
+                                });
+                                // 用新创建的 <a> 标签替换原有的文本内容
+                                titleTextElement.empty().append(anchor); // 清空原有内容并插入新的 <a> 标签
+                            }
+                        });
+
+
+
+
+
+
+
+
                         // 获取视口的高度
                         const viewportHeight = $(window).height();
 
@@ -121,7 +146,7 @@ function main() {
         margin-right: 10px;
     }
 
-    div[id^="#w_vm_id_"] {
+    div[id^="w_vm_id_"] {
         display: none !important
     }
 </style>
