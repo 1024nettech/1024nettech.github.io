@@ -1,6 +1,6 @@
 
 // 要请求的 URL
-const url = 'https://1024nettech.github.io/workflow/custom/js/scys.json'+ Date.now();
+const url = 'https://1024nettech.github.io/workflow/custom/js/scys.json?time='+ Date.now();
 
 // 发起 GET 请求
 window.GM_xmlhttpRequest({
