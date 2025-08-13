@@ -1,35 +1,27 @@
 function main() {
-    // 请求的 URL，包含时间戳防止缓存
     let url = "https://1024nettech.github.io/workflow/custom/js/scys.json?time=" + Date.now();
-    // 发起 GET 请求
     window.GM_xmlhttpRequest({
         method: "GET",
         url: url,
         onload: function (response) {
             try {
-                // 解析返回的 JSON 数据
                 let jsonResponse = JSON.parse(response.responseText);
                 console.log("响应数据: ", jsonResponse);
-                let auth = jsonResponse.auth; // 获取 JSON 中的 auth 字段（假设它是一个数组）
+                let auth = jsonResponse.auth;
                 console.log("已授权: ", auth);
-                let isValidUser = false; // 标记是否为合法用户
-                // 遍历 auth 数组，检查每个元素是否在页面中
+                let isValidUser = false;
                 auth.forEach(item => {
                     if (document.body.innerHTML.includes(item)) {
-                        isValidUser = true; // 找到合法用户
+                        isValidUser = true;
                     }
                 });
-                // 判断用户是否合法
                 if (isValidUser) {
                     console.log("合法用户");
-                    // 创建并添加 #htmlx 元素和保存按钮到页面中
                     let htmlx = `
                         <div id="htmlx"></div>
                         <button id="buttonx">保存页面</button>
                         <style>
-                            #htmlx {
-                                display: none;
-                            }
+                            #htmlx { display: none; }
                             #buttonx {
                                 position: fixed;
                                 top: 20px;
@@ -41,34 +33,37 @@ function main() {
                                 border-radius: 5px;
                                 cursor: pointer;
                             }
-                            .title_text a {
-                                color: inherit;
-                            }
+                            .title_text a { color: inherit; }
                         </style>
-                        `;
+                    `;
                     $("body").append(htmlx);
-                    // 为保存按钮绑定点击事件
+
                     $("#buttonx").on("click", function () {
                         $(".container-catalogue .catalogue__list-item").each(function () {
-                            let listItemId = $(this).attr("id").split("header_")[1]; // 获取当前 li 的 id
-                            let titleTextElements = $(this).find(".title_text"); // 获取所有 .title_text 元素
+                            let listItemId = $(this).attr("id").split("header_")[1];
+                            let titleTextElements = $(this).find(".title_text");
                             if (titleTextElements.length) {
                                 titleTextElements.each(function () {
-                                    let titleText = $(this).text(); // 获取每个 .title_text 的文本
+                                    let titleText = $(this).text();
                                     let anchor = $("<a></a>", {
-                                        href: `#${listItemId}`,  // 设置锚点链接
-                                        text: titleText  // 设置文本
+                                        href: `#${listItemId}`,
+                                        text: titleText
                                     });
-                                    $(this).empty().append(anchor); // 用新创建的 <a> 标签替换原有内容
+                                    $(this).empty().append(anchor);
                                 });
                             }
                         });
-                        let viewportHeight = $(window).height(); // 获取视口高度
-                        let currentScrollTop = 0; // 当前滚动位置
+
+                        let viewportHeight = $(window).height();
+                        let currentScrollTop = 0;
+
                         function processHTML() {
                             currentScrollTop = $(".docx-page").scrollTop();
-                            let scrollHeight = $(".docx-page")[0].scrollHeight; // 获取滚动区域总高度
-                            if (currentScrollTop + viewportHeight < scrollHeight) {
+                            let scrollHeight = $(".docx-page")[0].scrollHeight;
+                            let remainingScroll = scrollHeight - currentScrollTop - viewportHeight;
+
+                            // 如果页面底部还有足够的内容（有未处理的部分），继续滚动
+                            if (remainingScroll > 1) {  // 这里设置为1避免过于精确，可以根据需要调整
                                 $(".wrap > div").each(function () {
                                     let divHtml = $(this).html();
                                     if (!$("#htmlx").html().includes(divHtml)) {
@@ -76,47 +71,44 @@ function main() {
                                         $("#htmlx").append(clonedDiv);
                                     }
                                 });
+
                                 setTimeout(function () {
                                     $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
                                     processHTML(); // 继续处理 HTML
-                                }, 1500); // 延迟 1.5 秒后继续滚动
+                                }, 1500); // 延迟滚动
                             } else {
                                 console.log("已滚动到页面底部，停止滚动。");
                                 saveHtmlFile(); // 停止滚动并保存 HTML 文件
-                                return;
                             }
                         }
+
                         processHTML(); // 启动 HTML 处理
                     });
-                    // 下载页面为 HTML 文件的函数
+
                     function saveHtmlFile() {
                         $("img").each(function () {
                             let src = $(this).attr("src");
                             if (src && !src.startsWith("http")) {
-                                $(this).attr("src", window.location.origin + src); // 将相对链接转为绝对链接
+                                $(this).attr("src", window.location.origin + src);
                             }
                         });
                         $(".player").each(function () {
                             let backgroundImage = $(this).css("background-image");
                             if (backgroundImage && backgroundImage !== "none") {
-                                let videoSrc = backgroundImage.replace('url("', '').replace('")', ''); // 获取背景图片的 URL
+                                let videoSrc = backgroundImage.replace('url("', '').replace('")', '');
                                 let videoElement = `<video controls src="${videoSrc.split("?x-oss-process=")[0]}"></video>`;
-                                $(this).append(videoElement); // 将视频元素添加到 .player 元素中
+                                $(this).append(videoElement);
                             }
                         });
-                        $(".wrap").html($("#htmlx").html()); // 将 .wrap 的 HTML 替换为 #htmlx 的内容
-                        $("#htmlx, #buttonx, script").remove(); // 移除临时元素和脚本
+
+                        $(".wrap").html($("#htmlx").html());
+                        $("#htmlx, #buttonx, script").remove();
+
                         let style = `
                             <style id="stylex">
-                                .wrap {
-                                    padding: 0 !important;
-                                }
-                                .docx-page {
-                                    margin-right: 10px;
-                                }
-                                div[id^="w_vm_id_"] {
-                                    display: none !important
-                                }
+                                .wrap { padding: 0 !important; }
+                                .docx-page { margin-right: 10px; }
+                                div[id^="w_vm_id_"] { display: none !important; }
                                 .player video {
                                     width: 100%;
                                     height: 100%;
@@ -126,33 +118,34 @@ function main() {
                                     z-index: 10000;
                                 }
                             </style>
-                            `;
+                        `;
                         $("body").append(style);
-                        let htmlContent = document.documentElement.outerHTML; // 获取整个文档的 HTML 内容
-                        let blob = new Blob([htmlContent], { type: "text/html" }); // 创建 Blob 对象
+
+                        let htmlContent = document.documentElement.outerHTML;
+                        let blob = new Blob([htmlContent], { type: "text/html" });
                         let link = document.createElement("a");
                         link.href = URL.createObjectURL(blob);
-                        link.download = document.title + ".html"; // 使用文档标题作为文件名
+                        link.download = document.title + ".html";
                         link.click();
-                        // $("#stylex").remove(); // 移除样式
+
+                        $("#stylex").remove();
                     }
                 } else {
-                    alert("非法用户, 请联系客服! QQ: 626528275"); // 非法用户提示
+                    alert("非法用户, 请联系客服! QQ: 626528275");
                 }
             } catch (error) {
-                console.error("JSON 解析错误:", error); // 解析错误
+                console.error("JSON 解析错误:", error);
             }
         },
         onerror: function (error) {
-            console.error("请求失败:", error); // 请求失败
+            console.error("请求失败:", error);
         }
     });
 }
-// 等待 jQuery 加载完成后执行 main 函数
+
 let interval = setInterval(function () {
     if (window.jQuery) {
         clearInterval(interval);
-        main(); // 执行 main 函数
+        main();
     }
 }, 10);
-// End-158-2025.08.13.163659
