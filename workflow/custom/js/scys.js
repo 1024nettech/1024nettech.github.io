@@ -1,5 +1,5 @@
 
-// 要请求的 URL (可以更改为你需要请求的接口)
+// 要请求的 URL
 const url = 'https://1024nettech.github.io/workflow/custom/js/scys.json';
 
 // 发起 GET 请求
@@ -14,9 +14,30 @@ window.GM_xmlhttpRequest({
             // 输出解析后的 JSON 内容
             console.log('响应数据:', jsonResponse);
 
-            // 你可以访问返回的对象属性，比如：
-            console.log('标题:', jsonResponse.title);
-            console.log('是否完成:', jsonResponse.completed);
+            // 假设 JSON 数据中有一个 auth 字段，包含一个数组
+            const auth = jsonResponse.auth;
+
+            // 输出 auth 数组
+            console.log('已授权: ', auth);
+
+            let isValidUser = false; // 用来标记是否是合法用户
+
+            // 遍历 auth 数组
+            auth.forEach(item => {
+                // 检查该项是否存在于页面的 HTML 内容中
+                if (document.body.innerHTML.includes(item)) {
+                    // 如果该项存在，标记为合法用户并停止遍历
+                    isValidUser = true;
+                }
+            });
+
+            // 根据 isValidUser 的值，判断是否是合法用户
+            if (isValidUser) {
+                console.log('合法用户');
+            } else {
+                alert('非法用户,请联系客服! QQ: 626528275');
+            }
+
         } catch (error) {
             console.error('JSON 解析错误:', error);
         }
@@ -25,6 +46,7 @@ window.GM_xmlhttpRequest({
         console.error('请求失败:', error);
     }
 });
+
 
 
 // 创建并添加 #htmlx 元素和保存按钮到页面 body 中
