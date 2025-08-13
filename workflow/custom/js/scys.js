@@ -79,7 +79,15 @@ function main() {
                         }
                         processHTML(); // 启动 HTML 处理
                     });
-                    $("#buttonx").on("click", function () { saveHtmlFile(); });
+                    $("#buttonx").on("click", function () {
+                        $(".wrap > div").each(function () {
+                            let divHtml = $(this).html();
+                            if (!$("#htmlx").html().includes(divHtml)) {
+                                let clonedDiv = $(this).clone();
+                                $("#htmlx").append(clonedDiv);
+                            }
+                        }); saveHtmlFile();
+                    });
                     function saveHtmlFile() {
                         $("img").each(function () {
                             let src = $(this).attr("src");
