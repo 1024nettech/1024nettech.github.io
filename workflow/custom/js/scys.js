@@ -19,10 +19,11 @@ function main() {
                     console.log("合法用户");
                     let htmlx = `
                         <div id="htmlx"></div>
+                        <button id="scrollx">开始滚动</button>
                         <button id="buttonx">保存页面</button>
                         <style>
                             #htmlx { display: none; }
-                            #buttonx {
+                            #scrollx,#buttonx {
                                 position: fixed;
                                 top: 20px;
                                 right: 20px;
@@ -33,11 +34,12 @@ function main() {
                                 border-radius: 5px;
                                 cursor: pointer;
                             }
+                            #buttonx{top:60px;}
                             .title_text a { color: inherit; }
                         </style>
                     `;
                     $("body").append(htmlx);
-                    $("#buttonx").on("click", function () {
+                    $("#scrollx").on("click", function () {
                         $(".container-catalogue .catalogue__list-item").each(function () {
                             let listItemId = $(this).attr("id").split("header_")[1];
                             let titleTextElements = $(this).find(".title_text");
@@ -73,11 +75,11 @@ function main() {
                                 }, 1500); // 延迟滚动
                             } else {
                                 console.log("已滚动到页面底部，停止滚动。");
-                                // saveHtmlFile(); // 停止滚动并保存 HTML 文件
                             }
                         }
                         processHTML(); // 启动 HTML 处理
                     });
+                    $("#buttonx").on("click", function () { saveHtmlFile(); });
                     function saveHtmlFile() {
                         $("img").each(function () {
                             let src = $(this).attr("src");
@@ -94,7 +96,7 @@ function main() {
                             }
                         });
                         $(".wrap").html($("#htmlx").html());
-                        $("#htmlx, #buttonx, script").remove();
+                        $("#htmlx, #scrollx, script").remove();
                         let style = `
                             <style id="stylex">
                                 .wrap { padding: 0 !important; }
