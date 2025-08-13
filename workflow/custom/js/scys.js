@@ -65,21 +65,48 @@ function main() {
                     // 为保存按钮绑定点击事件
                     $("#buttonx").on('click', function () {
 
+                        // $('.container-catalogue .catalogue__list-item').each(function () {
+                        //     // 获取当前 li 元素的 id（去掉 "header_" 前缀）
+                        //     let listItemId = $(this).attr('id').split("header_")[1];
+                        //     // 获取当前 li 元素内的 .title_text 元素
+                        //     let titleTextElement = $(this).find('.title_text');
+                        //     if (titleTextElement.length) {
+                        //         // 获取 .title_text 内的文本内容
+                        //         let titleText = titleTextElement.text();
+                        //         // 创建一个新的 <a> 标签，设置 href 为当前 li 的 id
+                        //         let anchor = $('<a></a>', {
+                        //             href: `#${listItemId}`,  // 设置锚点链接
+                        //             text: titleText  // 设置锚点文本
+                        //         });
+                        //         // 用新创建的 <a> 标签替换原有的文本内容
+                        //         titleTextElement.empty().append(anchor); // 清空原有内容并插入新的 <a> 标签
+                        //     }
+                        // });
+                        // /*
+                        // 如果一个li中有多个title-text，则需要分别添加a元素，保持原来的text
+                        // <li data-v-c3d5c781="" id="header_EksndOU6zoZPslxyCQGcpr1ZnSe" class="catalogue__list-item heading2"><div data-v-c3d5c781="" class="vc-block-hearder"><!----><span data-v-c3d5c781=""><span data-v-c3d5c781="" class="title_text">1.1 确</span></span><span data-v-c3d5c781=""><span data-v-c3d5c781="" class="title_text">定</span></span><span data-v-c3d5c781=""><span data-v-c3d5c781="" class="title_text">自媒体账号定位</span></span></div></li>
+
+
+                        // */
                         $('.container-catalogue .catalogue__list-item').each(function () {
                             // 获取当前 li 元素的 id（去掉 "header_" 前缀）
                             let listItemId = $(this).attr('id').split("header_")[1];
-                            // 获取当前 li 元素内的 .title_text 元素
-                            let titleTextElement = $(this).find('.title_text');
-                            if (titleTextElement.length) {
-                                // 获取 .title_text 内的文本内容
-                                let titleText = titleTextElement.text();
-                                // 创建一个新的 <a> 标签，设置 href 为当前 li 的 id
-                                let anchor = $('<a></a>', {
-                                    href: `#${listItemId}`,  // 设置锚点链接
-                                    text: titleText  // 设置锚点文本
+                            // 获取当前 li 元素内的所有 .title_text 元素
+                            let titleTextElements = $(this).find('.title_text');
+
+                            // 如果找到了 .title_text 元素
+                            if (titleTextElements.length) {
+                                titleTextElements.each(function () {
+                                    // 获取每个 .title_text 元素的文本内容
+                                    let titleText = $(this).text();
+                                    // 创建一个新的 <a> 标签，设置 href 为当前 li 的 id
+                                    let anchor = $('<a></a>', {
+                                        href: `#${listItemId}`,  // 设置锚点链接
+                                        text: titleText  // 设置锚点文本
+                                    });
+                                    // 用新创建的 <a> 标签替换原有的文本内容
+                                    $(this).empty().append(anchor); // 清空原有内容并插入新的 <a> 标签
                                 });
-                                // 用新创建的 <a> 标签替换原有的文本内容
-                                titleTextElement.empty().append(anchor); // 清空原有内容并插入新的 <a> 标签
                             }
                         });
 
