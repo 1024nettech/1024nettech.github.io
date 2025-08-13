@@ -104,7 +104,7 @@ function main() {
                             }
                         });
                         $(".wrap").html($("#htmlx").html());
-                        $("#htmlx, #scrollx, script").remove();
+                        $("#htmlx, #scrollx,#buttonx, script").remove();
                         let style = `
                             <style id="stylex">
                                 .wrap { padding: 0 !important; }
