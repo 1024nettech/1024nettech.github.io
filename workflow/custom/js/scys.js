@@ -1,1 +1,175 @@
-function _0x2b35(){const _0x283abf=['text','.wrap','.wrap\x20>\x20div','896608WWUIrV','remove','outerHTML','clone','<a></a>','合法用户','responseText','scrollTop','已授权:\x20','now','append','4sQoVbO','html','11328600hqIQtU','296818sRxLqp','非法用户,\x20请联系客服!\x20QQ:\x20626528275','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22htmlx\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22buttonx\x22>保存页面</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#htmlx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#buttonx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x209999;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#0099ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.title_text\x20a\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20inherit;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','trigger','1262208tVTvRP','已滚动到页面底部，停止滚动。','empty','auth','2567045nbIoQv','createObjectURL','click','.docx-page','find','title','11232pFkJIR','error','#buttonx','.title_text','scrollHeight','body','1134jjytnI','text/html','documentElement','includes','forEach','27hbnoMY','attr','#htmlx','log','234736IDAxfB','height','each','href','响应数据:\x20','.html','createElement','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style\x20id=\x22stylex\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.wrap\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x200\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.docx-page\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-right:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20div[id^=\x22w_vm_id_\x22]\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none\x20!important\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'];_0x2b35=function(){return _0x283abf;};return _0x2b35();}(function(_0xea413d,_0xf0bd8f){const _0x20a97e=_0x4f75,_0x355552=_0xea413d();while(!![]){try{const _0x14de62=-parseInt(_0x20a97e(0x14d))/0x1+-parseInt(_0x20a97e(0x13f))/0x2+-parseInt(_0x20a97e(0x151))/0x3*(parseInt(_0x20a97e(0x14a))/0x4)+parseInt(_0x20a97e(0x155))/0x5+-parseInt(_0x20a97e(0x125))/0x6*(parseInt(_0x20a97e(0x12b))/0x7)+parseInt(_0x20a97e(0x134))/0x8*(parseInt(_0x20a97e(0x130))/0x9)+parseInt(_0x20a97e(0x14c))/0xa;if(_0x14de62===_0xf0bd8f)break;else _0x355552['push'](_0x355552['shift']());}catch(_0x583471){_0x355552['push'](_0x355552['shift']());}}}(_0x2b35,0x40bd5));function _0x4f75(_0x416a03,_0x3ed780){const _0x2b354f=_0x2b35();return _0x4f75=function(_0x4f75c0,_0x37a668){_0x4f75c0=_0x4f75c0-0x121;let _0x2836ef=_0x2b354f[_0x4f75c0];return _0x2836ef;},_0x4f75(_0x416a03,_0x3ed780);}function main(){const _0x49f8a5=_0x4f75;let _0x4a1a95='https://1024nettech.github.io/workflow/custom/js/scys.json?time='+Date[_0x49f8a5(0x148)]();window['GM_xmlhttpRequest']({'method':'GET','url':_0x4a1a95,'onload':function(_0x93ff06){const _0x235fb5=_0x49f8a5;try{let _0x1d0437=JSON['parse'](_0x93ff06[_0x235fb5(0x145)]);console[_0x235fb5(0x133)](_0x235fb5(0x138),_0x1d0437);let _0x3423bb=_0x1d0437[_0x235fb5(0x154)];console[_0x235fb5(0x133)](_0x235fb5(0x147),_0x3423bb);let _0x32c0de=![];_0x3423bb[_0x235fb5(0x12f)](_0x1b5fc2=>{const _0x5ea279=_0x235fb5;document[_0x5ea279(0x12a)]['innerHTML'][_0x5ea279(0x12e)](_0x1b5fc2)&&(_0x32c0de=!![]);});if(_0x32c0de){console[_0x235fb5(0x133)](_0x235fb5(0x144));let _0x376c6d=_0x235fb5(0x14f);$(_0x235fb5(0x12a))['append'](_0x376c6d),$(_0x235fb5(0x127))['on']('click',function(){const _0x597128=_0x235fb5;$('.container-catalogue\x20.catalogue__list-item')[_0x597128(0x136)](function(){const _0x4f14b9=_0x597128;let _0x3044ec=$(this)[_0x4f14b9(0x131)]('id')['split']('header_')[0x1],_0x3492d5=$(this)[_0x4f14b9(0x123)](_0x4f14b9(0x128));_0x3492d5['length']&&_0x3492d5[_0x4f14b9(0x136)](function(){const _0x3812f6=_0x4f14b9;let _0x291878=$(this)[_0x3812f6(0x13c)](),_0x5d5129=$(_0x3812f6(0x143),{'href':'#'+_0x3044ec,'text':_0x291878});$(this)[_0x3812f6(0x153)]()[_0x3812f6(0x149)](_0x5d5129);});});let _0x4ad513=$(window)[_0x597128(0x135)](),_0x1e75b4=0x0;function _0x5c1148(){const _0x461e8a=_0x597128;_0x1e75b4=$(_0x461e8a(0x122))[_0x461e8a(0x146)]();let _0x52706a=$(_0x461e8a(0x122))[0x0][_0x461e8a(0x129)];if(_0x1e75b4+_0x4ad513<_0x52706a)$(_0x461e8a(0x13e))[_0x461e8a(0x136)](function(){const _0x4f914d=_0x461e8a;let _0x5db0ca=$(this)[_0x4f914d(0x14b)]();if(!$('#htmlx')[_0x4f914d(0x14b)]()[_0x4f914d(0x12e)](_0x5db0ca)){let _0x4cfd02=$(this)[_0x4f914d(0x142)]();$(_0x4f914d(0x132))['append'](_0x4cfd02);}}),setTimeout(function(){const _0x3a2b64=_0x461e8a;$(_0x3a2b64(0x122))[_0x3a2b64(0x146)](_0x1e75b4+_0x4ad513)[_0x3a2b64(0x150)]('scroll'),_0x5c1148();},0x7d0);else{console[_0x461e8a(0x133)](_0x461e8a(0x152)),_0x1df937();return;}}_0x5c1148();});function _0x1df937(){const _0xc7534=_0x235fb5;$(_0xc7534(0x13d))[_0xc7534(0x14b)]($(_0xc7534(0x132))[_0xc7534(0x14b)]()),$('#htmlx,\x20#buttonx,\x20script')[_0xc7534(0x140)]();let _0x108147=_0xc7534(0x13b);$(_0xc7534(0x12a))[_0xc7534(0x149)](_0x108147);let _0x423389=document[_0xc7534(0x12d)][_0xc7534(0x141)],_0x2279ba=new Blob([_0x423389],{'type':_0xc7534(0x12c)}),_0x5aa71a=document[_0xc7534(0x13a)]('a');_0x5aa71a[_0xc7534(0x137)]=URL[_0xc7534(0x156)](_0x2279ba),_0x5aa71a['download']=document[_0xc7534(0x124)]+_0xc7534(0x139),_0x5aa71a[_0xc7534(0x121)](),$('#stylex')['remove']();}}else alert(_0x235fb5(0x14e));}catch(_0x3a6d08){console[_0x235fb5(0x126)]('JSON\x20解析错误:',_0x3a6d08);}},'onerror':function(_0x172903){const _0x1df3fd=_0x49f8a5;console[_0x1df3fd(0x126)]('请求失败:',_0x172903);}});}let interval=setInterval(function(){window['jQuery']&&(clearInterval(interval),main());},0xa);
+function main() {
+    // 请求的 URL，包含时间戳防止缓存
+    let url = "https://1024nettech.github.io/workflow/custom/js/scys.json?time=" + Date.now();
+    // 发起 GET 请求
+    window.GM_xmlhttpRequest({
+        method: "GET",
+        url: url,
+        onload: function (response) {
+            try {
+                // 解析返回的 JSON 数据
+                let jsonResponse = JSON.parse(response.responseText);
+                console.log("响应数据: ", jsonResponse);
+                // 获取 JSON 中的 auth 字段（假设它是一个数组）
+                let auth = jsonResponse.auth;
+                console.log("已授权: ", auth);
+                let isValidUser = false; // 标记是否为合法用户
+                // 遍历 auth 数组，检查每个元素是否在页面中
+                auth.forEach(item => {
+                    if (document.body.innerHTML.includes(item)) {
+                        isValidUser = true; // 找到合法用户
+                    }
+                });
+                // 判断用户是否合法
+                if (isValidUser) {
+                    console.log("合法用户");
+                    // 创建并添加 #htmlx 元素和保存按钮到页面中
+                    let htmlx = `
+                        <div id="htmlx"></div>
+                        <button id="buttonx">保存页面</button>
+                        <style>
+                            #htmlx {
+                                display: none;
+                            }
+                            #buttonx {
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                z-index: 9999;
+                                padding: 10px;
+                                background-color: #0099ff;
+                                color: white;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                            .title_text a {
+                                color: inherit;
+                            }
+                        </style>
+                        `;
+                    $("body").append(htmlx);
+                    // 为保存按钮绑定点击事件
+                    $("#buttonx").on("click", function () {
+                        // 遍历 .container-catalogue 中的每个 .catalogue__list-item 元素
+                        $(".container-catalogue .catalogue__list-item").each(function () {
+                            let listItemId = $(this).attr("id").split("header_")[1]; // 获取当前 li 的 id
+                            let titleTextElements = $(this).find(".title_text"); // 获取所有 .title_text 元素
+                            if (titleTextElements.length) {
+                                titleTextElements.each(function () {
+                                    let titleText = $(this).text(); // 获取每个 .title_text 的文本
+                                    let anchor = $("<a></a>", {
+                                        href: `#${listItemId}`,  // 设置锚点链接
+                                        text: titleText  // 设置文本
+                                    });
+                                    $(this).empty().append(anchor); // 用新创建的 <a> 标签替换原有内容
+                                });
+                            }
+                        });
+                        // 获取视口高度
+                        let viewportHeight = $(window).height();
+                        let currentScrollTop = 0; // 当前滚动位置
+                        // 处理 HTML 内容的函数
+                        function processHTML() {
+                            currentScrollTop = $(".docx-page").scrollTop();
+                            let scrollHeight = $(".docx-page")[0].scrollHeight; // 获取滚动区域总高度
+                            if (currentScrollTop + viewportHeight < scrollHeight) {
+                                $(".wrap > div").each(function () {
+                                    let divHtml = $(this).html();
+                                    if (!$("#htmlx").html().includes(divHtml)) {
+                                        let clonedDiv = $(this).clone();
+                                        $("#htmlx").append(clonedDiv);
+                                    }
+                                });
+                                setTimeout(function () {
+                                    $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
+                                    processHTML(); // 继续处理 HTML
+                                }, 2000); // 延迟 2 秒后继续滚动
+                            } else {
+                                console.log("已滚动到页面底部，停止滚动。");
+
+
+
+
+
+
+
+
+                                saveHtmlFile(); // 停止滚动并保存 HTML 文件
+                                return;
+                            }
+                        }
+                        // 启动 HTML 处理
+                        processHTML();
+                    });
+                    // 下载页面为 HTML 文件的函数
+                    function saveHtmlFile() {
+                        // 处理页面中的所有图片：相对链接转换为绝对链接
+                        $("img").each(function () {
+                            let src = $(this).attr("src");
+                            if (src && !src.startsWith("http")) {
+                                $(this).attr("src", window.location.origin + src); // 将相对链接转为绝对链接
+                            }
+                        });
+
+                        // 处理所有 .player 元素：将背景图片作为视频源，创建视频元素
+                        $(".player").each(function () {
+                            let backgroundImage = $(this).css("background-image");
+                            if (backgroundImage && backgroundImage !== "none") {
+                                let videoSrc = backgroundImage.replace('url("', '').replace('")', ''); // 获取背景图片的 URL
+                                let videoElement = $("<video></video>", {
+                                    src: videoSrc,  // 设置视频源
+                                    autoplay: true,
+                                    loop: true,
+                                    muted: true,
+                                    width: "100%", // 设置宽度为父元素 100%
+                                    height: "100%", // 设置高度为父元素 100%
+                                    style: "position: absolute; top: 0; left: 0;"
+                                });
+                                $(this).append(videoElement); // 将视频元素添加到 .player 元素中
+                            }
+                        });
+
+
+                        $(".wrap").html($("#htmlx").html()); // 将 .wrap 的 HTML 替换为 #htmlx 的内容
+                        $("#htmlx, #buttonx, script").remove(); // 移除临时元素和脚本
+                        let style = `
+                            <style id="stylex">
+                                .wrap {
+                                    padding: 0 !important;
+                                }
+                                .docx-page {
+                                    margin-right: 10px;
+                                }
+                                div[id^="w_vm_id_"] {
+                                    display: none !important
+                                }
+                            </style>
+                            `;
+                        $("body").append(style);
+                        let htmlContent = document.documentElement.outerHTML; // 获取整个文档的 HTML 内容
+                        let blob = new Blob([htmlContent], { type: "text/html" }); // 创建 Blob 对象
+                        let link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = document.title + ".html"; // 使用文档标题作为文件名
+                        link.click();
+                        $("#stylex").remove(); // 移除样式
+                    }
+                } else {
+                    alert("非法用户, 请联系客服! QQ: 626528275"); // 非法用户提示
+                }
+            } catch (error) {
+                console.error("JSON 解析错误:", error); // 解析错误
+            }
+        },
+        onerror: function (error) {
+            console.error("请求失败:", error); // 请求失败
+        }
+    });
+}
+// 等待 jQuery 加载完成后执行 main 函数
+let interval = setInterval(function () {
+    if (window.jQuery) {
+        clearInterval(interval);
+        main(); // 执行 main 函数
+    }
+}, 10);
