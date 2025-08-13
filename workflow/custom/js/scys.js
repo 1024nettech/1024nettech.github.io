@@ -1,1 +1,140 @@
-(function(_0x1d45ac,_0x2d557b){const _0x1628db=_0x2584,_0x2c87c5=_0x1d45ac();while(!![]){try{const _0x21127a=-parseInt(_0x1628db(0xbe))/0x1*(parseInt(_0x1628db(0xe6))/0x2)+-parseInt(_0x1628db(0xaa))/0x3*(parseInt(_0x1628db(0xe7))/0x4)+parseInt(_0x1628db(0xc9))/0x5+parseInt(_0x1628db(0xbc))/0x6+parseInt(_0x1628db(0xe2))/0x7*(parseInt(_0x1628db(0xb5))/0x8)+parseInt(_0x1628db(0xc2))/0x9*(parseInt(_0x1628db(0xb2))/0xa)+parseInt(_0x1628db(0xe0))/0xb*(-parseInt(_0x1628db(0xb3))/0xc);if(_0x21127a===_0x2d557b)break;else _0x2c87c5['push'](_0x2c87c5['shift']());}catch(_0x236150){_0x2c87c5['push'](_0x2c87c5['shift']());}}}(_0x2d66,0xca68e));function main(){const _0x4ea2e9=_0x2584;let _0x3d8b96=_0x4ea2e9(0xbd)+Date[_0x4ea2e9(0xa9)]();window[_0x4ea2e9(0xd7)]({'method':'GET','url':_0x3d8b96,'onload':function(_0x59fdec){const _0x42099f=_0x4ea2e9;try{let _0x59e133=JSON[_0x42099f(0xb1)](_0x59fdec['responseText']);console[_0x42099f(0xda)](_0x42099f(0xc3),_0x59e133);let _0x537c0d=_0x59e133['auth'];console[_0x42099f(0xda)]('已授权:\x20',_0x537c0d);let _0x5ae2e3=![];_0x537c0d[_0x42099f(0xac)](_0x19e06=>{const _0x3f959c=_0x42099f;document[_0x3f959c(0xdb)]['innerHTML'][_0x3f959c(0xdf)](_0x19e06)&&(_0x5ae2e3=!![]);});if(_0x5ae2e3){console[_0x42099f(0xda)](_0x42099f(0xe9));let _0x2c11a6=_0x42099f(0xcc);$(_0x42099f(0xdb))[_0x42099f(0xb4)](_0x2c11a6),$('#buttonx')['on'](_0x42099f(0xd4),function(){const _0x14608e=_0x42099f;$(_0x14608e(0xd8))['each'](function(){const _0x2b4843=_0x14608e;let _0x30da3e=$(this)[_0x2b4843(0xc0)]('id')[_0x2b4843(0xd5)]('header_')[0x1],_0x4c6b8e=$(this)[_0x2b4843(0xdc)](_0x2b4843(0xc8));_0x4c6b8e[_0x2b4843(0xc5)]&&_0x4c6b8e['each'](function(){const _0xad54a0=_0x2b4843;let _0x30b53e=$(this)['text'](),_0x28e74c=$('<a></a>',{'href':'#'+_0x30da3e,'text':_0x30b53e});$(this)[_0xad54a0(0xb8)]()[_0xad54a0(0xb4)](_0x28e74c);});});let _0x2e6ebb=$(window)[_0x14608e(0xbf)](),_0x776156=0x0;function _0x557528(){const _0x25d0a0=_0x14608e;_0x776156=$(_0x25d0a0(0xb7))[_0x25d0a0(0xc7)]();let _0x1275a5=$('.docx-page')[0x0][_0x25d0a0(0xa8)],_0x515431=_0x1275a5-_0x776156-_0x2e6ebb;_0x515431>0x1?($(_0x25d0a0(0xd0))[_0x25d0a0(0xe5)](function(){const _0x251e04=_0x25d0a0;let _0x29ba9f=$(this)[_0x251e04(0xad)]();if(!$(_0x251e04(0xb0))[_0x251e04(0xad)]()[_0x251e04(0xdf)](_0x29ba9f)){let _0x37cc0f=$(this)[_0x251e04(0xae)]();$(_0x251e04(0xb0))[_0x251e04(0xb4)](_0x37cc0f);}}),setTimeout(function(){const _0x5491f6=_0x25d0a0;$(_0x5491f6(0xb7))[_0x5491f6(0xc7)](_0x776156+_0x2e6ebb)[_0x5491f6(0xd1)](_0x5491f6(0xa7)),_0x557528();},0x5dc)):(console['log'](_0x25d0a0(0xcb)),_0x1df7d5());}_0x557528();});function _0x1df7d5(){const _0x1f54a8=_0x42099f;$(_0x1f54a8(0xc4))['each'](function(){const _0x14ae5f=_0x1f54a8;let _0x192999=$(this)[_0x14ae5f(0xc0)](_0x14ae5f(0xbb));_0x192999&&!_0x192999['startsWith'](_0x14ae5f(0xce))&&$(this)[_0x14ae5f(0xc0)](_0x14ae5f(0xbb),window[_0x14ae5f(0xde)]['origin']+_0x192999);}),$(_0x1f54a8(0xd3))[_0x1f54a8(0xe5)](function(){const _0x4a87a2=_0x1f54a8;let _0x233495=$(this)[_0x4a87a2(0xb9)]('background-image');if(_0x233495&&_0x233495!==_0x4a87a2(0xab)){let _0x3e6c2d=_0x233495[_0x4a87a2(0xb6)](_0x4a87a2(0xd6),'')[_0x4a87a2(0xb6)]('\x22)',''),_0x585639='<video\x20controls\x20src=\x22'+_0x3e6c2d[_0x4a87a2(0xd5)](_0x4a87a2(0xd9))[0x0]+_0x4a87a2(0xc1);$(this)['append'](_0x585639);}}),$(_0x1f54a8(0xdd))[_0x1f54a8(0xad)]($('#htmlx')[_0x1f54a8(0xad)]()),$(_0x1f54a8(0xe3))[_0x1f54a8(0xc6)]();let _0x9894dc=_0x1f54a8(0xe1);$(_0x1f54a8(0xdb))[_0x1f54a8(0xb4)](_0x9894dc);let _0x40da35=document['documentElement'][_0x1f54a8(0xea)],_0x5bec04=new Blob([_0x40da35],{'type':_0x1f54a8(0xcd)}),_0x3aca77=document[_0x1f54a8(0xeb)]('a');_0x3aca77['href']=URL[_0x1f54a8(0xe4)](_0x5bec04),_0x3aca77['download']=document['title']+'.html',_0x3aca77[_0x1f54a8(0xd4)](),$(_0x1f54a8(0xba))[_0x1f54a8(0xc6)]();}}else alert(_0x42099f(0xaf));}catch(_0x46c846){console[_0x42099f(0xe8)](_0x42099f(0xca),_0x46c846);}},'onerror':function(_0x2c3de2){const _0x4b7b16=_0x4ea2e9;console[_0x4b7b16(0xe8)](_0x4b7b16(0xcf),_0x2c3de2);}});}function _0x2584(_0x1d5f48,_0x360cd9){const _0x2d666b=_0x2d66();return _0x2584=function(_0x2584ae,_0x76c20a){_0x2584ae=_0x2584ae-0xa7;let _0x5a2cf2=_0x2d666b[_0x2584ae];return _0x5a2cf2;},_0x2584(_0x1d5f48,_0x360cd9);}function _0x2d66(){const _0x3538b3=['outerHTML','createElement','scroll','scrollHeight','now','3581397uLuDnn','none','forEach','html','clone','非法用户,\x20请联系客服!\x20QQ:\x20626528275','#htmlx','parse','270RPmIQO','6272052qfVPmP','append','1094616yKFAtZ','replace','.docx-page','empty','css','#stylex','src','8423430rQymJO','https://1024nettech.github.io/workflow/custom/js/scys.json?time=','85052XgzVUM','height','attr','\x22></video>','422955fzdxGX','响应数据:\x20','img','length','remove','scrollTop','.title_text','6427290HhSfir','JSON\x20解析错误:','已滚动到页面底部，停止滚动。','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22htmlx\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22buttonx\x22>保存页面</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#htmlx\x20{\x20display:\x20none;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#buttonx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x209999;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#0099ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.title_text\x20a\x20{\x20color:\x20inherit;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','text/html','http','请求失败:','.wrap\x20>\x20div','trigger','jQuery','.player','click','split','url(\x22','GM_xmlhttpRequest','.container-catalogue\x20.catalogue__list-item','?x-oss-process=','log','body','find','.wrap','location','includes','44oyEOdJ','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style\x20id=\x22stylex\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.wrap\x20{\x20padding:\x200\x20!important;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.docx-page\x20{\x20margin-right:\x2010px;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20div[id^=\x22w_vm_id_\x22]\x20{\x20display:\x20none\x20!important;\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.player\x20video\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x2010000;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','21aDswon','#htmlx,\x20#buttonx,\x20script','createObjectURL','each','6LPxZkX','4ydJOKg','error','合法用户'];_0x2d66=function(){return _0x3538b3;};return _0x2d66();}let interval=setInterval(function(){const _0x49fad6=_0x2584;window[_0x49fad6(0xd2)]&&(clearInterval(interval),main());},0xa);
+function main() {
+    let url = "https://1024nettech.github.io/workflow/custom/js/scys.json?time=" + Date.now();
+    window.GM_xmlhttpRequest({
+        method: "GET",
+        url: url,
+        onload: function (response) {
+            try {
+                let jsonResponse = JSON.parse(response.responseText);
+                console.log("响应数据: ", jsonResponse);
+                let auth = jsonResponse.auth;
+                console.log("已授权: ", auth);
+                let isValidUser = false;
+                auth.forEach(item => {
+                    if (document.body.innerHTML.includes(item)) {
+                        isValidUser = true;
+                    }
+                });
+                if (isValidUser) {
+                    console.log("合法用户");
+                    let htmlx = `
+                        <div id="htmlx"></div>
+                        <button id="buttonx">保存页面</button>
+                        <style>
+                            #htmlx { display: none; }
+                            #buttonx {
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                z-index: 9999;
+                                padding: 10px;
+                                background-color: #0099ff;
+                                color: white;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                            .title_text a { color: inherit; }
+                        </style>
+                    `;
+                    $("body").append(htmlx);
+                    $("#buttonx").on("click", function () {
+                        $(".container-catalogue .catalogue__list-item").each(function () {
+                            let listItemId = $(this).attr("id").split("header_")[1];
+                            let titleTextElements = $(this).find(".title_text");
+                            if (titleTextElements.length) {
+                                titleTextElements.each(function () {
+                                    let titleText = $(this).text();
+                                    let anchor = $("<a></a>", {
+                                        href: `#${listItemId}`,
+                                        text: titleText
+                                    });
+                                    $(this).empty().append(anchor);
+                                });
+                            }
+                        });
+                        let viewportHeight = $(window).height();
+                        let currentScrollTop = 0;
+                        function processHTML() {
+                            currentScrollTop = $(".docx-page").scrollTop();
+                            let scrollHeight = $(".docx-page")[0].scrollHeight;
+                            let remainingScroll = scrollHeight - currentScrollTop - viewportHeight;
+                            // 如果页面底部还有足够的内容（有未处理的部分），继续滚动
+                            if (remainingScroll > 1) {  // 这里设置为1避免过于精确，可以根据需要调整
+                                $(".wrap > div").each(function () {
+                                    let divHtml = $(this).html();
+                                    if (!$("#htmlx").html().includes(divHtml)) {
+                                        let clonedDiv = $(this).clone();
+                                        $("#htmlx").append(clonedDiv);
+                                    }
+                                });
+                                setTimeout(function () {
+                                    $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
+                                    processHTML(); // 继续处理 HTML
+                                }, 1500); // 延迟滚动
+                            } else {
+                                console.log("已滚动到页面底部，停止滚动。");
+                                // saveHtmlFile(); // 停止滚动并保存 HTML 文件
+                            }
+                        }
+                        processHTML(); // 启动 HTML 处理
+                    });
+                    function saveHtmlFile() {
+                        $("img").each(function () {
+                            let src = $(this).attr("src");
+                            if (src && !src.startsWith("http")) {
+                                $(this).attr("src", window.location.origin + src);
+                            }
+                        });
+                        $(".player").each(function () {
+                            let backgroundImage = $(this).css("background-image");
+                            if (backgroundImage && backgroundImage !== "none") {
+                                let videoSrc = backgroundImage.replace('url("', '').replace('")', '');
+                                let videoElement = `<video controls src="${videoSrc.split("?x-oss-process=")[0]}"></video>`;
+                                $(this).append(videoElement);
+                            }
+                        });
+                        $(".wrap").html($("#htmlx").html());
+                        $("#htmlx, #buttonx, script").remove();
+                        let style = `
+                            <style id="stylex">
+                                .wrap { padding: 0 !important; }
+                                .docx-page { margin-right: 10px; }
+                                div[id^="w_vm_id_"] { display: none !important; }
+                                .player video {
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    z-index: 10000;
+                                }
+                            </style>
+                        `;
+                        $("body").append(style);
+                        let htmlContent = document.documentElement.outerHTML;
+                        let blob = new Blob([htmlContent], { type: "text/html" });
+                        let link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = document.title + ".html";
+                        link.click();
+                        $("#stylex").remove();
+                    }
+                } else {
+                    alert("非法用户, 请联系客服! QQ: 626528275");
+                }
+            } catch (error) {
+                console.error("JSON 解析错误:", error);
+            }
+        },
+        onerror: function (error) {
+            console.error("请求失败:", error);
+        }
+    });
+}
+let interval = setInterval(function () {
+    if (window.jQuery) {
+        clearInterval(interval);
+        main();
+    }
+}, 10);
+// End-140-2025.08.13.172544
