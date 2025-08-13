@@ -1,1 +1,151 @@
-(function(_0x2bc25f,_0xa43be3){const _0x1131f7=_0x33c5,_0x30ae0a=_0x2bc25f();while(!![]){try{const _0x11d075=-parseInt(_0x1131f7(0x11c))/0x1+parseInt(_0x1131f7(0x111))/0x2*(parseInt(_0x1131f7(0x140))/0x3)+-parseInt(_0x1131f7(0x115))/0x4*(parseInt(_0x1131f7(0x126))/0x5)+-parseInt(_0x1131f7(0x14b))/0x6+-parseInt(_0x1131f7(0x14a))/0x7+-parseInt(_0x1131f7(0x13f))/0x8*(-parseInt(_0x1131f7(0x147))/0x9)+parseInt(_0x1131f7(0x135))/0xa*(parseInt(_0x1131f7(0x125))/0xb);if(_0x11d075===_0xa43be3)break;else _0x30ae0a['push'](_0x30ae0a['shift']());}catch(_0xa5ba80){_0x30ae0a['push'](_0x30ae0a['shift']());}}}(_0x2f87,0xdd121));function _0x2f87(){const _0x51a56d=['.container-catalogue\x20.catalogue__list-item','background-image','1780706GbPjdF','includes','title','url(\x22','2115148BiOxnY','#htmlx','trigger','scrollHeight','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style\x20id=\x22stylex\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.wrap\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x200\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.docx-page\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-right:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20div[id^=\x22w_vm_id_\x22]\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none\x20!important\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.player\x20video\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x2010000;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','JSON\x20解析错误:','error','1565876qLqZao','auth','html','each','.title_text','click','text','startsWith','download','121ECHFkR','5lHZHzY','#buttonx','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20id=\x22htmlx\x22></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22buttonx\x22>保存页面</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#htmlx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#buttonx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x209999;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#0099ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.title_text\x20a\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20inherit;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','https://1024nettech.github.io/workflow/custom/js/scys.json?time=','#htmlx,\x20#buttonx,\x20script','log','响应数据:\x20','GM_xmlhttpRequest','\x22></video>','css','img','location','text/html','.docx-page','forEach','4293470AuYqCJ','append','none','GET','src','body','href','innerHTML','#stylex','createObjectURL','29312jnxnwC','3ytSkiv','clone','.html','attr','now','header_','请求失败:','837hormaa','find','createElement','9744371EqhvZy','9370206BtjOSA','合法用户','?x-oss-process=','scroll','parse','.player','origin','scrollTop','split','responseText','replace','已授权:\x20','empty'];_0x2f87=function(){return _0x51a56d;};return _0x2f87();}function main(){const _0x5a03a6=_0x33c5;let _0x2998a6=_0x5a03a6(0x129)+Date[_0x5a03a6(0x144)]();window[_0x5a03a6(0x12d)]({'method':_0x5a03a6(0x138),'url':_0x2998a6,'onload':function(_0x5e7012){const _0x3e347c=_0x5a03a6;try{let _0x55a9ff=JSON[_0x3e347c(0x14f)](_0x5e7012[_0x3e347c(0x10b)]);console[_0x3e347c(0x12b)](_0x3e347c(0x12c),_0x55a9ff);let _0x192c86=_0x55a9ff[_0x3e347c(0x11d)];console[_0x3e347c(0x12b)](_0x3e347c(0x10d),_0x192c86);let _0xe5dfd8=![];_0x192c86[_0x3e347c(0x134)](_0x31d57f=>{const _0x35d148=_0x3e347c;document[_0x35d148(0x13a)][_0x35d148(0x13c)][_0x35d148(0x112)](_0x31d57f)&&(_0xe5dfd8=!![]);});if(_0xe5dfd8){console[_0x3e347c(0x12b)](_0x3e347c(0x14c));let _0x41dff3=_0x3e347c(0x128);$(_0x3e347c(0x13a))[_0x3e347c(0x136)](_0x41dff3),$(_0x3e347c(0x127))['on']('click',function(){const _0x1d7ba2=_0x3e347c;$(_0x1d7ba2(0x10f))[_0x1d7ba2(0x11f)](function(){const _0x2e15e4=_0x1d7ba2;let _0x1e59fb=$(this)['attr']('id')[_0x2e15e4(0x10a)](_0x2e15e4(0x145))[0x1],_0x9ee040=$(this)[_0x2e15e4(0x148)](_0x2e15e4(0x120));_0x9ee040['length']&&_0x9ee040['each'](function(){const _0x510c0f=_0x2e15e4;let _0x193bc3=$(this)[_0x510c0f(0x122)](),_0x42b359=$('<a></a>',{'href':'#'+_0x1e59fb,'text':_0x193bc3});$(this)[_0x510c0f(0x10e)]()['append'](_0x42b359);});});let _0x55cd11=$(window)['height'](),_0x4f603b=0x0;function _0x5bab6f(){const _0x33c915=_0x1d7ba2;_0x4f603b=$('.docx-page')[_0x33c915(0x109)]();let _0x17f28e=$(_0x33c915(0x133))[0x0][_0x33c915(0x118)];if(_0x4f603b+_0x55cd11<_0x17f28e)$('.wrap\x20>\x20div')['each'](function(){const _0x23fa08=_0x33c915;let _0x49c77a=$(this)[_0x23fa08(0x11e)]();if(!$('#htmlx')[_0x23fa08(0x11e)]()[_0x23fa08(0x112)](_0x49c77a)){let _0x2e5acb=$(this)[_0x23fa08(0x141)]();$(_0x23fa08(0x116))[_0x23fa08(0x136)](_0x2e5acb);}}),setTimeout(function(){const _0x3daf74=_0x33c915;$(_0x3daf74(0x133))['scrollTop'](_0x4f603b+_0x55cd11)[_0x3daf74(0x117)](_0x3daf74(0x14e)),_0x5bab6f();},0x5dc);else{console['log']('已滚动到页面底部，停止滚动。'),_0x431b56();return;}}_0x5bab6f();});function _0x431b56(){const _0x32a37f=_0x3e347c;$(_0x32a37f(0x130))[_0x32a37f(0x11f)](function(){const _0x5bb7f0=_0x32a37f;let _0x4f5ae0=$(this)[_0x5bb7f0(0x143)]('src');_0x4f5ae0&&!_0x4f5ae0[_0x5bb7f0(0x123)]('http')&&$(this)[_0x5bb7f0(0x143)](_0x5bb7f0(0x139),window[_0x5bb7f0(0x131)][_0x5bb7f0(0x108)]+_0x4f5ae0);}),$(_0x32a37f(0x107))[_0x32a37f(0x11f)](function(){const _0x276245=_0x32a37f;let _0x42b2f0=$(this)[_0x276245(0x12f)](_0x276245(0x110));if(_0x42b2f0&&_0x42b2f0!==_0x276245(0x137)){let _0x157bc8=_0x42b2f0[_0x276245(0x10c)](_0x276245(0x114),'')[_0x276245(0x10c)]('\x22)',''),_0x38c7a='<video\x20controls\x20src=\x22'+_0x157bc8['split'](_0x276245(0x14d))[0x0]+_0x276245(0x12e);$(this)[_0x276245(0x136)](_0x38c7a);}}),$('.wrap')[_0x32a37f(0x11e)]($('#htmlx')['html']()),$(_0x32a37f(0x12a))['remove']();let _0x1a51e4=_0x32a37f(0x119);$('body')['append'](_0x1a51e4);let _0x80fd=document['documentElement']['outerHTML'],_0x160e6b=new Blob([_0x80fd],{'type':_0x32a37f(0x132)}),_0x2fbb91=document[_0x32a37f(0x149)]('a');_0x2fbb91[_0x32a37f(0x13b)]=URL[_0x32a37f(0x13e)](_0x160e6b),_0x2fbb91[_0x32a37f(0x124)]=document[_0x32a37f(0x113)]+_0x32a37f(0x142),_0x2fbb91[_0x32a37f(0x121)](),$(_0x32a37f(0x13d))['remove']();}}else alert('非法用户,\x20请联系客服!\x20QQ:\x20626528275');}catch(_0x32d637){console[_0x3e347c(0x11b)](_0x3e347c(0x11a),_0x32d637);}},'onerror':function(_0x327240){const _0x1a1535=_0x5a03a6;console[_0x1a1535(0x11b)](_0x1a1535(0x146),_0x327240);}});}function _0x33c5(_0x414f93,_0x3e6812){const _0x2f870a=_0x2f87();return _0x33c5=function(_0x33c58c,_0x1b074b){_0x33c58c=_0x33c58c-0x107;let _0x1f7a80=_0x2f870a[_0x33c58c];return _0x1f7a80;},_0x33c5(_0x414f93,_0x3e6812);}let interval=setInterval(function(){window['jQuery']&&(clearInterval(interval),main());},0xa);
+function main() {
+    let url = "https://1024nettech.github.io/workflow/custom/js/scys.json?time=" + Date.now();
+    window.GM_xmlhttpRequest({
+        method: "GET",
+        url: url,
+        onload: function (response) {
+            try {
+                let jsonResponse = JSON.parse(response.responseText);
+                console.log("响应数据: ", jsonResponse);
+                let auth = jsonResponse.auth;
+                console.log("已授权: ", auth);
+                let isValidUser = false;
+                auth.forEach(item => {
+                    if (document.body.innerHTML.includes(item)) {
+                        isValidUser = true;
+                    }
+                });
+                if (isValidUser) {
+                    console.log("合法用户");
+                    let htmlx = `
+                        <div id="htmlx"></div>
+                        <button id="buttonx">保存页面</button>
+                        <style>
+                            #htmlx { display: none; }
+                            #buttonx {
+                                position: fixed;
+                                top: 20px;
+                                right: 20px;
+                                z-index: 9999;
+                                padding: 10px;
+                                background-color: #0099ff;
+                                color: white;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                            .title_text a { color: inherit; }
+                        </style>
+                    `;
+                    $("body").append(htmlx);
+
+                    $("#buttonx").on("click", function () {
+                        $(".container-catalogue .catalogue__list-item").each(function () {
+                            let listItemId = $(this).attr("id").split("header_")[1];
+                            let titleTextElements = $(this).find(".title_text");
+                            if (titleTextElements.length) {
+                                titleTextElements.each(function () {
+                                    let titleText = $(this).text();
+                                    let anchor = $("<a></a>", {
+                                        href: `#${listItemId}`,
+                                        text: titleText
+                                    });
+                                    $(this).empty().append(anchor);
+                                });
+                            }
+                        });
+
+                        let viewportHeight = $(window).height();
+                        let currentScrollTop = 0;
+
+                        function processHTML() {
+                            currentScrollTop = $(".docx-page").scrollTop();
+                            let scrollHeight = $(".docx-page")[0].scrollHeight;
+                            let remainingScroll = scrollHeight - currentScrollTop - viewportHeight;
+
+                            // 如果页面底部还有足够的内容（有未处理的部分），继续滚动
+                            if (remainingScroll > 1) {  // 这里设置为1避免过于精确，可以根据需要调整
+                                $(".wrap > div").each(function () {
+                                    let divHtml = $(this).html();
+                                    if (!$("#htmlx").html().includes(divHtml)) {
+                                        let clonedDiv = $(this).clone();
+                                        $("#htmlx").append(clonedDiv);
+                                    }
+                                });
+
+                                setTimeout(function () {
+                                    $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
+                                    processHTML(); // 继续处理 HTML
+                                }, 1500); // 延迟滚动
+                            } else {
+                                console.log("已滚动到页面底部，停止滚动。");
+                                saveHtmlFile(); // 停止滚动并保存 HTML 文件
+                            }
+                        }
+
+                        processHTML(); // 启动 HTML 处理
+                    });
+
+                    function saveHtmlFile() {
+                        $("img").each(function () {
+                            let src = $(this).attr("src");
+                            if (src && !src.startsWith("http")) {
+                                $(this).attr("src", window.location.origin + src);
+                            }
+                        });
+                        $(".player").each(function () {
+                            let backgroundImage = $(this).css("background-image");
+                            if (backgroundImage && backgroundImage !== "none") {
+                                let videoSrc = backgroundImage.replace('url("', '').replace('")', '');
+                                let videoElement = `<video controls src="${videoSrc.split("?x-oss-process=")[0]}"></video>`;
+                                $(this).append(videoElement);
+                            }
+                        });
+
+                        $(".wrap").html($("#htmlx").html());
+                        $("#htmlx, #buttonx, script").remove();
+
+                        let style = `
+                            <style id="stylex">
+                                .wrap { padding: 0 !important; }
+                                .docx-page { margin-right: 10px; }
+                                div[id^="w_vm_id_"] { display: none !important; }
+                                .player video {
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    z-index: 10000;
+                                }
+                            </style>
+                        `;
+                        $("body").append(style);
+
+                        let htmlContent = document.documentElement.outerHTML;
+                        let blob = new Blob([htmlContent], { type: "text/html" });
+                        let link = document.createElement("a");
+                        link.href = URL.createObjectURL(blob);
+                        link.download = document.title + ".html";
+                        link.click();
+
+                        $("#stylex").remove();
+                    }
+                } else {
+                    alert("非法用户, 请联系客服! QQ: 626528275");
+                }
+            } catch (error) {
+                console.error("JSON 解析错误:", error);
+            }
+        },
+        onerror: function (error) {
+            console.error("请求失败:", error);
+        }
+    });
+}
+
+let interval = setInterval(function () {
+    if (window.jQuery) {
+        clearInterval(interval);
+        main();
+    }
+}, 10);
