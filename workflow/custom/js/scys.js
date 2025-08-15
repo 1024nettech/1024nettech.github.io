@@ -20,6 +20,7 @@ function getUserInfo() {
             onload: function (response) {
                 try {
                     let data = JSON.parse(response.responseText).data.me;
+                    console.log(data);
                     let userInfo = {
                         name: data.name,
                         user_id: data.user_id,
