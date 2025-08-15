@@ -18,9 +18,9 @@ function getUserInfo() {
             method: "GET",
             url: url,
             onload: function (response) {
+                console.log(response.responseText);
                 try {
                     let data = JSON.parse(response.responseText).data.me;
-                    console.log(data);
                     let userInfo = {
                         name: data.name,
                         user_id: data.user_id,
@@ -29,6 +29,8 @@ function getUserInfo() {
                     resolve(userInfo); // 返回用户信息
                 } catch (error) {
                     console.error("获取用户信息失败: ", error);
+                    /*
+                    获取用户信息失败:  SyntaxError: JSON.parse: unexpected character at line 1 column 1 of the JSON data*/
                     reject(error);
                 }
             },
