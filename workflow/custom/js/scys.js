@@ -78,7 +78,7 @@ function isValidUser(user, userList) {
         if (u.name.trim() !== user.name.trim()) return false;
 
         // 如果 u.user_id 为空，则跳过验证
-        if (u.user_id.trim() !== "" && u.user_id !== user.user_id) return false;
+        if (u.user_id !== "" && u.user_id !== user.user_id) return false;
 
         // 群组编号匹配
         if (u.xq_group_number !== user.xq_group_number) return false;
@@ -261,4 +261,4 @@ let interval = setInterval(function () {
         main(); // 页面初始化
     }
 }, 10);
-// End-264-2025.08.18.203933
+// End-264-2025.08.18.205941
