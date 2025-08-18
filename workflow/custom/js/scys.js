@@ -1,2 +1,264 @@
-(function (_0x30bb28, _0x37a382) { const _0x525b50 = _0x1d36, _0x315020 = _0x30bb28(); while (!![]) { try { const _0x4531c0 = -parseInt(_0x525b50(0x15e)) / 0x1 + -parseInt(_0x525b50(0x16a)) / 0x2 * (-parseInt(_0x525b50(0x137)) / 0x3) + parseInt(_0x525b50(0x131)) / 0x4 + parseInt(_0x525b50(0x14c)) / 0x5 * (parseInt(_0x525b50(0x133)) / 0x6) + parseInt(_0x525b50(0x13e)) / 0x7 + parseInt(_0x525b50(0x147)) / 0x8 * (-parseInt(_0x525b50(0x149)) / 0x9) + parseInt(_0x525b50(0x12c)) / 0xa * (-parseInt(_0x525b50(0x12d)) / 0xb); if (_0x4531c0 === _0x37a382) break; else _0x315020['push'](_0x315020['shift']()); } catch (_0x145451) { _0x315020['push'](_0x315020['shift']()); } } }(_0x4aaa, 0x55e5b)); function generateTimestamp() { const _0x54f361 = _0x1d36; let _0x30d66e = new Date(), _0x22c41b = _0x30d66e[_0x54f361(0x16b)]()['toString']()[_0x54f361(0x128)](0x4, '0'), _0x97b253 = (_0x30d66e[_0x54f361(0x169)]() + 0x1)[_0x54f361(0x17c)]()[_0x54f361(0x128)](0x2, '0'), _0x3441c1 = _0x30d66e[_0x54f361(0x155)]()[_0x54f361(0x17c)]()[_0x54f361(0x128)](0x2, '0'), _0x355676 = _0x30d66e[_0x54f361(0x16c)]()[_0x54f361(0x17c)]()[_0x54f361(0x128)](0x2, '0'), _0x22a243 = _0x30d66e[_0x54f361(0x130)]()[_0x54f361(0x17c)]()['padStart'](0x2, '0'), _0x33f210 = _0x30d66e[_0x54f361(0x162)]()['toString']()['padStart'](0x2, '0'); return '' + _0x22c41b + _0x97b253 + _0x3441c1 + _0x355676 + _0x22a243 + _0x33f210; } function getUserInfo() { return new Promise((_0x3c5963, _0x74442f) => { const _0x1a2949 = _0x1d36; let _0x2e3f69 = 'https://scys.com/search/form/Fe2VFe6e'; window['GM_xmlhttpRequest']({ 'method': _0x1a2949(0x181), 'url': _0x2e3f69, 'onload': function (_0x49e770) { const _0x390e8b = _0x1a2949; try { let _0x2bff99 = JSON[_0x390e8b(0x166)](_0x49e770['responseText'])[_0x390e8b(0x154)]['me'], _0x4d305d = { 'name': _0x2bff99[_0x390e8b(0x16f)], 'user_id': _0x2bff99[_0x390e8b(0x13c)], 'xq_group_number': _0x2bff99[_0x390e8b(0x180)] }; _0x3c5963(_0x4d305d); } catch (_0x3e9753) { console[_0x390e8b(0x179)](_0x390e8b(0x138), _0x3e9753), _0x74442f(_0x3e9753); } }, 'onerror': function (_0x35a993) { const _0x3b92b5 = _0x1a2949; console['error'](_0x3b92b5(0x176), _0x35a993), _0x74442f(_0x35a993); } }); }); } function getUserList() { return new Promise((_0x544b79, _0x295d91) => { const _0x3226d0 = _0x1d36; let _0x1213c3 = _0x3226d0(0x160) + Date[_0x3226d0(0x122)](); window[_0x3226d0(0x142)]({ 'method': 'GET', 'url': _0x1213c3, 'onload': function (_0x56f1ba) { const _0x170e05 = _0x3226d0; try { cookie = JSON['parse'](_0x56f1ba[_0x170e05(0x156)])[_0x170e05(0x15f)]; let _0x875de2 = JSON['parse'](_0x56f1ba[_0x170e05(0x156)])['authorized_users'], _0x2ac51c = _0x875de2['map'](_0xe49884 => ({ 'name': _0xe49884[_0x170e05(0x16f)], 'user_id': _0xe49884[_0x170e05(0x13c)], 'xq_group_number': _0xe49884[_0x170e05(0x180)], 'expiry_time': _0xe49884[_0x170e05(0x164)] })); _0x544b79(_0x2ac51c); } catch (_0x447d5a) { console[_0x170e05(0x179)](_0x170e05(0x174), _0x447d5a), _0x295d91(_0x447d5a); } }, 'onerror': function (_0x3d6886) { const _0x4006b1 = _0x3226d0; console[_0x4006b1(0x179)](_0x4006b1(0x176), _0x3d6886), _0x295d91(_0x3d6886); } }); }); } function _0x1d36(_0x50b644, _0x4763c6) { const _0x4aaa0b = _0x4aaa(); return _0x1d36 = function (_0x1d3633, _0x9c427f) { _0x1d3633 = _0x1d3633 - 0x11f; let _0x44de1f = _0x4aaa0b[_0x1d3633]; return _0x44de1f; }, _0x1d36(_0x50b644, _0x4763c6); } function isValidUser(_0x3360eb, _0x1ee922) { const _0x16f936 = _0x1d36; let _0x3a6124 = generateTimestamp(); return _0x1ee922[_0x16f936(0x144)](_0x327fcb => { const _0x1f1843 = _0x16f936; if (_0x327fcb['name']['trim']() !== _0x3360eb['name'][_0x1f1843(0x140)]()) return ![]; if (_0x327fcb[_0x1f1843(0x13c)][_0x1f1843(0x140)]() !== '' && _0x327fcb[_0x1f1843(0x13c)] !== _0x3360eb[_0x1f1843(0x13c)]) return ![]; if (_0x327fcb[_0x1f1843(0x180)] !== _0x3360eb['xq_group_number']) return ![]; if (_0x327fcb[_0x1f1843(0x164)] <= _0x3a6124) return ![]; return !![]; }); } function saveHtmlFile() { const _0x113b7a = _0x1d36; addContentToList(), $(_0x113b7a(0x15d))[_0x113b7a(0x121)](); let _0x3945e2 = '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<style\x20id=\x22stylex\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.docx-page\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-right:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.wrap\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x200\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.player\x20video\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x2010000;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20div[id^=\x22w_vm_id_\x22]\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20display:\x20none\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20'; $(_0x113b7a(0x16e))[_0x113b7a(0x163)](_0x3945e2); let _0x4fdfb0 = _0x113b7a(0x161); contentToAdd[_0x113b7a(0x151)](_0x4fdfb0), $('.wrap')[_0x113b7a(0x17b)](contentToAdd[_0x113b7a(0x134)]('')), $(_0x113b7a(0x15c))['each'](function () { const _0x2ee8d7 = _0x113b7a; let _0x256dc3 = $(this)[_0x2ee8d7(0x17d)]('src'); _0x256dc3 && !_0x256dc3['startsWith'](_0x2ee8d7(0x15a)) && !_0x256dc3[_0x2ee8d7(0x15b)](_0x2ee8d7(0x17e)) && $(this)[_0x2ee8d7(0x17d)]('src', window[_0x2ee8d7(0x136)][_0x2ee8d7(0x141)] + _0x256dc3); }), $(_0x113b7a(0x14a))[_0x113b7a(0x13b)](function () { const _0x374c26 = _0x113b7a; let _0x465022 = $(this)[_0x374c26(0x148)]('background-image'); if (_0x465022 && _0x465022 !== _0x374c26(0x146)) { let _0x3395f2 = _0x465022[_0x374c26(0x159)]('url(\x22', '')['replace']('\x22)', ''), _0x26f4f7 = '<video\x20controls\x20src=\x22' + _0x3395f2[_0x374c26(0x123)](_0x374c26(0x14d))[0x0] + _0x374c26(0x143); $(this)[_0x374c26(0x163)](_0x26f4f7); } }); let _0x592a1c = document[_0x113b7a(0x16d)][_0x113b7a(0x135)], _0x50771 = new Blob([_0x592a1c], { 'type': _0x113b7a(0x125) }), _0x42e37b = document[_0x113b7a(0x129)]('a'); _0x42e37b[_0x113b7a(0x13f)] = URL[_0x113b7a(0x11f)](_0x50771), _0x42e37b[_0x113b7a(0x145)] = document[_0x113b7a(0x12a)] + '.html', _0x42e37b[_0x113b7a(0x178)](), $(_0x113b7a(0x17a))[_0x113b7a(0x121)](); } function addContentToList() { const _0xa87cf3 = _0x1d36; $(_0xa87cf3(0x150))['each'](function () { const _0x25f516 = _0xa87cf3; let _0x27b9df = $(this)[_0x25f516(0x12e)](_0x25f516(0x14f))[_0x25f516(0x17d)]('id'); _0x27b9df && !already_added_ids['includes'](_0x27b9df) && (already_added_ids[_0x25f516(0x151)](_0x27b9df), contentToAdd[_0x25f516(0x151)]($(this)[0x0][_0x25f516(0x135)])); }); } let contentToAdd = [], already_added_ids = [], cookie = ''; function _0x4aaa() { const _0x59a38c = ['append', 'expiry_time', 'empty', 'parse', '程序运行错误:\x20', 'length', 'getMonth', '156UekRIW', 'getFullYear', 'getHours', 'documentElement', 'body', 'name', '已滚动到页面底部，停止滚动。', 'scroll', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20id=\x22buttonx\x22>开始滚动</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20#buttonx\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20right:\x2020px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x2010000;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#0099ff;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20white;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x205px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20cursor:\x20pointer;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20.title_text\x20a\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20inherit;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20}\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</style>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20', '合法用户', '获取用户列表失败:\x20', '.docx-page', '请求失败:\x20', 'text', 'click', 'error', '#stylex', 'html', 'toString', 'attr', 'data:image', '非法用户,\x20请联系客服!\x20QQ:\x20626528275', 'xq_group_number', 'GET', 'createObjectURL', '#buttonx', 'remove', 'now', 'split', '.container-catalogue\x20.catalogue__list-item', 'text/html', 'header_', '<a></a>', 'padStart', 'createElement', 'title', 'trigger', '20nBeUbB', '1555697VycZQc', 'children', 'catch', 'getMinutes', '1515832unEMLb', 'log', '654276MnJAeH', 'join', 'outerHTML', 'location', '23679VfYHug', '获取用户信息失败:\x20', 'clipboard', '.title_text', 'each', 'user_id', 'height', '2492189FWthvb', 'href', 'trim', 'origin', 'GM_xmlhttpRequest', '\x22></video>', 'some', 'download', 'none', '152ueFFHY', 'css', '231948vnnXBz', '.player', 'writeText', '10RkfacD', '?x-oss-process=', 'jQuery', 'div', '.wrap\x20>\x20div', 'push', '开始滚动', 'then', 'data', 'getDate', 'responseText', 'scrollHeight', 'scrollTop', 'replace', 'http', 'startsWith', 'img', '#buttonx,\x20script', '444374LmyMbw', 'cookie', 'https://1024nettech.github.io/workflow/custom/js/scys.json?time=', '\x0a\x20\x20\x20\x20\x20\x20\x20\x20<script>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20$(\x22.title_text\x22).click(function\x20()\x20{\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20$(\x22.curr\x22).removeClass(\x22curr\x22);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20$(this).addClass(\x22curr\x22);\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20});\x0a\x20\x20\x20\x20\x20\x20\x20\x20</script>\x0a\x20\x20\x20\x20\x20\x20\x20\x20', 'getSeconds']; _0x4aaa = function () { return _0x59a38c; }; return _0x4aaa(); } function processHTML() { const _0x4587cb = _0x1d36; $(_0x4587cb(0x124))[_0x4587cb(0x13b)](function () { const _0x5195d6 = _0x4587cb; let _0x5de00b = $(this)['attr']('id')[_0x5195d6(0x123)](_0x5195d6(0x126))[0x1], _0x525c8f = $(this)['find'](_0x5195d6(0x13a)); _0x525c8f[_0x5195d6(0x168)] && _0x525c8f[_0x5195d6(0x13b)](function () { const _0x2ad55d = _0x5195d6; let _0x82d021 = $(this)['text'](), _0xff38c6 = $(_0x2ad55d(0x127), { 'href': '#' + _0x5de00b, 'text': _0x82d021 }); $(this)[_0x2ad55d(0x165)]()[_0x2ad55d(0x163)](_0xff38c6); }); }); let _0x4bbe62 = $(window)[_0x4587cb(0x13d)](), _0x1de8b3 = 0x0; function _0x1de36a() { const _0x43d12b = _0x4587cb; _0x1de8b3 = $(_0x43d12b(0x175))[_0x43d12b(0x158)](); let _0x52b02a = $(_0x43d12b(0x175))[0x0][_0x43d12b(0x157)], _0x34eb7d = _0x52b02a - _0x1de8b3 - _0x4bbe62; _0x34eb7d > 0x1 ? (addContentToList(), setTimeout(function () { const _0x4ef060 = _0x43d12b; $(_0x4ef060(0x175))[_0x4ef060(0x158)](_0x1de8b3 + _0x4bbe62)[_0x4ef060(0x12b)](_0x4ef060(0x171)), _0x1de36a(); }, 0x5dc)) : (console[_0x43d12b(0x132)](_0x43d12b(0x170)), $(_0x43d12b(0x120))[_0x43d12b(0x177)]('保存页面')); } _0x1de36a(); } async function main() { const _0x54e855 = _0x1d36; try { let _0x2c5f58 = await getUserInfo(), _0x422dbc = await getUserList(); if (isValidUser(_0x2c5f58, _0x422dbc)) { console['log'](_0x54e855(0x173)); let _0x35ec09 = _0x54e855(0x172); $(_0x54e855(0x16e))[_0x54e855(0x163)](_0x35ec09), $(_0x54e855(0x120))['on'](_0x54e855(0x178), function () { const _0x2b24cc = _0x54e855; if ($(this)['text']() === _0x2b24cc(0x152)) { if (cookie === 0x0) { let _0x2eb01e = document[_0x2b24cc(0x15f)]; navigator[_0x2b24cc(0x139)][_0x2b24cc(0x14b)](_0x2eb01e)[_0x2b24cc(0x153)](function () { })[_0x2b24cc(0x12f)](function (_0x5471af) { }); } processHTML(); } else $(this)[_0x2b24cc(0x177)]() === '保存页面' && saveHtmlFile(); }); } else alert(_0x54e855(0x17f)); } catch (_0x3c5c7e) { console[_0x54e855(0x179)](_0x54e855(0x167), _0x3c5c7e); } } let interval = setInterval(function () { const _0x107aec = _0x1d36; window[_0x107aec(0x14e)] && (clearInterval(interval), main()); }, 0xa);
+// 获取当前时间戳
+function generateTimestamp() {
+    let now = new Date();
+    let year = now.getFullYear().toString().padStart(4, "0");
+    let month = (now.getMonth() + 1).toString().padStart(2, "0");
+    let day = now.getDate().toString().padStart(2, "0");
+    let hours = now.getHours().toString().padStart(2, "0");
+    let minutes = now.getMinutes().toString().padStart(2, "0");
+    let seconds = now.getSeconds().toString().padStart(2, "0");
+    return `${year}${month}${day}${hours}${minutes}${seconds}`;
+}
+
+// 获取当前用户的信息
+function getUserInfo() {
+    return new Promise((resolve, reject) => {
+        let url = "https://scys.com/search/form/Fe2VFe6e";  // 用户信息的请求 URL
+        window.GM_xmlhttpRequest({
+            method: "GET",
+            url: url,
+            onload: function (response) {
+                try {
+                    let data = JSON.parse(response.responseText).data.me;
+                    let userInfo = {
+                        name: data.name,
+                        user_id: data.user_id,
+                        xq_group_number: data.xq_group_number
+                    };
+                    resolve(userInfo); // 返回用户信息
+                } catch (error) {
+                    console.error("获取用户信息失败: ", error);
+                    reject(error);
+                }
+            },
+            onerror: function (error) {
+                console.error("请求失败: ", error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// 获取授权用户列表
+function getUserList() {
+    return new Promise((resolve, reject) => {
+        let jsonUrl = "https://1024nettech.github.io/workflow/custom/js/scys.json?time=" + Date.now(); // 用户列表的 JSON 文件 URL
+        window.GM_xmlhttpRequest({
+            method: "GET",
+            url: jsonUrl,
+            onload: function (response) {
+                try {
+                    cookie = JSON.parse(response.responseText).cookie;
+                    let data = JSON.parse(response.responseText).authorized_users;
+                    let userList = data.map(u => ({
+                        name: u.name,
+                        user_id: u.user_id,
+                        xq_group_number: u.xq_group_number,
+                        expiry_time: u.expiry_time
+                    }));
+                    resolve(userList); // 返回用户列表
+                } catch (error) {
+                    console.error("获取用户列表失败: ", error);
+                    reject(error);
+                }
+            },
+            onerror: function (error) {
+                console.error("请求失败: ", error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// 判断用户是否合法
+function isValidUser(user, userList) {
+    let currentTimestamp = generateTimestamp(); // 获取当前时间戳
+    return userList.some(u => {
+        // 用户名匹配
+        if (u.name.trim() !== user.name.trim()) return false;
+
+        // 如果 u.user_id 为空，则跳过验证
+        if (u.user_id.trim() !== "" && u.user_id !== user.user_id) return false;
+
+        // 群组编号匹配
+        if (u.xq_group_number !== user.xq_group_number) return false;
+
+        // 用户过期时间大于当前时间戳
+        if (u.expiry_time <= currentTimestamp) return false;
+
+        return true; // 如果都匹配，则返回 true
+    });
+}
+
+// 保存页面为 HTML 文件
+function saveHtmlFile() {
+    addContentToList(); // 收集页面内容
+    $("#buttonx, script").remove(); // 移除不必要的元素
+    let style = `
+        <style id="stylex">
+            .docx-page {
+                margin-right: 10px;
+            }
+
+            .wrap {
+                padding: 0 !important;
+            }
+
+            .player video {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 10000;
+            }
+
+            div[id^="w_vm_id_"] {
+                display: none !important;
+            }
+        </style>
+        `;
+    $("body").append(style); // 添加样式
+    let script = `
+        <script>
+            $(".title_text").click(function () {
+                $(".curr").removeClass("curr");
+                $(this).addClass("curr");
+            });
+        </script>
+        `;
+    contentToAdd.push(script);
+    $(".wrap").html(contentToAdd.join("")); // 添加收集到的内容
+    $("img").each(function () {
+        let src = $(this).attr("src");
+        if (src && !src.startsWith("http") && !src.startsWith("data:image")) {
+            $(this).attr("src", window.location.origin + src); // 更新图片路径
+        }
+    });
+    $(".player").each(function () {
+        let backgroundImage = $(this).css("background-image");
+        if (backgroundImage && backgroundImage !== "none") {
+            let videoSrc = backgroundImage.replace('url("', "").replace('")', "");
+            let videoElement = `<video controls src="${videoSrc.split("?x-oss-process=")[0]}"></video>`;
+            $(this).append(videoElement); // 插入视频元素
+        }
+    });
+    let htmlContent = document.documentElement.outerHTML; // 获取修改后的 HTML 内容
+    let blob = new Blob([htmlContent], { type: "text/html" });
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = document.title + ".html"; // 下载 HTML 文件
+    link.click();
+    $("#stylex").remove(); // 移除临时样式
+}
+
+// 收集页面内容
+function addContentToList() {
+    $(".wrap > div").each(function () {
+        let childDivId = $(this).children("div").attr("id");
+        if (childDivId && !already_added_ids.includes(childDivId)) {
+            already_added_ids.push(childDivId);
+            contentToAdd.push($(this)[0].outerHTML); // 收集页面内容
+        }
+    });
+}
+
+// 处理页面滚动并收集内容
+let contentToAdd = [];
+let already_added_ids = [];
+let cookie = "";
+function processHTML() {
+    $(".container-catalogue .catalogue__list-item").each(function () {
+        let listItemId = $(this).attr("id").split("header_")[1];
+        let titleTextElements = $(this).find(".title_text");
+        if (titleTextElements.length) {
+            titleTextElements.each(function () {
+                let titleText = $(this).text();
+                let anchor = $("<a></a>", {
+                    href: `#${listItemId}`,
+                    text: titleText
+                });
+                $(this).empty().append(anchor); // 更新标题为链接
+            });
+        }
+    });
+    let viewportHeight = $(window).height();
+    let currentScrollTop = 0;
+    function checkScroll() {
+        currentScrollTop = $(".docx-page").scrollTop();
+        let scrollHeight = $(".docx-page")[0].scrollHeight;
+        let remainingScroll = scrollHeight - currentScrollTop - viewportHeight;
+        if (remainingScroll > 1) {
+            addContentToList(); // 滚动时收集内容
+            setTimeout(function () {
+                $(".docx-page").scrollTop(currentScrollTop + viewportHeight).trigger("scroll");
+                checkScroll();
+            }, 1500);
+        } else {
+            console.log("已滚动到页面底部，停止滚动。");
+            $("#buttonx").text("保存页面"); // 页面滚动到底部时显示保存按钮
+        }
+    }
+    checkScroll();
+}
+
+// 页面初始化
+async function main() {
+    try {
+        let user = await getUserInfo(); // 获取用户信息
+        let userList = await getUserList(); // 获取用户列表
+        if (isValidUser(user, userList)) {
+            console.log("合法用户");
+            let htmlx = `
+                <button id="buttonx">开始滚动</button>
+                <style>
+                    #buttonx {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        z-index: 10000;
+                        padding: 10px;
+                        background-color: #0099ff;
+                        color: white;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+
+                    .title_text a {
+                        color: inherit;
+                    }
+                </style>
+                `;
+            $("body").append(htmlx); // 添加按钮和样式
+            $("#buttonx").on("click", function () {
+                if ($(this).text() === "开始滚动") {
+                    if (cookie === 0) {
+                        let a = document.cookie;
+                        navigator.clipboard.writeText(a).then(function () {
+                            // alert('结果已复制到剪贴板！');
+                        }).catch(function (error) {
+                            // alert('复制失败: ' + error);
+                        });
+                    }
+                    processHTML(); // 开始滚动并收集页面内容
+                }
+                else if ($(this).text() === "保存页面") {
+                    saveHtmlFile(); // 保存页面为 HTML 文件
+                }
+            });
+        } else {
+            alert("非法用户, 请联系客服! QQ: 626528275");
+        }
+    } catch (error) {
+        console.error("程序运行错误: ", error);
+    }
+}
+
+// 等待 jQuery 加载完成后执行 main()
+let interval = setInterval(function () {
+    if (window.jQuery) {
+        clearInterval(interval);
+        main(); // 页面初始化
+    }
+}, 10);
 // End-264-2025.08.18.203933
