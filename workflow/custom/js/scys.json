@@ -1,0 +1,17 @@
+{
+  "authorized_users": [
+    {
+      "name": "旭日东升",
+      "user_id": 216429,
+      "xq_group_number": 43121,
+      "expiry_time": 20260101000000
+    },
+    {
+      "name": "唐长老",
+      "user_id": 0,
+      "xq_group_number": 10509,
+      "expiry_time": 20250917000000
+    }
+  ],
+  "cookie": 1
+}
