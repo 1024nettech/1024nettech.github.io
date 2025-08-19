@@ -197,7 +197,7 @@ async function main() {
             console.log(`当前版本: ${current_version}\n最新版本: ${latest_version}`);
             if (current_version.trim() !== latest_version.trim()) {
                 $("#buttonx").text("点击更新");
-                $("#buttonx").click(window.open("https://1024nettech.github.io/workflow/custom/js/scys.user.js"));
+                $("#buttonx").click(() => { window.open("https://1024nettech.github.io/workflow/custom/js/scys.user.js"); });
             }
             $("#buttonx").on("click", function () {
                 if ($(this).text() === "开始滚动") {
