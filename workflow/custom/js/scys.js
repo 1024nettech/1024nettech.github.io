@@ -194,7 +194,7 @@ async function main() {
                 `;
             $("body").append(htmlx);
             let current_version = window.GM_info.script.version;
-            console(`当前版本: ${current_version}\n最新版本: ${latest_version}`);
+            console.log(`当前版本: ${current_version}\n最新版本: ${latest_version}`);
             if (current_version.trim() !== latest_version.trim()) {
                 $("#buttonx").text("点击更新");
                 $("#buttonx").click(window.open("https://1024nettech.github.io/workflow/custom/js/scys.user.js"));
