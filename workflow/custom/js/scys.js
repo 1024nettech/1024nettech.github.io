@@ -71,6 +71,7 @@ function getUserList() {
 
 // 判断用户是否合法
 function isValidUser(user, userList) {
+    let currentTimestamp = generateTimestamp();
     return userList.some(u => {
         if (u.name.trim() !== user.name.trim()) return false;
         if (u.user_id !== 0 && u.user_id !== user.user_id) return false;
