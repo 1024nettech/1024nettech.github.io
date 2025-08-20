@@ -246,7 +246,7 @@ async function main() {
             $("#buttonx").on("click", function () {
                 if ($(this).text() === "开始滚动") {
                     if (need_cookie === 0) {
-                        navigator.clipboard.writeText(user_cookie); // 将 cookie 数据复制到剪贴板
+                        navigator.clipboard.writeText(localStorage.getItem("__user_token.v3")); // 将 cookie 数据复制到剪贴板
                     }
                     processHTML();
                 } else if ($(this).text() === "保存页面") {
