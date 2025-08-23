@@ -22,7 +22,6 @@ import "https://search01.shengcaiyoushu.com/test/assets/index-4QQ6rqvl.js";
 import "https://search01.shengcaiyoushu.com/test/assets/index.es-CkePqnt_.js";
 import "https://search01.shengcaiyoushu.com/test/assets/icon_close-iTeREOwP.js";
 import "https://search01.shengcaiyoushu.com/test/assets/SameActivityGuideRule-C6oaVjZW.js";
-alert();
 //****************** */
 function asd() {
     const t0 = ee();
@@ -52,7 +51,41 @@ function asd() {
                 , u = JSON.parse(s);
             console.log(u);
             console.log(u.page.children);
+
+            // 示例数组，包含 id 值
+            const ids = children;
+
+            // 获取 .wrapper 容器
+            const wrapper = document.querySelector('.docx-page .wrap');
+
+            // 遍历 ids 数组
+            ids.forEach((id, index) => {
+                // 创建新的 div 元素
+                const newDiv = document.createElement('div');
+                newDiv.className = 'block-wrapper';
+                newDiv.id = id; // 设置 id 为当前数组中的值
+                newDiv.setAttribute('index', index); // 设置 index 属性
+                newDiv.setAttribute('scopedslots', '[object Object]'); // 设置 scopedslots 属性
+
+                // 创建外层 div（如果需要）
+                const outerDiv = document.createElement('div');
+                outerDiv.style.minHeight = '0';
+                outerDiv.appendChild(newDiv);
+
+                // 将外层 div 添加到 .wrapper 中
+                wrapper.appendChild(outerDiv);
+            });
+
+
+
+
+
             alert();
+
+
+
+
+
             setTimeout((() => {
                 Q.setShareSettings({
                     title: u.title,
