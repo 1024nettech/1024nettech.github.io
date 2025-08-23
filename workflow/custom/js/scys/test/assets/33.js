@@ -49,6 +49,8 @@ V.get("/docx/".concat(re.value, "/info")).then((e => {
             , r = Ke.decompress(o)
             , s = Y(r)
             , u = JSON.parse(s);
+        console.log(u);
+        alert();
         setTimeout((() => {
             Q.setShareSettings({
                 title: u.title,
