@@ -51,6 +51,7 @@ function asd() {
                 , s = Y(r)
                 , u = JSON.parse(s);
             console.log(u);
+            console.log(u.page.children);
             alert();
             setTimeout((() => {
                 Q.setShareSettings({
