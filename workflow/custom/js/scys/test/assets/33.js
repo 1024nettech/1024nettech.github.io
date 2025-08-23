@@ -23,6 +23,130 @@ import "https://search01.shengcaiyoushu.com/test/assets/index.es-CkePqnt_.js";
 import "https://search01.shengcaiyoushu.com/test/assets/icon_close-iTeREOwP.js";
 import "https://search01.shengcaiyoushu.com/test/assets/SameActivityGuideRule-C6oaVjZW.js";
 alert();
+//****************** */
+const t = ee();
+let l = D({
+    node: []
+});
+const o = a("");
+let i = a([]);
+const c = a([]);
+let d = a("")
+    , f = a("");
+const h = a(!1)
+    , k = u((() => !_))
+    , x = oe.enc.Utf8.parse("LJg0DdPiCGYyq9h4")
+    , w = a("");
+re.value = t.params.id || t.query.token;
+V.get("/docx/".concat(re.value, "/info")).then((e => {
+    K.get("https://search01.shengcaiyoushu.com/upload/doc/".concat(re.value, "/").concat(re.value, ".json?v=").concat(e.version)).then((async a => {
+        let n = oe.AES.decrypt(a.data, x, {
+            iv: x,
+            mode: oe.mode.CBC,
+            padding: oe.pad.Pkcs7
+        })
+            , o = W(n)
+            , r = Ke.decompress(o)
+            , s = Y(r)
+            , u = JSON.parse(s);
+        setTimeout((() => {
+            Q.setShareSettings({
+                title: u.title,
+                desc: "生财有术，一个谈钱不伤感情的社群"
+            })
+        }
+        ), 1e3);
+        var c = 0
+            , d = "";
+        if (u.page.node.forEach((e => {
+            if (e.block_type >= 3 && e.block_type <= 11)
+                return d = "",
+                    void (c = 0);
+            if (13 === e.block_type) {
+                const t = e.ordered.elements[0];
+                if (t && t.text_run) {
+                    const a = t.text_run.text_element_style
+                        , n = "".concat(a.bold).concat(a.bulletlist);
+                    d === n ? c += 1 : c = 1,
+                        d = n,
+                        e.index = c
+                }
+            }
+        }
+        )),
+            l.value = u.page,
+            l.value.node,
+            i.value = (e => (e.forEach(((t, a) => {
+                if (t.block_type >= 3 && t.block_type <= 11)
+                    for (let n = a - 1; n >= 0; n--)
+                        if (e[n].block_type < t.block_type) {
+                            t.parent_id = e[n].block_id;
+                            break
+                        }
+            }
+            )),
+                e))(u.header) || [],
+            w.value = (null == u ? void 0 : u.type) || "",
+            "航海手册" === w.value && Fe(),
+            se.value = u.dup_block || [],
+            ue.value = u.version,
+            ge.value = u.user || [],
+            de.value.type = (null == u ? void 0 : u.type) || "",
+            de.value.header_title = (null == u ? void 0 : u.header_title) || "",
+            document.title = (null == u ? void 0 : u.title) || "",
+            (null == u ? void 0 : u.type) && (null == u ? void 0 : u.header_title) && (l.value.node = [{
+                type: null == u ? void 0 : u.type,
+                header_title: null == u ? void 0 : u.header_title,
+                block_id: "".concat(l.value.block_id, "_docx")
+            }, ...l.value.node]),
+            i.value.length > 0 && (i.value[0].curr = !0),
+            null == e ? void 0 : e.user) {
+            const { name: a, xq_group_number: n, union_user_id: l } = e.user;
+            ye.setWaterMark({
+                w_texts: [n ? "生财有术会员" : "生财有术微信用户", "".concat(a, " ").concat(n || l)],
+                w_options: {
+                    w_width: 360,
+                    w_rotateDeg: 25,
+                    w_font: "16px Vedana",
+                    w_color: "#666",
+                    w_opacity: "0.1",
+                    w_zIndex: "100000"
+                }
+            }),
+                N.logReport({
+                    name: "page_show",
+                    dataset: {
+                        userInfo: {
+                            ...e.user,
+                            number: n
+                        },
+                        value: t.path,
+                        query: t.query
+                    }
+                }),
+                new G("timing_docx", re.value, (() => (i.value.findIndex((e => e.curr)) / i.value.length * 100).toFixed(2)), {
+                    ...e.user,
+                    number: n
+                })
+        }
+        z((async () => {
+            if (window.location.hash.length > 0) {
+                const e = window.location.hash.split("#")[1];
+                B({
+                    position: e
+                })
+            }
+        }
+        ))
+    }
+    ))
+}
+)).catch((e => {
+    o.value = e.message
+}
+));
+
+//*////////////////////////
 var Oe = {}
     , je = {}
     , Be = {
@@ -2605,8 +2729,6 @@ const Za = {
                             title: u.title,
                             desc: "生财有术，一个谈钱不伤感情的社群"
                         })
-                        console.log(u);
-                        alert();
                     }
                     ), 1e3);
                     var c = 0
