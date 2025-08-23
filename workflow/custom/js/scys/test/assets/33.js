@@ -38,7 +38,7 @@ function asd() {
         , k = u((() => !_))
         , x = oe.enc.Utf8.parse("LJg0DdPiCGYyq9h4")
         , w = a("");
-    re.value = t0.params.id || t0.query.token;
+    // re.value = t0.params.id || t0.query.token;
     V.get("/docx/".concat(re.value, "/info")).then((e => {
         K.get("https://search01.shengcaiyoushu.com/upload/doc/".concat(re.value, "/").concat(re.value, ".json?v=").concat(e.version)).then((async a => {
             let n = oe.AES.decrypt(a.data, x, {
