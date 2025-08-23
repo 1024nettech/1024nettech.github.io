@@ -24,7 +24,7 @@ import "https://search01.shengcaiyoushu.com/test/assets/icon_close-iTeREOwP.js";
 import "https://search01.shengcaiyoushu.com/test/assets/SameActivityGuideRule-C6oaVjZW.js";
 alert();
 //****************** */
-const t = ee();
+const t0 = ee();
 let l = D({
     node: []
 });
@@ -37,7 +37,7 @@ const h = a(!1)
     , k = u((() => !_))
     , x = oe.enc.Utf8.parse("LJg0DdPiCGYyq9h4")
     , w = a("");
-re.value = t.params.id || t.query.token;
+re.value = t0.params.id || t0.query.token;
 V.get("/docx/".concat(re.value, "/info")).then((e => {
     K.get("https://search01.shengcaiyoushu.com/upload/doc/".concat(re.value, "/").concat(re.value, ".json?v=").concat(e.version)).then((async a => {
         let n = oe.AES.decrypt(a.data, x, {
