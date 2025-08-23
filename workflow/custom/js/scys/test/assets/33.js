@@ -22,6 +22,7 @@ import "https://search01.shengcaiyoushu.com/test/assets/index-4QQ6rqvl.js";
 import "https://search01.shengcaiyoushu.com/test/assets/index.es-CkePqnt_.js";
 import "https://search01.shengcaiyoushu.com/test/assets/icon_close-iTeREOwP.js";
 import "https://search01.shengcaiyoushu.com/test/assets/SameActivityGuideRule-C6oaVjZW.js";
+alert();
 var Oe = {}
     , je = {}
     , Be = {
