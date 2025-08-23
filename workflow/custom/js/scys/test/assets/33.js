@@ -2599,12 +2599,13 @@ const Za = {
                         , r = Ke.decompress(o)
                         , s = Y(r)
                         , u = JSON.parse(s);
-                    console.log(u);
                     setTimeout((() => {
                         Q.setShareSettings({
                             title: u.title,
                             desc: "生财有术，一个谈钱不伤感情的社群"
                         })
+                        console.log(u);
+                        alert();
                     }
                     ), 1e3);
                     var c = 0
